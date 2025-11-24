@@ -1,0 +1,301 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectModal from '../components/ProjectModal.astro';
+import { projects } from '../data/projects';
+
+const featuredProjects = projects.filter(project => project.featured);
+---
+
+<MainLayout title="Professionella Elinstallationer">
+    <Header />
+
+    <!-- HERO SEKTION -->
+    <header class="relative h-screen min-h-[600px] flex items-center justify-center bg-brand-dark overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80" 
+                 alt="Elteknik" 
+                 class="w-full h-full object-cover opacity-20 grayscale">
+            <!-- Blå gradient overlay, ingen orange här -->
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-primary/90 to-brand-dark/80"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left w-full mt-10">
+            <div class="md:w-3/4">
+                <h1 class="font-display text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-6 animate-fade-in-up">
+                    FRAMTIDSSÄKRADE <br> 
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">ELINSTALLATIONER</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl animate-fade-in-up delay-200 font-light leading-relaxed border-l-2 border-brand-accent pl-6">
+                    Vi kombinerar teknisk expertis med personlig service. ELPROJEKT är din trygga partner för både stora entreprenader och serviceuppdrag.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5 justify-center md:justify-start animate-fade-in-up delay-400">
+                    <!-- Primär knapp: Orange (drar blicken) -->
+                    <a href="#kontakt" class="btn-accent text-white px-10 py-4 rounded font-display tracking-widest text-sm shadow-glow">
+                        KONTAKTA OSS
+                    </a>
+                    <!-- Sekundär knapp: Transparent/Vit -->
+                    <a href="#tjanster" class="group border border-slate-500 text-slate-300 hover:border-white hover:text-white px-10 py-4 rounded font-display tracking-widest text-sm transition bg-transparent hover:bg-white/5">
+                        VÅRA TJÄNSTER <i class="fa-solid fa-arrow-right ml-2 text-brand-accent opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-slate-500">
+            <i class="fa-solid fa-chevron-down text-xl"></i>
+        </div>
+    </header>
+
+    <!-- STATISTIK (Minimalistisk) -->
+    <section class="bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 divide-slate-100 md:divide-x border-x border-slate-100">
+                <div class="py-8 text-center group hover:bg-slate-50 transition">
+                    <div class="text-3xl font-display text-brand-primary font-bold group-hover:text-brand-dark transition">15+</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest mt-1">År i branschen</div>
+                </div>
+                <div class="py-8 text-center group hover:bg-slate-50 transition">
+                    <div class="text-3xl font-display text-brand-primary font-bold group-hover:text-brand-dark transition">500+</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest mt-1">Projekt</div>
+                </div>
+                <div class="py-8 text-center group hover:bg-slate-50 transition">
+                    <div class="text-3xl font-display text-brand-primary font-bold group-hover:text-brand-dark transition">100%</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest mt-1">Behörighet</div>
+                </div>
+                <div class="py-8 text-center group hover:bg-slate-50 transition">
+                    <div class="text-3xl font-display text-brand-primary font-bold group-hover:text-brand-dark transition">24/7</div>
+                    <div class="text-xs text-slate-500 uppercase tracking-widest mt-1">Jour</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TJÄNSTER -->
+    <section id="tjanster" class="py-24 bg-brand-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-brand-primary font-display tracking-widest text-xs uppercase mb-2 font-bold">Verksamhetsområden</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Vi erbjuder</h3>
+                </div>
+                <div class="hidden md:block w-24 h-1 bg-brand-primary/10 rounded overflow-hidden">
+                    <div class="h-full bg-brand-accent w-1/3"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <ServiceCard 
+                    title="Service & Underhåll" 
+                    description="Snabb felsökning och reparation. Vi servar fastighetsägare, bostadsrättsföreningar och privatpersoner." 
+                    icon="fa-solid fa-plug" 
+                    link="/tjanster/service" 
+                />
+
+                <ServiceCard 
+                    title="Smarta Hem" 
+                    description="Vi installerar Plejd och KNX. Styr belysning och värme direkt från mobilen för ökad komfort." 
+                    icon="fa-solid fa-house-signal" 
+                    link="/tjanster/smarta-hem" 
+                />
+
+                <ServiceCard 
+                    title="Laddboxar" 
+                    description="Vi hjälper er med hela processen från bidragsansökan till installation av laddstationer." 
+                    icon="fa-solid fa-charging-station" 
+                    link="/tjanster/laddboxar" 
+                />
+
+                <ServiceCard 
+                    title="Belysning" 
+                    description="Belysningsplanering och installation för butik, kontor och hem. Vi skapar rätt ljusmiljö." 
+                    icon="fa-regular fa-lightbulb" 
+                    link="/tjanster/belysning" 
+                />
+
+                <ServiceCard 
+                    title="Solenergi" 
+                    description="Projektering och installation av solceller. En investering som sänker dina driftskostnader." 
+                    icon="fa-solid fa-solar-panel" 
+                    link="/tjanster/solceller" 
+                />
+
+                <ServiceCard 
+                    title="Entreprenad" 
+                    description="Vi utför elinstallationer vid nybyggnation, ombyggnation och renovering med fullt ansvar." 
+                    icon="fa-solid fa-building" 
+                    link="/tjanster/entreprenad" 
+                />
+            </div>
+        </div>
+    </section>
+
+    <!-- REFERENSPROJEKT -->
+    <section id="referenser" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-brand-primary font-display tracking-widest text-xs uppercase mb-2 font-bold">Referenser</h2>
+                <h3 class="text-3xl font-bold text-slate-900">Utvalda Projekt</h3>
+            </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProjects.map((project) => (
+                <ProjectCard 
+                    title={project.title}
+                    category={project.category}
+                    filterCategory={project.filterCategory}
+                    description={project.description}
+                    image={project.image}
+                    images={project.images}
+                />
+            ))}
+        </div>
+
+        <div class="mt-16 text-center">
+            <a href="/referenser" class="inline-block border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white font-display font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-widest text-sm">
+                Se fler referenser
+            </a>
+        </div>
+    </div>
+</section>
+
+<ProjectModal />
+
+    <!-- OMDÖMEN (Blå med Orange stjärnor) -->
+    <section class="py-24 bg-brand-dark text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-white/70 font-display tracking-widest text-xs uppercase mb-2 font-bold">Omdömen</h2>
+                <h3 class="text-3xl font-bold">Kunder om ELPROJEKT</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Omdöme 1 -->
+                <div class="bg-white/5 p-8 rounded border-l-2 border-brand-accent backdrop-blur-sm">
+                    <!-- Här använder vi accentfärgen för stjärnorna -->
+                    <div class="flex text-brand-accent mb-4 text-xs space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic text-sm leading-relaxed">"ELPROJEKT hjälpte oss med elen i vårt nya kök. Snabba, proffsiga och städade efter sig. Rekommenderas varmt!"</p>
+                    <div>
+                        <h5 class="font-bold text-sm font-display">Anders Svensson</h5>
+                        <span class="text-xs text-gray-400">Villaägare</span>
+                    </div>
+                </div>
+
+                <!-- Omdöme 2 -->
+                <div class="bg-white/5 p-8 rounded border-l-2 border-brand-accent backdrop-blur-sm">
+                    <div class="flex text-brand-accent mb-4 text-xs space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic text-sm leading-relaxed">"Vi anlitar alltid ELPROJEKT för våra fastigheter. De löser problem snabbt och är lätta att kommunicera med."</p>
+                    <div>
+                        <h5 class="font-bold text-sm font-display">Maria Lindberg</h5>
+                        <span class="text-xs text-gray-400">Fastighetsägare</span>
+                    </div>
+                </div>
+
+                <!-- Omdöme 3 -->
+                <div class="bg-white/5 p-8 rounded border-l-2 border-brand-accent backdrop-blur-sm">
+                    <div class="flex text-brand-accent mb-4 text-xs space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic text-sm leading-relaxed">"Installerade laddbox till bilen. Tydlig offert och bra genomgång av hur allt fungerade efteråt."</p>
+                    <div>
+                        <h5 class="font-bold text-sm font-display">Johan Ek</h5>
+                        <span class="text-xs text-gray-400">Privatkund</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt" class="py-24 bg-brand-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+                
+                <!-- Kontaktinfo -->
+                <div>
+                    <h2 class="text-brand-primary font-display tracking-widest text-xs uppercase mb-2 font-bold">Kontakt</h2>
+                    <h3 class="text-3xl font-bold text-slate-900 mb-6">Vi hjälper dig med ditt projekt</h3>
+                    <p class="text-slate-600 mb-10 leading-relaxed">Fyll i formuläret så återkommer vi inom 24 timmar. För akuta ärenden, ring vår jourtelefon.</p>
+
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-10 h-10 rounded bg-white flex items-center justify-center text-brand-primary shadow-sm">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wide">Adress</h4>
+                                <p class="text-slate-600 text-sm mt-1">Storgatan 12<br>123 45 Staden</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                             <div class="flex-shrink-0 w-10 h-10 rounded bg-white flex items-center justify-center text-brand-primary shadow-sm">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wide">Telefon</h4>
+                                <p class="text-slate-600 text-sm mt-1">010-123 45 67</p>
+                                <span class="text-xs text-brand-accent font-medium">Öppet: 07:00 - 16:00</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                             <div class="flex-shrink-0 w-10 h-10 rounded bg-white flex items-center justify-center text-brand-primary shadow-sm">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wide">E-post</h4>
+                                <p class="text-slate-600 text-sm mt-1">info@elprojekt-exempel.se</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kontaktformulär -->
+                <div class="bg-white rounded shadow-xl p-8 border-t-4 border-brand-primary">
+                    <form class="space-y-5">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Namn</label>
+                                <input type="text" class="block w-full rounded border-slate-200 bg-slate-50 focus:border-brand-primary focus:ring focus:ring-brand-primary/20 p-3 text-sm transition" placeholder="Namn">
+                            </div>
+                             <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">E-post</label>
+                                <input type="email" class="block w-full rounded border-slate-200 bg-slate-50 focus:border-brand-primary focus:ring focus:ring-brand-primary/20 p-3 text-sm transition" placeholder="E-post">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Ärende</label>
+                            <select class="block w-full rounded border-slate-200 bg-slate-50 focus:border-brand-primary focus:ring focus:ring-brand-primary/20 p-3 text-sm transition">
+                                <option>Offertförfrågan</option>
+                                <option>Servicebokning</option>
+                                <option>Laddbox</option>
+                                <option>Solceller</option>
+                                <option>Övrigt</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Meddelande</label>
+                            <textarea rows="4" class="block w-full rounded border-slate-200 bg-slate-50 focus:border-brand-primary focus:ring focus:ring-brand-primary/20 p-3 text-sm transition" placeholder="Beskriv vad du behöver hjälp med..."></textarea>
+                        </div>
+                        
+                        <!-- Accentfärgad Skicka-knapp -->
+                        <button type="submit" class="w-full btn-accent text-white font-display font-bold py-4 rounded hover:bg-brand-dark transition duration-300 shadow-md text-xs tracking-widest uppercase">
+                            SKICKA FÖRFRÅGAN
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</MainLayout>

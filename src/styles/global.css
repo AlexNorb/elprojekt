@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Bank Gothic Light - Custom Font */
+@font-face {
+  font-family: 'Bank Gothic Light';
+  src: url('/fonts/bank-gothic-light.woff2') format('woff2'),
+       url('/fonts/bank-gothic-light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: optional;
+}
+
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-brand-primary: #003ca6;
+  --color-brand-dark: #002a75;
+  --color-brand-accent: #ff7403;
+  --color-brand-gray: #f8fafc;
+
+  /* Typography */
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Bank Gothic Light", sans-serif;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 15px rgba(255, 116, 3, 0.3);
+
+  /* Animations */
+  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Custom Utilities */
+.logo-text {
+  font-family: var(--font-display);
+  letter-spacing: -1px;
+}
+
+.btn-accent {
+  background-color: var(--color-brand-accent);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-accent:hover {
+  background-color: #e66000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 116, 3, 0.3);
+}

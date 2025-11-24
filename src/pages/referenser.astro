@@ -1,0 +1,82 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectModal from '../components/ProjectModal.astro';
+import SubPageHero from '../components/SubPageHero.astro';
+import { projects } from '../data/projects';
+---
+
+<MainLayout title="Våra Referenser">
+    <Header />
+
+    <SubPageHero 
+        title="Referenser"
+        subtitle="Se våra senaste projekt inom solenergi, smarta hem och elinstallationer för både företag och privatpersoner."
+        image="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80"
+        label="Våra Projekt"
+    />
+
+    <!-- FILTRERING & GRID -->
+    <section class="py-16 bg-white min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded border border-brand-accent bg-brand-accent text-white font-display text-xs tracking-widest transition" data-filter="all">ALLA</button>
+                <button class="filter-btn px-6 py-2 rounded border border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary font-display text-xs tracking-widest transition bg-white" data-filter="villa">VILLA</button>
+                <button class="filter-btn px-6 py-2 rounded border border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary font-display text-xs tracking-widest transition bg-white" data-filter="foretag">FÖRETAG</button>
+                <button class="filter-btn px-6 py-2 rounded border border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary font-display text-xs tracking-widest transition bg-white" data-filter="energi">ENERGI</button>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="project-grid">
+                {projects.map((project) => (
+                    <ProjectCard 
+                        title={project.title}
+                        category={project.category}
+                        filterCategory={project.filterCategory}
+                        description={project.description}
+                        image={project.image}
+                        images={project.images}
+                    />
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <ProjectModal />
+
+    <Footer />
+</MainLayout>
+
+<script>
+    // Filter Logik
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+    
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => {
+                b.classList.remove('bg-brand-accent', 'text-white', 'border-brand-accent');
+                b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
+            });
+            btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
+            btn.classList.add('bg-brand-accent', 'text-white', 'border-brand-accent');
+
+            const filterValue = btn.getAttribute('data-filter');
+            cards.forEach(card => {
+                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                    (card as HTMLElement).style.display = 'block';
+                } else {
+                    (card as HTMLElement).style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Modal Animation styles are now in ProjectModal */
+</style>

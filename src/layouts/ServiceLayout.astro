@@ -1,0 +1,139 @@
+---
+import MainLayout from './MainLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SubPageHero from '../components/SubPageHero.astro';
+
+interface Props {
+  title: string;
+  heroImage: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  category: string;
+}
+
+const { title, heroImage, heroTitle, heroSubtitle, category } = Astro.props;
+---
+
+<MainLayout title={title}>
+  <Header />
+
+  <SubPageHero 
+    title={heroTitle}
+    subtitle={heroSubtitle}
+    image={heroImage}
+    label="Tjänster"
+  />
+
+  <!-- HUVUDINNEHÅLL -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        
+        <!-- VÄNSTER KOLUMN (Huvudtext - Slot) -->
+        <div class="lg:col-span-2">
+          <slot />
+        </div>
+
+        <!-- HÖGER KOLUMN (Sidebar) -->
+        <div class="lg:col-span-1">
+          <div class="sticky-sidebar space-y-8">
+            
+            <!-- Tjänste-meny -->
+            <div class="bg-white border border-slate-100 rounded shadow-soft p-6">
+              <h4 class="text-brand-primary font-display font-bold text-sm uppercase tracking-widest mb-4">Våra Tjänster</h4>
+              <nav class="space-y-2">
+                <a href="/tjanster/solceller" class={`block px-4 py-3 rounded font-medium text-sm transition flex justify-between items-center ${Astro.url.pathname.includes('solceller') ? 'bg-brand-primary text-white' : 'text-slate-600 hover:bg-brand-gray hover:text-brand-primary'}`}>
+                  Solceller & Energi <i class={`fa-solid fa-chevron-right text-xs ${Astro.url.pathname.includes('solceller') ? '' : 'opacity-0 group-hover:opacity-100'}`}></i>
+                </a>
+                <a href="/tjanster/service" class={`block px-4 py-3 rounded font-medium text-sm transition flex justify-between items-center ${Astro.url.pathname.includes('service') ? 'bg-brand-primary text-white' : 'text-slate-600 hover:bg-brand-gray hover:text-brand-primary'}`}>
+                  Service & Underhåll <i class={`fa-solid fa-chevron-right text-xs ${Astro.url.pathname.includes('service') ? '' : 'opacity-0 group-hover:opacity-100'}`}></i>
+                </a>
+                <a href="/tjanster/smarta-hem" class={`block px-4 py-3 rounded font-medium text-sm transition flex justify-between items-center ${Astro.url.pathname.includes('smarta-hem') ? 'bg-brand-primary text-white' : 'text-slate-600 hover:bg-brand-gray hover:text-brand-primary'}`}>
+                  Smarta Hem <i class={`fa-solid fa-chevron-right text-xs ${Astro.url.pathname.includes('smarta-hem') ? '' : 'opacity-0 group-hover:opacity-100'}`}></i>
+                </a>
+                <a href="/tjanster/laddboxar" class={`block px-4 py-3 rounded font-medium text-sm transition flex justify-between items-center ${Astro.url.pathname.includes('laddboxar') ? 'bg-brand-primary text-white' : 'text-slate-600 hover:bg-brand-gray hover:text-brand-primary'}`}>
+                  Laddboxar <i class={`fa-solid fa-chevron-right text-xs ${Astro.url.pathname.includes('laddboxar') ? '' : 'opacity-0 group-hover:opacity-100'}`}></i>
+                </a>
+                <a href="/tjanster/belysning" class={`block px-4 py-3 rounded font-medium text-sm transition flex justify-between items-center ${Astro.url.pathname.includes('belysning') ? 'bg-brand-primary text-white' : 'text-slate-600 hover:bg-brand-gray hover:text-brand-primary'}`}>
+                  Belysning <i class={`fa-solid fa-chevron-right text-xs ${Astro.url.pathname.includes('belysning') ? '' : 'opacity-0 group-hover:opacity-100'}`}></i>
+                </a>
+                 <a href="/tjanster/entreprenad" class={`block px-4 py-3 rounded font-medium text-sm transition flex justify-between items-center ${Astro.url.pathname.includes('entreprenad') ? 'bg-brand-primary text-white' : 'text-slate-600 hover:bg-brand-gray hover:text-brand-primary'}`}>
+                  Entreprenad <i class={`fa-solid fa-chevron-right text-xs ${Astro.url.pathname.includes('entreprenad') ? '' : 'opacity-0 group-hover:opacity-100'}`}></i>
+                </a>
+              </nav>
+            </div>
+
+            <!-- CTA Box -->
+            <div class="bg-brand-dark rounded shadow-xl p-8 text-center text-white relative overflow-hidden">
+              <div class="absolute top-0 right-0 -mr-10 -mt-10 w-32 h-32 bg-brand-primary rounded-full opacity-50 filter blur-2xl"></div>
+              <h4 class="text-xl font-bold font-display mb-2 relative z-10">Redo att starta?</h4>
+              <p class="text-slate-300 text-sm mb-6 relative z-10">Kontakta oss för en kostnadsfri offert eller rådgivning.</p>
+              <a href="#kontakt-form" class="btn-accent text-white px-6 py-3 rounded font-display text-xs tracking-widest inline-block w-full relative z-10">
+                BEGÄR OFFERT
+              </a>
+            </div>
+
+            <!-- Kontakt Widget -->
+            <div class="bg-brand-gray border border-slate-200 rounded p-6">
+              <h4 class="text-slate-900 font-bold mb-4 font-display text-sm uppercase">Kontaktuppgifter</h4>
+              <ul class="space-y-4 text-sm text-slate-600">
+                <li class="flex items-center">
+                  <div class="w-8 h-8 rounded bg-white flex items-center justify-center text-brand-accent mr-3 shadow-sm"><i class="fa-solid fa-phone"></i></div>
+                  <span class="font-medium">010-123 45 67</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-8 h-8 rounded bg-white flex items-center justify-center text-brand-accent mr-3 shadow-sm"><i class="fa-solid fa-envelope"></i></div>
+                  <span class="font-medium">info@elprojekt.se</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT FORMULÄR -->
+  <section id="kontakt-form" class="py-16 bg-brand-gray border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl font-bold text-slate-900 mb-2 font-display">Intresserad av {category}?</h2>
+      <p class="text-slate-600 mb-8">Fyll i dina uppgifter så kontaktar vi dig.</p>
+      
+      <form class="bg-white p-8 rounded shadow-lg text-left grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="md:col-span-2">
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Namn</label>
+          <input type="text" class="block w-full rounded border-slate-200 bg-slate-50 focus:border-brand-accent focus:ring-brand-accent/20 p-3 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Telefon</label>
+          <input type="tel" class="block w-full rounded border-slate-200 bg-slate-50 focus:border-brand-accent focus:ring-brand-accent/20 p-3 text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">E-post</label>
+          <input type="email" class="block w-full rounded border-slate-200 bg-slate-50 focus:border-brand-accent focus:ring-brand-accent/20 p-3 text-sm">
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Meddelande</label>
+          <textarea rows="3" class="block w-full rounded border-slate-200 bg-slate-50 focus:border-brand-accent focus:ring-brand-accent/20 p-3 text-sm"></textarea>
+        </div>
+        <div class="md:col-span-2">
+          <button type="submit" class="w-full btn-accent text-white font-display font-bold py-4 rounded shadow-lg tracking-widest uppercase text-sm">
+            SKICKA FÖRFRÅGAN
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <Footer />
+</MainLayout>
+
+<style>
+  .sticky-sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 120px;
+  }
+</style>
