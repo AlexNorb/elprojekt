@@ -1,4 +1,5 @@
 ---
+const base = import.meta.env.BASE_URL;
 ---
 <!-- PROJECT DETAILS MODAL -->
 <div id="project-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4">
@@ -54,7 +55,7 @@
 
             <div class="mt-8 pt-6 border-t border-slate-100">
                 <p class="text-xs text-slate-500 mb-3 text-center">Gillar du resultatet?</p>
-                <a href="/#kontakt" class="block w-full text-center bg-brand-primary hover:bg-brand-dark text-white font-display font-bold py-4 rounded transition duration-300 shadow-lg text-xs uppercase tracking-widest">
+                <a href={base + "#kontakt"} class="block w-full text-center bg-brand-primary hover:bg-brand-dark text-white font-display font-bold py-4 rounded transition duration-300 shadow-lg text-xs uppercase tracking-widest">
                     Begär Offert på liknande
                 </a>
             </div>

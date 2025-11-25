@@ -13,6 +13,7 @@ interface Props {
 }
 
 const { title, heroImage, heroTitle, heroSubtitle, category } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <MainLayout title={title}>
@@ -41,22 +42,22 @@ const { title, heroImage, heroTitle, heroSubtitle, category } = Astro.props;
           <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg shadow-xl p-4 w-full">
             <h4 class="text-brand-accent font-display font-bold text-sm uppercase tracking-widest mb-3">Våra Tjänster</h4>
             <nav class="space-y-1">
-              <a href="/tjanster/solceller" class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('solceller') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
+              <a href={base + "tjanster/solceller"} class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('solceller') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
                 Solceller & Energi
               </a>
-              <a href="/tjanster/service" class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('service') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
+              <a href={base + "tjanster/service"} class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('service') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
                 Service & Underhåll
               </a>
-              <a href="/tjanster/smarta-hem" class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('smarta-hem') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
+              <a href={base + "tjanster/smarta-hem"} class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('smarta-hem') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
                 Smarta Hem
               </a>
-              <a href="/tjanster/laddboxar" class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('laddboxar') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
+              <a href={base + "tjanster/laddboxar"} class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('laddboxar') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
                 Laddboxar
               </a>
-              <a href="/tjanster/belysning" class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('belysning') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
+              <a href={base + "tjanster/belysning"} class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('belysning') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
                 Belysning
               </a>
-              <a href="/tjanster/entreprenad" class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('entreprenad') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
+              <a href={base + "tjanster/entreprenad"} class={`block px-4 py-2 rounded font-medium text-sm transition ${Astro.url.pathname.includes('entreprenad') ? 'bg-brand-accent text-white' : 'text-white/80 hover:bg-white/10 hover:text-white'}`}>
                 Entreprenad
               </a>
             </nav>

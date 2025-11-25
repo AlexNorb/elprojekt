@@ -8,6 +8,7 @@ import ProjectModal from '../components/ProjectModal.astro';
 import { projects } from '../data/projects';
 
 const featuredProjects = projects.filter(project => project.featured);
+const base = import.meta.env.BASE_URL;
 ---
 
 <MainLayout title="Professionella Elinstallationer">
@@ -34,11 +35,11 @@ const featuredProjects = projects.filter(project => project.featured);
                 </p>
                 <div class="flex flex-col sm:flex-row gap-5 justify-center md:justify-start animate-fade-in-up delay-400">
                     <!-- Primär knapp: Orange (drar blicken) -->
-                    <a href="#kontakt" class="btn-accent text-white px-10 py-4 rounded font-display tracking-widest text-sm shadow-glow">
+                    <a href={base + "#kontakt"} class="btn-accent text-white px-10 py-4 rounded font-display tracking-widest text-sm shadow-glow">
                         KONTAKTA OSS
                     </a>
                     <!-- Sekundär knapp: Transparent/Vit -->
-                    <a href="#tjanster" class="group border border-slate-500 text-slate-300 hover:border-white hover:text-white px-10 py-4 rounded font-display tracking-widest text-sm transition bg-transparent hover:bg-white/5">
+                    <a href={base + "#tjanster"} class="group border border-slate-500 text-slate-300 hover:border-white hover:text-white px-10 py-4 rounded font-display tracking-widest text-sm transition bg-transparent hover:bg-white/5">
                         VÅRA TJÄNSTER <i class="fa-solid fa-arrow-right ml-2 text-brand-accent opacity-0 group-hover:opacity-100 transition-opacity"></i>
                     </a>
                 </div>
@@ -92,42 +93,42 @@ const featuredProjects = projects.filter(project => project.featured);
                     title="Service & Underhåll" 
                     description="Snabb felsökning och reparation. Vi servar fastighetsägare, bostadsrättsföreningar och privatpersoner." 
                     icon="fa-solid fa-plug" 
-                    link="/tjanster/service" 
+                    link={base + "tjanster/service"} 
                 />
 
                 <ServiceCard 
                     title="Smarta Hem" 
                     description="Vi installerar Plejd och KNX. Styr belysning och värme direkt från mobilen för ökad komfort." 
                     icon="fa-solid fa-house-signal" 
-                    link="/tjanster/smarta-hem" 
+                    link={base + "tjanster/smarta-hem"} 
                 />
 
                 <ServiceCard 
                     title="Laddboxar" 
                     description="Vi hjälper er med hela processen från bidragsansökan till installation av laddstationer." 
                     icon="fa-solid fa-charging-station" 
-                    link="/tjanster/laddboxar" 
+                    link={base + "tjanster/laddboxar"} 
                 />
 
                 <ServiceCard 
                     title="Belysning" 
                     description="Belysningsplanering och installation för butik, kontor och hem. Vi skapar rätt ljusmiljö." 
                     icon="fa-regular fa-lightbulb" 
-                    link="/tjanster/belysning" 
+                    link={base + "tjanster/belysning"} 
                 />
 
                 <ServiceCard 
                     title="Solenergi" 
                     description="Projektering och installation av solceller. En investering som sänker dina driftskostnader." 
                     icon="fa-solid fa-solar-panel" 
-                    link="/tjanster/solceller" 
+                    link={base + "tjanster/solceller"} 
                 />
 
                 <ServiceCard 
                     title="Entreprenad" 
                     description="Vi utför elinstallationer vid nybyggnation, ombyggnation och renovering med fullt ansvar." 
                     icon="fa-solid fa-building" 
-                    link="/tjanster/entreprenad" 
+                    link={base + "tjanster/entreprenad"} 
                 />
             </div>
         </div>
@@ -155,7 +156,7 @@ const featuredProjects = projects.filter(project => project.featured);
         </div>
 
         <div class="mt-16 text-center">
-            <a href="/referenser" class="inline-block border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white font-display font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-widest text-sm">
+            <a href={base + "referenser"} class="inline-block border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white font-display font-bold py-3 px-8 rounded transition duration-300 uppercase tracking-widest text-sm">
                 Se fler referenser
             </a>
         </div>
