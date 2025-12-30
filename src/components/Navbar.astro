@@ -1,5 +1,6 @@
 ---
 import BoltIcon from "./icons/BoltIcon.astro";
+import LogoTitle from "./icons/LogoTitle.astro";
 import MenuIcon from "./icons/MenuIcon.astro";
 import XMarkIcon from "./icons/XMarkIcon.astro";
 
@@ -8,7 +9,6 @@ import { services } from "../data/services";
 import { pb } from "../utils";
 
 const navItems = [
-    { label: "Hem", href: pb("/#home") },
     {
         label: "Tjänster",
         href: pb("/#services"),
@@ -17,7 +17,7 @@ const navItems = [
             href: pb(`/services/${s.slug}`),
         })),
     },
-    { label: "Referenser", href: pb("/referenser") },
+    { label: "Projekt", href: pb("/referenser") },
     { label: "Om Oss", href: pb("/#about") },
     { label: "Kontakt", href: pb("/#contact") },
 ];
@@ -33,17 +33,9 @@ const navItems = [
             <a
                 href={pb("/#home")}
                 class="flex-shrink-0 flex items-center gap-2 group"
+                aria-label="ELPROJEKT"
             >
-                <div
-                    class="w-10 h-10 rounded-md flex items-center justify-center shadow-lg transition-colors bg-elblue text-white"
-                >
-                    <BoltIcon className="w-6 h-6" />
-                </div>
-                <span
-                    class="font-display font-bold text-2xl tracking-tight transition-colors text-elblue"
-                >
-                    ELPROJEKT
-                </span>
+                <LogoTitle className="h-8 w-auto drop-shadow-md" />
             </a>
 
             {/* Desktop Menu */}

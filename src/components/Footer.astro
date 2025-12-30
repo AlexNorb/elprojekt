@@ -1,5 +1,5 @@
 ---
-import BoltIcon from "./icons/BoltIcon.astro";
+import LogoTitle from "./icons/LogoTitle.astro";
 import { pb } from "../utils";
 ---
 
@@ -7,13 +7,11 @@ import { pb } from "../utils";
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div class="col-span-1 md:col-span-1">
-                <div class="flex items-center gap-2 mb-4">
-                    <div class="text-elorange w-6 h-6">
-                        <BoltIcon />
-                    </div>
-                    <span class="font-display font-bold text-xl tracking-tight"
-                        >ELPROJEKT</span
-                    >
+                <div class="mb-6">
+                    <LogoTitle
+                        className="w-full max-w-[260px] h-auto"
+                        light={true}
+                    />
                 </div>
                 <p class="text-slate-400 text-sm leading-relaxed mb-4">
                     Din partner för säkra och moderna elinstallationer. Vi

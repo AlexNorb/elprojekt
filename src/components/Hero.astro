@@ -1,6 +1,7 @@
 ---
 import ArrowRightIcon from "./icons/ArrowRightIcon.astro";
 import BoltIcon from "./icons/BoltIcon.astro";
+import HeroServiceSelector from "./HeroServiceSelector.astro";
 import { pb } from "../utils";
 ---
 
@@ -90,109 +91,20 @@ import { pb } from "../utils";
                             <ArrowRightIcon />
                         </div>
                     </a>
-                    <a
-                        href={pb("/#services")}
-                        class="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-base font-bold font-display rounded-md text-white bg-white/5 backdrop-blur-sm hover:bg-white/10 md:text-lg transition-all duration-300"
-                    >
-                        Våra Tjänster
-                    </a>
                 </div>
             </div>
 
-            {/* Abstract Tech Visual */}
-            <div
-                class="mt-20 lg:mt-0 lg:col-span-5 relative hidden lg:block animate-fade-in-up opacity-0"
-                style="animation-delay: 0.8s; animation-fill-mode: forwards"
-            >
-                <div
-                    class="relative rounded-lg bg-gradient-to-br from-elblue/50 to-transparent p-1 shadow-2xl backdrop-blur-sm border border-white/10 animate-float"
-                >
-                    <div
-                        class="bg-slate-900/80 rounded-lg p-8 h-[450px] flex flex-col justify-between relative overflow-hidden"
-                    >
-                        <div
-                            class="absolute top-0 right-0 p-6 text-elorange w-12 h-12 opacity-80"
-                        >
-                            <BoltIcon />
-                        </div>
-
-                        <div class="space-y-6 mt-12 relative z-10">
-                            {/* Simulated Dashboard UI */}
-                            <div
-                                class="bg-white/5 rounded-md p-4 border border-white/5"
-                            >
-                                <div
-                                    class="flex justify-between items-center mb-2"
-                                >
-                                    <span
-                                        class="text-xs text-slate-400 font-mono"
-                                        >PROJECT_STATUS</span
-                                    >
-                                    <span
-                                        class="text-xs text-green-400 font-mono"
-                                        >ON_TRACK</span
-                                    >
-                                </div>
-                                <div class="h-16 flex items-end space-x-1">
-                                    {
-                                        [40, 70, 45, 90, 60, 80, 50, 95].map(
-                                            (h) => (
-                                                <div
-                                                    class="flex-1 bg-elblue-400 opacity-80 rounded-sm transition-all duration-500 hover:opacity-100"
-                                                    style={{ height: `${h}%` }}
-                                                />
-                                            ),
-                                        )
-                                    }
-                                </div>
-                            </div>
-
-                            <div
-                                class="bg-white/5 rounded-md p-4 border border-white/5 flex items-center justify-between"
-                            >
-                                <div>
-                                    <div
-                                        class="text-xs text-slate-400 font-mono mb-1"
-                                    >
-                                        DIRECT_LINE
-                                    </div>
-                                    <div
-                                        class="text-white font-display text-lg"
-                                    >
-                                        CONNECTED
-                                    </div>
-                                </div>
-                                <div
-                                    class="w-10 h-10 rounded-full border-2 border-green-500 flex items-center justify-center"
-                                >
-                                    <div
-                                        class="w-2 h-2 bg-green-500 rounded-full animate-ping"
-                                    >
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative z-10 mt-auto">
-                            <h3
-                                class="text-white font-display text-2xl font-bold mb-1"
-                            >
-                                Trygg Partner
-                            </h3>
-                            <p class="text-slate-400 text-sm">
-                                Vi tar ansvar hela vägen.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            {/* Service Selector / Tech Card */}
+            <div class="mt-12 lg:mt-0 lg:col-span-5 relative">
+                <HeroServiceSelector />
 
                 {/* Glow effects */}
                 <div
-                    class="absolute -top-20 -right-20 w-64 h-64 bg-elblue rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse-slow"
+                    class="absolute -top-20 -right-20 w-64 h-64 bg-elblue rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-slow pointer-events-none"
                 >
                 </div>
                 <div
-                    class="absolute -bottom-10 -left-10 w-48 h-48 bg-elorange rounded-full mix-blend-screen filter blur-[80px] opacity-20 animate-pulse-slow"
+                    class="absolute -bottom-10 -left-10 w-48 h-48 bg-elorange rounded-full mix-blend-screen filter blur-[80px] opacity-10 animate-pulse-slow pointer-events-none"
                 >
                 </div>
             </div>

@@ -1,0 +1,172 @@
+---
+import StarIcon from "./icons/StarIcon.astro";
+import CheckBadgeIcon from "./icons/CheckBadgeIcon.astro";
+
+const reviews = [
+    {
+        name: "Anders P.",
+        location: "Stenungsund",
+        text: "Installerade laddbox och drog ny el till garaget. Otroligt proffsigt.",
+        stars: 5,
+    },
+    {
+        name: "Maria Lindberg",
+        location: "Tjörn",
+        text: "Bra samarbete med snickarna och snygga lösningar för belysningen.",
+        stars: 5,
+    },
+    {
+        name: "BRF Strandkanten",
+        location: "Uddevalla",
+        text: "Vi bytte ut belysningen i trapphusen. Snabbt jobb.",
+        stars: 5,
+    },
+];
+---
+
+<section
+    class="bg-white border-b border-slate-100 py-6 overflow-hidden relative"
+>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Container for Carousel/Grid */}
+        <div
+            id="banner-carousel"
+            class="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0"
+        >
+            {
+                reviews.map((review, index) => (
+                    <div
+                        class="banner-card min-w-[85%] sm:min-w-[350px] md:min-w-0 snap-center flex flex-col md:block"
+                        data-index={index}
+                    >
+                        <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-50 border border-slate-100 hover:border-elblue/20 hover:shadow-sm transition-all duration-300 h-full">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 rounded-full bg-elblue/10 flex items-center justify-center text-elblue font-bold font-display text-lg">
+                                    {review.name.charAt(0)}
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-1">
+                                    <h4 class="text-sm font-bold text-slate-900 truncate pr-2">
+                                        {review.name}
+                                    </h4>
+                                    <div class="flex text-elorange">
+                                        {Array.from({
+                                            length: review.stars,
+                                        }).map(() => (
+                                            <StarIcon className="w-3 h-3" />
+                                        ))}
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-500 mb-1 line-clamp-2">
+                                    "{review.text}"
+                                </p>
+                                <div class="flex items-center text-[10px] text-slate-400">
+                                    <span class="mr-2">{review.location}</span>
+                                    <span class="flex items-center text-elblue">
+                                        <CheckBadgeIcon className="w-3 h-3 mr-0.5" />
+                                        Verifierad
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        {/* Dots Indicator (Mobile Only) */}
+        <div class="flex justify-center gap-2 mt-0 md:hidden h-2">
+            {
+                reviews.map((_, index) => (
+                    <button
+                        class="banner-dot w-1.5 h-1.5 rounded-full bg-slate-300 transition-all duration-300 hover:bg-elorange/50 focus:outline-none"
+                        aria-label={`Gå till omdöme ${index + 1}`}
+                        data-index={index}
+                    />
+                ))
+            }
+        </div>
+    </div>
+
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .banner-dot.active {
+            background-color: var(--color-elorange);
+            transform: scale(1.2);
+        }
+    </style>
+
+    <script>
+        const carousel = document.getElementById("banner-carousel");
+        const cards = document.querySelectorAll(".banner-card");
+        const dots = document.querySelectorAll(".banner-dot");
+
+        // Click Handler for Dots
+        dots.forEach((dot) => {
+            dot.addEventListener("click", () => {
+                const index = parseInt(dot.getAttribute("data-index") || "0");
+                const card = cards[index];
+                if (card && carousel && card instanceof HTMLElement) {
+                    // Calculate position to center the card
+                    // card.offsetLeft relative to the scrolling container
+                    // We want to center it, so we subtract half the container width and add half the card width
+                    // actually, usually simpler behavior is just scrolling to the start of the card with snap
+                    const left = card.offsetLeft;
+
+                    // But since we have padding on container (px-4), offsetLeft might be relative to parent content box.
+                    // Easiest is often just formatting scrollLeft.
+                    // Let's try simple scroll logic first.
+                    // For snap containers, usually just scrolling near the element triggers the snap.
+
+                    // Mobile container has padding-left: 1rem (16px) due to px-4.
+                    // The first card starts at internal offset 0 (effectively).
+                    // card.offsetLeft will return the pixel distance.
+
+                    // Let's try using scrollIntoView with inline: 'center' block: 'nearest'
+                    card.scrollIntoView({
+                        behavior: "smooth",
+                        block: "nearest",
+                        inline: "center",
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for Active Dot State
+        const observerOptions = {
+            root: carousel,
+            threshold: 0.5,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            if (window.innerWidth >= 768) return; // Ignore on desktop
+
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const index = entry.target.getAttribute("data-index");
+                    if (index !== null) {
+                        dots.forEach((d) => d.classList.remove("active"));
+                        const activeDot = document.querySelector(
+                            `.banner-dot[data-index="${index}"]`,
+                        );
+                        if (activeDot) activeDot.classList.add("active");
+                    }
+                }
+            });
+        }, observerOptions);
+
+        cards.forEach((card) => observer.observe(card));
+
+        // Initial Active State
+        if (dots.length > 0 && window.innerWidth < 768) {
+            dots[0].classList.add("active");
+        }
+    </script>
+</section>
