@@ -3,6 +3,7 @@ import XMarkIcon from "./icons/XMarkIcon.astro";
 import ChevronLeftIcon from "./icons/ChevronLeftIcon.astro";
 import ChevronRightIcon from "./icons/ChevronRightIcon.astro";
 import CheckBadgeIcon from "./icons/CheckBadgeIcon.astro";
+import { pb } from "../utils";
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -112,7 +113,7 @@ const base = import.meta.env.BASE_URL;
                     Gillar du resultatet?
                 </p>
                 <a
-                    href="/#contact"
+                    href={pb("/#contact")}
                     class="block w-full text-center bg-elblue hover:bg-elblue-600 text-white font-display font-bold py-4 rounded transition duration-300 shadow-lg text-xs uppercase tracking-widest"
                 >
                     Begär Offert på liknande

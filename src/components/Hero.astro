@@ -1,6 +1,7 @@
 ---
 import ArrowRightIcon from "./icons/ArrowRightIcon.astro";
 import BoltIcon from "./icons/BoltIcon.astro";
+import { pb } from "../utils";
 ---
 
 <section
@@ -18,7 +19,18 @@ import BoltIcon from "./icons/BoltIcon.astro";
             class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-elblue-900/40 to-slate-900/40"
         >
         </div>
-        <div class="absolute inset-0 bg-[url('/tech-grid.svg')] opacity-30">
+        <!-- Note: Background images in Tailwind arbitary values needs care with base path. 
+             Ideally move to style attribute or use a class with standard CSS if path issues arise.
+             For now assumption is tech-grid.svg is in public. 
+             Safe approach: use inline style for background image to use pb(). 
+             But `bg-[url('/tech-grid.svg')]` is compiled at build time by Tailwind. 
+             If it's in public, Tailwind might not touch it. 
+             Let's switch to inline style to be safe with pb(). 
+        -->
+        <div
+            class="absolute inset-0 opacity-30"
+            style={`background-image: url('${pb("/tech-grid.svg")}')`}
+        >
         </div>
         {
             /* Assumed grid pattern exists or will be replaced by CSS if in config */
@@ -68,7 +80,7 @@ import BoltIcon from "./icons/BoltIcon.astro";
                     style="animation-delay: 0.6s; animation-fill-mode: forwards"
                 >
                     <a
-                        href="/#contact"
+                        href={pb("/#contact")}
                         class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-elblue font-display rounded-md hover:bg-elblue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-elblue shadow-[0_0_20px_rgba(0,60,166,0.5)] hover:shadow-[0_0_30px_rgba(0,60,166,0.7)]"
                     >
                         Kontakta mig
@@ -79,7 +91,7 @@ import BoltIcon from "./icons/BoltIcon.astro";
                         </div>
                     </a>
                     <a
-                        href="/#services"
+                        href={pb("/#services")}
                         class="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-base font-bold font-display rounded-md text-white bg-white/5 backdrop-blur-sm hover:bg-white/10 md:text-lg transition-all duration-300"
                     >
                         Våra Tjänster

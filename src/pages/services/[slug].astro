@@ -7,6 +7,7 @@ import MobileActionBar from "../../components/MobileActionBar.astro";
 import CheckBadgeIcon from "../../components/icons/CheckBadgeIcon.astro";
 import ArrowRightIcon from "../../components/icons/ArrowRightIcon.astro";
 import ContactForm from "../../components/ContactForm.astro";
+import { pb } from "../../utils";
 
 export async function getStaticPaths() {
     return services.map((service) => ({
@@ -31,7 +32,7 @@ const { service } = Astro.props;
                 {/* Header Image */}
                 <div class="relative h-64 md:h-96">
                     <a
-                        href="/"
+                        href={pb("/")}
                         onclick="event.preventDefault(); history.back();"
                         class="absolute top-4 left-4 z-20 inline-flex items-center text-white/90 hover:text-white bg-slate-900/40 hover:bg-slate-900/60 backdrop-blur-sm px-4 py-2 rounded-full transition-all font-bold text-xs uppercase tracking-wider cursor-pointer border border-white/10"
                     >
@@ -148,7 +149,7 @@ const { service } = Astro.props;
 
                             <div class="space-y-4">
                                 <a
-                                    href="/#contact"
+                                    href={pb("/#contact")}
                                     class="w-full flex items-center justify-center px-6 py-4 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-elblue hover:bg-elblue-600 transition-all transform hover:-translate-y-1 block text-center"
                                 >
                                     Begär Offert
