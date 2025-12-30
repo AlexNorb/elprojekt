@@ -4,7 +4,7 @@
 @font-face {
   font-family: 'Bank Gothic Light';
   src: url('/fonts/bank-gothic-light.woff2') format('woff2'),
-       url('/fonts/bank-gothic-light.woff') format('woff');
+    url('/fonts/bank-gothic-light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: optional;
@@ -12,12 +12,21 @@
 
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+}
+
 @theme {
   /* Colors */
   --color-brand-primary: #003ca6;
   --color-brand-dark: #002a75;
   --color-brand-accent: #ff7403;
   --color-brand-gray: #f8fafc;
+
+  /* Aliases for migration */
+  --color-elblue: var(--color-brand-primary);
+  --color-elorange: var(--color-brand-accent);
 
   /* Typography */
   --font-sans: "Inter", sans-serif;
@@ -31,8 +40,15 @@
   --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
 
   @keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 

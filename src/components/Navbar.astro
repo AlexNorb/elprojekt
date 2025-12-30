@@ -1,0 +1,197 @@
+---
+import BoltIcon from "./icons/BoltIcon.astro";
+import MenuIcon from "./icons/MenuIcon.astro";
+import XMarkIcon from "./icons/XMarkIcon.astro";
+
+import ChevronDownIcon from "./icons/ChevronDownIcon.astro";
+import { services } from "../data/services";
+
+const navItems = [
+    { label: "Hem", href: "/#home" },
+    {
+        label: "Tjänster",
+        href: "/#services",
+        children: services.map((s) => ({
+            label: s.title,
+            href: `/services/${s.slug}`,
+        })),
+    },
+    { label: "Referenser", href: "/referenser" },
+    { label: "Om Oss", href: "/#about" },
+    { label: "Kontakt", href: "/#contact" },
+];
+---
+
+<nav
+    id="navbar"
+    class="fixed w-full z-50 transition-transform duration-300 ease-in-out bg-white backdrop-blur-md border-b border-gray-100 shadow-sm py-3 translate-y-0"
+>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center">
+            {/* Logo */}
+            <a
+                href="/#home"
+                class="flex-shrink-0 flex items-center gap-2 group"
+            >
+                <div
+                    class="w-10 h-10 rounded-md flex items-center justify-center shadow-lg transition-colors bg-elblue text-white"
+                >
+                    <BoltIcon className="w-6 h-6" />
+                </div>
+                <span
+                    class="font-display font-bold text-2xl tracking-tight transition-colors text-elblue"
+                >
+                    ELPROJEKT
+                </span>
+            </a>
+
+            {/* Desktop Menu */}
+            <div class="hidden md:flex space-x-8 items-center">
+                {
+                    navItems.map((item) =>
+                        item.children ? (
+                            <div class="relative group">
+                                <a
+                                    href={item.href}
+                                    class="flex items-center gap-1 font-sans text-sm font-medium transition-colors duration-200 uppercase tracking-wide text-slate-600 hover:text-elblue py-2"
+                                >
+                                    {item.label}
+                                    <ChevronDownIcon className="w-4 h-4" />
+                                </a>
+                                <div class="absolute left-0 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+                                    <div class="bg-white backdrop-blur-md rounded-md shadow-xl border border-gray-100 py-2 overflow-hidden">
+                                        {item.children.map((child) => (
+                                            <a
+                                                href={child.href}
+                                                class="block px-4 py-3 text-slate-600 hover:text-elblue hover:bg-slate-50 transition-colors text-sm font-medium border-l-2 border-transparent hover:border-elblue"
+                                            >
+                                                {child.label}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <a
+                                href={item.href}
+                                class="font-sans text-sm font-medium transition-colors duration-200 uppercase tracking-wide text-slate-600 hover:text-elblue py-2"
+                            >
+                                {item.label}
+                            </a>
+                        ),
+                    )
+                }
+                <a
+                    href="/#contact"
+                    class="px-6 py-2.5 rounded-md font-display font-medium text-sm transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 bg-elblue text-white hover:bg-elblue/90"
+                >
+                    Begär Offert
+                </a>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div class="flex items-center md:hidden">
+                <button
+                    id="mobile-menu-btn"
+                    class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none text-elblue"
+                >
+                    <span class="sr-only">Öppna meny</span>
+                    <div id="menu-icon-open" class="block">
+                        <MenuIcon className="h-8 w-8" />
+                    </div>
+                    <div id="menu-icon-close" class="hidden">
+                        <XMarkIcon className="h-8 w-8" />
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {/* Mobile Menu Panel */}
+    <div
+        id="mobile-menu"
+        class="hidden md:hidden absolute w-full bg-white backdrop-blur-md border-b border-gray-100 shadow-xl top-full left-0"
+    >
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {
+                navItems.map((item) => (
+                    <a
+                        href={item.href}
+                        class="mobile-nav-link block px-3 py-4 rounded-md text-base font-medium text-slate-700 hover:text-elblue hover:bg-elblue-50 font-display"
+                    >
+                        {item.label}
+                    </a>
+                ))
+            }
+            <a
+                href="/#contact"
+                class="mobile-nav-link block w-full text-center mt-4 bg-elblue text-white px-3 py-4 rounded-md text-base font-bold font-display"
+            >
+                BEGÄR OFFERT
+            </a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIconOpen = document.getElementById("menu-icon-open");
+    const menuIconClose = document.getElementById("menu-icon-close");
+    const navbar = document.getElementById("navbar");
+    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+    let isMenuOpen = false;
+
+    function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+            mobileMenu?.classList.remove("hidden");
+            menuIconOpen?.classList.add("hidden");
+            menuIconClose?.classList.remove("hidden");
+        } else {
+            mobileMenu?.classList.add("hidden");
+            menuIconOpen?.classList.remove("hidden");
+            menuIconClose?.classList.add("hidden");
+        }
+    }
+
+    mobileMenuBtn?.addEventListener("click", toggleMenu);
+
+    // Close menu when clicking a link
+    mobileNavLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            if (isMenuOpen) toggleMenu();
+        });
+    });
+
+    // Scroll Hide Logic
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener(
+        "scroll",
+        () => {
+            const currentScrollY = window.scrollY;
+
+            // Always show if at top or menu is open
+            if (currentScrollY < 10 || isMenuOpen) {
+                navbar?.classList.remove("-translate-y-full");
+                navbar?.classList.add("translate-y-0");
+                lastScrollY = currentScrollY;
+                return;
+            }
+
+            if (currentScrollY > lastScrollY) {
+                // Scrolling Down -> Hide
+                navbar?.classList.remove("translate-y-0");
+                navbar?.classList.add("-translate-y-full");
+            } else {
+                // Scrolling Up -> Show
+                navbar?.classList.remove("-translate-y-full");
+                navbar?.classList.add("translate-y-0");
+            }
+            lastScrollY = currentScrollY;
+        },
+        { passive: true },
+    );
+</script>
