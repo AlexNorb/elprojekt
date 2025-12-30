@@ -1,6 +1,7 @@
 ---
 import PhoneIcon from "./icons/PhoneIcon.astro";
 import ChatBubbleOvalLeftIcon from "./icons/ChatBubbleOvalLeftIcon.astro";
+import { pb } from "../utils";
 ---
 
 <div
@@ -12,7 +13,7 @@ import ChatBubbleOvalLeftIcon from "./icons/ChatBubbleOvalLeftIcon.astro";
     >
         <div class="grid grid-cols-2 gap-3">
             <a
-                href="/#contact"
+                href={pb("/#contact")}
                 class="flex flex-col items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-800 py-3 rounded-md transition-colors active:scale-95"
             >
                 <ChatBubbleOvalLeftIcon className="w-6 h-6 mb-1 text-elblue" />

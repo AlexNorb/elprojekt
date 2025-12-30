@@ -5,20 +5,21 @@ import XMarkIcon from "./icons/XMarkIcon.astro";
 
 import ChevronDownIcon from "./icons/ChevronDownIcon.astro";
 import { services } from "../data/services";
+import { pb } from "../utils";
 
 const navItems = [
-    { label: "Hem", href: "/#home" },
+    { label: "Hem", href: pb("/#home") },
     {
         label: "Tjänster",
-        href: "/#services",
+        href: pb("/#services"),
         children: services.map((s) => ({
             label: s.title,
-            href: `/services/${s.slug}`,
+            href: pb(`/services/${s.slug}`),
         })),
     },
-    { label: "Referenser", href: "/referenser" },
-    { label: "Om Oss", href: "/#about" },
-    { label: "Kontakt", href: "/#contact" },
+    { label: "Referenser", href: pb("/referenser") },
+    { label: "Om Oss", href: pb("/#about") },
+    { label: "Kontakt", href: pb("/#contact") },
 ];
 ---
 
@@ -30,7 +31,7 @@ const navItems = [
         <div class="flex justify-between items-center">
             {/* Logo */}
             <a
-                href="/#home"
+                href={pb("/#home")}
                 class="flex-shrink-0 flex items-center gap-2 group"
             >
                 <div
@@ -82,7 +83,7 @@ const navItems = [
                     )
                 }
                 <a
-                    href="/#contact"
+                    href={pb("/#contact")}
                     class="px-6 py-2.5 rounded-md font-display font-medium text-sm transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 bg-elblue text-white hover:bg-elblue/90"
                 >
                     Begär Offert
@@ -124,7 +125,7 @@ const navItems = [
                 ))
             }
             <a
-                href="/#contact"
+                href={pb("/#contact")}
                 class="mobile-nav-link block w-full text-center mt-4 bg-elblue text-white px-3 py-4 rounded-md text-base font-bold font-display"
             >
                 BEGÄR OFFERT
