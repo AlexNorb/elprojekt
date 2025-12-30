@@ -1,0 +1,113 @@
+---
+import PhoneIcon from "./icons/PhoneIcon.astro";
+import EnvelopeIcon from "./icons/EnvelopeIcon.astro";
+import ContactForm from "./ContactForm.astro";
+---
+
+<section id="contact" class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2
+                class="text-elorange font-bold tracking-wide uppercase text-sm mb-2 font-display"
+            >
+                Kontakta Oss
+            </h2>
+            <h3
+                class="text-3xl font-extrabold text-slate-900 sm:text-4xl font-display"
+            >
+                Hör av dig direkt
+            </h3>
+            <p class="mt-4 text-slate-600 max-w-2xl mx-auto">
+                Vi erbjuder ofta fasta priser på installationer som laddboxar
+                och elcentraler. Behöver du ritningar till ditt nya hus eller
+                renovering hjälper vi till med det också.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+            {/* Form */}
+            <div
+                class="bg-white rounded-lg shadow-xl p-8 sm:p-12 border border-slate-100"
+            >
+                <ContactForm />
+            </div>
+
+            {/* Contact Info */}
+            <div class="flex flex-col justify-center space-y-8">
+                <div>
+                    <h4
+                        class="text-2xl font-bold font-display text-slate-900 mb-4"
+                    >
+                        Inga jobb är för små.
+                    </h4>
+                    <p class="text-slate-600 text-lg">
+                        Jag erbjuder kostnadsfria offerter och kommer gärna ut
+                        och tittar på plats i Tjörn, Stenungsund och omnejd för
+                        att diskutera lösningar.
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <div
+                        class="flex items-center p-6 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-elblue transition-colors group"
+                    >
+                        <div
+                            class="flex-shrink-0 bg-elblue-50 p-4 rounded-full group-hover:bg-elblue group-hover:text-white text-elblue transition-colors"
+                        >
+                            <PhoneIcon className="h-6 w-6" />
+                        </div>
+                        <div class="ml-5">
+                            <p
+                                class="text-sm font-medium text-slate-500 uppercase tracking-wide"
+                            >
+                                Ring mig
+                            </p>
+                            <p
+                                class="text-xl font-bold text-slate-900 font-display"
+                            >
+                                08-123 45 67
+                            </p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="flex items-center p-6 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-elblue transition-colors group"
+                    >
+                        <div
+                            class="flex-shrink-0 bg-elblue-50 p-4 rounded-full group-hover:bg-elblue group-hover:text-white text-elblue transition-colors"
+                        >
+                            <EnvelopeIcon className="h-6 w-6" />
+                        </div>
+                        <div class="ml-5">
+                            <p
+                                class="text-sm font-medium text-slate-500 uppercase tracking-wide"
+                            >
+                                Maila mig
+                            </p>
+                            <p
+                                class="text-xl font-bold text-slate-900 font-display"
+                            >
+                                info@elprojekt.se
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-elblue rounded-lg text-white">
+                    <h5 class="font-display font-bold text-lg mb-2">
+                        Samarbete & B2B
+                    </h5>
+                    <p class="text-elblue-100 text-sm mb-4">
+                        Söker ni underentreprenör? Jag är van att samarbeta i
+                        både små och stora projekt.
+                    </p>
+                    <div
+                        class="text-xs font-mono bg-elblue-600/50 p-2 rounded inline-block"
+                    >
+                        F-Skatt • Ansvarsförsäkring • ID06
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

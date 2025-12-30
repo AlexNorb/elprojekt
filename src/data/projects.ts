@@ -1,7 +1,7 @@
 export interface Project {
     title: string;
     category: string;
-    filterCategory: string;
+    filterCategory: string[];
     description: string;
     image: string;
     images: string[];
@@ -12,7 +12,7 @@ export const projects: Project[] = [
     {
         title: "Villa Sjöutsikten",
         category: "Villa, Nyproduktion",
-        filterCategory: "villa",
+        filterCategory: ["villa"],
         description: "Totalentreprenad vid nybyggnation av exklusiv villa. Vi installerade Plejd för ljusstyrning, Easee laddbox samt drog nätverk i hela huset.",
         image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1453&q=80",
         images: [
@@ -26,7 +26,7 @@ export const projects: Project[] = [
     {
         title: "Centralgatan Kontor",
         category: "Företag, Renovering",
-        filterCategory: "foretag",
+        filterCategory: ["foretag"],
         description: "Byte av all belysning till energieffektiv LED i kontorslandskap på 400kvm. Inklusive närvarostyrning och nödutrymningsskyltar.",
         image: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80",
         images: [
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     {
         title: "BRF Solbacken",
         category: "Energi, Solceller",
-        filterCategory: "energi",
+        filterCategory: ["energi"],
         description: "Installation av 120 solpaneler på BRF-tak. Total effekt 50kW. Anläggningen kopplades mot Ferroamp-system för fasbalansering.",
         image: "https://images.unsplash.com/photo-1592833159155-c62df1b65634?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80",
         images: [
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     {
         title: "Kökrenovering Älvsjö",
         category: "Villa, Renovering",
-        filterCategory: "villa",
+        filterCategory: ["villa"],
         description: "Omdragning av el i kök och vardagsrum. Installation av spottar i tak, nya uttag över bänk samt anslutning av vitvaror.",
         image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
         images: [
@@ -67,7 +67,7 @@ export const projects: Project[] = [
     {
         title: "Laddboxar Parkering",
         category: "Energi, Laddbox",
-        filterCategory: "energi",
+        filterCategory: ["energi"],
         description: "Installation av 10st laddboxar för samfällighet. Inklusive markarbete för ny kabeldragning och lastbalansering i central.",
         image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80",
         images: [
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     {
         title: "Industrihall Lager",
         category: "Företag, Industri",
-        filterCategory: "foretag",
+        filterCategory: ["foretag",],
         description: "Drog fram ny matning 63A till maskinpark samt installerade kraftbelysning i taket på 8 meters höjd med saxlift.",
         image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
         images: [

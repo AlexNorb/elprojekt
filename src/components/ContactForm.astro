@@ -1,0 +1,141 @@
+---
+const { subject } = Astro.props;
+---
+
+<form id="contact-form" class="space-y-6">
+    <div>
+        <label
+            for="name"
+            class="block text-sm font-medium text-slate-700 font-display mb-1"
+        >
+            Namn
+        </label>
+        <input
+            type="text"
+            name="name"
+            id="name"
+            required
+            class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
+            placeholder="Förnamn Efternamn"
+        />
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div>
+            <label
+                for="email"
+                class="block text-sm font-medium text-slate-700 font-display mb-1"
+            >
+                E-post
+            </label>
+            <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
+                placeholder="din@email.se"
+            />
+        </div>
+        <div>
+            <label
+                for="phone"
+                class="block text-sm font-medium text-slate-700 font-display mb-1"
+            >
+                Telefon
+            </label>
+            <input
+                type="tel"
+                name="phone"
+                id="phone"
+                class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
+                placeholder="070-123 45 67"
+            />
+        </div>
+    </div>
+
+    <div>
+        <label
+            for="serviceType"
+            class="block text-sm font-medium text-slate-700 font-display mb-1"
+        >
+            Ärende
+        </label>
+        <select
+            id="serviceType"
+            name="serviceType"
+            class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
+        >
+            <option selected={!subject}>Allmän förfrågan</option>
+            <option selected={subject === "Installation"}
+                >Offertförfrågan - Installation</option
+            >
+            <option selected={subject === "Service"}
+                >Service & Felsökning</option
+            >
+            <option selected={subject === "Laddbox"}>Laddbox / Elbil</option>
+            <option selected={subject === "Ritningar"}
+                >Ritningar & Planering</option
+            >
+            <option selected={subject === "Företag"}>För Företag / B2B</option>
+            <!-- Fallback/Dynamic option if subject doesn't match predefined list -->
+            {
+                subject &&
+                    ![
+                        "Installation",
+                        "Service",
+                        "Laddbox",
+                        "Ritningar",
+                        "Företag",
+                    ].includes(subject) && (
+                        <option selected value={subject}>
+                            Angående: {subject}
+                        </option>
+                    )
+            }
+        </select>
+    </div>
+
+    <div>
+        <label
+            for="message"
+            class="block text-sm font-medium text-slate-700 font-display mb-1"
+        >
+            Meddelande
+        </label>
+        <textarea
+            id="message"
+            name="message"
+            rows="4"
+            required
+            class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
+            placeholder="Beskriv vad du behöver hjälp med..."></textarea>
+    </div>
+
+    <div>
+        <button
+            type="submit"
+            class="w-full flex justify-center py-4 px-6 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-elorange hover:bg-elorange-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-elorange transition-all duration-200 transform hover:-translate-y-1 font-display uppercase tracking-wider"
+        >
+            Skicka Förfrågan
+        </button>
+    </div>
+</form>
+
+<script>
+    // Use querySelectorAll to handle multiple forms on page if necessary, though ID usage implies uniqueness.
+    // Ideally we should use class if multiple forms could exist, but for now ID 'contact-form' is likely unique per view.
+    // If logic suggests multiple forms (e.g. modal + page), ID needs to be unique or use classes.
+    // Let's stick to ID for now as per original code, but cleaner logic.
+    const form = document.getElementById("contact-form");
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target as HTMLFormElement);
+            const name = formData.get("name");
+            // Here you would typically send data to a backend
+            alert(`Tack ${name}! Jag återkommer till dig inom kort.`);
+            (e.target as HTMLFormElement).reset();
+        });
+    }
+</script>

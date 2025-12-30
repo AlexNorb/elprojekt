@@ -1,62 +1,112 @@
 ---
-const base = import.meta.env.BASE_URL;
+import BoltIcon from "./icons/BoltIcon.astro";
 ---
-<footer class="bg-white border-t border-slate-100 pt-16 pb-8">
+
+<footer class="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div class="col-span-1 md:col-span-1">
-                 <!-- LOGO FOOTER (Hybrid) -->
-                <div class="flex flex-col items-start select-none mb-4">
-                    <div class="flex items-center logo-text text-xl leading-none">
-                        <span class="text-brand-primary">EL</span>
-                        <span class="text-brand-primary">PR</span>
-                        <div class="relative w-5 h-5 mx-0.5 bg-brand-primary rounded flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" class="w-3 h-3 text-brand-accent" style="fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round;">
-                                <path d="M2 12 C 6 8, 10 16, 14 12 S 22 8, 22 12" />
-                            </svg>
-                        </div>
-                        <span class="text-brand-primary">JEKT</span>
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="text-elorange w-6 h-6">
+                        <BoltIcon />
                     </div>
+                    <span class="font-display font-bold text-xl tracking-tight"
+                        >ELPROJEKT</span
+                    >
                 </div>
-                <p class="text-slate-500 text-sm leading-relaxed">
-                    Kvalitetssäkrade elinstallationer för en hållbar framtid. Med fokus på säkerhet och modern teknik.
+                <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    Din partner för säkra och moderna elinstallationer. Vi
+                    säkrar framtiden med teknik.
                 </p>
-            </div>
-            
-            <div>
-                <h4 class="font-bold text-sm mb-4 text-slate-900 uppercase tracking-wider">Meny</h4>
-                <ul class="space-y-2 text-slate-500 text-sm">
-                    <li><a href={base + "#tjanster"} class="hover:text-brand-primary transition">Tjänster</a></li>
-                    <li><a href={base + "om-oss"} class="hover:text-brand-primary transition">Om oss</a></li>
-                    <li><a href={base + "referenser"} class="hover:text-brand-primary transition">Projekt</a></li>
-                    <li><a href={base + "#kontakt"} class="hover:text-brand-primary transition">Kontakt</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-bold text-sm mb-4 text-slate-900 uppercase tracking-wider">Tjänster</h4>
-                <ul class="space-y-2 text-slate-500 text-sm">
-                    <li><a href="#" class="hover:text-brand-primary transition">Installation</a></li>
-                    <li><a href="#" class="hover:text-brand-primary transition">Service</a></li>
-                    <li><a href="#" class="hover:text-brand-primary transition">Laddboxar</a></li>
-                    <li><a href="#" class="hover:text-brand-primary transition">Solceller</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-bold text-sm mb-4 text-slate-900 uppercase tracking-wider">Socialt</h4>
-                <div class="flex space-x-4">
-                    <a href="#" class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center hover:bg-brand-primary hover:text-white transition text-slate-400"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center hover:bg-brand-primary hover:text-white transition text-slate-400"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center hover:bg-brand-primary hover:text-white transition text-slate-400"><i class="fa-brands fa-instagram"></i></a>
+                <div class="text-xs text-slate-500 font-mono">
+                    Verksamma i:<br />
+                    Tjörn • Stenungsund • Uddevalla • Kungälv
                 </div>
+            </div>
+
+            <div>
+                <h4 class="font-display font-bold text-lg mb-4">Tjänster</h4>
+                <ul class="space-y-2 text-slate-400 text-sm">
+                    <li>
+                        <a
+                            href="/#services"
+                            class="hover:text-elorange transition-colors"
+                            >Smarta Hem & Plejd</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/#services"
+                            class="hover:text-elorange transition-colors"
+                            >Laddbox (Zaptec/Easee)</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/#services"
+                            class="hover:text-elorange transition-colors"
+                            >Renovering Kök & Badrum</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/#services"
+                            class="hover:text-elorange transition-colors"
+                            >Byte av Elcentral</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-display font-bold text-lg mb-4">Företag</h4>
+                <ul class="space-y-2 text-slate-400 text-sm">
+                    <li>
+                        <a
+                            href="/#about"
+                            class="hover:text-elorange transition-colors"
+                            >Om oss</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/#contact"
+                            class="hover:text-elorange transition-colors"
+                            >Karriär</a>
+                    </li>
+                    <li>
+                        <a
+                            href="/#contact"
+                            class="hover:text-elorange transition-colors"
+                            >Integritetspolicy</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-display font-bold text-lg mb-4">Kontakt</h4>
+                <ul class="space-y-2 text-slate-400 text-sm">
+                    <li>Storgatan 12</li>
+                    <li>111 22 Stockholm</li>
+                    <li class="pt-2 text-white font-medium">08-123 45 67</li>
+                    <li>info@elprojekt.se</li>
+                </ul>
             </div>
         </div>
-        <div class="border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-400 text-xs">
-            <p>&copy; 2023 ELPROJEKT AB. Alla rättigheter förbehållna.</p>
-            <div class="flex space-x-4 mt-4 md:mt-0">
-                <a href="#" class="hover:text-brand-primary">Integritetspolicy</a>
-                <a href="#" class="hover:text-brand-primary">Cookies</a>
+
+        <div
+            class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center"
+        >
+            <p class="text-slate-500 text-xs">
+                &copy; {new Date().getFullYear()} ELPROJEKT AB. Alla rättigheter reserverade.
+            </p>
+            <div class="mt-4 md:mt-0 flex space-x-4">
+                {/* Social placeholders */}
+                <div
+                    class="w-8 h-8 bg-slate-800 rounded-md flex items-center justify-center hover:bg-elblue cursor-pointer transition-colors"
+                >
+                    <span class="font-display font-bold text-xs">Fb</span>
+                </div>
+                <div
+                    class="w-8 h-8 bg-slate-800 rounded-md flex items-center justify-center hover:bg-elblue cursor-pointer transition-colors"
+                >
+                    <span class="font-display font-bold text-xs">In</span>
+                </div>
             </div>
         </div>
     </div>

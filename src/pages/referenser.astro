@@ -1,46 +1,81 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import ProjectModal from '../components/ProjectModal.astro';
-import SubPageHero from '../components/SubPageHero.astro';
-import { projects } from '../data/projects';
+import MainLayout from "../layouts/MainLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ProjectModal from "../components/ProjectModal.astro";
+import { projects, type Project } from "../data/projects";
+
+// Get unique categories for dynamic filtering
+const categories = [
+    "all",
+    ...new Set(projects.flatMap((p) => p.filterCategory)),
+];
+
+// Optional: Helper to format category labels (e.g. "foretag" -> "Företag")
+const formatCategory = (cat: string) => {
+    if (cat === "all") return "ALLA";
+    if (cat === "foretag") return "FÖRETAG";
+    return cat.toUpperCase();
+};
 ---
 
 <MainLayout title="Våra Referenser">
-    <Header />
+    <Navbar />
 
-    <SubPageHero 
-        title="Referenser"
-        subtitle="Se våra senaste projekt inom solenergi, smarta hem och elinstallationer för både företag och privatpersoner."
-        image="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80"
-    />
+    <!-- Compact Header -->
+    <div
+        class="pt-32 pb-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in"
+    >
+        <h1
+            class="text-3xl md:text-4xl font-bold font-display text-slate-900 mb-4"
+        >
+            Våra Referenser
+        </h1>
+        <p class="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
+            Ett urval av våra senaste projekt inom solenergi, smarta hem och
+            installationer.
+        </p>
+    </div>
 
     <!-- FILTRERING & GRID -->
-    <section class="py-24 bg-white min-h-screen">
+    <section class="pb-24 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
             <!-- Filter Buttons -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button class="filter-btn active px-6 py-2 rounded border border-brand-accent bg-brand-accent text-white font-display text-xs tracking-widest transition" data-filter="all">ALLA</button>
-                <button class="filter-btn px-6 py-2 rounded border border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary font-display text-xs tracking-widest transition bg-white" data-filter="villa">VILLA</button>
-                <button class="filter-btn px-6 py-2 rounded border border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary font-display text-xs tracking-widest transition bg-white" data-filter="foretag">FÖRETAG</button>
-                <button class="filter-btn px-6 py-2 rounded border border-slate-200 text-slate-600 hover:border-brand-primary hover:text-brand-primary font-display text-xs tracking-widest transition bg-white" data-filter="energi">ENERGI</button>
+                {
+                    categories.map((category: string) => (
+                        <button
+                            class={`filter-btn px-6 py-2 rounded border font-display text-xs tracking-widest transition uppercase ${
+                                category === "all"
+                                    ? "active bg-elorange text-white border-elorange hover:bg-elorange/90"
+                                    : "bg-white text-slate-600 border-slate-200 hover:border-elblue hover:text-elblue"
+                            }`}
+                            data-filter={category}
+                        >
+                            {formatCategory(category)}
+                        </button>
+                    ))
+                }
             </div>
 
             <!-- Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="project-grid">
-                {projects.map((project) => (
-                    <ProjectCard 
-                        title={project.title}
-                        category={project.category}
-                        filterCategory={project.filterCategory}
-                        description={project.description}
-                        image={project.image}
-                        images={project.images}
-                    />
-                ))}
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                id="project-grid"
+            >
+                {
+                    projects.map((project: Project) => (
+                        <ProjectCard
+                            title={project.title}
+                            category={project.category}
+                            filterCategory={project.filterCategory}
+                            description={project.description}
+                            image={project.image}
+                            images={project.images}
+                        />
+                    ))
+                }
             </div>
         </div>
     </section>
@@ -52,30 +87,60 @@ import { projects } from '../data/projects';
 
 <script>
     // Filter Logik
-    const buttons = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.project-card');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            buttons.forEach(b => {
-                b.classList.remove('bg-brand-accent', 'text-white', 'border-brand-accent');
-                b.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
-            });
-            btn.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
-            btn.classList.add('bg-brand-accent', 'text-white', 'border-brand-accent');
+    const buttons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".project-card");
 
-            const filterValue = btn.getAttribute('data-filter');
-            cards.forEach(card => {
-                if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                    (card as HTMLElement).style.display = 'block';
+    buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            // Reset state
+            buttons.forEach((b) => {
+                b.classList.remove(
+                    "bg-elorange",
+                    "text-white",
+                    "border-elorange",
+                    "hover:bg-elorange/90",
+                );
+                b.classList.add(
+                    "bg-white",
+                    "text-slate-600",
+                    "border-slate-200",
+                    "hover:border-elblue",
+                    "hover:text-elblue",
+                );
+            });
+            // Set active state
+            btn.classList.remove(
+                "bg-white",
+                "text-slate-600",
+                "border-slate-200",
+                "hover:border-elblue",
+                "hover:text-elblue",
+            );
+            btn.classList.add(
+                "bg-elorange",
+                "text-white",
+                "border-elorange",
+                "hover:bg-elorange/90",
+            );
+
+            const filterValue = btn.getAttribute("data-filter");
+            cards.forEach((card) => {
+                const cardEl = card as HTMLElement;
+                const cardCategories = (
+                    card.getAttribute("data-category") || ""
+                ).split(",");
+
+                if (
+                    filterValue === "all" ||
+                    (filterValue && cardCategories.includes(filterValue))
+                ) {
+                    cardEl.style.display = "block";
+                    cardEl.classList.add("animate-fade-in");
                 } else {
-                    (card as HTMLElement).style.display = 'none';
+                    cardEl.style.display = "none";
+                    cardEl.classList.remove("animate-fade-in");
                 }
             });
         });
     });
 </script>
-
-<style>
-    /* Modal Animation styles are now in ProjectModal */
-</style>

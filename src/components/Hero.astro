@@ -1,0 +1,210 @@
+---
+import ArrowRightIcon from "./icons/ArrowRightIcon.astro";
+import BoltIcon from "./icons/BoltIcon.astro";
+---
+
+<section
+    id="home"
+    class="relative min-h-screen flex items-center pt-20 pb-20 lg:pb-32 overflow-hidden bg-slate-900"
+>
+    {/* Background Image & Overlay */}
+    <div class="absolute inset-0 z-0">
+        <img
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+            alt="Modern Technology Background"
+            class="w-full h-full object-cover opacity-30"
+        />
+        <div
+            class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-elblue-900/40 to-slate-900/40"
+        >
+        </div>
+        <div class="absolute inset-0 bg-[url('/tech-grid.svg')] opacity-30">
+        </div>
+        {
+            /* Assumed grid pattern exists or will be replaced by CSS if in config */
+        }
+    </div>
+
+    <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16"
+    >
+        <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+            <div
+                class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-7 lg:text-left"
+            >
+                <div
+                    class="inline-flex items-center px-4 py-2 rounded-md border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm mb-8 animate-fade-in-up"
+                    style="animation-delay: 0.1s"
+                >
+                    <span
+                        class="w-2 h-2 rounded-full bg-elorange mr-3 animate-pulse"
+                    ></span>
+                    <span
+                        class="text-xs font-bold tracking-widest uppercase text-white/90 font-sans"
+                    >
+                        Verksam på Tjörn, i Stenungsund & Kungälv
+                    </span>
+                </div>
+
+                <h1
+                    class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl lg:text-7xl font-display leading-tight animate-fade-in-up"
+                    style="animation-delay: 0.2s"
+                >
+                    Framtidens El. <br />
+                    <span class="text-white">Personligt levererad.</span>
+                </h1>
+
+                <p
+                    class="mt-8 text-lg text-slate-200 leading-relaxed font-sans max-w-lg mx-auto lg:mx-0 border-l-2 border-elorange pl-6 animate-fade-in-up opacity-0"
+                    style="animation-delay: 0.4s; animation-fill-mode: forwards"
+                >
+                    ELPROJEKT utför allt från nybyggnation och renovering till
+                    smarta laddboxar. Din personliga elektriker i Tjörn,
+                    Stenungsund, Uddevalla och Kungälv.
+                </p>
+
+                <div
+                    class="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up opacity-0"
+                    style="animation-delay: 0.6s; animation-fill-mode: forwards"
+                >
+                    <a
+                        href="/#contact"
+                        class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-elblue font-display rounded-md hover:bg-elblue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-elblue shadow-[0_0_20px_rgba(0,60,166,0.5)] hover:shadow-[0_0_30px_rgba(0,60,166,0.7)]"
+                    >
+                        Kontakta mig
+                        <div
+                            class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform inline-block"
+                        >
+                            <ArrowRightIcon />
+                        </div>
+                    </a>
+                    <a
+                        href="/#services"
+                        class="inline-flex items-center justify-center px-8 py-4 border border-white/20 text-base font-bold font-display rounded-md text-white bg-white/5 backdrop-blur-sm hover:bg-white/10 md:text-lg transition-all duration-300"
+                    >
+                        Våra Tjänster
+                    </a>
+                </div>
+            </div>
+
+            {/* Abstract Tech Visual */}
+            <div
+                class="mt-20 lg:mt-0 lg:col-span-5 relative hidden lg:block animate-fade-in-up opacity-0"
+                style="animation-delay: 0.8s; animation-fill-mode: forwards"
+            >
+                <div
+                    class="relative rounded-lg bg-gradient-to-br from-elblue/50 to-transparent p-1 shadow-2xl backdrop-blur-sm border border-white/10 animate-float"
+                >
+                    <div
+                        class="bg-slate-900/80 rounded-lg p-8 h-[450px] flex flex-col justify-between relative overflow-hidden"
+                    >
+                        <div
+                            class="absolute top-0 right-0 p-6 text-elorange w-12 h-12 opacity-80"
+                        >
+                            <BoltIcon />
+                        </div>
+
+                        <div class="space-y-6 mt-12 relative z-10">
+                            {/* Simulated Dashboard UI */}
+                            <div
+                                class="bg-white/5 rounded-md p-4 border border-white/5"
+                            >
+                                <div
+                                    class="flex justify-between items-center mb-2"
+                                >
+                                    <span
+                                        class="text-xs text-slate-400 font-mono"
+                                        >PROJECT_STATUS</span
+                                    >
+                                    <span
+                                        class="text-xs text-green-400 font-mono"
+                                        >ON_TRACK</span
+                                    >
+                                </div>
+                                <div class="h-16 flex items-end space-x-1">
+                                    {
+                                        [40, 70, 45, 90, 60, 80, 50, 95].map(
+                                            (h) => (
+                                                <div
+                                                    class="flex-1 bg-elblue-400 opacity-80 rounded-sm transition-all duration-500 hover:opacity-100"
+                                                    style={{ height: `${h}%` }}
+                                                />
+                                            ),
+                                        )
+                                    }
+                                </div>
+                            </div>
+
+                            <div
+                                class="bg-white/5 rounded-md p-4 border border-white/5 flex items-center justify-between"
+                            >
+                                <div>
+                                    <div
+                                        class="text-xs text-slate-400 font-mono mb-1"
+                                    >
+                                        DIRECT_LINE
+                                    </div>
+                                    <div
+                                        class="text-white font-display text-lg"
+                                    >
+                                        CONNECTED
+                                    </div>
+                                </div>
+                                <div
+                                    class="w-10 h-10 rounded-full border-2 border-green-500 flex items-center justify-center"
+                                >
+                                    <div
+                                        class="w-2 h-2 bg-green-500 rounded-full animate-ping"
+                                    >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 mt-auto">
+                            <h3
+                                class="text-white font-display text-2xl font-bold mb-1"
+                            >
+                                Trygg Partner
+                            </h3>
+                            <p class="text-slate-400 text-sm">
+                                Vi tar ansvar hela vägen.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Glow effects */}
+                <div
+                    class="absolute -top-20 -right-20 w-64 h-64 bg-elblue rounded-full mix-blend-screen filter blur-[100px] opacity-30 animate-pulse-slow"
+                >
+                </div>
+                <div
+                    class="absolute -bottom-10 -left-10 w-48 h-48 bg-elorange rounded-full mix-blend-screen filter blur-[80px] opacity-20 animate-pulse-slow"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Simple float animation if not in global css yet */
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+    .animate-pulse-slow {
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+</style>

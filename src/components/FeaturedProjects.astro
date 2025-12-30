@@ -1,0 +1,53 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import ProjectModal from "./ProjectModal.astro";
+import { projects } from "../data/projects";
+
+const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
+---
+
+<section id="featured-projects" class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2
+                class="text-elorange font-bold tracking-wide uppercase text-sm mb-2 font-display"
+            >
+                Utvalda Projekt
+            </h2>
+            <h3
+                class="text-3xl font-extrabold text-slate-900 sm:text-4xl font-display"
+            >
+                Några av våra senaste arbeten
+            </h3>
+            <p class="mt-4 text-xl text-slate-500 font-sans">
+                Se fler referenser på vår referenssida.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                featuredProjects.map((project) => (
+                    <ProjectCard
+                        title={project.title}
+                        category={project.category}
+                        filterCategory={project.filterCategory}
+                        description={project.description}
+                        image={project.image}
+                        images={project.images}
+                    />
+                ))
+            }
+        </div>
+
+        <div class="mt-12 text-center">
+            <a
+                href="/referenser"
+                class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-md text-white bg-elblue hover:bg-elblue-600 transition-all shadow-md font-display uppercase tracking-wide"
+            >
+                Visa alla referenser
+            </a>
+        </div>
+    </div>
+</section>
+
+<ProjectModal />

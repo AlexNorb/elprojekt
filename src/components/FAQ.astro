@@ -1,0 +1,115 @@
+---
+import ChevronDownIcon from "./icons/ChevronDownIcon.astro";
+
+const faqs = [
+    {
+        question: "Vad är ROT/Grön teknik?",
+        answer: "ROT-avdrag ger privatpersoner 30% skattereduktion på arbetskostnaden vid elinstallationer i hemmet. Grön teknik är ett skatteavdrag på upp till 50% för installation av laddboxar och solceller (inklusive batterilagring). Vi sköter all administration direkt på fakturan så du slipper krångel.",
+    },
+    {
+        question: "Hur lång är garantin på era jobb?",
+        answer: "Vi lämnar alltid minst 2 års garanti på utfört arbete och material enligt konsumenttjänstlagen. För specifika produkter som solceller och laddboxar gäller ofta längre produktgarantier från tillverkaren, ofta upp till 10-25 år.",
+    },
+    {
+        question: "Hur bokar jag en offert?",
+        answer: "Enklast är att använda formuläret här på hemsidan under 'Kontakt'. Du kan också ringa oss direkt. För mindre jobb kan vi ofta ge ett pris direkt, medan större projekt kräver ett kostnadsfritt hembesök för att vi ska kunna ge en exakt offert.",
+    },
+    {
+        question: "Utför ni jobb åt både privatpersoner och företag?",
+        answer: "Ja, absolut! Vi arbetar med allt från små servicejobb i lägenheter till stora entreprenader för bostadsrättsföreningar och kontor. Inget jobb är för litet eller för stort för oss.",
+    },
+    {
+        question: "Kan ni hjälpa till med smarta hem-lösningar?",
+        answer: "Definitivt. Vi är specialister på smarta hem-system som Plejd, KNX och Wiser. Vi kan hjälpa dig att styra allt från belysning till värme direkt i mobilen.",
+    },
+];
+---
+
+<section id="faq" class="py-24 bg-white relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2
+                class="text-elorange font-bold tracking-wide uppercase text-sm mb-2 font-display"
+            >
+                Vanliga Frågor
+            </h2>
+            <h3
+                class="text-3xl font-extrabold text-slate-900 sm:text-4xl font-display"
+            >
+                Du undrar, vi svarar.
+            </h3>
+        </div>
+
+        <div class="space-y-4">
+            {
+                faqs.map((faq, index) => (
+                    <div class="faq-item border border-slate-100 rounded-lg overflow-hidden transition-all duration-300 bg-white hover:border-elblue/30">
+                        <button class="faq-toggle w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+                            <span class="faq-question font-display font-bold text-lg transition-colors text-slate-800">
+                                {faq.question}
+                            </span>
+                            <span class="faq-icon ml-6 flex-shrink-0 transition-transform duration-300 text-slate-400">
+                                <ChevronDownIcon className="w-6 h-6" />
+                            </span>
+                        </button>
+
+                        <div class="faq-answer px-6 text-slate-600 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0">
+                            <p class="leading-relaxed border-t border-slate-200/50 pt-4 pb-6">
+                                {faq.answer}
+                            </p>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    const toggles = document.querySelectorAll(".faq-toggle");
+
+    toggles.forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+            const parent = toggle.parentElement;
+            const answer = parent?.querySelector(".faq-answer") as HTMLElement;
+            const icon = toggle.querySelector(".faq-icon");
+            const question = toggle.querySelector(".faq-question");
+
+            if (!answer || !parent || !icon || !question) return;
+
+            const isClosed = answer.classList.contains("max-h-0");
+
+            // Close all others
+            document.querySelectorAll(".faq-item").forEach((item) => {
+                const ans = item.querySelector(".faq-answer") as HTMLElement;
+                const icn = item.querySelector(".faq-icon");
+                const qst = item.querySelector(".faq-question");
+
+                if (ans) {
+                    ans.style.maxHeight = "0px";
+                    ans.classList.add("max-h-0", "opacity-0");
+                }
+                icn?.classList.remove("rotate-180", "text-elblue");
+                qst?.classList.remove("text-elblue");
+                item.classList.remove(
+                    "shadow-lg",
+                    "bg-slate-50",
+                    "border-elblue/20",
+                );
+            });
+
+            if (isClosed) {
+                answer.classList.remove("max-h-0", "opacity-0");
+                answer.style.maxHeight = answer.scrollHeight + "px";
+
+                icon.classList.add("rotate-180", "text-elblue");
+                question.classList.add("text-elblue");
+                parent.classList.add(
+                    "shadow-lg",
+                    "bg-slate-50",
+                    "border-elblue/20",
+                );
+            }
+        });
+    });
+</script>
