@@ -101,6 +101,36 @@ const { service } = Astro.props;
                                 )
                             }
                         </div>
+
+                        {/* Process Steps (if available) - e.g. for Solar */}
+                        {
+                            service.processSteps && (
+                                <div class="mt-12 pt-12 border-t border-slate-100">
+                                    <h3 class="text-xl font-bold text-slate-900 mb-6 font-display">
+                                        Så går det till
+                                    </h3>
+                                    <div class="space-y-6">
+                                        {service.processSteps.map((step) => (
+                                            <div class="flex">
+                                                <div class="flex-shrink-0 mr-4">
+                                                    <div class="w-10 h-10 rounded-full bg-elblue text-white flex items-center justify-center font-bold font-display shadow-sm">
+                                                        {step.step}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h4 class="text-lg font-bold text-slate-900">
+                                                        {step.title}
+                                                    </h4>
+                                                    <p class="text-slate-600 text-sm mt-1 leading-relaxed">
+                                                        {step.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
 
                     {/* Sidebar / CTA */}
