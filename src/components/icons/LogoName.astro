@@ -2,15 +2,16 @@
 const { className, light = false } = Astro.props;
 ---
 
+<!-- Logo Name SVG: Single color, no tagline -->
 <svg
     width="423.30722"
-    height="64.412643"
-    viewBox="0 0 111.99996 17.042512"
+    height="34.804657"
+    viewBox="0 0 111.99996 9.2087325"
     version="1.1"
     id="svg5"
     xml:space="preserve"
     xmlns="http://www.w3.org/2000/svg"
-    class:list={["logo-svg", { light: light }, className]}
+    class:list={["logo-name-svg", { light: light }, className]}
 >
     <defs id="defs2">
         <linearGradient id="swatch1">
@@ -20,7 +21,7 @@ const { className, light = false } = Astro.props;
                 id="stop1"></stop>
         </linearGradient>
     </defs>
-    <g id="layer1" transform="translate(-160.51901,-85.130183)">
+    <g id="layer1" transform="translate(-160.51901,-85.130182)">
         <g id="g14" transform="translate(-290.19448,26.130841)">
             <g id="full_name">
                 <g id="icon">
@@ -73,22 +74,21 @@ const { className, light = false } = Astro.props;
                     id="text10"
                     style="font-size:26.4567px;line-height:1.25;font-family:'Bank Gothic Light';-inkscape-font-specification:'Bank Gothic Light, Normal';white-space:pre;fill:#003ca6;stroke-width:1.00864"
                     transform="matrix(0.26231624,0,0,0.26231624,433.31064,6.6145979)"
-                    aria-label="DITT PROJEKT I FOKUS"></path>
-            </g>
-        </g>
-    </g>
-</svg>
+                    aria-label="DITT PROJEKT I FOKUS"></path></g
+            ></g
+        ></g
+    ></svg
+>
 
 <style>
     /* Default Blue - applied to all paths in the SVG */
-    /* Default Blue - applied to all paths in the SVG */
-    .logo-svg :global(path) {
+    .logo-name-svg :global(path) {
         fill: #003ca6 !important;
         stroke: none !important; /* Override potential strokes from SVG */
     }
 
     /* Light Mode Overrides */
-    .logo-svg.light :global(path) {
+    .logo-name-svg.light :global(path) {
         fill: white !important;
     }
 </style>
