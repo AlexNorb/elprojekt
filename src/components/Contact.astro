@@ -25,28 +25,8 @@ import ContactForm from "./ContactForm.astro";
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-            {/* Form */}
-            <div
-                class="bg-white rounded-lg shadow-xl p-8 sm:p-12 border border-slate-100"
-            >
-                <ContactForm />
-            </div>
-
             {/* Contact Info */}
-            <div class="flex flex-col justify-center space-y-8">
-                <div>
-                    <h4
-                        class="text-2xl font-bold font-display text-slate-900 mb-4"
-                    >
-                        Inga jobb är för små.
-                    </h4>
-                    <p class="text-slate-600 text-lg">
-                        Jag erbjuder kostnadsfria offerter och kommer gärna ut
-                        och tittar på plats i Tjörn, Stenungsund och omnejd för
-                        att diskutera lösningar.
-                    </p>
-                </div>
-
+            <div class="flex flex-col justify-center space-y-8 order-1">
                 <div class="space-y-6">
                     <div
                         class="flex items-center p-6 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-elblue transition-colors group"
@@ -93,6 +73,19 @@ import ContactForm from "./ContactForm.astro";
                     </div>
                 </div>
 
+                <div>
+                    <h4
+                        class="text-xl font-bold font-display text-slate-900 mb-4"
+                    >
+                        Inga jobb är för små.
+                    </h4>
+                    <p class="text-slate-600 text-base">
+                        Jag erbjuder kostnadsfria offerter och kommer gärna ut
+                        och tittar på plats i Tjörn, Stenungsund och omnejd för
+                        att diskutera lösningar.
+                    </p>
+                </div>
+
                 <div class="mt-8 p-6 bg-elblue rounded-lg text-white">
                     <h5 class="font-display font-bold text-lg mb-2">
                         Samarbete & B2B
@@ -107,6 +100,13 @@ import ContactForm from "./ContactForm.astro";
                         F-Skatt • Ansvarsförsäkring • ID06
                     </div>
                 </div>
+            </div>
+
+            {/* Form */}
+            <div
+                class="bg-white rounded-lg shadow-xl p-8 sm:p-12 border border-slate-100 order-2"
+            >
+                <ContactForm />
             </div>
         </div>
     </div>

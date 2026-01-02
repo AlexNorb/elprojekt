@@ -25,7 +25,7 @@ const navItems = [
 
 <nav
     id="navbar"
-    class="fixed w-full z-50 transition-transform duration-300 ease-in-out bg-white backdrop-blur-md border-b border-gray-100 shadow-sm py-3 translate-y-0"
+    class="fixed w-full z-50 transition-all duration-300 ease-in-out py-3 translate-y-0 bg-transparent"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center">
@@ -142,10 +142,20 @@ const navItems = [
             mobileMenu?.classList.remove("hidden");
             menuIconOpen?.classList.add("hidden");
             menuIconClose?.classList.remove("hidden");
+            // Ensure white bg when menu is open
+            navbar?.classList.add(
+                "bg-white",
+                "shadow-sm",
+                "border-b",
+                "border-gray-100",
+            );
+            navbar?.classList.remove("bg-transparent");
         } else {
             mobileMenu?.classList.add("hidden");
             menuIconOpen?.classList.remove("hidden");
             menuIconClose?.classList.add("hidden");
+            // Re-check scroll position to reset transparency if at top
+            handleScroll();
         }
     }
 
@@ -158,33 +168,52 @@ const navItems = [
         });
     });
 
-    // Scroll Hide Logic
+    // Scroll Logic
     let lastScrollY = window.scrollY;
+    const scrollThreshold = 75;
 
-    window.addEventListener(
-        "scroll",
-        () => {
-            const currentScrollY = window.scrollY;
+    function handleScroll() {
+        const currentScrollY = window.scrollY;
 
-            // Always show if at top or menu is open
-            if (currentScrollY < 10 || isMenuOpen) {
-                navbar?.classList.remove("-translate-y-full");
-                navbar?.classList.add("translate-y-0");
-                lastScrollY = currentScrollY;
-                return;
-            }
+        // Visual Style Logic (Transparent at top, White when scrolled)
+        if (currentScrollY < scrollThreshold && !isMenuOpen) {
+            navbar?.classList.remove(
+                "bg-white",
+                "shadow-sm",
+                "border-b",
+                "border-gray-100",
+            );
+            navbar?.classList.add("bg-transparent");
+        } else {
+            navbar?.classList.add(
+                "bg-white",
+                "shadow-sm",
+                "border-b",
+                "border-gray-100",
+            );
+            navbar?.classList.remove("bg-transparent");
+        }
 
-            if (currentScrollY > lastScrollY) {
-                // Scrolling Down -> Hide
-                navbar?.classList.remove("translate-y-0");
-                navbar?.classList.add("-translate-y-full");
-            } else {
-                // Scrolling Up -> Show
-                navbar?.classList.remove("-translate-y-full");
-                navbar?.classList.add("translate-y-0");
-            }
-            lastScrollY = currentScrollY;
-        },
-        { passive: true },
-    );
+        // Hide/Show Logic
+        // Always show if above threshold or menu is open
+        if (currentScrollY < scrollThreshold || isMenuOpen) {
+            navbar?.classList.remove("-translate-y-full");
+            navbar?.classList.add("translate-y-0");
+        } else if (currentScrollY > lastScrollY) {
+            // Scrolling Down -> Hide
+            navbar?.classList.remove("translate-y-0");
+            navbar?.classList.add("-translate-y-full");
+        } else {
+            // Scrolling Up -> Show
+            navbar?.classList.remove("-translate-y-full");
+            navbar?.classList.add("translate-y-0");
+        }
+
+        lastScrollY = currentScrollY;
+    }
+
+    window.addEventListener("scroll", () => handleScroll(), { passive: true });
+
+    // Init state check
+    handleScroll();
 </script>

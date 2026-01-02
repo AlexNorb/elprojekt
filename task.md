@@ -1,0 +1,2 @@
+- [x] Implement Light Theme in `Hero.astro` <!-- id: 5 -->
+- [x] Implement Transparent-to-White `Navbar.astro` <!-- id: 6 -->

@@ -1,7 +1,6 @@
 ---
 import ArrowRightIcon from "./icons/ArrowRightIcon.astro";
-import BoltIcon from "./icons/BoltIcon.astro";
-import HeroServiceSelector from "./HeroServiceSelector.astro";
+
 import { pb } from "../utils";
 ---
 
@@ -12,102 +11,64 @@ import { pb } from "../utils";
     {/* Background Image & Overlay */}
     <div class="absolute inset-0 z-0">
         <img
-            src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+            src="public/images/hero/hero-left.webp"
             alt="Modern Technology Background"
-            class="w-full h-full object-cover opacity-30"
+            class="w-full h-full object-cover opacity-100"
         />
         <div
-            class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-elblue-900/40 to-slate-900/40"
+            class="absolute inset-0 bg-gradient-to-b from-white/70 via-white/40 to-white/0"
         >
         </div>
-        <!-- Note: Background images in Tailwind arbitary values needs care with base path. 
-             Ideally move to style attribute or use a class with standard CSS if path issues arise.
-             For now assumption is tech-grid.svg is in public. 
-             Safe approach: use inline style for background image to use pb(). 
-             But `bg-[url('/tech-grid.svg')]` is compiled at build time by Tailwind. 
-             If it's in public, Tailwind might not touch it. 
-             Let's switch to inline style to be safe with pb(). 
-        -->
-        <div
-            class="absolute inset-0 opacity-30"
-            style={`background-image: url('${pb("/tech-grid.svg")}')`}
-        >
-        </div>
-        {
-            /* Assumed grid pattern exists or will be replaced by CSS if in config */
-        }
     </div>
 
     <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-16 flex flex-col items-center justify-center text-center"
     >
-        <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
-            <div
-                class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-7 lg:text-left"
+        <h1
+            class="text-4xl tracking-tight font-extrabold text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl font-display leading-tight animate-fade-in-up max-w-4xl"
+            style="animation-delay: 0.2s"
+        >
+            Framtidens El. <br />
+            <span class="text-elblue">Personligt levererad.</span>
+        </h1>
+
+        <p
+            class="mt-8 text-xl text-slate-900 leading-relaxed font-sans max-w-2xl mx-auto animate-fade-in-up opacity-0"
+            style="animation-delay: 0.4s; animation-fill-mode: forwards"
+        >
+            Din trygga partner för solceller, laddboxar och elinstallationer på
+            Tjörn, i Stenungsund och Kungälv. Vi levererar hållbara ellösningar
+            med personlig service och högsta kvalitet.
+        </p>
+
+        <div
+            class="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up opacity-0"
+            style="animation-delay: 0.6s; animation-fill-mode: forwards"
+        >
+            <a
+                href={pb("/#contact")}
+                class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-elblue font-display rounded-md hover:bg-elblue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-elblue shadow-[0_4px_14px_0_rgba(0,118,255,0.39)] hover:shadow-[0_6px_20px_rgba(0,118,255,0.23)] hover:-translate-y-1"
             >
+                Begär Offert
                 <div
-                    class="inline-flex items-center px-4 py-2 rounded-md border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm mb-8 animate-fade-in-up"
-                    style="animation-delay: 0.1s"
+                    class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform inline-block"
                 >
-                    <span
-                        class="w-2 h-2 rounded-full bg-elorange mr-3 animate-pulse"
-                    ></span>
-                    <span
-                        class="text-xs font-bold tracking-widest uppercase text-white/90 font-sans"
-                    >
-                        Verksam på Tjörn, i Stenungsund & Kungälv
-                    </span>
+                    <ArrowRightIcon />
                 </div>
+            </a>
 
-                <h1
-                    class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl lg:text-7xl font-display leading-tight animate-fade-in-up"
-                    style="animation-delay: 0.2s"
-                >
-                    Framtidens El. <br />
-                    <span class="text-white">Personligt levererad.</span>
-                </h1>
+            <a
+                href="#services"
+                class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-700 transition-all duration-200 bg-white/50 border border-slate-200 font-display rounded-md hover:bg-white hover:text-elblue hover:border-elblue/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200 backdrop-blur-sm"
+            >
+                Våra Tjänster
+            </a>
+        </div>
 
-                <p
-                    class="mt-8 text-lg text-slate-200 leading-relaxed font-sans max-w-lg mx-auto lg:mx-0 border-l-2 border-elorange pl-6 animate-fade-in-up opacity-0"
-                    style="animation-delay: 0.4s; animation-fill-mode: forwards"
-                >
-                    ELPROJEKT utför allt från nybyggnation och renovering till
-                    smarta laddboxar. Din personliga elektriker i Tjörn,
-                    Stenungsund, Uddevalla och Kungälv.
-                </p>
-
-                <div
-                    class="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up opacity-0"
-                    style="animation-delay: 0.6s; animation-fill-mode: forwards"
-                >
-                    <a
-                        href={pb("/#contact")}
-                        class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-elblue font-display rounded-md hover:bg-elblue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-elblue shadow-[0_0_20px_rgba(0,60,166,0.5)] hover:shadow-[0_0_30px_rgba(0,60,166,0.7)]"
-                    >
-                        Kontakta mig
-                        <div
-                            class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform inline-block"
-                        >
-                            <ArrowRightIcon />
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            {/* Service Selector / Tech Card */}
-            <div class="mt-12 lg:mt-0 lg:col-span-5 relative">
-                <HeroServiceSelector />
-
-                {/* Glow effects */}
-                <div
-                    class="absolute -top-20 -right-20 w-64 h-64 bg-elblue rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-slow pointer-events-none"
-                >
-                </div>
-                <div
-                    class="absolute -bottom-10 -left-10 w-48 h-48 bg-elorange rounded-full mix-blend-screen filter blur-[80px] opacity-10 animate-pulse-slow pointer-events-none"
-                >
-                </div>
-            </div>
+        {/* Glow effects - Centered */}
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-elblue rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse-slow pointer-events-none -z-10"
+        >
         </div>
     </div>
 </section>
