@@ -6,19 +6,26 @@ import XMarkIcon from "./icons/XMarkIcon.astro";
 import LogoTitle from "./icons/LogoTitle.astro";
 
 import ChevronDownIcon from "./icons/ChevronDownIcon.astro";
-import { services } from "../data/services";
 import { pb } from "../utils";
+import { getCollection } from "astro:content";
+
+// Fetch services from content collection
+const servicesCollection = await getCollection("services");
+const services = servicesCollection.map((s) => ({
+    title: s.data.title,
+    slug: s.slug,
+}));
 
 const navItems = [
     {
         label: "Tjänster",
-        href: pb("/#services"),
+        href: pb("/#services"), // Keep #services anchor if it's a section on home, or change to /tjanster if it's a page
         children: services.map((s) => ({
             label: s.title,
-            href: pb(`/services/${s.slug}`),
+            href: pb(`/tjanster/${s.slug}`),
         })),
     },
-    { label: "Projekt", href: pb("/referenser") },
+    { label: "Projekt", href: pb("/projekt") },
     { label: "Om Oss", href: pb("/#about") },
     { label: "Kontakt", href: pb("/#contact") },
 ];

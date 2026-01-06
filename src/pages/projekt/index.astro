@@ -1,26 +1,38 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import ProjectModal from "../components/ProjectModal.astro";
-import { projects, type Project } from "../data/projects";
+import MainLayout from "../../layouts/MainLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
 
-// Get unique categories for dynamic filtering
-const categories = [
-    "all",
-    ...new Set(projects.flatMap((p) => p.filterCategory)),
-];
+// Fetch projects from Content Collection
+const projects = await getCollection("projects");
 
-// Optional: Helper to format category labels (e.g. "foretag" -> "Företag")
-const formatCategory = (cat: string) => {
-    if (cat === "all") return "ALLA";
-    if (cat === "foretag") return "FÖRETAG";
-    return cat.toUpperCase();
+// Helper for Title Case
+const toTitleCase = (str: string) => {
+    return str.replace(/\w\S*/g, (txt) => {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
 };
+
+// Define Fixed Categories
+const fixedCategories = ["Företag", "Privat"];
+
+// Get Dynamic Categories from project frontmatter
+const dynamicCategories = [
+    ...new Set(projects.flatMap((p) => p.data.filterCategory || [])),
+].map((cat) => toTitleCase(cat));
+
+// Combine all filter options (unique)
+// Order: Alla, Fixed (Privat, Företag), then Dynamic
+const categories = [
+    "Alla",
+    ...fixedCategories,
+    ...dynamicCategories.filter((c) => !fixedCategories.includes(c)),
+];
 ---
 
-<MainLayout title="Våra Referenser">
+<MainLayout title="Våra Projekt">
     <Navbar />
 
     <!-- Compact Header -->
@@ -30,7 +42,7 @@ const formatCategory = (cat: string) => {
         <h1
             class="text-3xl md:text-4xl font-bold font-display text-slate-900 mb-4"
         >
-            Våra Referenser
+            Våra Projekt
         </h1>
         <p class="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
             Ett urval av våra senaste projekt inom solenergi, smarta hem och
@@ -44,16 +56,16 @@ const formatCategory = (cat: string) => {
             <!-- Filter Buttons -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
                 {
-                    categories.map((category: string) => (
+                    [...new Set(categories)].map((category: string) => (
                         <button
                             class={`filter-btn px-6 py-2 rounded border font-display text-xs tracking-widest transition uppercase ${
-                                category === "all"
-                                    ? "active bg-elorange text-white border-elorange hover:bg-elorange/90"
+                                category === "Alla"
+                                    ? "active bg-elorange text-white border-elorange hover:bg-elorange/90 shadow-md"
                                     : "bg-white text-slate-600 border-slate-200 hover:border-elblue hover:text-elblue"
                             }`}
                             data-filter={category}
                         >
-                            {formatCategory(category)}
+                            {category}
                         </button>
                     ))
                 }
@@ -65,22 +77,21 @@ const formatCategory = (cat: string) => {
                 id="project-grid"
             >
                 {
-                    projects.map((project: Project) => (
+                    projects.map((project) => (
                         <ProjectCard
-                            title={project.title}
-                            category={project.category}
-                            filterCategory={project.filterCategory}
-                            description={project.description}
-                            image={project.image}
-                            images={project.images}
+                            title={project.data.title}
+                            category={project.data.serviceType}
+                            serviceType={project.data.serviceType}
+                            filterCategory={project.data.filterCategory || []}
+                            description={project.data.description || ""}
+                            image={project.data.coverImage}
+                            slug={project.slug}
                         />
                     ))
                 }
             </div>
         </div>
     </section>
-
-    <ProjectModal />
 
     <Footer />
 </MainLayout>
@@ -99,6 +110,7 @@ const formatCategory = (cat: string) => {
                     "text-white",
                     "border-elorange",
                     "hover:bg-elorange/90",
+                    "shadow-md",
                 );
                 b.classList.add(
                     "bg-white",
@@ -121,18 +133,21 @@ const formatCategory = (cat: string) => {
                 "text-white",
                 "border-elorange",
                 "hover:bg-elorange/90",
+                "shadow-md",
             );
 
-            const filterValue = btn.getAttribute("data-filter");
+            const filterValue = btn.getAttribute("data-filter")?.toLowerCase();
+
             cards.forEach((card) => {
                 const cardEl = card as HTMLElement;
                 const cardCategories = (
                     card.getAttribute("data-category") || ""
-                ).split(",");
+                ).toLowerCase();
+                const categoryList = cardCategories.split(",");
 
                 if (
-                    filterValue === "all" ||
-                    (filterValue && cardCategories.includes(filterValue))
+                    filterValue === "alla" ||
+                    (filterValue && categoryList.includes(filterValue))
                 ) {
                     cardEl.style.display = "block";
                     cardEl.classList.add("animate-fade-in");

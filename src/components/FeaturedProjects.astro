@@ -1,10 +1,26 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
 import ProjectModal from "./ProjectModal.astro";
-import { projects } from "../data/projects";
+import { getCollection } from "astro:content";
 import { pb } from "../utils";
 
-const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
+const allProjects = await getCollection("projects");
+
+// Filter for featured projects, or fallback to first 3
+let featuredProjects = allProjects.filter((p) => p.data.featured);
+if (featuredProjects.length === 0) {
+    featuredProjects = allProjects.slice(0, 3);
+} else {
+    featuredProjects = featuredProjects.slice(0, 3);
+}
+
+// Helper to format category for display (taking first filter category or serviceType)
+const getDisplayCategory = (project: any) => {
+    if (project.data.filterCategory && project.data.filterCategory.length > 0) {
+        return project.data.filterCategory[0].toUpperCase();
+    }
+    return project.data.serviceType || "PROJEKT";
+};
 ---
 
 <section id="featured-projects" class="py-16 bg-slate-50">
@@ -29,12 +45,12 @@ const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
             {
                 featuredProjects.map((project) => (
                     <ProjectCard
-                        title={project.title}
-                        category={project.category}
-                        filterCategory={project.filterCategory}
-                        description={project.description}
-                        image={project.image}
-                        images={project.images}
+                        title={project.data.title}
+                        category={getDisplayCategory(project)}
+                        filterCategory={project.data.filterCategory || []}
+                        description={project.data.description || ""}
+                        image={project.data.coverImage}
+                        slug={project.slug}
                     />
                 ))
             }
@@ -42,7 +58,7 @@ const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
 
         <div class="mt-12 text-center">
             <a
-                href={pb("/referenser")}
+                href={pb("/projekt")}
                 class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-md text-white bg-elblue hover:bg-elblue-600 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 shadow-md font-display uppercase tracking-wide"
             >
                 Visa alla referenser

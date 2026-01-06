@@ -1,10 +1,20 @@
 ---
-import { services } from "../data/services";
+import { getCollection } from "astro:content";
 import { pb } from "../utils";
 import HomeModernIcon from "./icons/HomeModernIcon.astro";
 import BatteryIcon from "./icons/BatteryIcon.astro";
 import BoltIcon from "./icons/BoltIcon.astro";
 import CpuChipIcon from "./icons/CpuChipIcon.astro";
+
+// Fetch from Content Collection
+const servicesCollection = await getCollection("services");
+const services = servicesCollection.map((s) => ({
+    title: s.data.title,
+    slug: s.slug,
+    description: s.data.description,
+    image: s.data.image,
+    icon: s.data.icon,
+}));
 
 const iconMap = {
     "home-modern": HomeModernIcon,
@@ -41,7 +51,7 @@ const iconMap = {
                     const Icon = iconMap[service.icon as keyof typeof iconMap];
                     return (
                         <a
-                            href={pb(`/services/${service.slug}`)}
+                            href={pb(`/tjanster/${service.slug}`)}
                             class="group relative bg-slate-50 result-card rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:bg-white hover:-translate-y-1 border border-slate-100 hover:border-elblue/20 flex flex-col cursor-pointer opacity-0 translate-y-20 reveal-on-scroll"
                             style={`transition-delay: ${index * 150}ms`}
                         >

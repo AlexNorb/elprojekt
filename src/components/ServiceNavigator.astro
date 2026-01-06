@@ -9,7 +9,7 @@ import ArrowRightIcon from "./icons/ArrowRightIcon.astro";
 import ArrowLeftIcon from "./icons/ArrowLeftIcon.astro";
 import StarIcon from "./icons/StarIcon.astro";
 
-// Service Slugs based on src/data/services.ts
+// Service Slugs
 const SERVICES = {
     RENOVATION: "renovering-nybyggnation",
     EV_CHARGING: "laddbox-elbil",
@@ -326,7 +326,7 @@ const SERVICES = {
                         label: "Se våra referenser",
                         icon: "⭐",
                         action: "link",
-                        url: "/referenser",
+                        url: "/projekt",
                         text: "Bilder och case från våra tidigare projekt.",
                     },
                     {
@@ -376,7 +376,7 @@ const SERVICES = {
                     this.ui.resultBtn.href = this.pb(option.url);
                 } else {
                     this.ui.resultBtn.href = this.pb(
-                        `/services/${option.slug}`,
+                        `/tjanster/${option.slug}`,
                     );
                 }
                 this.ui.resultBtn.innerHTML = `<span>Gå till sidan</span> <span class="w-5 h-5">→</span>`;

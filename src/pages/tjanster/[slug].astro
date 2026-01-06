@@ -1,5 +1,5 @@
 ---
-import { services } from "../../data/services";
+import { getCollection } from "astro:content";
 import MainLayout from "../../layouts/MainLayout.astro";
 import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
@@ -8,8 +8,10 @@ import CheckBadgeIcon from "../../components/icons/CheckBadgeIcon.astro";
 import ArrowRightIcon from "../../components/icons/ArrowRightIcon.astro";
 import ContactForm from "../../components/ContactForm.astro";
 import { pb } from "../../utils";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
+    const services = await getCollection("services");
     return services.map((service) => ({
         params: { slug: service.slug },
         props: { service },
@@ -17,12 +19,16 @@ export async function getStaticPaths() {
 }
 
 const { service } = Astro.props;
+const { data } = service; // Access frontmatter data
+
+// Helper for image handling
+const isUrl = (img: any) => typeof img === "string";
 ---
 
-<MainLayout title={service.title} description={service.description}>
+<MainLayout title={data.title} description={data.description}>
     <Navbar />
 
-    <div class="pt-20 pb-20 min-h-screen bg-slate-50 animate-fade-in">
+    <div class="pt-24 pb-24 min-h-screen bg-slate-50 animate-fade-in">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb / Back */}
 
@@ -38,12 +44,25 @@ const { service } = Astro.props;
                     >
                         <span class="mr-2">←</span> Tillbaka
                     </a>
-                    <img
-                        src={service.image ||
-                            "https://images.unsplash.com/photo-1581092921461-eab62e97a782?auto=format&fit=crop&q=80"}
-                        alt={service.title}
-                        class="w-full h-full object-cover"
-                    />
+
+                    {
+                        isUrl(data.image) ? (
+                            <img
+                                src={data.image as string}
+                                alt={data.title}
+                                class="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <Image
+                                src={data.image as any}
+                                alt={data.title}
+                                class="w-full h-full object-cover"
+                                width={1200}
+                                height={600}
+                            />
+                        )
+                    }
+
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"
                     >
@@ -57,7 +76,7 @@ const { service } = Astro.props;
                         <h1
                             class="text-4xl md:text-5xl font-display font-bold text-white mb-2"
                         >
-                            {service.title}
+                            {data.title}
                         </h1>
                     </div>
                 </div>
@@ -73,7 +92,7 @@ const { service } = Astro.props;
                             Om tjänsten
                         </h2>
                         <p class="text-lg text-slate-600 leading-relaxed mb-8">
-                            {service.longDescription || service.description}
+                            {data.longDescription || data.description}
                         </p>
 
                         <h3
@@ -83,8 +102,8 @@ const { service } = Astro.props;
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {
-                                service.features ? (
-                                    service.features.map((feature) => (
+                                data.features ? (
+                                    data.features.map((feature) => (
                                         <div class="flex items-center p-4 bg-slate-50 rounded-md border border-slate-100">
                                             <div class="w-6 h-6 text-elblue mr-3 flex-shrink-0">
                                                 <CheckBadgeIcon />
@@ -105,13 +124,13 @@ const { service } = Astro.props;
 
                         {/* Process Steps (if available) - e.g. for Solar */}
                         {
-                            service.processSteps && (
+                            data.processSteps && (
                                 <div class="mt-12 pt-12 border-t border-slate-100">
                                     <h3 class="text-xl font-bold text-slate-900 mb-6 font-display">
                                         Så går det till
                                     </h3>
                                     <div class="space-y-6">
-                                        {service.processSteps.map((step) => (
+                                        {data.processSteps.map((step) => (
                                             <div class="flex">
                                                 <div class="flex-shrink-0 mr-4">
                                                     <div class="w-10 h-10 rounded-full bg-elblue text-white flex items-center justify-center font-bold font-display shadow-sm">
@@ -190,12 +209,12 @@ const { service } = Astro.props;
             <h2
                 class="text-2xl font-bold text-slate-900 text-center mb-8 font-display"
             >
-                Har du frågor om {service.title}?
+                Har du frågor om {data.title}?
             </h2>
             <div
                 class="bg-slate-50 rounded-xl p-6 md:p-10 border border-slate-100 shadow-sm"
             >
-                <ContactForm subject={service.title} />
+                <ContactForm subject={data.title} />
             </div>
         </div>
     </section>

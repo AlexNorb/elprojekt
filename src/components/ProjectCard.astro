@@ -1,35 +1,59 @@
 ---
+import { Image } from "astro:assets";
+
 export interface Props {
   title: string;
   category: string;
-  image: string;
+  image: string | ImageMetadata;
+  serviceType: string;
   filterCategory: string[];
   description: string;
-  images: string[];
+  slug: string;
 }
 
-const { title, category, image, filterCategory, description, images } =
-  Astro.props;
-
-const projectData = JSON.stringify({
+const {
   title,
   category,
-  desc: description,
-  images,
-});
+  image,
+  serviceType,
+  filterCategory = [],
+  slug,
+} = Astro.props;
+
+// Helper to check if image is a string (URL) or ImageMetadata
+const isUrl = (img: any) => typeof img === "string";
+
+// Combine serviceType and filterCategories for filtering
+// Normalize to Title Case for display if needed, but here we just need raw values for data-attribute
+const allCategories = [serviceType, ...filterCategory];
 ---
 
-<div
-  class="project-card group relative overflow-hidden bg-elblue rounded-lg h-72 cursor-pointer shadow-md hover:shadow-xl transition-all duration-300"
-  data-category={filterCategory.join(",")}
-  data-project={projectData}
+<a
+  href={`/projekt/${slug}`}
+  class="project-card group relative overflow-hidden bg-elblue rounded-lg h-72 cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 block"
+  data-category={allCategories.join(",")}
 >
-  <img
-    src={image}
-    alt={title}
-    class="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition duration-700 transform group-hover:scale-110"
-  />
-  <div class="absolute inset-0 p-8 flex flex-col justify-end">
+  <div class="absolute inset-0 z-0">
+    {
+      isUrl(image) ? (
+        <img
+          src={image as string}
+          alt={title}
+          class="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition duration-700 transform group-hover:scale-110"
+        />
+      ) : (
+        <Image
+          src={image as ImageMetadata}
+          alt={title}
+          class="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition duration-700 transform group-hover:scale-110"
+          width={600}
+          height={400}
+        />
+      )
+    }
+  </div>
+
+  <div class="absolute inset-0 p-8 flex flex-col justify-end z-10">
     <div
       class="transform translate-y-4 group-hover:translate-y-0 transition duration-500"
     >
@@ -39,14 +63,17 @@ const projectData = JSON.stringify({
       </div>
       <span
         class="text-white/80 text-[10px] font-bold uppercase tracking-widest mb-1 block font-display"
-        >{category.split(",")[0]}</span
+        >{serviceType}</span
       >
-      <h4 class="text-white text-xl font-bold mb-2 font-display">{title}</h4>
+      <h4 class="text-white text-xl font-bold mb-2 font-display">
+        {title}
+      </h4>
+      <!-- Optional: Show categories on hover -->
       <p
-        class="text-white/90 text-xs opacity-0 group-hover:opacity-100 transition duration-500 font-sans"
+        class="text-white/90 text-xs opacity-0 group-hover:opacity-100 transition duration-500 font-sans capitalize"
       >
-        {category}
+        {filterCategory.join(", ")}
       </p>
     </div>
   </div>
-</div>
+</a>
