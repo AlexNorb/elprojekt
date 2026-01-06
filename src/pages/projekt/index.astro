@@ -58,7 +58,7 @@ const categories = [
                 {
                     [...new Set(categories)].map((category: string) => (
                         <button
-                            class={`filter-btn px-6 py-2 rounded border font-display text-xs tracking-widest transition uppercase ${
+                            class={`filter-btn px-6 py-2 rounded border shadow-sm font-display text-xs tracking-widest transition uppercase ${
                                 category === "Alla"
                                     ? "active bg-elorange text-white border-elorange hover:bg-elorange/90 shadow-md"
                                     : "bg-white text-slate-600 border-slate-200 hover:border-elblue hover:text-elblue"
