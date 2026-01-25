@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { pb } from "../utils";
 
 export interface Props {
   title: string;
@@ -29,7 +30,7 @@ const allCategories = [serviceType, ...filterCategory];
 ---
 
 <a
-  href={`/projekt/${slug}`}
+  href={pb(`/projekt/${slug}`)}
   class="project-card group relative overflow-hidden bg-elblue rounded-lg h-72 cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 block"
   data-category={allCategories.join(",")}
 >

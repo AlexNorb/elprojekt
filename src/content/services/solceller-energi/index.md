@@ -1,6 +1,6 @@
 ---
 id: 1
-title: "Solceller & Energi"
+title: "Solceller & Batterilagring"
 description: "Nyckelfärdiga solcellsanläggningar och batterilagring. Vi hjälper dig från kalkyl till färdig installation."
 icon: "bolt"
 longDescription: "Att installera solceller är en av de bästa investeringarna du kan göra för både plånboken och miljön. På ELPROJEKT är vi experter på att dimensionera och installera anläggningar som är optimerade för svenska förhållanden. Vi använder endast paneler och växelriktare från ledande tillverkare för att garantera lång livslängd och hög verkningsgrad. Vi hjälper dig även med batterilagring så att du kan spara din solenergi till kvällen eller sälja den när priset är högt."

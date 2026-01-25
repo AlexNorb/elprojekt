@@ -7,7 +7,7 @@ coverImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=
 coverAlt: "Industriell miljö med maskiner"
 description: "Drog fram ny matning 63A till maskinpark samt installerade kraftbelysning i taket på 8 meters höjd med saxlift."
 tags: ["industri", "kraftinstallation", "belysning"]
-filterCategory: ["foretag"]
+filterCategory: ["industri"]
 gallery:
   - "https://images.unsplash.com/photo-1563514210080-60b5403e1e2d"
   - "https://images.unsplash.com/photo-1563514210077-0a4a58b22a0a"

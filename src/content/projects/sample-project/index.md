@@ -2,12 +2,12 @@
 title: "Exempel Projekt"
 client: "Test Kund AB"
 completionDate: 2024-01-01
-serviceType: "Privat"
+serviceType: "Företag"
 coverImage: "./image.jpg"
 coverAlt: "Placeholder image showing electrical work"
 description: "Ett exempelprojekt för att visa funktionaliteten med Content Collections och lokala bilder."
 tags: ["demo", "exempel"]
-filterCategory: ["foretag"]
+filterCategory: ["Industri"]
 ---
 
 # Detta är ett exempelprojekt

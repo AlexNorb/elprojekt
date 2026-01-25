@@ -7,6 +7,8 @@ import MobileActionBar from "../../components/MobileActionBar.astro";
 import CheckBadgeIcon from "../../components/icons/CheckBadgeIcon.astro";
 import ArrowRightIcon from "../../components/icons/ArrowRightIcon.astro";
 import ContactForm from "../../components/ContactForm.astro";
+import PhoneIcon from "../../components/icons/PhoneIcon.astro";
+import EnvelopeIcon from "../../components/icons/EnvelopeIcon.astro";
 import { pb } from "../../utils";
 import { Image } from "astro:assets";
 
@@ -172,19 +174,59 @@ const { data } = service; // Access frontmatter data
 
                             <div class="space-y-4">
                                 <a
-                                    href={pb("/#contact")}
+                                    href="#contact-form"
                                     class="w-full flex items-center justify-center px-6 py-4 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-elblue hover:bg-elblue-600 transition-all transform hover:-translate-y-1 block text-center"
                                 >
-                                    Begär Offert
+                                    Skicka förfrågan
                                     <div class="ml-2 w-5 h-5 inline-block">
                                         <ArrowRightIcon />
                                     </div>
                                 </a>
+
                                 <a
                                     href="tel:081234567"
-                                    class="w-full flex items-center justify-center px-6 py-4 border border-slate-300 rounded-md text-base font-bold text-slate-700 bg-white hover:bg-slate-50 transition-all block text-center"
+                                    class="flex items-center p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:border-elblue hover:shadow-md transition-all group"
                                 >
-                                    Ring oss: 08-123 45 67
+                                    <div
+                                        class="flex-shrink-0 bg-elblue-50 p-3 rounded-full group-hover:bg-elblue group-hover:text-white text-elblue transition-colors"
+                                    >
+                                        <PhoneIcon className="h-5 w-5" />
+                                    </div>
+                                    <div class="ml-4 text-left">
+                                        <p
+                                            class="text-xs font-medium text-slate-500 uppercase tracking-wide"
+                                        >
+                                            Ring mig
+                                        </p>
+                                        <p
+                                            class="text-lg font-bold text-slate-900 font-display"
+                                        >
+                                            08-123 45 67
+                                        </p>
+                                    </div>
+                                </a>
+
+                                <a
+                                    href="mailto:info@elprojekt.se"
+                                    class="flex items-center p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:border-elblue hover:shadow-md transition-all group"
+                                >
+                                    <div
+                                        class="flex-shrink-0 bg-elblue-50 p-3 rounded-full group-hover:bg-elblue group-hover:text-white text-elblue transition-colors"
+                                    >
+                                        <EnvelopeIcon className="h-5 w-5" />
+                                    </div>
+                                    <div class="ml-4 text-left">
+                                        <p
+                                            class="text-xs font-medium text-slate-500 uppercase tracking-wide"
+                                        >
+                                            Maila mig
+                                        </p>
+                                        <p
+                                            class="text-lg font-bold text-slate-900 font-display"
+                                        >
+                                            info@elprojekt.se
+                                        </p>
+                                    </div>
                                 </a>
                             </div>
 
@@ -208,7 +250,7 @@ const { data } = service; // Access frontmatter data
         </div>
     </div>
 
-    <section class="py-16 bg-white border-t border-slate-100">
+    <section id="contact-form" class="py-16 bg-white border-t border-slate-100">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
                 class="text-2xl font-bold text-slate-900 text-center mb-8 font-display"

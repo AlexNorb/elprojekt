@@ -7,7 +7,7 @@ coverImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=
 coverAlt: "Ljust och modernt kontorslandskap"
 description: "Byte av all belysning till energieffektiv LED i kontorslandskap på 400kvm. Inklusive närvarostyrning och nödutrymningsskyltar."
 tags: ["kontor", "belysning", "led", "energioptimering"]
-filterCategory: ["foretag"]
+filterCategory: ["Industri"]
 gallery:
   - "https://images.unsplash.com/photo-1522071820081-009f0129c7c5"
   - "https://images.unsplash.com/photo-1533050186591-7603348008d3"

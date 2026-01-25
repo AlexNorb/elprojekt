@@ -1,6 +1,6 @@
 ---
 id: 4
-title: "Renovering & Nybyggnation"
+title: "Nybyggnation & Renovering"
 description: "Kompletta elinstallationer för kök, badrum, villor och entreprenad."
 icon: "home-modern"
 longDescription: "Vi är din partner vid både nybyggnation och renovering. Oavsett om det gäller ett stambyte, en köksrenovering eller en helt ny villa tar vi ansvar för hela elinstallationen. Vi utför ljusberäkningar, upprättar ritningar och samarbetar tätt med andra hantverkare för ett perfekt resultat. Vi täcker även butiksanpassningar och kontorsombyggnader."
