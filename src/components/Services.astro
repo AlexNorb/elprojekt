@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import { pb } from "../utils";
 import HomeModernIcon from "./icons/HomeModernIcon.astro";
 import BatteryIcon from "./icons/BatteryIcon.astro";
@@ -57,11 +58,21 @@ const iconMap = {
                         >
                             {/* Image Header */}
                             <div class="h-48 overflow-hidden relative">
-                                <img
-                                    src={service.image}
-                                    alt={service.title}
-                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
+                                {typeof service.image === "string" ? (
+                                    <img
+                                        src={service.image}
+                                        alt={service.title}
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <Image
+                                        src={service.image}
+                                        alt={service.title}
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        width={600}
+                                        height={400}
+                                    />
+                                )}
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                             </div>
 

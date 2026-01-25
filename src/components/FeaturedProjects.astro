@@ -47,6 +47,7 @@ const getDisplayCategory = (project: any) => {
                     <ProjectCard
                         title={project.data.title}
                         category={getDisplayCategory(project)}
+                        serviceType={project.data.serviceType}
                         filterCategory={project.data.filterCategory || []}
                         description={project.data.description || ""}
                         image={project.data.coverImage}

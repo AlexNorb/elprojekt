@@ -18,11 +18,15 @@ export async function getStaticPaths() {
     }));
 }
 
-const { service } = Astro.props;
-const { data } = service; // Access frontmatter data
-
 // Helper for image handling
 const isUrl = (img: any) => typeof img === "string";
+
+interface Props {
+    service: import("astro:content").CollectionEntry<"services">;
+}
+
+const { service } = Astro.props;
+const { data } = service; // Access frontmatter data
 ---
 
 <MainLayout title={data.title} description={data.description}>
