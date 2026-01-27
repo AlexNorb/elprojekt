@@ -3,115 +3,113 @@ import LogoTitle from "./icons/LogoTitle.astro";
 import { pb } from "../utils";
 ---
 
-<footer class="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
+<footer
+    class="bg-slate-900 text-white pt-12 pb-28 md:pb-8 border-t border-slate-800"
+>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div class="col-span-1 md:col-span-1">
-                <div class="mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-10">
+            <!-- Logo & Service Areas -->
+            <div>
+                <div class="mb-5">
                     <LogoTitle
-                        className="w-full max-w-[260px] h-auto"
+                        className="w-full max-w-[200px] h-auto"
                         light={true}
                     />
                 </div>
                 <p class="text-slate-400 text-sm leading-relaxed mb-4">
-                    Din lokala elektriker för framtidssäkra elinstallationer.
+                    Din lokala elektriker. Moderna lösningar, personlig service.
                 </p>
-                <div class="text-xs text-slate-500 font-mono">
-                    Verksamma i:<br />
-                    Tjörn • Orust • Stenungsund • Uddevalla • Kungälv
+                <div class="text-xs text-slate-500">
+                    <span class="font-medium text-slate-400"
+                        >Serviceområden:</span
+                    ><br />
+                    Tjörn • Orust • Stenungsund<br class="sm:hidden" />
+                    <span class="hidden sm:inline"> • </span>Uddevalla • Kungälv
                 </div>
             </div>
 
+            <!-- Företaget -->
             <div>
-                <h4 class="font-display font-bold text-lg mb-4">Tjänster</h4>
-                <ul class="space-y-2 text-slate-400 text-sm">
-                    <li>
-                        <a
-                            href={pb("/#services")}
-                            class="hover:text-elorange transition-colors"
-                            >Smarta Hem & Plejd</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href={pb("/#services")}
-                            class="hover:text-elorange transition-colors"
-                            >Laddbox (Zaptec/Easee)</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href={pb("/#services")}
-                            class="hover:text-elorange transition-colors"
-                            >Renovering Kök & Badrum</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href={pb("/#services")}
-                            class="hover:text-elorange transition-colors"
-                            >Byte av Elcentral</a
-                        >
-                    </li>
-                </ul>
+                <h4 class="font-display font-bold text-lg mb-4">Företaget</h4>
+                <div class="space-y-1 text-slate-400 text-sm">
+                    <p class="text-white font-medium">
+                        Elprojekt i Uddevalla AB
+                    </p>
+                    <p>Org.nr 559557-0895</p>
+                    <p>Friggavägen 6</p>
+                    <p>451 76 Uddevalla</p>
+                </div>
             </div>
 
-            <div>
-                <h4 class="font-display font-bold text-lg mb-4">Företag</h4>
-                <ul class="space-y-2 text-slate-400 text-sm">
-                    <li>
-                        <a
-                            href={pb("/#about")}
-                            class="hover:text-elorange transition-colors"
-                            >Om oss</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href={pb("/#contact")}
-                            class="hover:text-elorange transition-colors"
-                            >Karriär</a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href={pb("/#contact")}
-                            class="hover:text-elorange transition-colors"
-                            >Integritetspolicy</a
-                        >
-                    </li>
-                </ul>
-            </div>
-
+            <!-- Kontakt -->
             <div>
                 <h4 class="font-display font-bold text-lg mb-4">Kontakt</h4>
-                <ul class="space-y-2 text-slate-400 text-sm">
-                    <li>Storgatan 12</li>
-                    <li>111 22 Stockholm</li>
-                    <li class="pt-2 text-white font-medium">08-123 45 67</li>
-                    <li>info@elprojekt.se</li>
-                </ul>
+                <div class="space-y-2 text-sm">
+                    <a
+                        href="tel:+46703325655"
+                        class="flex items-center gap-2 text-white font-medium hover:text-elorange transition-colors group"
+                    >
+                        <i
+                            class="fa-solid fa-phone text-xs text-slate-500 group-hover:text-elorange transition-colors"
+                        ></i>
+                        070-332 56 55
+                    </a>
+                    <a
+                        href="mailto:alex@elprojekt.nu"
+                        class="flex items-center gap-2 text-slate-400 hover:text-elorange transition-colors group"
+                    >
+                        <i
+                            class="fa-solid fa-envelope text-xs text-slate-500 group-hover:text-elorange transition-colors"
+                        ></i>
+                        alex@elprojekt.nu
+                    </a>
+                </div>
             </div>
         </div>
 
         <div
-            class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center"
+            class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4"
         >
-            <p class="text-slate-500 text-xs">
-                &copy; {new Date().getFullYear()} ELPROJEKT AB. Alla rättigheter reserverade.
+            <p class="text-slate-500 text-xs text-center sm:text-left">
+                &copy; {new Date().getFullYear()} Elprojekt i Uddevalla AB. Alla rättigheter
+                reserverade.
             </p>
-            <div class="mt-4 md:mt-0 flex space-x-4">
-                {/* Social placeholders */}
-                <div
-                    class="w-8 h-8 bg-slate-800 rounded-md flex items-center justify-center hover:bg-elblue cursor-pointer transition-colors"
+
+            <!-- Social Links -->
+            <div class="flex items-center gap-3">
+                <a
+                    href="https://facebook.com/PLACEHOLDER"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                    class="w-9 h-9 bg-slate-800 rounded-md flex items-center justify-center hover:bg-[#1877F2] text-slate-400 hover:text-white cursor-pointer transition-all duration-200"
                 >
-                    <span class="font-display font-bold text-xs">Fb</span>
-                </div>
-                <div
-                    class="w-8 h-8 bg-slate-800 rounded-md flex items-center justify-center hover:bg-elblue cursor-pointer transition-colors"
+                    <i class="fa-brands fa-facebook-f text-sm"></i>
+                </a>
+                <a
+                    href="https://instagram.com/PLACEHOLDER"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    class="w-9 h-9 bg-slate-800 rounded-md flex items-center justify-center hover:bg-gradient-to-br hover:from-[#833AB4] hover:via-[#FD1D1D] hover:to-[#F77737] text-slate-400 hover:text-white cursor-pointer transition-all duration-200"
                 >
-                    <span class="font-display font-bold text-xs">In</span>
-                </div>
+                    <i class="fa-brands fa-instagram text-sm"></i>
+                </a>
+
+                <!-- Google Reviews CTA -->
+                <a
+                    href="https://g.page/r/PLACEHOLDER/review"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2 px-3 py-2 bg-slate-800 rounded-md hover:bg-white text-slate-400 hover:text-slate-900 cursor-pointer transition-all duration-200 group"
+                >
+                    <i
+                        class="fa-brands fa-google text-sm group-hover:text-[#4285F4]"
+                    ></i>
+                    <span class="text-xs font-medium hidden sm:inline"
+                        >Lämna omdöme</span
+                    >
+                </a>
             </div>
         </div>
     </div>

@@ -4,10 +4,55 @@ import "../styles/global.css";
 interface Props {
     title: string;
     description?: string;
+    image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
 const base = import.meta.env.BASE_URL;
+
+// SEO defaults
+const siteTitle = "ELPROJEKT";
+const fullTitle = `${title} | ${siteTitle}`;
+const defaultDescription =
+    "Lokal elektriker i Tjörn, Orust & Stenungsund. Personlig service och moderna lösningar. Elinstallationer, laddboxar, solceller & batterier. Starta ditt nästa Elprojekt nu!";
+const metaDescription = description || defaultDescription;
+const canonicalURL = new URL(
+    Astro.url.pathname,
+    Astro.site || "https://elprojekt.nu",
+);
+const ogImage = image || `${base}images/og-default.jpg`;
+
+// LocalBusiness structured data for local SEO
+const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "Electrician",
+    name: "ELPROJEKT",
+    description: defaultDescription,
+    url: "https://elprojekt.nu",
+    telephone: "+46 70 332 56 55",
+    email: "alex@elprojekt.nu",
+    areaServed: [
+        { "@type": "City", name: "Tjörn" },
+        { "@type": "City", name: "Orust" },
+        { "@type": "City", name: "Stenungsund" },
+        { "@type": "City", name: "Uddevalla" },
+        { "@type": "City", name: "Kungälv" },
+    ],
+    serviceType: [
+        "Elinstallation",
+        "Laddbox",
+        "Solceller",
+        "Batterilagring",
+        "Smarta hem",
+        "Elservice",
+        "Felsökning el",
+        "Elcentral",
+        "Underhåll el",
+        "Nybyggnation",
+        "Renovering",
+    ],
+    priceRange: "$$",
+};
 ---
 
 <!doctype html>
@@ -15,12 +60,39 @@ const base = import.meta.env.BASE_URL;
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{title} | ELPROJEKT</title>
-        <meta
-            name="description"
-            content={description ||
-                "ELPROJEKT - Din partner för elinstallationer, service, solceller och laddboxar."}
+        <title>{fullTitle}</title>
+        <meta name="description" content={metaDescription} />
+
+        <!-- Canonical URL & Language -->
+        <link rel="canonical" href={canonicalURL.toString()} />
+        <link rel="alternate" hreflang="sv-SE" href={canonicalURL.toString()} />
+        <link
+            rel="alternate"
+            hreflang="x-default"
+            href={canonicalURL.toString()}
         />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL.toString()} />
+        <meta property="og:title" content={fullTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:locale" content="sv_SE" />
+        <meta property="og:site_name" content={siteTitle} />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={fullTitle} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={ogImage} />
+
+        <!-- Additional SEO -->
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="ELPROJEKT" />
+        <meta name="geo.region" content="SE-O" />
+        <meta name="geo.placename" content="Stenungsund" />
+
         <link rel="icon" type="image/svg+xml" href={base + "favicon.svg"} />
 
         <!-- Preload Bank Gothic Light for faster loading -->
@@ -37,9 +109,15 @@ const base = import.meta.env.BASE_URL;
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
+
+        <!-- Structured Data (JSON-LD) -->
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(localBusinessSchema)}
+        />
     </head>
     <body
-        class="font-sans text-slate-700 antialiased bg-slate-50 selection:bg-elblue selection:text-white"
+        class="font-sans text-slate-700 antialiased bg-slate-50 selection:bg-elblue selection:text-white overflow-x-hidden"
     >
         <slot />
     </body>

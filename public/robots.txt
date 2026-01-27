@@ -1,0 +1,8 @@
+# Robots.txt for ELPROJEKT
+# https://elprojekt.se
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://AlexNorb.github.io/elprojekt/sitemap-index.xml
