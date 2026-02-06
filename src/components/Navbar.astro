@@ -277,13 +277,14 @@ const navItems = [
 
     // Scroll Logic
     let lastScrollY = window.scrollY;
-    const scrollThreshold = 75;
+    const transparencyThreshold = 100; // Stay transparent until 100px scrolled
+    const hideShowThreshold = 10; // Start hide/show behavior after 10px
 
     function handleScroll() {
         const currentScrollY = window.scrollY;
 
         // Visual Style Logic (Transparent at top, semi-transparent when scrolled)
-        if (currentScrollY < scrollThreshold && !isMenuOpen) {
+        if (currentScrollY < transparencyThreshold && !isMenuOpen) {
             navbar?.classList.remove(
                 "bg-white/95",
                 "backdrop-blur-md",
@@ -303,7 +304,7 @@ const navItems = [
 
         // Hide/Show Logic
         // Always show if above threshold or menu is open
-        if (currentScrollY < scrollThreshold || isMenuOpen) {
+        if (currentScrollY < hideShowThreshold || isMenuOpen) {
             navbar?.classList.remove("-translate-y-full");
             navbar?.classList.add("translate-y-0");
         } else if (currentScrollY > lastScrollY) {
