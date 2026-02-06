@@ -1,3 +1,0 @@
-- [x] Implement Light Theme in `Hero.astro` <!-- id: 5 -->
-- [x] Implement Transparent-to-White `Navbar.astro` <!-- id: 6 -->
-- [x] Fix dynamic links in `ProjectCard.astro` <!-- id: 7 -->

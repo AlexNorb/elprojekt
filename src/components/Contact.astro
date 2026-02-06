@@ -27,50 +27,54 @@ import ContactForm from "./ContactForm.astro";
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
             {/* Contact Info */}
             <div class="flex flex-col justify-center space-y-8 order-1">
-                <div class="space-y-6">
-                    <div
-                        class="flex items-center p-6 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-elblue transition-colors group"
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4"
+                >
+                    <a
+                        href="tel:0703325655"
+                        class="block p-6 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-elblue hover:shadow-md transition-all group text-center"
                     >
-                        <div
-                            class="flex-shrink-0 bg-elblue-50 p-4 rounded-full group-hover:bg-elblue group-hover:text-white text-elblue transition-colors"
-                        >
-                            <PhoneIcon className="h-6 w-6" />
-                        </div>
-                        <div class="ml-5">
+                        <div class="flex items-center justify-center mb-2">
+                            <div
+                                class="flex-shrink-0 bg-elblue-50 p-2 rounded-full group-hover:bg-elblue group-hover:text-white text-elblue transition-colors mr-3"
+                            >
+                                <PhoneIcon className="h-5 w-5" />
+                            </div>
                             <p
                                 class="text-sm font-medium text-slate-500 uppercase tracking-wide"
                             >
                                 Ring mig
                             </p>
-                            <p
-                                class="text-xl font-bold text-slate-900 font-display"
-                            >
-                                070-332 56 55
-                            </p>
                         </div>
-                    </div>
-
-                    <div
-                        class="flex items-center p-6 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-elblue transition-colors group"
-                    >
-                        <div
-                            class="flex-shrink-0 bg-elblue-50 p-4 rounded-full group-hover:bg-elblue group-hover:text-white text-elblue transition-colors"
+                        <p
+                            class="text-xl font-bold text-slate-900 font-display"
                         >
-                            <EnvelopeIcon className="h-6 w-6" />
-                        </div>
-                        <div class="ml-5">
+                            070-332 56 55
+                        </p>
+                    </a>
+
+                    <a
+                        href="mailto:alex@elprojekt.nu"
+                        class="block p-6 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-elblue hover:shadow-md transition-all group text-center"
+                    >
+                        <div class="flex items-center justify-center mb-2">
+                            <div
+                                class="flex-shrink-0 bg-elblue-50 p-2 rounded-full group-hover:bg-elblue group-hover:text-white text-elblue transition-colors mr-3"
+                            >
+                                <EnvelopeIcon className="h-5 w-5" />
+                            </div>
                             <p
                                 class="text-sm font-medium text-slate-500 uppercase tracking-wide"
                             >
                                 Maila mig
                             </p>
-                            <p
-                                class="text-xl font-bold text-slate-900 font-display"
-                            >
-                                alex@elprojekt.nu
-                            </p>
                         </div>
-                    </div>
+                        <p
+                            class="text-xl font-bold text-slate-900 font-display"
+                        >
+                            alex@elprojekt.nu
+                        </p>
+                    </a>
                 </div>
 
                 <div>
