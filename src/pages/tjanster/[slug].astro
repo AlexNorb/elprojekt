@@ -9,8 +9,14 @@ import ArrowRightIcon from "../../components/icons/ArrowRightIcon.astro";
 import ContactForm from "../../components/ContactForm.astro";
 import PhoneIcon from "../../components/icons/PhoneIcon.astro";
 import EnvelopeIcon from "../../components/icons/EnvelopeIcon.astro";
+import PricingCard from "../../components/PricingCard.astro";
 import { pb } from "../../utils";
 import { Image } from "astro:assets";
+
+// Import all pricing files from service folders
+const pricingFiles = import.meta.glob("../../content/services/*/pricing.json", {
+    eager: true,
+});
 
 export async function getStaticPaths() {
     const services = await getCollection("services");
@@ -28,7 +34,17 @@ interface Props {
 }
 
 const { service } = Astro.props;
-const { data } = service; // Access frontmatter data
+const { data } = service;
+
+// Load pricing from service folder if hasPricing is true
+let pricing = null;
+if (data.hasPricing) {
+    const pricingPath = `../../content/services/${service.slug}/pricing.json`;
+    const pricingModule = pricingFiles[pricingPath] as any;
+    if (pricingModule) {
+        pricing = pricingModule.default || pricingModule;
+    }
+}
 ---
 
 <MainLayout title={data.title} description={data.description}>
@@ -127,6 +143,37 @@ const { data } = service; // Access frontmatter data
                                 )
                             }
                         </div>
+
+                        {/* Pricing Card (if available) */}
+                        {
+                            pricing && (
+                                <div class="mt-12 pt-12 border-t border-slate-100">
+                                    <h3 class="text-xl font-bold text-slate-900 mb-6 font-display">
+                                        Prisexempel
+                                    </h3>
+                                    <div class="max-w-md">
+                                        <PricingCard
+                                            title={pricing.title}
+                                            subtitle={pricing.subtitle}
+                                            price={pricing.price}
+                                            priceLabel={pricing.priceLabel}
+                                            priceSuffix={pricing.priceSuffix}
+                                            includes={pricing.includes}
+                                            note={pricing.note}
+                                            greenTechDiscount={
+                                                pricing.greenTechDiscount
+                                            }
+                                            greenTechText={
+                                                pricing.greenTechText
+                                            }
+                                            ctaText={pricing.ctaText}
+                                            ctaLink={pricing.ctaLink}
+                                            image={pricing.image}
+                                        />
+                                    </div>
+                                </div>
+                            )
+                        }
 
                         {/* Process Steps (if available) - e.g. for Solar */}
                         {

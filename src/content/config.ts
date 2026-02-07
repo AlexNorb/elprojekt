@@ -32,7 +32,8 @@ const servicesCollection = defineCollection({
             step: z.number(),
             title: z.string(),
             description: z.string()
-        })).optional()
+        })).optional(),
+        hasPricing: z.boolean().optional() // Flag to load pricing.json from service folder
     })
 });
 

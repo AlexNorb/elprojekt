@@ -1,0 +1,19 @@
+{
+    "title": "Laddbox installerad",
+    "subtitle": "Fast pris – inga dolda kostnader",
+    "price": 8000,
+    "priceLabel": "från",
+    "priceSuffix": "kr",
+    "includes": [
+        "Laddbox (Zaptec eller Easee)",
+        "Installation av auktoriserad elinstallatör",
+        "Upp till 5 meter kabel",
+        "Anmälan till nätägare"
+    ],
+    "note": "Priset avser standardinstallation i villa. Slutpris kan variera beroende på förutsättningar.",
+    "greenTechDiscount": true,
+    "greenTechText": "50% Grön teknik-avdrag ingår i priset",
+    "ctaText": "Begär offert",
+    "ctaLink": "/#contact-form",
+    "image": "https://images.unsplash.com/photo-1647166545674-ce28ce93bdca?auto=format&fit=crop&q=80"
+}
