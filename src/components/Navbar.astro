@@ -11,10 +11,12 @@ import { getCollection } from "astro:content";
 
 // Fetch services from content collection
 const servicesCollection = await getCollection("services");
-const services = servicesCollection.map((s) => ({
-    title: s.data.title,
-    slug: s.slug,
-}));
+const services = servicesCollection
+    .sort((a, b) => (a.data.id ?? 99) - (b.data.id ?? 99))
+    .map((s) => ({
+        title: s.data.title,
+        slug: s.slug,
+    }));
 
 const navItems = [
     {

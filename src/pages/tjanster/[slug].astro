@@ -5,7 +5,9 @@ import Navbar from "../../components/Navbar.astro";
 import Footer from "../../components/Footer.astro";
 import MobileActionBar from "../../components/MobileActionBar.astro";
 import CheckBadgeIcon from "../../components/icons/CheckBadgeIcon.astro";
+
 import ArrowRightIcon from "../../components/icons/ArrowRightIcon.astro";
+import ChevronDownIcon from "../../components/icons/ChevronDownIcon.astro";
 import ContactForm from "../../components/ContactForm.astro";
 import PhoneIcon from "../../components/icons/PhoneIcon.astro";
 import EnvelopeIcon from "../../components/icons/EnvelopeIcon.astro";
@@ -35,6 +37,7 @@ interface Props {
 
 const { service } = Astro.props;
 const { data } = service;
+const { Content } = await service.render();
 
 // Load pricing from service folder if hasPricing is true
 let pricing = null;
@@ -45,6 +48,26 @@ if (data.hasPricing) {
         pricing = pricingModule.default || pricingModule;
     }
 }
+
+// Tax deduction configuration
+const taxDeductionConfig = {
+    rot30: {
+        title: "ROT-avdrag 30%",
+        text: "På denna tjänst kan du utnyttja ROT-avdrag på 30% av arbetskostnaden. Vi sköter all administration.",
+    },
+    gron50: {
+        title: "Grön Teknik 50%",
+        text: "På denna tjänst kan du utnyttja Grön Teknik-avdrag på 50% för både material- och arbetskostnaden. Vi sköter all administration.",
+    },
+    gron15: {
+        title: "Grön Teknik",
+        text: `På denna tjänst kan du utnyttja Grön Teknik-avdrag för både material- och arbetskostnaden:<br/><br/>• <strong>Batterilagring:</strong> 50%<br/>• <strong>Solceller:</strong> 15%<br/><br/>Vi sköter all administration.`,
+    },
+};
+const taxInfo =
+    data.taxDeduction && data.taxDeduction !== "none"
+        ? taxDeductionConfig[data.taxDeduction]
+        : null;
 ---
 
 <MainLayout title={data.title} description={data.description}>
@@ -90,16 +113,44 @@ if (data.hasPricing) {
                     >
                     </div>
                     <div class="absolute bottom-0 left-0 p-8 md:p-12">
-                        <div
-                            class="inline-flex items-center px-3 py-1 rounded-sm bg-elorange text-white text-xs font-bold uppercase tracking-wider mb-4"
-                        >
-                            Tjänst
-                        </div>
                         <h1
-                            class="text-4xl md:text-5xl font-display font-bold text-white mb-2"
+                            class="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-white mb-2"
                         >
                             {data.title}
                         </h1>
+                    </div>
+                </div>
+
+                {
+                    /* Mobile CTA Section - shown only on mobile/tablet, hidden on lg+ */
+                }
+                <div
+                    class="lg:hidden p-4 bg-slate-50 border-b border-slate-100"
+                >
+                    <div class="flex items-center gap-2">
+                        <a
+                            href="#contact-form"
+                            class="flex-1 flex items-center justify-center px-5 py-3 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-elblue hover:bg-elblue-600 transition-all"
+                        >
+                            Skicka förfrågan
+                            <div class="ml-2 w-4 h-4 inline-block">
+                                <ChevronDownIcon />
+                            </div>
+                        </a>
+                        <a
+                            href="tel:0703325655"
+                            class="flex items-center justify-center p-3 bg-white rounded-md border border-slate-200 hover:border-elblue hover:bg-elblue hover:text-white transition-all text-elblue"
+                            aria-label="Ring oss"
+                        >
+                            <PhoneIcon className="h-5 w-5" />
+                        </a>
+                        <a
+                            href="mailto:alex@elprojekt.nu"
+                            class="flex items-center justify-center p-3 bg-white rounded-md border border-slate-200 hover:border-elblue hover:bg-elblue hover:text-white transition-all text-elblue"
+                            aria-label="Maila oss"
+                        >
+                            <EnvelopeIcon className="h-5 w-5" />
+                        </a>
                     </div>
                 </div>
 
@@ -107,33 +158,15 @@ if (data.hasPricing) {
                     class="grid grid-cols-1 lg:grid-cols-3 gap-0 lg:divide-x divide-slate-100"
                 >
                     {/* Main Content */}
-                    <div class="col-span-2 p-8 md:p-12">
-                        <h2
-                            class="text-2xl font-bold text-slate-900 mb-6 font-display"
-                        >
-                            Om tjänsten
-                        </h2>
-                        <p class="text-lg text-slate-600 leading-relaxed mb-8">
-                            {data.longDescription || data.description}
-                        </p>
-
-                        <h3
-                            class="text-xl font-bold text-slate-900 mb-6 font-display"
-                        >
-                            Vad vi erbjuder
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="col-span-2 p-6 md:p-12">
+                        {/* Features FIRST - inline tags that wrap naturally */}
+                        <div class="flex flex-wrap gap-2 md:gap-3 mb-8">
                             {
                                 data.features ? (
                                     data.features.map((feature) => (
-                                        <div class="flex items-center p-4 bg-slate-50 rounded-md border border-slate-100">
-                                            <div class="w-6 h-6 text-elblue mr-3 flex-shrink-0">
-                                                <CheckBadgeIcon />
-                                            </div>
-                                            <span class="font-medium text-slate-700">
-                                                {feature}
-                                            </span>
-                                        </div>
+                                        <span class="inline-flex items-center px-3 py-1.5 md:px-4 md:py-2 bg-slate-100 rounded-full text-sm md:text-base font-medium text-slate-700">
+                                            {feature}
+                                        </span>
                                     ))
                                 ) : (
                                     <p class="text-slate-500">
@@ -143,6 +176,13 @@ if (data.hasPricing) {
                                 )
                             }
                         </div>
+
+                        {/* Description - no heading */}
+                        <article
+                            class="prose prose-lg prose-slate max-w-none mb-8 prose-p:text-slate-600 prose-strong:text-slate-800"
+                        >
+                            <Content />
+                        </article>
 
                         {/* Pricing Card (if available) */}
                         {
@@ -175,7 +215,7 @@ if (data.hasPricing) {
                             )
                         }
 
-                        {/* Process Steps (if available) - e.g. for Solar */}
+                        {/* Process Steps (if available) */}
                         {
                             data.processSteps && (
                                 <div class="mt-12 pt-12 border-t border-slate-100">
@@ -204,10 +244,29 @@ if (data.hasPricing) {
                                 </div>
                             )
                         }
+
+                        {
+                            /* ROT/Green Tech info - shown on mobile after content */
+                        }
+                        {
+                            taxInfo && (
+                                <div class="lg:hidden mt-12 p-6 bg-elblue-50 rounded-lg border border-elblue-100">
+                                    <h4 class="font-bold text-elblue mb-2">
+                                        {taxInfo.title}
+                                    </h4>
+                                    <p
+                                        class="text-sm text-elblue-800"
+                                        set:html={taxInfo.text}
+                                    />
+                                </div>
+                            )
+                        }
                     </div>
 
-                    {/* Sidebar / CTA */}
-                    <div class="col-span-1 p-8 md:p-12 bg-slate-50/50">
+                    {/* Sidebar / CTA - hidden on mobile, shown on lg+ */}
+                    <div
+                        class="hidden lg:block col-span-1 p-8 md:p-12 bg-slate-50/50"
+                    >
                         <div class="sticky top-24">
                             <h3
                                 class="text-xl font-bold text-slate-900 mb-2 font-display"
@@ -226,7 +285,7 @@ if (data.hasPricing) {
                                 >
                                     Skicka förfrågan
                                     <div class="ml-2 w-5 h-5 inline-block">
-                                        <ArrowRightIcon />
+                                        <ChevronDownIcon />
                                     </div>
                                 </a>
 
@@ -290,19 +349,19 @@ if (data.hasPricing) {
                                 </div>
                             </div>
 
-                            <div
-                                class="mt-12 p-6 bg-elblue-50 rounded-lg border border-elblue-100"
-                            >
-                                <h4 class="font-bold text-elblue mb-2">
-                                    ROT-avdrag / Grön Teknik
-                                </h4>
-                                <p class="text-sm text-elblue-800">
-                                    På denna tjänst kan du ofta utnyttja
-                                    skatteavdrag på upp till 50% av
-                                    arbetskostnaden eller materialet (Grön
-                                    Teknik). Vi sköter all administration.
-                                </p>
-                            </div>
+                            {
+                                taxInfo && (
+                                    <div class="mt-12 p-6 bg-elblue-50 rounded-lg border border-elblue-100">
+                                        <h4 class="font-bold text-elblue mb-2">
+                                            {taxInfo.title}
+                                        </h4>
+                                        <p
+                                            class="text-sm text-elblue-800"
+                                            set:html={taxInfo.text}
+                                        />
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>

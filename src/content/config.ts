@@ -33,7 +33,8 @@ const servicesCollection = defineCollection({
             title: z.string(),
             description: z.string()
         })).optional(),
-        hasPricing: z.boolean().optional() // Flag to load pricing.json from service folder
+        hasPricing: z.boolean().optional(), // Flag to load pricing.json from service folder
+        taxDeduction: z.enum(['none', 'rot30', 'gron50', 'gron15']).optional() // ROT/Grön teknik display
     })
 });
 
