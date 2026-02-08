@@ -4,30 +4,39 @@ title: "Laddboxar & Lastbalansering"
 description: "Ladda elbilen hemma – säkert och smart. Vi installerar laddboxar med lastbalansering för villa, BRF och företag."
 icon: "battery"
 features:
-  - "Laddeffekt 3,7–22 kW (5–10× snabbare)"
-  - "Automatisk lastbalansering"
-  - "50% skatteavdrag (Grön teknik)"
-  - "App-styrning & statistik"
+  - "Säker hemma-laddning"
+  - "Lastbalansering"
+  - "50% Grön Teknik"
+  - "Alla ledande märken"
 image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80"
 processSteps:
   - step: 1
     title: "Skicka förfrågan"
-    description: "Kontakta oss via formulär eller mail, gärna med bilder på elcentral och placering."
+    description: "Kontakta oss gärna med bild på elcentral och önskad placering."
   - step: 2
     title: "Fastprisoffert"
-    description: "Vi återkommer med ett fast pris baserat på dina förutsättningar."
+    description: "Du får ett fast pris där laddbox, installation och avdrag är tydligt specificerat."
   - step: 3
-    title: "Installation"
-    description: "Vid godkännande bokar vi tid och installerar din laddbox."
+    title: "Installation & Klart"
+    description: "Vi monterar, driftsätter och visar hur allt fungerar. Vi sköter admin för Grön Teknik."
 taxDeduction: "gron50"
 ---
 
-Att ladda via vanligt vägguttag är **varken säkert eller effektivt** – ett vanligt uttag ger endast 2,3 kW och riskerar att överhettas vid kontinuerlig laddning.
+Att ladda elbilen i ett vanligt vägguttag (Schuko) är en nödlösning. Det är **varken säkert eller effektivt** i längden då vanliga uttag inte är gjorda för hög belastning under lång tid, vilket innebär brandrisk.
 
-En laddbox kan leverera vanligen **11 kW** men kan ge så mycket som upp till **22 kW**, vilket ger en mycket kortare laddtid.
+Med en fast installerad laddbox får du:
+- **Säkerhet:** Byggd för att ladda bilar med övervakning och skydd.
+- **Snabbhet:** Ladda upp till 10 gånger snabbare än i vägguttaget (upp till 22 kW).
+- **Kontroll:** Styr laddningen via app, se förbrukning och ladda när elen är billig.
 
-Vi installerar laddboxar från alla marknadsledande tillverkare – oavsett om du föredrar Zaptec, Easee, Charge Amps, Garo eller annat. Med inbyggd **lastbalansering** anpassas laddeffekten automatiskt efter hushållets förbrukning, vilket skyddar din huvudsäkring och möjliggör laddning när elpriset är som lägst.
+### Lastbalansering – husets "trafikpolis"
+Vi rekommenderar alltid **lastbalansering**. Den känner av hur mycket ström huset drar i övrigt (matlagning, tvätt, värme) och sänker tillfälligt effekten till bilen så att **huvudsäkringen inte går**.
 
-Vi hjälper privatpersoner, bostadsrättsföreningar och företag i **Tjörn, Orust, Stenungsund, Uddevalla och Kungälv**. Allt arbete utförs av auktoriserad elinstallatör, och som privatperson kan du få **50% skatteavdrag via Grön teknik**.
+Vi installerar boxar från marknadsledande tillverkare som **Zaptec, Easee, Charge Amps och Garo**. Vi är märkesoberoende och rekommenderar det som passar dina behov bäst.
+
+### 50% skatteavdrag direkt på fakturan
+Som privatperson får du **50% avdrag på både material och arbete** via Grön Teknik. Vi sköter all administration med Skatteverket – du ser bara det lägre priset på din faktura.
 
 <small>*Jag kan hjälpa dig på Tjörn, Orust, Stenungsund, Uddevalla, Kungälv och omkringliggande områden.*</small>
+
+

@@ -1,6 +1,7 @@
 ---
 import CheckBadgeIcon from "./icons/CheckBadgeIcon.astro";
 import BoltIcon from "./icons/BoltIcon.astro";
+import { pb } from "../utils";
 ---
 
 <section
@@ -30,12 +31,12 @@ import BoltIcon from "./icons/BoltIcon.astro";
             <h3
                 class="text-3xl font-extrabold sm:text-4xl font-display mb-6 text-slate-900"
             >
-                Personligt engagemang.<br />Professionell kraft.
+                Personligt kontakt.<br />Moderna elinstallationer.
             </h3>
             <p class="text-slate-600 text-lg leading-relaxed">
-                ELPROJEKT är ett modernt elinstallationsföretag med en enkel
-                filosofi: Teknik ska funka, och hantverkare ska vara lätta att
-                nå.
+                ELPROJEKT bygger på en enkel idé: Du ska kunna lita på din
+                elektriker. Jag erbjuder trygga installationer med personlig
+                service och moderna lösningar som förenklar din vardag.
             </p>
         </div>
 
@@ -49,12 +50,12 @@ import BoltIcon from "./icons/BoltIcon.astro";
                         /* Profile Image - keeping rounded-full as it is standard for avatars */
                     }
                     <div
-                        class="absolute -top-10 -right-6 md:-right-10 w-28 h-28 rounded-full border-4 border-white shadow-lg overflow-hidden bg-slate-100"
+                        class="absolute -top-10 -right-2 md:-right-10 w-28 h-28 rounded-full border-4 border-white shadow-lg overflow-hidden bg-slate-100"
                     >
                         <img
-                            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
-                            alt="Din Elektriker"
-                            class="w-full h-full object-cover"
+                            src={pb("/images/alex.png")}
+                            alt="Alex på Elprojekt"
+                            class="w-full h-full object-contain bg-slate-100"
                         />
                     </div>
 
@@ -64,16 +65,17 @@ import BoltIcon from "./icons/BoltIcon.astro";
                         Din elektriker
                     </h4>
                     <p class="text-slate-600 mb-6 leading-relaxed pr-8">
-                        Jag driver ELPROJEKT med målsättningen att vara den
-                        elektriker jag själv hade velat anlita. När du kontaktar
-                        oss hamnar du inte i en växel, utan du pratar direkt med
-                        den som ansvarar för ditt projekt.
+                        Jag som driver firman heter Alexander och det är också
+                        jag som utför arbetet hemma hos dig. Det betyder att du
+                        alltid har direktkontakt med den som ansvarar för jobbet
+                        – från första samtalet till färdig installation. Inga
+                        mellanhänder, inga missförstånd.
                     </p>
                     <p class="text-slate-600 mb-6 leading-relaxed">
-                        Oavsett om du är privatperson som vill säkra villan,
-                        eller ett företag som behöver en pålitlig
-                        underentreprenör, så garanterar jag korta beslutsvägar
-                        och personligt ansvarstagande från start till mål.
+                        Oavsett om du behöver hjälp med en laddbox, en
+                        renovering eller bara ett extra uttag, så får du en
+                        noggrann installation utförd av en auktoriserad
+                        elektriker som bryr sig om slutresultatet.
                     </p>
 
                     <div class="flex flex-wrap gap-4 mt-8">
@@ -135,55 +137,62 @@ import BoltIcon from "./icons/BoltIcon.astro";
                     <h4
                         class="text-xl font-bold font-display mb-2 text-elorange relative z-10"
                     >
-                        Starka tillsammans
+                        Helhetslösningar
                     </h4>
                     <h3
                         class="text-2xl font-bold font-display mb-6 relative z-10"
                     >
-                        En del av Byggprojekt
+                        I samarbete med Byggprojekt
                     </h3>
 
                     <p
-                        class="text-blue-100 text-sm mb-6 leading-relaxed flex-grow relative z-10"
+                        class="text-blue-100 text-sm mb-2 leading-relaxed flex-grow relative z-10"
                     >
-                        ELPROJEKT är en stolt partner och del av nätverket kring <a
+                        Ska du bygga ut eller renovera köket? Vi tar med oss
+                        snickaren! Genom <a
                             href="https://byggprojekt.se/"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="text-white font-bold hover:underline decoration-elorange"
-                            >Byggprojekt.se</a
-                        >.
+                            >Byggprojekt</a
+                        > erbjuder vi en sömlös helhet där alla drar åt samma håll.
+                        Självklart anlitas vi också ofta som fristående experter på
+                        enbart el.
                     </p>
 
-                    <div class="space-y-4 mb-8 relative z-10">
-                        <div
-                            class="bg-white/10 p-4 rounded-md border border-white/20 backdrop-blur-sm"
-                        >
-                            <h5 class="font-bold text-white text-sm mb-1">
-                                För privatkund & BRF
-                            </h5>
-                            <p class="text-blue-100 text-xs">
-                                Ska du renovera köket eller bygga ut? Genom vårt
-                                nära samarbete med Byggprojekt kan vi erbjuda
-                                helhetslösningar där snickare, målare och
-                                elektriker samordnas sömlöst.
-                            </p>
-                        </div>
-
-                        <div
-                            class="bg-white/10 p-4 rounded-md border border-white/20 backdrop-blur-sm"
-                        >
-                            <h5 class="font-bold text-white text-sm mb-1">
-                                Fristående aktör
-                            </h5>
-                            <p class="text-blue-100 text-xs">
-                                Även om vi har starka band till Byggprojekt,
-                                arbetar vi dagligen som oberoende elektriker åt
-                                andra byggbolag, fastighetsägare och
-                                privatpersoner.
-                            </p>
-                        </div>
-                    </div>
+                    <ul class="space-y-4 mb-8 mt-2 relative z-10">
+                        <li class="flex items-start">
+                            <CheckBadgeIcon
+                                className="h-5 w-5 text-elorange mr-3 mt-0.5 flex-shrink-0"
+                            />
+                            <span class="text-blue-50 text-sm"
+                                ><strong class="text-white block mb-0.5"
+                                    >En kontaktväg</strong
+                                >Vi sköter samordningen med alla hantverkare.</span
+                            >
+                        </li>
+                        <li class="flex items-start">
+                            <CheckBadgeIcon
+                                className="h-5 w-5 text-elorange mr-3 mt-0.5 flex-shrink-0"
+                            />
+                            <span class="text-blue-50 text-sm"
+                                ><strong class="text-white block mb-0.5"
+                                    >Trygghet & Kvalitet</strong
+                                >Bara behöriga och försäkrade proffs i
+                                nätverket.</span
+                            >
+                        </li>
+                        <li class="flex items-start">
+                            <CheckBadgeIcon
+                                className="h-5 w-5 text-elorange mr-3 mt-0.5 flex-shrink-0"
+                            />
+                            <span class="text-blue-50 text-sm"
+                                ><strong class="text-white block mb-0.5"
+                                    >Effektivitet</strong
+                                >Kortare ledtider när alla drar åt samma håll.</span
+                            >
+                        </li>
+                    </ul>
 
                     <a
                         href="https://byggprojekt.se/"

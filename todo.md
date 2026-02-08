@@ -1,3 +1,23 @@
+# Nästa Steg (Att göra inför nästa gång)
+
+- [ ] **Kontaktformulär:**
+    - [ ] Finslipa fält och design.
+    - [ ] Implementera backend (skicka mail) - t.ex. Cloudflare Workers, Netlify Forms eller Resend.
+- [ ] **Projekt:**
+    - [ ] Lägg in exempelprojekt för att fylla ut sidan.
+    - [ ] Ersätt med riktiga referensprojekt och bilder så snart de finns.
+- [ ] **Sociala Medier & Omdömen:**
+    - [ ] Uppdatera länkar till Facebook och Google Reviews (Instagram är klar).
+    - [ ] Ersätt hårdkodade omdömen med riktiga citat.
+- [ ] **Kod & Optimering:**
+    - [ ] Se över repo efter gammal kod och städa.
+    - [ ] Optimera prestanda.
+    - [ ] Utforska Astro Islands för interaktiva komponenter.
+- [ ] **Övrigt:**
+    - [ ] Generell "polish" och genomgång.
+
+---
+
 # Elprojekt Website Analysis & Recommendations
 
 Comprehensive review of the Elprojekt Astro website covering code quality, SEO, unused files, placeholders, and improvement opportunities.

@@ -1,36 +1,38 @@
 ---
 id: 4
 title: "El- & Ljusdesign"
-description: "Elritningar, ljusberäkningar och materialval. Professionell projektering för villa och renovering – även som ren konsulttjänst."
+description: "Professionella elritningar och ljusdesign. Spara tid och undvik dyra misstag i ditt byggprojekt."
 icon: "sparkles"
 features:
-  - "Elritningar (CAD/PDF)"
-  - "Ljusberäkningar"
-  - "Materialförslag"
-  - "Moderna lösningar"
+  - "Elritningar CAD"
+  - "Ljusdesign"
+  - "Inred med ljus"
+  - "För alla elektriker"
 image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?auto=format&fit=crop&q=80"
 processSteps:
   - step: 1
     title: "Digitalt uppstartsmöte"
-    description: "Vi går igenom dina önskemål, ritningar och budget via videomöte."
+    description: "Vi går igenom dina ritningar, behov och vision via videomöte."
   - step: 2
-    title: "Förslag & Ritning"
-    description: "Du får elritningar, ljusberäkningar och materialförslag som PDF."
+    title: "Skiss & Design"
+    description: "Vi tar fram ett förslag på placering, armaturer och styrning."
   - step: 3
-    title: "Revidering & Leverans"
-    description: "Vi justerar efter din feedback och levererar slutgiltigt underlag digitalt."
+    title: "Färdig Handling"
+    description: "Du får kompletta måttsatta ritningar och armaturlista att ge till din elektriker."
 taxDeduction: "rot30"
 ---
 
-Vid renovering och nybyggnation läggs ofta stor omsorg på färgval, kakel, kök och inredning – men **elen glöms lätt bort**. Ändå kan enkla detaljer som stil och färg på strömbrytare, uttag och armaturer göra enorm skillnad för helhetsintrycket.
+Vid renovering och nybyggnation läggs ofta stor omsorg på kakel, kök och färgval – men **elen glöms lätt bort** till sista stund. Resultatet blir ofta standardlösningar, sladdhärvor och uttag på fel ställen.
 
-Vi hjälper dig att tänka igenom elen redan från start. Du får:
-- **Kompletta elritningar** i CAD eller PDF
-- **Ljusdesign** som ger rätt ljus och känsla i varje rum
-- **Genomtänkta materialförslag** – från knappar och uttag till armaturer och smarta lösningar
+### Inred med ljus
+Ljus är inredning. Rätt ljussättning kan förvandla ett rum, skapa rymd och framhäva arkitekturen. Vi hjälper dig att placera ljuset rätt - inte bara mitt i taket. Vi ger förslag på:
+- **Allmänljus:** För städning och vardag.
+- **Arbetsljus:** Rätt ljus vid köksbänk och skrivbord.
+- **Stämningsljus:** Dimbart och mysigt för kvällen.
 
-Tjänsten erbjuds både som del av ett installationsuppdrag och som **fristående konsultation** – perfekt om du bygger i egen regi eller vill ha ett professionellt underlag att lämna till din entreprenör.
+### Slipp dyra misstag
+Att flytta ett uttag i efterhand är dyrt och krångligt. Med en **professionell elritning** vet du (och snickaren) exakt var allt ska sitta innan väggarna stängs.
 
-Hela processen kan skötas **digitalt och på distans**.
+Tjänsten är helt **fristående**. Du får en färdig handling som du kan lämna till din entreprenör eller använda om du bygger i egen regi. Vi jobbar helt digitalt och hjälper kunder i hela Sverige.
 
 <small>*Jag kan hjälpa dig på Tjörn, Orust, Stenungsund, Uddevalla, Kungälv och omkringliggande områden.*</small>

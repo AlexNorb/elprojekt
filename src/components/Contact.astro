@@ -18,15 +18,15 @@ import ContactForm from "./ContactForm.astro";
                 Hör av dig direkt
             </h3>
             <p class="mt-4 text-slate-600 max-w-2xl mx-auto">
-                Vi erbjuder ofta fasta priser på installationer som laddboxar
-                och elcentraler. Behöver du ritningar till ditt nya hus eller
-                renovering hjälper vi till med det också.
+                Vi hjälper dig med allt från elinstallationer i nybyggnation
+                till renovering och smarta hem. Hör av dig så hittar vi en
+                lösning.
             </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-            {/* Contact Info */}
-            <div class="flex flex-col justify-center space-y-8 order-1">
+            {/* Contact Info - Top Left on Desktop */}
+            <div class="flex flex-col justify-center space-y-8 lg:col-start-1">
                 <div
                     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4"
                 >
@@ -81,37 +81,44 @@ import ContactForm from "./ContactForm.astro";
                     <h4
                         class="text-xl font-bold font-display text-slate-900 mb-4"
                     >
-                        Inga jobb är för små.
+                        Ditt projekt i fokus
                     </h4>
                     <p class="text-slate-600 text-base">
-                        Jag erbjuder kostnadsfria offerter och kommer gärna ut
-                        och tittar på plats i Tjörn, Stenungsund och omnejd för
+                        Jag erbjuder en personlig genomgång av ditt projekt. För
+                        större jobb kommer jag gärna ut och tittar på plats för
                         att diskutera lösningar.
                     </p>
                 </div>
-
-                <div class="mt-8 p-6 bg-elblue rounded-lg text-white">
-                    <h5 class="font-display font-bold text-lg mb-2">
-                        Samarbete & B2B
-                    </h5>
-                    <p class="text-elblue-100 text-sm mb-4">
-                        Söker ni underentreprenör? Jag är van att samarbeta i
-                        både små och stora projekt.
-                    </p>
-                    <div
-                        class="text-xs font-mono bg-elblue-600/50 p-2 rounded inline-block"
-                    >
-                        F-Skatt • Ansvarsförsäkring • ID06
-                    </div>
-                </div>
             </div>
 
-            {/* Form */}
+            {
+                /* Form - Right Column (spans 2 rows on desktop to balance height) */
+            }
             <div
                 id="contact-form"
-                class="bg-white rounded-lg shadow-xl p-8 sm:p-12 border border-slate-100 order-2"
+                class="bg-white rounded-lg shadow-xl p-8 sm:p-12 border border-slate-100 lg:col-start-2 lg:row-span-2"
             >
                 <ContactForm />
+            </div>
+
+            {
+                /* B2B - Bottom Left on Desktop (under info), Bottom on Mobile (under form) */
+            }
+            <div
+                class="mt-0 p-6 bg-elblue rounded-lg text-white lg:col-start-1 lg:mt-auto"
+            >
+                <h5 class="font-display font-bold text-lg mb-2">
+                    Samarbete & B2B
+                </h5>
+                <p class="text-elblue-100 text-sm mb-4">
+                    Söker ni underentreprenör? Jag är van att samarbeta i både
+                    små och stora projekt.
+                </p>
+                <div
+                    class="text-xs font-mono bg-elblue-600/50 p-2 rounded inline-block"
+                >
+                    F-Skatt • Ansvarsförsäkring • ID06
+                </div>
             </div>
         </div>
     </div>
