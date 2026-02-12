@@ -13,7 +13,7 @@ const projectsCollection = defineCollection({
         description: z.string().optional(),
         tags: z.array(z.string()).optional(),
         filterCategory: z.array(z.string()).optional(),
-        gallery: z.array(image().or(z.string())).optional(),
+        gallery: z.array(image().or(z.string()).nullable()).nullable().optional().default([]),
         featured: z.boolean().optional().default(false)
     })
 });

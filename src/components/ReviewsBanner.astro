@@ -3,24 +3,12 @@ import StarIcon from "./icons/StarIcon.astro";
 import CheckBadgeIcon from "./icons/CheckBadgeIcon.astro";
 
 const reviews = [
-    {
-        name: "Anders P.",
-        location: "Stenungsund",
-        text: "Installerade laddbox och drog ny el till garaget. Otroligt proffsigt.",
-        stars: 5,
-    },
-    {
-        name: "Maria Lindberg",
-        location: "Tjörn",
-        text: "Bra samarbete med snickarna och snygga lösningar för belysningen.",
-        stars: 5,
-    },
-    {
-        name: "BRF Strandkanten",
-        location: "Uddevalla",
-        text: "Vi bytte ut belysningen i trapphusen. Snabbt jobb.",
-        stars: 5,
-    },
+    // {
+    //     name: "Anders P.",
+    //     location: "Stenungsund",
+    //     text: "Installerade laddbox och drog ny el till garaget. Otroligt proffsigt.",
+    //     stars: 5,
+    // },
 ];
 ---
 
@@ -40,11 +28,6 @@ const reviews = [
                         data-index={index}
                     >
                         <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-50 border border-slate-100 hover:border-elblue/20 hover:shadow-sm transition-all duration-300 h-full">
-                            <div class="flex-shrink-0">
-                                <div class="w-10 h-10 rounded-full bg-elblue/10 flex items-center justify-center text-elblue font-bold font-display text-lg">
-                                    {review.name.charAt(0)}
-                                </div>
-                            </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center justify-between mb-1">
                                     <h4 class="text-sm font-bold text-slate-900 truncate pr-2">

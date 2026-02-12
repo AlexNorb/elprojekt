@@ -22,13 +22,15 @@ const { Content } = await project.render();
 // Combine cover image and gallery images into a single array for the slider
 const images = [
     { src: project.data.coverImage, alt: project.data.coverAlt },
-    ...(project.data.gallery
-        ? project.data.gallery.map((img) => ({
-              src: img,
-              alt: `Galleri - ${project.data.title}`,
-          }))
+    ...(Array.isArray(project.data.gallery)
+        ? project.data.gallery
+              .filter((img) => img) // Filter out empty strings
+              .map((img) => ({
+                  src: img,
+                  alt: `Galleri - ${project.data.title}`,
+              }))
         : []),
-];
+].filter((img) => img.src);
 
 // Helper to check if image is a string (URL) or ImageMetadata
 const isUrl = (img: any) => typeof img === "string";

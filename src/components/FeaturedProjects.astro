@@ -14,6 +14,15 @@ if (featuredProjects.length === 0) {
     featuredProjects = featuredProjects.slice(0, 4);
 }
 
+// Dynamic grid class based on number of projects
+const gridClass =
+    {
+        1: "grid-cols-1 max-w-2xl mx-auto",
+        2: "grid-cols-1 md:grid-cols-2",
+        3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+        4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
+    }[featuredProjects.length] || "grid-cols-1 md:grid-cols-2 lg:grid-cols-4";
+
 // Helper to format category for display (taking first filter category or serviceType)
 const getDisplayCategory = (project: any) => {
     if (project.data.filterCategory && project.data.filterCategory.length > 0) {
@@ -34,14 +43,15 @@ const getDisplayCategory = (project: any) => {
             <h3
                 class="text-3xl font-extrabold text-slate-900 sm:text-4xl font-display"
             >
-                Några av våra senaste arbeten
+                Några av våra arbeten
             </h3>
             <p class="mt-4 text-xl text-slate-500 font-sans">
-                Se fler på vår projektsida.
+                Bli inspirerad och se vad vi kan göra för dig! <br /> Se fler på vår
+                projektsida.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class={`grid ${gridClass} gap-8`}>
             {
                 featuredProjects.map((project) => (
                     <ProjectCard

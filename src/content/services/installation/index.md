@@ -1,7 +1,7 @@
 ---
 id: 1
 title: "Installation, Byggnation & Renovering"
-description: "Helhetslösningar för villa och renovering. Vi tar ansvar från första skiss till färdig installation."
+description: "Allt inom elinstallation, nybyggnation och renovering. Vi finns med från första skiss till färdig installation."
 icon: "home-modern"
 features:
   - "Totalentreprenad El"
@@ -19,14 +19,14 @@ processSteps:
     description: "Du får en tydlig offert och tidsplan. Vi samordnar med andra hantverkare."
   - step: 3
     title: "Utförande"
-    description: "Våra elektriker utför installationen enligt plan och gällande regler."
+    description: "Vi utför installationen enligt plan."
   - step: 4
     title: "Slutkontroll"
     description: "När allt är klart går vi igenom installationen tillsammans med dig."
 taxDeduction: "rot30"
 ---
 
-Oavsett om du ska renovera köket, bygga till eller planera en helt ny villa tar vi **helhetsansvar för elinstallationen**. Vi är med från första skiss till färdigt resultat.
+Oavsett om du ska renovera kök eller badrum, bygga till eller planera en helt ny villa tar vi **helhetsansvar för elinstallationen**. Vi är med från första skiss till färdigt resultat.
 
 ### Kök & Badrum – hemmets hjärta
 Vid renovering av kök och badrum är planering A och O. Vi hjälper dig med:
@@ -36,13 +36,14 @@ Vid renovering av kök och badrum är planering A och O. Vi hjälper dig med:
 
 ### Nyproduktion och Tillbyggnad
 Att bygga nytt ger fantastiska möjligheter att skapa ett hem som passar just dig. Vi drar all el, nätverk och förbereder för framtiden (t.ex. elbilsladdning och solceller).
-*Glöm inte planeringen! Läs mer om vår tjänst [El- & Ljusdesign](/tjanster/el-ljusdesign).*
+
+💡 *Planerar du en större renovering eller nybygge? [Läs mer om vår El- & Ljusdesign](/tjanster/el-ljusdesign) för professionella elritningar och ljusberäkningar.*
+
+---
 
 ### Totalentreprenad via Byggprojekt
 Vi samarbetar tätt med [Byggprojekt](https://byggprojekt.se/) och kan erbjuda en **smidig helhetslösning**. Du behöver inte jaga snickare, målare och rörmokare – vi samordnar allt. En kontaktperson, en tidsplan, ett färdigt resultat.
 
 <small>*Jag kan hjälpa dig på Tjörn, Orust, Stenungsund, Uddevalla, Kungälv och omkringliggande områden.*</small>
 
----
 
-💡 *Planerar du en större renovering eller nybygge? [Läs mer om vår El- & Ljusdesign](/tjanster/el-ljusdesign) för professionella elritningar och ljusberäkningar.*

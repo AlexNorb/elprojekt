@@ -31,7 +31,7 @@ import { pb } from "../utils";
             <h3
                 class="text-3xl font-extrabold sm:text-4xl font-display mb-6 text-slate-900"
             >
-                Personligt kontakt.<br />Moderna elinstallationer.
+                Personlig kontakt.<br />Moderna elinstallationer.
             </h3>
             <p class="text-slate-600 text-lg leading-relaxed">
                 ELPROJEKT bygger på en enkel idé: Du ska kunna lita på din
@@ -119,10 +119,10 @@ import { pb } from "../utils";
                         Till andra byggföretag
                     </h5>
                     <p class="text-slate-600 text-sm">
-                        Söker ni en flexibel samarbetspartner? Vi är vana att
-                        arbeta som underentreprenör i större projekt och förstår
-                        vikten av att hålla tidsplaner och kommunicera med andra
-                        yrkesgrupper på bygget.
+                        Söker ni en flexibel samarbetspartner? Jag är van att
+                        arbeta som underentreprenör och förstår vikten av att
+                        hålla tidsplaner och kommunicera med andra yrkesgrupper
+                        på bygget.
                     </p>
                 </div>
             </div>
@@ -145,19 +145,37 @@ import { pb } from "../utils";
                         I samarbete med Byggprojekt
                     </h3>
 
+                    <div
+                        class="grid grid-cols-2 gap-x-4 gap-y-2 mb-6 mt-2 relative z-10"
+                    >
+                        {
+                            [
+                                "Bygga hus",
+                                "Renovera",
+                                "Kök",
+                                "Badrum",
+                                "Takbyte",
+                                "Takrenovering",
+                            ].map((item) => (
+                                <div class="flex items-center text-blue-100 text-sm">
+                                    <span class="w-1.5 h-1.5 bg-elorange rounded-full mr-2" />
+                                    {item}
+                                </div>
+                            ))
+                        }
+                    </div>
+
                     <p
                         class="text-blue-100 text-sm mb-2 leading-relaxed flex-grow relative z-10"
                     >
-                        Ska du bygga ut eller renovera köket? Vi tar med oss
-                        snickaren! Genom <a
+                        Behöver ditt projekt även en snickare? Genom <a
                             href="https://byggprojekt.se/"
                             target="_blank"
                             rel="noopener noreferrer"
                             class="text-white font-bold hover:underline decoration-elorange"
                             >Byggprojekt</a
-                        > erbjuder vi en sömlös helhet där alla drar åt samma håll.
-                        Självklart anlitas vi också ofta som fristående experter på
-                        enbart el.
+                        > erbjuder vi en sömlös helhet där alla är vana att jobba
+                        tillsammans.
                     </p>
 
                     <ul class="space-y-4 mb-8 mt-2 relative z-10">
