@@ -1,8 +1,28 @@
 ---
-const { subject } = Astro.props;
+import PaperClipIcon from "./icons/PaperClipIcon.astro";
 ---
 
 <form id="contact-form" class="space-y-6">
+    <div>
+        <label
+            for="serviceType"
+            class="block text-sm font-medium text-slate-700 font-display mb-1"
+        >
+            Ärende
+        </label>
+        <select
+            id="serviceType"
+            name="serviceType"
+            class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
+        >
+            <option>Allmänt</option>
+            <option>Offertförfrågan</option>
+            <option>Service & Felsökning</option>
+            <option>Laddbox</option>
+            <option>Solceller</option>
+        </select>
+    </div>
+
     <div>
         <label
             for="name"
@@ -32,7 +52,6 @@ const { subject } = Astro.props;
                 type="email"
                 name="email"
                 id="email"
-                required
                 class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
                 placeholder="din@email.se"
             />
@@ -56,48 +75,6 @@ const { subject } = Astro.props;
 
     <div>
         <label
-            for="serviceType"
-            class="block text-sm font-medium text-slate-700 font-display mb-1"
-        >
-            Ärende
-        </label>
-        <select
-            id="serviceType"
-            name="serviceType"
-            class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
-        >
-            <option selected={!subject}>Allmän förfrågan</option>
-            <option selected={subject === "Installation"}
-                >Offertförfrågan - Installation</option
-            >
-            <option selected={subject === "Service"}
-                >Service & Felsökning</option
-            >
-            <option selected={subject === "Laddbox"}>Laddbox / Elbil</option>
-            <option selected={subject === "Ritningar"}
-                >Ritningar & Planering</option
-            >
-            <option selected={subject === "Företag"}>För Företag / B2B</option>
-            <!-- Fallback/Dynamic option if subject doesn't match predefined list -->
-            {
-                subject &&
-                    ![
-                        "Installation",
-                        "Service",
-                        "Laddbox",
-                        "Ritningar",
-                        "Företag",
-                    ].includes(subject) && (
-                        <option selected value={subject}>
-                            Angående: {subject}
-                        </option>
-                    )
-            }
-        </select>
-    </div>
-
-    <div>
-        <label
             for="message"
             class="block text-sm font-medium text-slate-700 font-display mb-1"
         >
@@ -110,6 +87,25 @@ const { subject } = Astro.props;
             required
             class="block w-full rounded-md border-gray-300 bg-slate-50 border p-3 focus:border-elblue focus:ring-elblue sm:text-sm outline-none transition-all"
             placeholder="Beskriv vad du behöver hjälp med..."></textarea>
+    </div>
+
+    <!-- File Upload Section -->
+    <div class="flex flex-col sm:flex-row gap-4">
+        <label
+            for="file-upload"
+            class="flex items-center justify-center w-full px-4 py-3 border border-slate-300 border-dashed rounded-md shadow-sm text-sm font-medium text-slate-600 bg-slate-50 hover:bg-slate-100 cursor-pointer transition-colors"
+        >
+            <PaperClipIcon className="w-5 h-5 mr-2 text-slate-400" />
+            <span>Bifoga bild eller dokument</span>
+            <input
+                id="file-upload"
+                name="file-upload"
+                type="file"
+                multiple
+                accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
+                class="sr-only"
+            />
+        </label>
     </div>
 
     <div>
@@ -129,10 +125,49 @@ const { subject } = Astro.props;
     // Let's stick to ID for now as per original code, but cleaner logic.
     const form = document.getElementById("contact-form");
     if (form) {
+        const emailInput = form.querySelector(
+            'input[name="email"]',
+        ) as HTMLInputElement;
+        const phoneInput = form.querySelector(
+            'input[name="phone"]',
+        ) as HTMLInputElement;
+
+        const validateGroup = () => {
+            // Om BÅDA är tomma
+            if (!phoneInput.value && !emailInput.value) {
+                // Sätt ett felmeddelande på det första fältet (detta triggar bubblan vid submit)
+                emailInput.setCustomValidity(
+                    "Du måste fylla i antingen e-post eller telefonnummer.",
+                );
+            } else {
+                // Om minst ett är ifyllt, rensa felet (så formuläret kan skickas)
+                emailInput.setCustomValidity("");
+            }
+        };
+
+        // Kör kontrollen varje gång användaren skriver något i något av fälten
+        emailInput.addEventListener("input", validateGroup);
+        phoneInput.addEventListener("input", validateGroup);
+
+        // Kör en gång vid start för att sätta initialt krav
+        // Vi kör den INTE direkt för att undvika valideringsfel innan användaren gjort något,
+        // men webbläsaren kollar validity vid submit.
+        // Dock, för att 'required'-beteendet ska kicka in korrekt vid submit om inget är ifyllt:
+        validateGroup();
+
         form.addEventListener("submit", (e) => {
             e.preventDefault();
+
+            // Webbläsarens inbyggda validering har redan kört här (pga validateGroup).
+            // Om vi är här är formuläret giltigt enligt HTML5 constraints.
+
             const formData = new FormData(e.target as HTMLFormElement);
+
+            // Data extraction
+            const email = formData.get("email") as string;
+            const phone = formData.get("phone") as string;
             const name = formData.get("name");
+
             // Here you would typically send data to a backend
             alert(`Tack ${name}! Jag återkommer till dig inom kort.`);
             (e.target as HTMLFormElement).reset();
