@@ -43,6 +43,9 @@ const capitalize = (str: string) =>
 <MainLayout
     title={`${project.data.title} - Referens`}
     description={project.data.description}
+    image={typeof project.data.coverImage === "string"
+        ? project.data.coverImage
+        : project.data.coverImage?.src}
 >
     <Navbar />
 

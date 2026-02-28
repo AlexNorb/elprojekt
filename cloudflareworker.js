@@ -4,7 +4,7 @@
 export default {
     async fetch(request, env) {
         const corsHeaders = {
-            "Access-Control-Allow-Origin": "*", // Byt till din GitHub Pages-URL för högre säkerhet
+            "Access-Control-Allow-Origin": "https://elprojekt.nu",
             "Access-Control-Allow-Methods": "POST, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type",
         };
@@ -31,9 +31,9 @@ export default {
 
                 // Bygg Resend-payloaden
                 const resendPayload = {
-                    from: "onboarding@resend.dev", // Byt till din verifierade domän i Resend
-                    to: "allecc@gmail.com",
-                    subject: `Kontakt från ${body.name || 'Webbsidan'} - ${body.serviceType || 'Förfrågan'}`,
+                    from: "hemsida@kontakt.elprojekt.nu", // Byt till din verifierade domän i Resend
+                    to: "alexander@elprojekt.nu",
+                    subject: `${body.name || 'Webbsidan'} - ${body.serviceType || 'Förfrågan'}`,
                     html: htmlContent,
                     ...(body.email && { reply_to: body.email }),
                 };

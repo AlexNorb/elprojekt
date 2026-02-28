@@ -20,7 +20,7 @@ const canonicalURL = new URL(
     Astro.url.pathname,
     Astro.site || "https://elprojekt.nu",
 );
-const ogImage = image || `${base}images/og-default.jpg`;
+const ogImage = image || `${base}images/hero/hero-left.webp`;
 
 // LocalBusiness structured data for local SEO
 const localBusinessSchema = {
@@ -78,8 +78,13 @@ const localBusinessSchema = {
         <meta property="og:title" content={fullTitle} />
         <meta property="og:description" content={metaDescription} />
         <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={fullTitle} />
         <meta property="og:locale" content="sv_SE" />
         <meta property="og:site_name" content={siteTitle} />
+
+        <meta name="theme-color" content="#ffffff" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
