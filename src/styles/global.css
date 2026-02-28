@@ -3,11 +3,11 @@
 /* Bank Gothic Light - Custom Font */
 @font-face {
   font-family: 'Bank Gothic Light';
-  src: url('../assets/fonts/bank-gothic-light.woff2') format('woff2'),
-    url('../assets/fonts/bank-gothic-light.woff') format('woff');
+  src: url('/fonts/bank-gothic-light.woff2') format('woff2'),
+    url('/fonts/bank-gothic-light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
-  font-display: optional;
+  font-display: swap;
 }
 
 @import "tailwindcss";
