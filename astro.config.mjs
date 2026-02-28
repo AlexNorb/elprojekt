@@ -7,8 +7,8 @@ import sitemap from '@astrojs/sitemap';
 const isProd = process.argv.includes('build');
 
 export default defineConfig({
-  site: isProd ? 'https://AlexNorb.github.io' : 'http://localhost:4321',
-  base: isProd ? '/elprojekt/' : undefined,
+  site: isProd ? 'https://elprojekt.nu' : 'http://localhost:4321',
+  base: undefined,
 
   // 2. We explicitly tell TypeScript the result is one of the allowed strings
   trailingSlash: isProd ? /** @type {'always'} */ ('always') : /** @type {'ignore'} */ ('ignore'),

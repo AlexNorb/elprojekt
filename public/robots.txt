@@ -5,4 +5,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://AlexNorb.github.io/elprojekt/sitemap-index.xml
+Sitemap: https://elprojekt.nu/sitemap-index.xml

@@ -1,6 +1,6 @@
 /**
  * Prepends the base URL to a given path.
- * Usage: pb('/about') -> '/elprojekt/about' (in prod) or '/about' (in dev)
+ * Usage: pb('/about') -> '/about'
  */
 export function pb(path: string): string {
     // Ensure we don't double-slash if BASE_URL ends with / and path starts with /
