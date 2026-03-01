@@ -166,8 +166,8 @@ Comprehensive review of the Elprojekt Astro website covering code quality, SEO, 
 
 ### Pending (Need Your Input)
 - [ ] Replace social media placeholder URLs with real ones:
-  - `https://facebook.com/PLACEHOLDER`
-  - `https://instagram.com/PLACEHOLDER`
+  - `https://www.facebook.com/elprojekt.nu`
+  - `https://www.instagram.com/elprojekt.nu`
   - `https://g.page/r/PLACEHOLDER/review`
 - [ ] Contact Form Backend (Cloudflare Workers / Resend.com)
 - [ ] Replace 6 placeholder images with real project photos
