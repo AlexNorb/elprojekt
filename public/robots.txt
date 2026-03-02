@@ -1,5 +1,5 @@
 # Robots.txt for ELPROJEKT
-# https://elprojekt.se
+# https://elprojekt.nu
 
 User-agent: *
 Allow: /
