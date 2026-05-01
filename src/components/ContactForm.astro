@@ -207,350 +207,352 @@ import PaperClipIcon from "./icons/PaperClipIcon.astro";
 </div>
 
 <script>
-    const form = document.getElementById("el-contact-form-element");
-    if (form) {
-        const emailInput = form.querySelector(
-            'input[name="email"]',
-        ) as HTMLInputElement;
-        const phoneInput = form.querySelector(
-            'input[name="phone"]',
-        ) as HTMLInputElement;
-        const submitButton = form.querySelector(
-            'button[type="submit"]',
-        ) as HTMLButtonElement;
-        const fileInput = form.querySelector(
-            'input[name="file-upload"]',
-        ) as HTMLInputElement;
-        const fileListContainer = document.getElementById(
-            "file-list",
-        ) as HTMLUListElement;
+    document.addEventListener("astro:page-load", () => {
+        const form = document.getElementById("el-contact-form-element");
+        if (form) {
+            const emailInput = form.querySelector(
+                'input[name="email"]',
+            ) as HTMLInputElement;
+            const phoneInput = form.querySelector(
+                'input[name="phone"]',
+            ) as HTMLInputElement;
+            const submitButton = form.querySelector(
+                'button[type="submit"]',
+            ) as HTMLButtonElement;
+            const fileInput = form.querySelector(
+                'input[name="file-upload"]',
+            ) as HTMLInputElement;
+            const fileListContainer = document.getElementById(
+                "file-list",
+            ) as HTMLUListElement;
 
-        const successMessage = document.getElementById("success-message");
-        const resetFormBtn = document.getElementById("reset-form-btn");
+            const successMessage = document.getElementById("success-message");
+            const resetFormBtn = document.getElementById("reset-form-btn");
 
-        // Templates
-        const trashIconTpl = document.getElementById(
-            "icon-trash",
-        ) as HTMLTemplateElement;
-        const docIconTpl = document.getElementById(
-            "icon-doc",
-        ) as HTMLTemplateElement;
+            // Templates
+            const trashIconTpl = document.getElementById(
+                "icon-trash",
+            ) as HTMLTemplateElement;
+            const docIconTpl = document.getElementById(
+                "icon-doc",
+            ) as HTMLTemplateElement;
 
-        const MAX_TOTAL_SIZE = 20 * 1024 * 1024; // 20 MB
+            const MAX_TOTAL_SIZE = 20 * 1024 * 1024; // 20 MB
 
-        // Vår State management för filer i minnet
-        let sessionFiles: Array<{
-            id: string; // Unikt snabbt ID
-            originalName: string;
-            isImage: boolean;
-            base64Data: string; // Utan "data:...base64,"
-            sizeBytes: number;
-        }> = [];
+            // Vår State management för filer i minnet
+            let sessionFiles: Array<{
+                id: string; // Unikt snabbt ID
+                originalName: string;
+                isImage: boolean;
+                base64Data: string; // Utan "data:...base64,"
+                sizeBytes: number;
+            }> = [];
 
-        const validateGroup = () => {
-            if (!phoneInput.value && !emailInput.value) {
-                emailInput.setCustomValidity(
-                    "Du måste fylla i antingen e-post eller telefonnummer.",
-                );
-            } else {
-                emailInput.setCustomValidity("");
-            }
-        };
-
-        emailInput.addEventListener("input", validateGroup);
-        phoneInput.addEventListener("input", validateGroup);
-        validateGroup();
-
-        // Verktyg: Formatera storlek snyggt
-        const formatBytes = (bytes: number) => {
-            if (bytes === 0) return "0 Bytes";
-            const k = 1024;
-            const sizes = ["Bytes", "KB", "MB", "GB"];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return (
-                parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
-            );
-        };
-
-        // UI: Rita ut valda filer
-        const renderFileList = () => {
-            fileListContainer.innerHTML = "";
-
-            sessionFiles.forEach((fileObj) => {
-                const li = document.createElement("li");
-                li.className =
-                    "relative group flex flex-col items-center justify-center p-3 border border-slate-200 rounded-lg bg-white overflow-hidden shadow-sm";
-
-                // Media eller Ikon
-                if (fileObj.isImage) {
-                    const img = document.createElement("img");
-                    // Vi måste lägga till mime-headern igen bara för att visa bilden i UI:t
-                    img.src = `data:image/jpeg;base64,${fileObj.base64Data}`;
-                    img.className =
-                        "w-full h-24 object-cover rounded shadow-inner mb-2";
-                    li.appendChild(img);
-                } else {
-                    const iconClone = docIconTpl.content.cloneNode(true);
-                    li.appendChild(iconClone);
-
-                    const nameSpan = document.createElement("span");
-                    nameSpan.className =
-                        "text-xs font-semibold text-slate-700 truncate w-full text-center mb-1";
-                    nameSpan.title = fileObj.originalName;
-                    nameSpan.innerText = fileObj.originalName;
-                    li.appendChild(nameSpan);
-                }
-
-                // Storlek (Komprimerad / Faktisk)
-                const sizeSpan = document.createElement("span");
-                sizeSpan.className =
-                    "text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full";
-                sizeSpan.innerText = formatBytes(fileObj.sizeBytes);
-                li.appendChild(sizeSpan);
-
-                // Papperskorg Knapp (Visas vid hover på Desktop, alltid övre kant på mobil)
-                const removeBtn = document.createElement("button");
-                removeBtn.type = "button";
-                removeBtn.className =
-                    "absolute top-1 right-1 p-1 bg-white/90 text-red-500 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-sm hover:bg-red-50";
-                const trashClone = trashIconTpl.content.cloneNode(true);
-                removeBtn.appendChild(trashClone);
-
-                removeBtn.addEventListener("click", () => {
-                    sessionFiles = sessionFiles.filter(
-                        (f) => f.id !== fileObj.id,
+            const validateGroup = () => {
+                if (!phoneInput.value && !emailInput.value) {
+                    emailInput.setCustomValidity(
+                        "Du måste fylla i antingen e-post eller telefonnummer.",
                     );
-                    renderFileList();
-                });
+                } else {
+                    emailInput.setCustomValidity("");
+                }
+            };
 
-                li.appendChild(removeBtn);
-                fileListContainer.appendChild(li);
-            });
-        };
+            emailInput.addEventListener("input", validateGroup);
+            phoneInput.addEventListener("input", validateGroup);
+            validateGroup();
 
-        // Hjälpfunktion för att komprimera bilder med Canvas
-        const compressImage = (
-            file: File,
-            maxWidth = 1920,
-            quality = 0.8,
-        ): Promise<string> => {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                img.src = URL.createObjectURL(file);
-                img.onload = () => {
-                    URL.revokeObjectURL(img.src);
-                    let width = img.width;
-                    let height = img.height;
+            // Verktyg: Formatera storlek snyggt
+            const formatBytes = (bytes: number) => {
+                if (bytes === 0) return "0 Bytes";
+                const k = 1024;
+                const sizes = ["Bytes", "KB", "MB", "GB"];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return (
+                    parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
+                );
+            };
 
-                    if (width > maxWidth) {
-                        height = Math.round((height * maxWidth) / width);
-                        width = maxWidth;
+            // UI: Rita ut valda filer
+            const renderFileList = () => {
+                fileListContainer.innerHTML = "";
+
+                sessionFiles.forEach((fileObj) => {
+                    const li = document.createElement("li");
+                    li.className =
+                        "relative group flex flex-col items-center justify-center p-3 border border-slate-200 rounded-lg bg-white overflow-hidden shadow-sm";
+
+                    // Media eller Ikon
+                    if (fileObj.isImage) {
+                        const img = document.createElement("img");
+                        // Vi måste lägga till mime-headern igen bara för att visa bilden i UI:t
+                        img.src = `data:image/jpeg;base64,${fileObj.base64Data}`;
+                        img.className =
+                            "w-full h-24 object-cover rounded shadow-inner mb-2";
+                        li.appendChild(img);
+                    } else {
+                        const iconClone = docIconTpl.content.cloneNode(true);
+                        li.appendChild(iconClone);
+
+                        const nameSpan = document.createElement("span");
+                        nameSpan.className =
+                            "text-xs font-semibold text-slate-700 truncate w-full text-center mb-1";
+                        nameSpan.title = fileObj.originalName;
+                        nameSpan.innerText = fileObj.originalName;
+                        li.appendChild(nameSpan);
                     }
 
-                    const canvas = document.createElement("canvas");
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext("2d");
-                    if (!ctx)
-                        return reject(
-                            new Error("Could not get canvas context"),
+                    // Storlek (Komprimerad / Faktisk)
+                    const sizeSpan = document.createElement("span");
+                    sizeSpan.className =
+                        "text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full";
+                    sizeSpan.innerText = formatBytes(fileObj.sizeBytes);
+                    li.appendChild(sizeSpan);
+
+                    // Papperskorg Knapp (Visas vid hover på Desktop, alltid övre kant på mobil)
+                    const removeBtn = document.createElement("button");
+                    removeBtn.type = "button";
+                    removeBtn.className =
+                        "absolute top-1 right-1 p-1 bg-white/90 text-red-500 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-sm hover:bg-red-50";
+                    const trashClone = trashIconTpl.content.cloneNode(true);
+                    removeBtn.appendChild(trashClone);
+
+                    removeBtn.addEventListener("click", () => {
+                        sessionFiles = sessionFiles.filter(
+                            (f) => f.id !== fileObj.id,
                         );
+                        renderFileList();
+                    });
 
-                    ctx.drawImage(img, 0, 0, width, height);
-                    const dataUrl = canvas.toDataURL("image/jpeg", quality);
-                    const base64Content = dataUrl.split(",")[1];
-                    resolve(base64Content);
-                };
-                img.onerror = (error) => reject(error);
-            });
-        };
+                    li.appendChild(removeBtn);
+                    fileListContainer.appendChild(li);
+                });
+            };
 
-        // Hjälpfunktion för att läsa andra filer som Base64
-        const readFileAsBase64 = (file: File): Promise<string> => {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    const result = reader.result as string;
-                    const base64Content = result.split(",")[1];
-                    resolve(base64Content);
-                };
-                reader.onerror = (error) => reject(error);
-                reader.readAsDataURL(file);
-            });
-        };
+            // Hjälpfunktion för att komprimera bilder med Canvas
+            const compressImage = (
+                file: File,
+                maxWidth = 1920,
+                quality = 0.8,
+            ): Promise<string> => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = URL.createObjectURL(file);
+                    img.onload = () => {
+                        URL.revokeObjectURL(img.src);
+                        let width = img.width;
+                        let height = img.height;
 
-        // Omedelbar komprimering och processering vid fil-val (onChange)
-        fileInput.addEventListener("change", async (e) => {
-            const files = (e.target as HTMLInputElement).files;
-            if (!files || files.length === 0) return;
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
 
-            // Användare valde filer -- byt text på knappen tillfälligt för feedback under processing
-            const labelSpan =
-                fileInput.previousElementSibling as HTMLSpanElement;
-            const originalLabelText = labelSpan.innerText;
-            labelSpan.innerText = "Laddar och komprimerar...";
+                        const canvas = document.createElement("canvas");
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext("2d");
+                        if (!ctx)
+                            return reject(
+                                new Error("Could not get canvas context"),
+                            );
 
-            // Vi blockerar submit-knappen tillfälligt under tiden vi bearbetar
-            const originalSubmitText = submitButton.innerText;
-            submitButton.disabled = true;
-            submitButton.innerText = "Bearbetar Filer...";
-            submitButton.classList.add("opacity-70", "cursor-not-allowed");
+                        ctx.drawImage(img, 0, 0, width, height);
+                        const dataUrl = canvas.toDataURL("image/jpeg", quality);
+                        const base64Content = dataUrl.split(",")[1];
+                        resolve(base64Content);
+                    };
+                    img.onerror = (error) => reject(error);
+                });
+            };
 
-            let currentTotalSize = sessionFiles.reduce(
-                (acc, f) => acc + f.sizeBytes,
-                0,
-            );
+            // Hjälpfunktion för att läsa andra filer som Base64
+            const readFileAsBase64 = (file: File): Promise<string> => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const result = reader.result as string;
+                        const base64Content = result.split(",")[1];
+                        resolve(base64Content);
+                    };
+                    reader.onerror = (error) => reject(error);
+                    reader.readAsDataURL(file);
+                });
+            };
 
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
+            // Omedelbar komprimering och processering vid fil-val (onChange)
+            fileInput.addEventListener("change", async (e) => {
+                const files = (e.target as HTMLInputElement).files;
+                if (!files || files.length === 0) return;
 
-                // Enkel filtyp-koll
-                const isImage = file.type.startsWith("image/");
-                const isValidDoc = file.name.match(
-                    /\.(pdf|doc|docx|xls|xlsx)$/i,
+                // Användare valde filer -- byt text på knappen tillfälligt för feedback under processing
+                const labelSpan =
+                    fileInput.previousElementSibling as HTMLSpanElement;
+                const originalLabelText = labelSpan.innerText;
+                labelSpan.innerText = "Laddar och komprimerar...";
+
+                // Vi blockerar submit-knappen tillfälligt under tiden vi bearbetar
+                const originalSubmitText = submitButton.innerText;
+                submitButton.disabled = true;
+                submitButton.innerText = "Bearbetar Filer...";
+                submitButton.classList.add("opacity-70", "cursor-not-allowed");
+
+                let currentTotalSize = sessionFiles.reduce(
+                    (acc, f) => acc + f.sizeBytes,
+                    0,
                 );
 
-                if (!isImage && !isValidDoc) {
-                    alert(
-                        `Ogiltig filtyp: ${file.name}. Vi stödjer bara bilder och vanliga dokument (PDF, Word, Excel).`,
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+
+                    // Enkel filtyp-koll
+                    const isImage = file.type.startsWith("image/");
+                    const isValidDoc = file.name.match(
+                        /\.(pdf|doc|docx|xls|xlsx)$/i,
                     );
-                    continue; // Skippa denna fil
+
+                    if (!isImage && !isValidDoc) {
+                        alert(
+                            `Ogiltig filtyp: ${file.name}. Vi stödjer bara bilder och vanliga dokument (PDF, Word, Excel).`,
+                        );
+                        continue; // Skippa denna fil
+                    }
+
+                    let base64Content = "";
+                    let finalSizeBytes = 0;
+
+                    try {
+                        if (isImage) {
+                            base64Content = await compressImage(file);
+                            // Räkna ut ungefärlig storlek på base64 strängen i bytes (varje base64 char = 3/4 byte)
+                            finalSizeBytes = Math.round(
+                                (base64Content.length * 3) / 4,
+                            );
+                        } else {
+                            base64Content = await readFileAsBase64(file);
+                            finalSizeBytes = file.size; // Orginalstorlek för okomprimerade dokument
+                        }
+
+                        // Kolla mot MAX_TOTAL_SIZE
+                        if (currentTotalSize + finalSizeBytes > MAX_TOTAL_SIZE) {
+                            alert(
+                                `Filen ${file.name} fick inte plats! Max storlek på uppladdningar (efter ev. komprimering) är 20 MB.`,
+                            );
+                            continue;
+                        }
+
+                        currentTotalSize += finalSizeBytes;
+                        sessionFiles.push({
+                            id: Math.random().toString(36).substr(2, 9),
+                            originalName: file.name,
+                            isImage,
+                            base64Data: base64Content,
+                            sizeBytes: finalSizeBytes,
+                        });
+                    } catch (err) {
+                        console.error("Kunde inte läsa filen", file.name, err);
+                    }
                 }
 
-                let base64Content = "";
-                let finalSizeBytes = 0;
+                // Rensa inputen så att man kan välja exakt samma fil igen (change trigger).
+                fileInput.value = "";
+                labelSpan.innerText = originalLabelText;
+
+                // Återställ submit-knappen
+                submitButton.disabled = false;
+                submitButton.innerText = originalSubmitText;
+                submitButton.classList.remove("opacity-70", "cursor-not-allowed");
+
+                renderFileList();
+            });
+
+            // Sändning av formuläret
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const originalButtonText = submitButton.innerText;
+                submitButton.disabled = true;
+                submitButton.innerText = "Skickar...";
+                submitButton.classList.add("opacity-70", "cursor-not-allowed");
 
                 try {
-                    if (isImage) {
-                        base64Content = await compressImage(file);
-                        // Räkna ut ungefärlig storlek på base64 strängen i bytes (varje base64 char = 3/4 byte)
-                        finalSizeBytes = Math.round(
-                            (base64Content.length * 3) / 4,
-                        );
+                    const formData = new FormData(e.target as HTMLFormElement);
+                    const data = Object.fromEntries(formData.entries());
+
+                    const payload: any = {
+                        name: data.name,
+                        email: data.email,
+                        phone: data.phone,
+                        serviceType: data.serviceType,
+                        message: data.message,
+                        attachments: sessionFiles.map((f) => ({
+                            filename: f.originalName,
+                            content: f.base64Data,
+                        })), // Redan klara i minnet!
+                    };
+
+                    const response = await fetch(
+                        "https://broad-truth-b482-resend-form-handler.allecc.workers.dev",
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(payload),
+                        },
+                    );
+
+                    if (response.ok) {
+                        // Istället för alert: Dölj formulär, visa success
+                        form.style.display = "none";
+                        if (successMessage) {
+                            successMessage.classList.remove("hidden");
+                            successMessage.classList.add("flex");
+                            // Scrolla success-meddelandet till en bra position
+                            const navbarHeight = 80; // En uppskattning ifall du har fixed navbar
+                            const topPosition =
+                                successMessage.getBoundingClientRect().top +
+                                window.scrollY -
+                                navbarHeight -
+                                20;
+                            window.scrollTo({
+                                top: topPosition,
+                                behavior: "smooth",
+                            });
+                        }
+
+                        (e.target as HTMLFormElement).reset();
+                        // Rensa UI och state
+                        sessionFiles = [];
+                        renderFileList();
                     } else {
-                        base64Content = await readFileAsBase64(file);
-                        finalSizeBytes = file.size; // Orginalstorlek för okomprimerade dokument
-                    }
-
-                    // Kolla mot MAX_TOTAL_SIZE
-                    if (currentTotalSize + finalSizeBytes > MAX_TOTAL_SIZE) {
                         alert(
-                            `Filen ${file.name} fick inte plats! Max storlek på uppladdningar (efter ev. komprimering) är 20 MB.`,
+                            "Ett fel uppstod när meddelandet skulle skickas. Vänligen försök igen senare eller maila oss direkt.",
                         );
-                        continue;
                     }
-
-                    currentTotalSize += finalSizeBytes;
-                    sessionFiles.push({
-                        id: Math.random().toString(36).substr(2, 9),
-                        originalName: file.name,
-                        isImage,
-                        base64Data: base64Content,
-                        sizeBytes: finalSizeBytes,
-                    });
-                } catch (err) {
-                    console.error("Kunde inte läsa filen", file.name, err);
-                }
-            }
-
-            // Rensa inputen så att man kan välja exakt samma fil igen (change trigger).
-            fileInput.value = "";
-            labelSpan.innerText = originalLabelText;
-
-            // Återställ submit-knappen
-            submitButton.disabled = false;
-            submitButton.innerText = originalSubmitText;
-            submitButton.classList.remove("opacity-70", "cursor-not-allowed");
-
-            renderFileList();
-        });
-
-        // Sändning av formuläret
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const originalButtonText = submitButton.innerText;
-            submitButton.disabled = true;
-            submitButton.innerText = "Skickar...";
-            submitButton.classList.add("opacity-70", "cursor-not-allowed");
-
-            try {
-                const formData = new FormData(e.target as HTMLFormElement);
-                const data = Object.fromEntries(formData.entries());
-
-                const payload: any = {
-                    name: data.name,
-                    email: data.email,
-                    phone: data.phone,
-                    serviceType: data.serviceType,
-                    message: data.message,
-                    attachments: sessionFiles.map((f) => ({
-                        filename: f.originalName,
-                        content: f.base64Data,
-                    })), // Redan klara i minnet!
-                };
-
-                const response = await fetch(
-                    "https://broad-truth-b482-resend-form-handler.allecc.workers.dev",
-                    {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload),
-                    },
-                );
-
-                if (response.ok) {
-                    // Istället för alert: Dölj formulär, visa success
-                    form.style.display = "none";
-                    if (successMessage) {
-                        successMessage.classList.remove("hidden");
-                        successMessage.classList.add("flex");
-                        // Scrolla success-meddelandet till en bra position
-                        const navbarHeight = 80; // En uppskattning ifall du har fixed navbar
-                        const topPosition =
-                            successMessage.getBoundingClientRect().top +
-                            window.scrollY -
-                            navbarHeight -
-                            20;
-                        window.scrollTo({
-                            top: topPosition,
-                            behavior: "smooth",
-                        });
-                    }
-
-                    (e.target as HTMLFormElement).reset();
-                    // Rensa UI och state
-                    sessionFiles = [];
-                    renderFileList();
-                } else {
+                } catch (error: any) {
+                    console.error("Nätverksfel eller CORS-problem:", error);
                     alert(
-                        "Ett fel uppstod när meddelandet skulle skickas. Vänligen försök igen senare eller maila oss direkt.",
+                        "Kunde inte kontakta servern. Vänligen försök igen senare.",
+                    );
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.innerText = originalButtonText;
+                    submitButton.classList.remove(
+                        "opacity-70",
+                        "cursor-not-allowed",
                     );
                 }
-            } catch (error: any) {
-                console.error("Nätverksfel eller CORS-problem:", error);
-                alert(
-                    "Kunde inte kontakta servern. Vänligen försök igen senare.",
-                );
-            } finally {
-                submitButton.disabled = false;
-                submitButton.innerText = originalButtonText;
-                submitButton.classList.remove(
-                    "opacity-70",
-                    "cursor-not-allowed",
-                );
-            }
-        });
-
-        // Hantera reset ("Skicka nytt meddelande")
-        if (resetFormBtn) {
-            resetFormBtn.addEventListener("click", () => {
-                if (successMessage) {
-                    successMessage.classList.add("hidden");
-                    successMessage.classList.remove("flex");
-                }
-                form.style.display = "block"; // eller flex om det är orginal display. form har ingen men css class="space-y-6"
             });
+
+            // Hantera reset ("Skicka nytt meddelande")
+            if (resetFormBtn) {
+                resetFormBtn.addEventListener("click", () => {
+                    if (successMessage) {
+                        successMessage.classList.add("hidden");
+                        successMessage.classList.remove("flex");
+                    }
+                    form.style.display = "block"; // eller flex om det är orginal display. form har ingen men css class="space-y-6"
+                });
+            }
         }
-    }
+    });
 </script>

@@ -104,69 +104,64 @@ const reviews = [
     </style>
 
     <script>
-        const carousel = document.getElementById("banner-carousel");
-        const cards = document.querySelectorAll(".banner-card");
-        const dots = document.querySelectorAll(".banner-dot");
+        let carousel;
+        let cards;
+        let dots;
+        let observer;
 
-        // Click Handler for Dots
-        dots.forEach((dot) => {
-            dot.addEventListener("click", () => {
-                const index = parseInt(dot.getAttribute("data-index") || "0");
-                const card = cards[index];
-                if (card && carousel && card instanceof HTMLElement) {
-                    // Calculate position to center the card
-                    // card.offsetLeft relative to the scrolling container
-                    // We want to center it, so we subtract half the container width and add half the card width
-                    // actually, usually simpler behavior is just scrolling to the start of the card with snap
-                    const left = card.offsetLeft;
+        document.addEventListener("astro:page-load", () => {
+            carousel = document.getElementById("banner-carousel");
+            cards = document.querySelectorAll(".banner-card");
+            dots = document.querySelectorAll(".banner-dot");
 
-                    // But since we have padding on container (px-4), offsetLeft might be relative to parent content box.
-                    // Easiest is often just formatting scrollLeft.
-                    // Let's try simple scroll logic first.
-                    // For snap containers, usually just scrolling near the element triggers the snap.
+            if (!carousel) return;
 
-                    // Mobile container has padding-left: 1rem (16px) due to px-4.
-                    // The first card starts at internal offset 0 (effectively).
-                    // card.offsetLeft will return the pixel distance.
-
-                    // Let's try using scrollIntoView with inline: 'center' block: 'nearest'
-                    card.scrollIntoView({
-                        behavior: "smooth",
-                        block: "nearest",
-                        inline: "center",
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for Active Dot State
-        const observerOptions = {
-            root: carousel,
-            threshold: 0.5,
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            if (window.innerWidth >= 768) return; // Ignore on desktop
-
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const index = entry.target.getAttribute("data-index");
-                    if (index !== null) {
-                        dots.forEach((d) => d.classList.remove("active"));
-                        const activeDot = document.querySelector(
-                            `.banner-dot[data-index="${index}"]`,
-                        );
-                        if (activeDot) activeDot.classList.add("active");
+            // Click Handler for Dots
+            dots.forEach((dot) => {
+                dot.addEventListener("click", () => {
+                    const index = parseInt(dot.getAttribute("data-index") || "0");
+                    const card = cards[index];
+                    if (card && carousel && card instanceof HTMLElement) {
+                        card.scrollIntoView({
+                            behavior: "smooth",
+                            block: "nearest",
+                            inline: "center",
+                        });
                     }
-                }
+                });
             });
-        }, observerOptions);
 
-        cards.forEach((card) => observer.observe(card));
+            // Intersection Observer for Active Dot State
+            const observerOptions = {
+                root: carousel,
+                threshold: 0.5,
+            };
 
-        // Initial Active State
-        if (dots.length > 0 && window.innerWidth < 768) {
-            dots[0].classList.add("active");
-        }
+            if (observer) observer.disconnect();
+
+            observer = new IntersectionObserver((entries) => {
+                if (window.innerWidth >= 768) return; // Ignore on desktop
+
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = entry.target.getAttribute("data-index");
+                        if (index !== null) {
+                            dots.forEach((d) => d.classList.remove("active"));
+                            const activeDot = document.querySelector(
+                                `.banner-dot[data-index="${index}"]`,
+                            );
+                            if (activeDot) activeDot.classList.add("active");
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            cards.forEach((card) => observer.observe(card));
+
+            // Initial Active State
+            if (dots.length > 0 && window.innerWidth < 768) {
+                dots[0].classList.add("active");
+            }
+        });
     </script>
 </section>

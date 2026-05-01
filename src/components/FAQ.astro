@@ -58,50 +58,52 @@ const faqs = [
 </section>
 
 <script>
-    const toggles = document.querySelectorAll(".faq-toggle");
+    document.addEventListener("astro:page-load", () => {
+        const toggles = document.querySelectorAll(".faq-toggle");
 
-    toggles.forEach((toggle) => {
-        toggle.addEventListener("click", () => {
-            const parent = toggle.parentElement;
-            const answer = parent?.querySelector(".faq-answer") as HTMLElement;
-            const icon = toggle.querySelector(".faq-icon");
-            const question = toggle.querySelector(".faq-question");
+        toggles.forEach((toggle) => {
+            toggle.addEventListener("click", () => {
+                const parent = toggle.parentElement;
+                const answer = parent?.querySelector(".faq-answer") as HTMLElement;
+                const icon = toggle.querySelector(".faq-icon");
+                const question = toggle.querySelector(".faq-question");
 
-            if (!answer || !parent || !icon || !question) return;
+                if (!answer || !parent || !icon || !question) return;
 
-            const isClosed = answer.classList.contains("max-h-0");
+                const isClosed = answer.classList.contains("max-h-0");
 
-            // Close all others
-            document.querySelectorAll(".faq-item").forEach((item) => {
-                const ans = item.querySelector(".faq-answer") as HTMLElement;
-                const icn = item.querySelector(".faq-icon");
-                const qst = item.querySelector(".faq-question");
+                // Close all others
+                document.querySelectorAll(".faq-item").forEach((item) => {
+                    const ans = item.querySelector(".faq-answer") as HTMLElement;
+                    const icn = item.querySelector(".faq-icon");
+                    const qst = item.querySelector(".faq-question");
 
-                if (ans) {
-                    ans.style.maxHeight = "0px";
-                    ans.classList.add("max-h-0", "opacity-0");
+                    if (ans) {
+                        ans.style.maxHeight = "0px";
+                        ans.classList.add("max-h-0", "opacity-0");
+                    }
+                    icn?.classList.remove("rotate-180", "text-elblue");
+                    qst?.classList.remove("text-elblue");
+                    item.classList.remove(
+                        "shadow-lg",
+                        "bg-slate-50",
+                        "border-elblue/20",
+                    );
+                });
+
+                if (isClosed) {
+                    answer.classList.remove("max-h-0", "opacity-0");
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+
+                    icon.classList.add("rotate-180", "text-elblue");
+                    question.classList.add("text-elblue");
+                    parent.classList.add(
+                        "shadow-lg",
+                        "bg-slate-50",
+                        "border-elblue/20",
+                    );
                 }
-                icn?.classList.remove("rotate-180", "text-elblue");
-                qst?.classList.remove("text-elblue");
-                item.classList.remove(
-                    "shadow-lg",
-                    "bg-slate-50",
-                    "border-elblue/20",
-                );
             });
-
-            if (isClosed) {
-                answer.classList.remove("max-h-0", "opacity-0");
-                answer.style.maxHeight = answer.scrollHeight + "px";
-
-                icon.classList.add("rotate-180", "text-elblue");
-                question.classList.add("text-elblue");
-                parent.classList.add(
-                    "shadow-lg",
-                    "bg-slate-50",
-                    "border-elblue/20",
-                );
-            }
         });
     });
 </script>

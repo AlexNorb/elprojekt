@@ -100,64 +100,66 @@ const categories = [
 </MainLayout>
 
 <script>
-    // Filter Logik
-    const buttons = document.querySelectorAll(".filter-btn");
-    const cards = document.querySelectorAll(".project-card");
+    document.addEventListener("astro:page-load", () => {
+        // Filter Logik
+        const buttons = document.querySelectorAll(".filter-btn");
+        const cards = document.querySelectorAll(".project-card");
 
-    buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            // Reset state
-            buttons.forEach((b) => {
-                b.classList.remove(
-                    "bg-elorange",
-                    "text-white",
-                    "border-elorange",
-                    "hover:bg-elorange/90",
-                    "shadow-md",
-                );
-                b.classList.add(
+        buttons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                // Reset state
+                buttons.forEach((b) => {
+                    b.classList.remove(
+                        "bg-elorange",
+                        "text-white",
+                        "border-elorange",
+                        "hover:bg-elorange/90",
+                        "shadow-md",
+                    );
+                    b.classList.add(
+                        "bg-white",
+                        "text-slate-600",
+                        "border-slate-200",
+                        "hover:border-elblue",
+                        "hover:text-elblue",
+                    );
+                });
+                // Set active state
+                btn.classList.remove(
                     "bg-white",
                     "text-slate-600",
                     "border-slate-200",
                     "hover:border-elblue",
                     "hover:text-elblue",
                 );
-            });
-            // Set active state
-            btn.classList.remove(
-                "bg-white",
-                "text-slate-600",
-                "border-slate-200",
-                "hover:border-elblue",
-                "hover:text-elblue",
-            );
-            btn.classList.add(
-                "bg-elorange",
-                "text-white",
-                "border-elorange",
-                "hover:bg-elorange/90",
-                "shadow-md",
-            );
+                btn.classList.add(
+                    "bg-elorange",
+                    "text-white",
+                    "border-elorange",
+                    "hover:bg-elorange/90",
+                    "shadow-md",
+                );
 
-            const filterValue = btn.getAttribute("data-filter")?.toLowerCase();
+                const filterValue = btn.getAttribute("data-filter")?.toLowerCase();
 
-            cards.forEach((card) => {
-                const cardEl = card as HTMLElement;
-                const cardCategories = (
-                    card.getAttribute("data-category") || ""
-                ).toLowerCase();
-                const categoryList = cardCategories.split(",");
+                cards.forEach((card) => {
+                    const cardEl = card as HTMLElement;
+                    const cardCategories = (
+                        card.getAttribute("data-category") || ""
+                    ).toLowerCase();
+                    const categoryList = cardCategories.split(",");
 
-                if (
-                    filterValue === "alla" ||
-                    (filterValue && categoryList.includes(filterValue))
-                ) {
-                    cardEl.style.display = "block";
-                    cardEl.classList.add("animate-fade-in");
-                } else {
-                    cardEl.style.display = "none";
-                    cardEl.classList.remove("animate-fade-in");
-                }
+                    if (
+                        filterValue === "alla" ||
+                        (filterValue && categoryList.includes(filterValue))
+                    ) {
+                        cardEl.style.display = "block";
+                        cardEl.classList.add("animate-fade-in");
+                    } else {
+                        cardEl.style.display = "none";
+                        cardEl.classList.remove("animate-fade-in");
+                    }
+                });
             });
         });
     });

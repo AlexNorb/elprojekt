@@ -38,15 +38,24 @@ import { pb } from "../utils";
 </div>
 
 <script>
-    const actionBar = document.getElementById("mobile-action-bar");
+    let actionBar;
+
     const handleScroll = () => {
+        if (!actionBar) return;
         if (window.scrollY > 200) {
-            actionBar?.classList.remove("translate-y-full");
-            actionBar?.classList.add("translate-y-0");
+            actionBar.classList.remove("translate-y-full");
+            actionBar.classList.add("translate-y-0");
         } else {
-            actionBar?.classList.add("translate-y-full");
-            actionBar?.classList.remove("translate-y-0");
+            actionBar.classList.add("translate-y-full");
+            actionBar.classList.remove("translate-y-0");
         }
     };
+
+    // Attach scroll listener once
     window.addEventListener("scroll", handleScroll, { passive: true });
+
+    document.addEventListener("astro:page-load", () => {
+        actionBar = document.getElementById("mobile-action-bar");
+        handleScroll();
+    });
 </script>

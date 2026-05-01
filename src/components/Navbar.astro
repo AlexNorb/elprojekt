@@ -211,113 +211,55 @@ const navItems = [
 </nav>
 
 <script>
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const menuIconOpen = document.getElementById("menu-icon-open");
-    const menuIconClose = document.getElementById("menu-icon-close");
-    const navbar = document.getElementById("navbar");
-    const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
-
+    let mobileMenuBtn;
+    let mobileMenu;
+    let menuIconOpen;
+    let menuIconClose;
+    let navbar;
+    let mobileNavLinks;
     let isMenuOpen = false;
+    let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    const transparencyThreshold = 100;
+    const hideShowThreshold = 10;
 
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
         if (isMenuOpen) {
-            // Show menu with animation
-            mobileMenu?.classList.remove(
-                "opacity-0",
-                "-translate-y-2",
-                "pointer-events-none",
-            );
-            mobileMenu?.classList.add(
-                "opacity-100",
-                "translate-y-0",
-                "pointer-events-auto",
-            );
-            // Animate icon: hide hamburger, show X
+            mobileMenu?.classList.remove("opacity-0", "-translate-y-2", "pointer-events-none");
+            mobileMenu?.classList.add("opacity-100", "translate-y-0", "pointer-events-auto");
             menuIconOpen?.classList.add("opacity-0", "scale-75", "rotate-90");
             menuIconClose?.classList.remove("opacity-0", "scale-75");
             menuIconClose?.classList.add("opacity-100", "scale-100");
-            // Semi-transparent bg when menu is open (keep border transparent to avoid gap)
-            navbar?.classList.add(
-                "bg-white/95",
-                "backdrop-blur-md",
-                "shadow-sm",
-                "border-transparent",
-            );
+            navbar?.classList.add("bg-white/95", "backdrop-blur-md", "shadow-sm", "border-transparent");
             navbar?.classList.remove("bg-transparent", "border-gray-100");
         } else {
-            // Hide menu with animation
-            mobileMenu?.classList.add(
-                "opacity-0",
-                "-translate-y-2",
-                "pointer-events-none",
-            );
-            mobileMenu?.classList.remove(
-                "opacity-100",
-                "translate-y-0",
-                "pointer-events-auto",
-            );
-            // Animate icon: show hamburger, hide X
-            menuIconOpen?.classList.remove(
-                "opacity-0",
-                "scale-75",
-                "rotate-90",
-            );
+            mobileMenu?.classList.add("opacity-0", "-translate-y-2", "pointer-events-none");
+            mobileMenu?.classList.remove("opacity-100", "translate-y-0", "pointer-events-auto");
+            menuIconOpen?.classList.remove("opacity-0", "scale-75", "rotate-90");
             menuIconClose?.classList.add("opacity-0", "scale-75");
             menuIconClose?.classList.remove("opacity-100", "scale-100");
-            // Re-check scroll position to reset transparency if at top
             handleScroll();
         }
     }
 
-    mobileMenuBtn?.addEventListener("click", toggleMenu);
-
-    // Close menu when clicking a link
-    mobileNavLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-            if (isMenuOpen) toggleMenu();
-        });
-    });
-
-    // Scroll Logic
-    let lastScrollY = window.scrollY;
-    const transparencyThreshold = 100; // Stay transparent until 100px scrolled
-    const hideShowThreshold = 10; // Start hide/show behavior after 10px
-
     function handleScroll() {
         const currentScrollY = window.scrollY;
 
-        // Visual Style Logic (Transparent at top, semi-transparent when scrolled)
         if (currentScrollY < transparencyThreshold && !isMenuOpen) {
-            navbar?.classList.remove(
-                "bg-white/95",
-                "backdrop-blur-md",
-                "shadow-sm",
-                "border-gray-100",
-            );
+            navbar?.classList.remove("bg-white/95", "backdrop-blur-md", "shadow-sm", "border-gray-100");
             navbar?.classList.add("bg-transparent", "border-transparent");
         } else {
-            navbar?.classList.add(
-                "bg-white/95",
-                "backdrop-blur-md",
-                "shadow-sm",
-                "border-gray-100",
-            );
+            navbar?.classList.add("bg-white/95", "backdrop-blur-md", "shadow-sm", "border-gray-100");
             navbar?.classList.remove("bg-transparent", "border-transparent");
         }
 
-        // Hide/Show Logic
-        // Always show if above threshold or menu is open
         if (currentScrollY < hideShowThreshold || isMenuOpen) {
             navbar?.classList.remove("-translate-y-full");
             navbar?.classList.add("translate-y-0");
         } else if (currentScrollY > lastScrollY) {
-            // Scrolling Down -> Hide
             navbar?.classList.remove("translate-y-0");
             navbar?.classList.add("-translate-y-full");
         } else {
-            // Scrolling Up -> Show
             navbar?.classList.remove("-translate-y-full");
             navbar?.classList.add("translate-y-0");
         }
@@ -325,8 +267,27 @@ const navItems = [
         lastScrollY = currentScrollY;
     }
 
-    window.addEventListener("scroll", () => handleScroll(), { passive: true });
+    // Attach scroll listener once
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Init state check
-    handleScroll();
+    document.addEventListener("astro:page-load", () => {
+        mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        mobileMenu = document.getElementById("mobile-menu");
+        menuIconOpen = document.getElementById("menu-icon-open");
+        menuIconClose = document.getElementById("menu-icon-close");
+        navbar = document.getElementById("navbar");
+        mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+        isMenuOpen = false;
+        lastScrollY = window.scrollY;
+
+        mobileMenuBtn?.addEventListener("click", toggleMenu);
+        mobileNavLinks?.forEach((link) => {
+            link.addEventListener("click", () => {
+                if (isMenuOpen) toggleMenu();
+            });
+        });
+
+        handleScroll();
+    });
 </script>
