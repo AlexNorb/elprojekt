@@ -24,6 +24,8 @@ export default defineConfig({
     domains: ['images.unsplash.com'],
   },
 
+  prefetch: true,
+
   integrations: [
     sitemap({
       i18n: {
