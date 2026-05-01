@@ -10,6 +10,13 @@ export default defineConfig({
   site: isProd ? 'https://elprojekt.nu' : 'http://localhost:4321',
   base: undefined,
 
+  redirects: {
+    '/betyg': {
+      status: 301,
+      destination: 'https://g.page/r/CZaiX2q-GJRhEBM/review'
+    }
+  },
+
   // 2. We explicitly tell TypeScript the result is one of the allowed strings
   trailingSlash: isProd ? /** @type {'always'} */ ('always') : /** @type {'ignore'} */ ('ignore'),
 
