@@ -122,21 +122,14 @@ const capitalize = (str: string) =>
                                     class={`absolute inset-0 transition-opacity duration-500 ease-in-out ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"}`}
                                     data-slide={index}
                                 >
-                                    {isUrl(img.src) ? (
-                                        <img
-                                            src={img.src as string}
-                                            alt={img.alt}
-                                            class="w-full h-full object-cover"
-                                        />
-                                    ) : (
-                                        <Image
-                                            src={img.src as any}
-                                            alt={img.alt}
-                                            class="w-full h-full object-cover"
-                                            width={1200}
-                                            height={675}
-                                        />
-                                    )}
+                                    <Image
+                                        src={img.src as ImageMetadata | string}
+                                        alt={img.alt}
+                                        class="w-full h-full object-cover"
+                                        width={1200}
+                                        height={675}
+                                        inferSize={typeof img.src === "string"}
+                                    />
                                 </div>
                             ))
                         }
@@ -174,21 +167,14 @@ const capitalize = (str: string) =>
                                         data-thumb={index}
                                         aria-label={`Visa bild ${index + 1}`}
                                     >
-                                        {isUrl(img.src) ? (
-                                            <img
-                                                src={img.src as string}
-                                                alt={img.alt}
-                                                class="w-full h-full object-cover"
-                                            />
-                                        ) : (
-                                            <Image
-                                                src={img.src as any}
-                                                alt={img.alt}
-                                                class="w-full h-full object-cover"
-                                                width={200}
-                                                height={150}
-                                            />
-                                        )}
+                                        <Image
+                                            src={img.src as ImageMetadata | string}
+                                            alt={img.alt}
+                                            class="w-full h-full object-cover"
+                                            width={200}
+                                            height={150}
+                                            inferSize={typeof img.src === "string"}
+                                        />
                                     </button>
                                 ))}
                             </div>

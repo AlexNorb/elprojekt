@@ -35,23 +35,14 @@ const allCategories = [serviceType, ...filterCategory];
   data-category={allCategories.join(",")}
 >
   <div class="absolute inset-0 z-0">
-    {
-      isUrl(image) ? (
-        <img
-          src={image as string}
-          alt={title}
-          class="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition duration-700 transform group-hover:scale-110"
-        />
-      ) : (
-        <Image
-          src={image as ImageMetadata}
-          alt={title}
-          class="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition duration-700 transform group-hover:scale-110"
-          width={600}
-          height={400}
-        />
-      )
-    }
+    <Image
+      src={image as ImageMetadata | string}
+      alt={title}
+      class="w-full h-full object-cover opacity-80 group-hover:opacity-40 transition duration-700 transform group-hover:scale-110"
+      width={600}
+      height={400}
+      inferSize={typeof image === "string"}
+    />
   </div>
 
   <div class="absolute inset-0 p-8 flex flex-col justify-end z-10">

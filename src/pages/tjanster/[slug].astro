@@ -94,23 +94,14 @@ const taxInfo =
                         <span class="mr-2">←</span> Tillbaka
                     </a>
 
-                    {
-                        isUrl(data.image) ? (
-                            <img
-                                src={data.image as string}
-                                alt={data.title}
-                                class="w-full h-full object-cover"
-                            />
-                        ) : (
-                            <Image
-                                src={data.image as any}
-                                alt={data.title}
-                                class="w-full h-full object-cover"
-                                width={1200}
-                                height={600}
-                            />
-                        )
-                    }
+                    <Image
+                        src={data.image as ImageMetadata | string}
+                        alt={data.title}
+                        class="w-full h-full object-cover"
+                        width={1200}
+                        height={600}
+                        inferSize={typeof data.image === "string"}
+                    />
 
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"

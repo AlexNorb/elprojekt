@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import CheckBadgeIcon from "./icons/CheckBadgeIcon.astro";
 import BoltIcon from "./icons/BoltIcon.astro";
+import alexImg from "../assets/images/alex.png";
 import { pb } from "../utils";
 ---
 
@@ -52,10 +54,12 @@ import { pb } from "../utils";
                     <div
                         class="absolute -top-10 -right-2 md:-right-10 w-28 h-28 rounded-full border-4 border-white shadow-lg overflow-hidden bg-slate-100"
                     >
-                        <img
-                            src={pb("/images/alex.png")}
+                        <Image
+                            src={alexImg}
                             alt="Alex på Elprojekt"
                             class="w-full h-full object-contain bg-slate-100"
+                            width={112}
+                            height={112}
                         />
                     </div>
 

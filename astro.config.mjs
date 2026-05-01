@@ -20,6 +20,10 @@ export default defineConfig({
   // 2. We explicitly tell TypeScript the result is one of the allowed strings
   trailingSlash: isProd ? /** @type {'always'} */ ('always') : /** @type {'ignore'} */ ('ignore'),
 
+  image: {
+    domains: ['images.unsplash.com'],
+  },
+
   integrations: [
     sitemap({
       i18n: {
