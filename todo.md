@@ -1,14 +1,14 @@
 # Nästa Steg (Att göra inför nästa gång)
 
-- [ ] **Kontaktformulär:**
-    - [ ] Finslipa fält och design.
-    - [ ] Implementera backend (skicka mail) - t.ex. Cloudflare Workers, Netlify Forms eller Resend.
+- [x] **Kontaktformulär:**
+    - [x] Finslipa fält och design.
+    - [x] Implementera backend (skicka mail) - t.ex. Cloudflare Workers, Netlify Forms eller Resend.
 - [ ] **Projekt:**
     - [ ] Lägg in exempelprojekt för att fylla ut sidan.
     - [ ] Ersätt med riktiga referensprojekt och bilder så snart de finns.
-- [ ] **Sociala Medier & Omdömen:**
-    - [ ] Uppdatera länkar till Facebook och Google Reviews (Instagram är klar).
-    - [ ] Ersätt hårdkodade omdömen med riktiga citat.
+- [x] **Sociala Medier & Omdömen:**
+    - [x] Uppdatera länkar till Facebook och Google Reviews (Instagram är klar).
+    - [x] Ersätt hårdkodade omdömen med riktiga citat.
 - [ ] **Kod & Optimering:**
     - [ ] Se över repo efter gammal kod och städa.
     - [ ] Optimera prestanda.
@@ -165,15 +165,15 @@ Comprehensive review of the Elprojekt Astro website covering code quality, SEO, 
 - [ ] 📊 Set up Google Analytics (optional)
 
 ### Pending (Need Your Input)
-- [ ] Replace social media placeholder URLs with real ones:
+- [x] Replace social media placeholder URLs with real ones:
   - `https://www.facebook.com/elprojekt.nu`
   - `https://www.instagram.com/elprojekt.nu`
-  - `https://g.page/r/PLACEHOLDER/review`
-- [ ] Contact Form Backend (Cloudflare Workers / Resend.com)
+  - `https://g.page/r/CZaiX2q-GJRhEBM/review`
+- [x] Contact Form Backend (Cloudflare Workers / Resend.com)
 - [ ] Replace 6 placeholder images with real project photos
 
 ### Optional Improvements
-- [ ] Remove Font Awesome CDN (already have local icons)
+- [x] Remove Font Awesome CDN (already have local icons)
 - [ ] Move reviews/FAQ data to content collections
 - [ ] Add TypeScript interfaces for hardcoded data
 

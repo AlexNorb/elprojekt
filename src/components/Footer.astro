@@ -42,9 +42,37 @@ import { pb } from "../utils";
                     <p class="text-white font-medium">
                         Elprojekt i Uddevalla AB
                     </p>
-                    <p>Org.nr 559557-0895</p>
-                    <p>Friggavägen 6</p>
-                    <p>451 76 Uddevalla</p>
+                    <button
+                        data-copy="559557-0895"
+                        class="flex items-center gap-1.5 hover:text-elorange transition-colors duration-200 group cursor-pointer text-left"
+                        title="Kopiera organisationsnummer"
+                    >
+                        <span>Org.nr 559557-0895</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="copy-icon w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="check-icon hidden w-3.5 h-3.5 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </button>
+                    <button
+                        data-copy="Friggavägen 6, 451 76 Uddevalla"
+                        class="flex items-center gap-1.5 hover:text-elorange transition-colors duration-200 group cursor-pointer text-left mt-1"
+                        title="Kopiera adress"
+                    >
+                        <div class="block">
+                            <p>Friggavägen 6</p>
+                            <p>451 76 Uddevalla</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="copy-icon w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity flex-shrink-0 self-center ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="check-icon hidden w-3.5 h-3.5 text-green-500 flex-shrink-0 self-center ml-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -112,3 +140,38 @@ import { pb } from "../utils";
         </div>
     </div>
 </footer>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const copyButtons = document.querySelectorAll("[data-copy]");
+        copyButtons.forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                const textToCopy = btn.getAttribute("data-copy");
+                if (!textToCopy) return;
+
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    
+                    const icon = btn.querySelector(".copy-icon");
+                    const checkIcon = btn.querySelector(".check-icon");
+                    
+                    if (icon && checkIcon) {
+                        icon.classList.add("hidden");
+                        checkIcon.classList.remove("hidden");
+                        btn.classList.add("text-green-500");
+                        btn.classList.remove("hover:text-elorange");
+
+                        setTimeout(() => {
+                            icon.classList.remove("hidden");
+                            checkIcon.classList.add("hidden");
+                            btn.classList.remove("text-green-500");
+                            btn.classList.add("hover:text-elorange");
+                        }, 1500);
+                    }
+                } catch (err) {
+                    console.error("Kunde inte kopiera text: ", err);
+                }
+            });
+        });
+    });
+</script>
