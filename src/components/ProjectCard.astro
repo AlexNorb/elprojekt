@@ -33,6 +33,9 @@ const allCategories = [serviceType, ...filterCategory];
   href={pb(`/projekt/${slug}`)}
   class="project-card group relative overflow-hidden bg-elblue rounded-lg h-72 cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 block"
   data-category={allCategories.join(",")}
+  data-umami-event="Project Card Click"
+  data-umami-event-project={slug}
+  data-umami-event-service={serviceType}
 >
   <div class="absolute inset-0 z-0">
     <Image

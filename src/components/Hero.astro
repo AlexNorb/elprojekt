@@ -77,7 +77,9 @@ import { pb } from "../utils";
                 style="animation-delay: 0.6s; animation-fill-mode: forwards"
             >
                 <a
-                    href={pb("/#contact")}
+                    href={pb("/#contact-form")}
+                    data-umami-event="CTA Contact Click"
+                    data-umami-event-location="hero"
                     class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-white transition-all duration-200 bg-elblue font-display rounded-md hover:bg-elblue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-elblue shadow-[0_4px_14px_0_rgba(0,118,255,0.39)] hover:shadow-[0_6px_20px_rgba(0,118,255,0.23)] hover:-translate-y-1"
                 >
                     Ta kontakt
@@ -88,6 +90,7 @@ import { pb } from "../utils";
 
                 <a
                     href="#services"
+                    data-umami-event="Hero Services Click"
                     class="group relative inline-flex items-center justify-center px-8 py-4 text-base font-bold text-slate-700 transition-all duration-200 bg-white/50 border border-slate-200 font-display rounded-md hover:bg-white hover:text-elblue hover:border-elblue/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200 backdrop-blur-sm"
                 >
                     Tjänster

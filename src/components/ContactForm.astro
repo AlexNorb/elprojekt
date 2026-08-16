@@ -501,6 +501,16 @@ import PaperClipIcon from "./icons/PaperClipIcon.astro";
                     );
 
                     if (response.ok) {
+                        // Track event in Umami Analytics
+                        if (typeof (window as any).umami !== "undefined") {
+                            (window as any).umami.track("Contact Form Submit", {
+                                service: (data.serviceType as string) || "Allmänt",
+                                hasAttachment: sessionFiles.length > 0,
+                                attachmentCount: sessionFiles.length,
+                                page: window.location.pathname,
+                            });
+                        }
+
                         // Istället för alert: Dölj formulär, visa success
                         form.style.display = "none";
                         if (successMessage) {

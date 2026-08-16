@@ -89,6 +89,8 @@ const navItems = [
                 }
                 <a
                     href={pb("/#contact-form")}
+                    data-umami-event="CTA Contact Click"
+                    data-umami-event-location="navbar-desktop"
                     class="px-6 py-2.5 rounded-md font-display font-medium text-sm transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-0.5 bg-elblue text-white hover:bg-elblue/90"
                 >
                     Skicka Förfrågan
@@ -101,6 +103,8 @@ const navItems = [
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Facebook"
+                        data-umami-event="Social Link Click"
+                        data-umami-event-network="facebook"
                         class="w-8 h-8 rounded-md flex items-center justify-center text-slate-500 hover:text-[#1877F2] transition-all duration-200"
                     >
                         <FacebookIcon className="w-5 h-5" />
@@ -110,6 +114,8 @@ const navItems = [
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Instagram"
+                        data-umami-event="Social Link Click"
+                        data-umami-event-network="instagram"
                         class="w-8 h-8 rounded-md flex items-center justify-center text-slate-500 hover:text-[#E4405F] transition-all duration-200"
                     >
                         <InstagramIcon className="w-5 h-5" />
@@ -119,6 +125,8 @@ const navItems = [
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Google Reviews"
+                        data-umami-event="Review Link Click"
+                        data-umami-event-platform="google-reviews"
                         class="w-8 h-8 rounded-md flex items-center justify-center text-slate-500 hover:text-[#FBBC05] transition-all duration-200"
                     >
                         <StarIcon className="w-5 h-5" />
@@ -168,7 +176,9 @@ const navItems = [
             }
             <!-- CTA Button -->
             <a
-                href={pb("/#contact")}
+                href={pb("/#contact-form")}
+                data-umami-event="CTA Contact Click"
+                data-umami-event-location="navbar-mobile"
                 class="mobile-nav-link block w-full text-center mt-4 bg-elblue text-white px-3 py-4 rounded-md text-base font-bold font-display"
             >
                 SKICKA FÖRFRÅGAN

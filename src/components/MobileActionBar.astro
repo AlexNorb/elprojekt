@@ -14,6 +14,9 @@ import { pb } from "../utils";
         <div class="grid grid-cols-2 gap-3">
             <a
                 href={pb("/#contact-form")}
+                data-umami-event="CTA Contact Click"
+                data-umami-event-location="mobile-action-bar"
+                data-umami-event-type="form"
                 class="flex flex-col items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-800 py-3 rounded-md transition-colors active:scale-95"
             >
                 <ChatBubbleOvalLeftIcon className="w-6 h-6 mb-1 text-elblue" />
@@ -25,6 +28,8 @@ import { pb } from "../utils";
 
             <a
                 href="tel:+46703325655"
+                data-umami-event="Phone Call Click"
+                data-umami-event-location="mobile-action-bar"
                 class="flex flex-col items-center justify-center bg-elblue hover:bg-elblue-600 text-white py-3 rounded-md transition-colors shadow-lg shadow-elblue/30 active:scale-95"
             >
                 <PhoneIcon className="w-6 h-6 mb-1" />

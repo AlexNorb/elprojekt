@@ -125,6 +125,9 @@ const taxInfo =
                     <div class="flex items-center gap-2">
                         <a
                             href="#contact-form"
+                            data-umami-event="CTA Contact Click"
+                            data-umami-event-location="service-mobile-bar"
+                            data-umami-event-service={data.title}
                             class="flex-1 flex items-center justify-center px-5 py-3 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-elblue hover:bg-elblue-600 transition-all"
                         >
                             Skicka förfrågan
@@ -134,6 +137,9 @@ const taxInfo =
                         </a>
                         <a
                             href="tel:0703325655"
+                            data-umami-event="Phone Call Click"
+                            data-umami-event-location="service-mobile-bar"
+                            data-umami-event-service={data.title}
                             class="flex items-center justify-center p-3 bg-white rounded-md border border-slate-200 hover:border-elblue hover:bg-elblue hover:text-white transition-all text-elblue"
                             aria-label="Ring oss"
                         >
@@ -141,6 +147,9 @@ const taxInfo =
                         </a>
                         <a
                             href="mailto:alex@elprojekt.nu"
+                            data-umami-event="Email Click"
+                            data-umami-event-location="service-mobile-bar"
+                            data-umami-event-service={data.title}
                             class="flex items-center justify-center p-3 bg-white rounded-md border border-slate-200 hover:border-elblue hover:bg-elblue hover:text-white transition-all text-elblue"
                             aria-label="Maila oss"
                         >
@@ -276,8 +285,11 @@ const taxInfo =
                             <div class="space-y-4">
                                 <a
                                     href="#contact-form"
+                                    data-umami-event="CTA Contact Click"
+                                    data-umami-event-location="service-sidebar"
+                                    data-umami-event-service={data.title}
                                     class="w-full flex items-center justify-center px-6 py-4 border border-transparent rounded-md shadow-sm text-base font-bold text-white bg-elblue hover:bg-elblue-600 transition-all transform hover:-translate-y-1 block text-center"
-                                >
+                                 >
                                     Skicka förfrågan
                                     <div class="ml-2 w-5 h-5 inline-block">
                                         <ChevronDownIcon />
@@ -290,6 +302,9 @@ const taxInfo =
                                 >
                                     <a
                                         href="tel:0703325655"
+                                        data-umami-event="Phone Call Click"
+                                        data-umami-event-location="service-sidebar"
+                                        data-umami-event-service={data.title}
                                         class="block p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:border-elblue hover:shadow-md transition-all group text-center"
                                     >
                                         <div
@@ -317,6 +332,9 @@ const taxInfo =
 
                                     <a
                                         href="mailto:alex@elprojekt.nu"
+                                        data-umami-event="Email Click"
+                                        data-umami-event-location="service-sidebar"
+                                        data-umami-event-service={data.title}
                                         class="block p-4 bg-white rounded-lg shadow-sm border border-slate-200 hover:border-elblue hover:shadow-md transition-all group text-center"
                                     >
                                         <div
