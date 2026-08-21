@@ -1,0 +1,476 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import MobileActionBar from "../components/MobileActionBar.astro";
+import ContactForm from "../components/ContactForm.astro";
+import BoltIcon from "../components/icons/BoltIcon.astro";
+import BatteryIcon from "../components/icons/BatteryIcon.astro";
+import CpuChipIcon from "../components/icons/CpuChipIcon.astro";
+import HomeModernIcon from "../components/icons/HomeModernIcon.astro";
+import CheckBadgeIcon from "../components/icons/CheckBadgeIcon.astro";
+import PhoneIcon from "../components/icons/PhoneIcon.astro";
+import EnvelopeIcon from "../components/icons/EnvelopeIcon.astro";
+import ChevronDownIcon from "../components/icons/ChevronDownIcon.astro";
+import StarIcon from "../components/icons/StarIcon.astro";
+import { pb } from "../utils";
+---
+
+<MainLayout
+    title="Showroom & Energilösningar | Elprojekt"
+    description="Välkommen till Elprojekt. Utforska solceller, batterilagring, växelriktare, laddboxar och kompletta elinstallationer."
+>
+    <Navbar />
+
+    <main class="min-h-screen bg-slate-50 pt-20">
+        {/* HERO SECTION */}
+        <section class="relative bg-slate-900 text-white py-16 lg:py-24 overflow-hidden">
+            {/* Background Glow */}
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-elblue rounded-full mix-blend-screen filter blur-[140px] opacity-25 pointer-events-none"
+            ></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-3xl">
+                    {/* Dynamic Source Badge */}
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-elorange text-xs sm:text-sm font-bold font-display uppercase tracking-wider mb-6 backdrop-blur-sm" id="qr-badge-container">
+                        <span class="w-2 h-2 rounded-full bg-elorange animate-pulse"></span>
+                        <span id="qr-badge">Välkommen till vårt Showroom</span>
+                    </div>
+
+                    <h1
+                        id="qr-heading"
+                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-white leading-tight mb-6"
+                    >
+                        Grön teknik & <br />
+                        <span class="text-elorange">framtidens energi.</span>
+                    </h1>
+
+                    <p
+                        id="qr-subheading"
+                        class="text-lg sm:text-xl text-slate-300 leading-relaxed font-sans mb-8 border-l-4 border-elorange pl-4 sm:pl-6"
+                    >
+                        Kul att du scannade vår QR-kod! Här visar vi upp framtidens smarta energilösningar – solceller, batterilagring, växelriktare och elbilsladdning. Och som alltid hjälper vi dig med allt inom traditionell elinstallation.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <a
+                            href="#contact-form"
+                            data-umami-event="QR Hero CTA Click"
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold text-white transition-all duration-200 bg-elblue font-display rounded-md hover:bg-elblue-600 shadow-[0_4px_14px_0_rgba(0,118,255,0.39)] hover:-translate-y-0.5"
+                        >
+                            Prata med Alexander
+                            <div class="ml-2 w-4 h-4 inline-block">
+                                <ChevronDownIcon />
+                            </div>
+                        </a>
+                        <a
+                            href="#showroom-products"
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold text-slate-300 transition-all duration-200 bg-white/5 border border-white/15 font-display rounded-md hover:bg-white/10 hover:text-white"
+                        >
+                            Se produkterna
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* SHOWROOM FOCUS: ENERGILÖSNINGAR */}
+        <section id="showroom-products" class="py-16 bg-white border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-elorange font-bold tracking-wide uppercase text-sm mb-2 font-display">
+                        I vårt Showroom
+                    </h2>
+                    <h3 class="text-3xl font-extrabold text-slate-900 font-display">
+                        Smarta energisystem för hem & företag
+                    </h3>
+                    <p class="mt-3 text-slate-600 text-base">
+                        Helhetslösningar installerade av auktoriserad elektriker med lokal förankring och personlig service.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* 1. Solceller */}
+                    <div id="card-solceller" class="product-card flex flex-col p-6 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-elblue/40 hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-elblue-50 text-elblue flex items-center justify-center mb-4">
+                            <BoltIcon className="w-6 h-6" />
+                        </div>
+                        <span class="text-xs font-bold text-elblue uppercase tracking-wider mb-1">
+                            15% Grön Teknik
+                        </span>
+                        <h4 class="text-xl font-bold text-slate-900 font-display mb-2">
+                            Solceller & Takmontage
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed flex-grow mb-4">
+                            Producera din egen el. Monteras fackmannamässigt av behörig elektriker och certifierade takläggare via Byggprojekt.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Marknadsledande paneler</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Säkra takgenomföringar</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Totalentreprenad</li>
+                        </ul>
+                        <a
+                            href={pb("/tjanster/solceller-batterilagring")}
+                            class="inline-flex items-center text-sm font-bold text-elblue hover:text-elorange transition-colors"
+                        >
+                            Läs mer om solceller →
+                        </a>
+                    </div>
+
+                    {/* 2. Batterilagring */}
+                    <div id="card-batteri" class="product-card flex flex-col p-6 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-elblue/40 hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-elblue-50 text-elblue flex items-center justify-center mb-4">
+                            <BatteryIcon className="w-6 h-6" />
+                        </div>
+                        <span class="text-xs font-bold text-elorange uppercase tracking-wider mb-1">
+                            50% Grön Teknik
+                        </span>
+                        <h4 class="text-xl font-bold text-slate-900 font-display mb-2">
+                            Batterilager med AI-styrning
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed flex-grow mb-4">
+                            Lagra din egen solenergi, kapa effekttoppar och låt intelligent AI-styrning automatiskt optimera laddning mot dyra elpristoppar.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Maxa egenanvändningen</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Smart elprisoptimering</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>50% skatteavdrag</li>
+                        </ul>
+                        <a
+                            href={pb("/tjanster/solceller-batterilagring")}
+                            class="inline-flex items-center text-sm font-bold text-elblue hover:text-elorange transition-colors"
+                        >
+                            Läs mer om batterier →
+                        </a>
+                    </div>
+
+                    {/* 3. Växelriktare */}
+                    <div id="card-vaxelriktare" class="product-card flex flex-col p-6 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-elblue/40 hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-elblue-50 text-elblue flex items-center justify-center mb-4">
+                            <CpuChipIcon className="w-6 h-6" />
+                        </div>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+                            Systemets Hjärna
+                        </span>
+                        <h4 class="text-xl font-bold text-slate-900 font-display mb-2">
+                            Smarta Växelriktare
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed flex-grow mb-4">
+                            Hög verkningsgrad och realtidsövervakning via app. Vi hjälper dig att välja rätt hybridväxelriktare för ditt system.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Realtidskoll i mobilen</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Hybrid förberedd för batteri</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Hög driftsäkerhet</li>
+                        </ul>
+                        <a
+                            href="#contact-form"
+                            class="inline-flex items-center text-sm font-bold text-elblue hover:text-elorange transition-colors"
+                        >
+                            Rådgivning & offert →
+                        </a>
+                    </div>
+
+                    {/* 4. Laddboxar */}
+                    <div id="card-laddbox" class="product-card flex flex-col p-6 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-elblue/40 hover:shadow-lg transition-all duration-300">
+                        <div class="w-12 h-12 rounded-lg bg-elblue-50 text-elblue flex items-center justify-center mb-4">
+                            <BatteryIcon className="w-6 h-6" />
+                        </div>
+                        <span class="text-xs font-bold text-elorange uppercase tracking-wider mb-1">
+                            50% Grön Teknik • Från 8 000 kr
+                        </span>
+                        <h4 class="text-xl font-bold text-slate-900 font-display mb-2">
+                            Laddbox med Lastbalansering
+                        </h4>
+                        <p class="text-sm text-slate-600 leading-relaxed flex-grow mb-4">
+                            Ladda elbilen snabbt och säkert hemma. Dynamisk lastbalansering skyddar huvudsäkringen mot överbelastning.
+                        </p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Zaptec, Easee, Garo m.fl.</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>App-styrning & timer</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Fast pris inkl. installation</li>
+                        </ul>
+                        <a
+                            href={pb("/tjanster/laddbox")}
+                            class="inline-flex items-center text-sm font-bold text-elblue hover:text-elorange transition-colors"
+                        >
+                            Läs mer om laddboxar →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* ALLA ÖVRIGA TJÄNSTER */}
+        <section class="py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-elblue font-bold tracking-wide uppercase text-sm mb-2 font-display">
+                        Komplett Elfirma
+                    </h2>
+                    <h3 class="text-3xl font-extrabold text-slate-900 font-display">
+                        Vi utför alla typer av elinstallationer
+                    </h3>
+                    <p class="mt-3 text-slate-600 text-base">
+                        Oavsett om du behöver akut hjälp, bygga nytt, renovera eller installera smart belysning finns vi vid din sida.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Service & Centralbyte */}
+                    <a
+                        href={pb("/tjanster/service-underhall")}
+                        class="p-6 bg-white rounded-xl border border-slate-200/70 hover:border-elblue hover:shadow-md transition-all group flex flex-col"
+                    >
+                        <h4 class="font-display font-bold text-lg text-slate-900 group-hover:text-elblue transition-colors mb-2">
+                            Service & Centralbyte
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed flex-grow">
+                            Felsökning, byte från proppskåp till automatsäkringar och jordfelsbrytare, elbesiktning vid husköp.
+                        </p>
+                        <span class="text-xs font-bold text-elblue group-hover:text-elorange transition-colors mt-4 flex items-center">
+                            Läs mer <span class="ml-1">→</span>
+                        </span>
+                    </a>
+
+                    {/* Smarta Hem & Plejd */}
+                    <a
+                        href={pb("/tjanster/smarta-hem")}
+                        class="p-6 bg-white rounded-xl border border-slate-200/70 hover:border-elblue hover:shadow-md transition-all group flex flex-col"
+                    >
+                        <h4 class="font-display font-bold text-lg text-slate-900 group-hover:text-elblue transition-colors mb-2">
+                            Smarta Hem (Plejd)
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed flex-grow">
+                            Trådlös belysningsstyrning, astro-ur, "släck allt"-knapp och smarta scenarier för ett enklare liv.
+                        </p>
+                        <span class="text-xs font-bold text-elblue group-hover:text-elorange transition-colors mt-4 flex items-center">
+                            Läs mer <span class="ml-1">→</span>
+                        </span>
+                    </a>
+
+                    {/* Byggnation & Renovering */}
+                    <a
+                        href={pb("/tjanster/installation")}
+                        class="p-6 bg-white rounded-xl border border-slate-200/70 hover:border-elblue hover:shadow-md transition-all group flex flex-col"
+                    >
+                        <h4 class="font-display font-bold text-lg text-slate-900 group-hover:text-elblue transition-colors mb-2">
+                            Kök, Badrum & Nybygge
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed flex-grow">
+                            Totalentreprenad el. Golvvärme, infälld belysning och samordning med snickare via Byggprojekt.
+                        </p>
+                        <span class="text-xs font-bold text-elblue group-hover:text-elorange transition-colors mt-4 flex items-center">
+                            Läs mer <span class="ml-1">→</span>
+                        </span>
+                    </a>
+
+                    {/* El- & Ljusdesign */}
+                    <a
+                        href={pb("/tjanster/el-ljusdesign")}
+                        class="p-6 bg-white rounded-xl border border-slate-200/70 hover:border-elblue hover:shadow-md transition-all group flex flex-col"
+                    >
+                        <h4 class="font-display font-bold text-lg text-slate-900 group-hover:text-elblue transition-colors mb-2">
+                            El- & Ljusdesign
+                        </h4>
+                        <p class="text-xs text-slate-600 leading-relaxed flex-grow">
+                            Professionella CAD-ritningar, genomtänkt ljussättning och inredning med designade uttag och brytare.
+                        </p>
+                        <span class="text-xs font-bold text-elblue group-hover:text-elorange transition-colors mt-4 flex items-center">
+                            Läs mer <span class="ml-1">→</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        {/* TRYGGHETS-BANNER */}
+        <section class="py-10 bg-elblue text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center sm:text-left">
+                    <div class="flex items-center justify-center sm:justify-start gap-3">
+                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
+                        <div>
+                            <p class="font-bold font-display text-sm">Auktoriserad Elektriker</p>
+                            <p class="text-xs text-blue-100">Trygg & fackmannamässig installation</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center sm:justify-start gap-3">
+                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
+                        <div>
+                            <p class="font-bold font-display text-sm">Direktkontakt</p>
+                            <p class="text-xs text-blue-100">Inga mellanhänder – prata med Alexander</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center sm:justify-start gap-3">
+                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
+                        <div>
+                            <p class="font-bold font-display text-sm">Grön Teknik & ROT</p>
+                            <p class="text-xs text-blue-100">Upp till 50% avdrag direkt på fakturan</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center sm:justify-start gap-3">
+                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
+                        <div>
+                            <p class="font-bold font-display text-sm">Lokalt förankrad</p>
+                            <p class="text-xs text-blue-100">Tjörn, Orust, Stenungsund & Uddevalla</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* KONTAKT / OFFERTFORMULÄR */}
+        <section id="contact-form" class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="text-elorange font-bold tracking-wide uppercase text-sm mb-2 font-display">
+                        Kostnadsfri Förfrågan
+                    </h2>
+                    <h3 class="text-3xl font-extrabold text-slate-900 font-display">
+                        Låt oss diskutera ditt projekt
+                    </h3>
+                    <p class="mt-3 text-slate-600 max-w-xl mx-auto text-sm sm:text-base">
+                        Fyll i dina uppgifter så återkopplar vi snabbt med rådgivning eller offert. Du kan även ringa direkt!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Direktkontakt-boxar */}
+                    <div class="lg:col-span-1 space-y-4">
+                        <a
+                            href="tel:0703325655"
+                            data-umami-event="QR Phone Click"
+                            class="block p-5 bg-slate-50 rounded-xl border border-slate-200 hover:border-elblue transition-all group text-center"
+                        >
+                            <div class="w-10 h-10 rounded-full bg-elblue-50 text-elblue flex items-center justify-center mx-auto mb-2 group-hover:bg-elblue group-hover:text-white transition-colors">
+                                <PhoneIcon className="w-5 h-5" />
+                            </div>
+                            <p class="text-xs text-slate-500 uppercase font-medium">Ring direkt</p>
+                            <p class="text-lg font-bold text-slate-900 font-display">070-332 56 55</p>
+                        </a>
+
+                        <a
+                            href="mailto:alex@elprojekt.nu"
+                            data-umami-event="QR Email Click"
+                            class="block p-5 bg-slate-50 rounded-xl border border-slate-200 hover:border-elblue transition-all group text-center"
+                        >
+                            <div class="w-10 h-10 rounded-full bg-elblue-50 text-elblue flex items-center justify-center mx-auto mb-2 group-hover:bg-elblue group-hover:text-white transition-colors">
+                                <EnvelopeIcon className="w-5 h-5" />
+                            </div>
+                            <p class="text-xs text-slate-500 uppercase font-medium">Maila mig</p>
+                            <p class="text-lg font-bold text-slate-900 font-display">alex@elprojekt.nu</p>
+                        </a>
+
+                        <div class="p-5 bg-elblue-50 rounded-xl border border-elblue-100 text-xs text-elblue-950 space-y-2">
+                            <p class="font-bold font-display text-sm text-elblue">Direkt med Alexander</p>
+                            <p class="text-slate-600 leading-relaxed">
+                                Inga fördröjningar eller kundtjänstköer. Du pratar alltid direkt med den som utför arbetet.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Formulär */}
+                    <div class="lg:col-span-2 bg-slate-50 rounded-xl p-6 sm:p-8 border border-slate-200">
+                        <ContactForm />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <MobileActionBar />
+    <Footer />
+</MainLayout>
+
+{/* DYNAMISK PARAMETERHANTERING (UTM / Query params) */}
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const params = new URLSearchParams(window.location.search);
+        
+        // Hämta parametrar (stöd för både UTM och enkla namn)
+        const source = params.get("utm_source") || params.get("src") || params.get("kalla");
+        const campaign = params.get("utm_campaign") || params.get("kampanj") || params.get("tjanst");
+        const area = params.get("omrade") || params.get("stad");
+
+        const badgeEl = document.getElementById("qr-badge");
+        const headingEl = document.getElementById("qr-heading");
+        const subheadingEl = document.getElementById("qr-subheading");
+        const serviceSelect = document.getElementById("serviceType") as HTMLSelectElement;
+
+        // 1. Anpassa badge efter källa (source)
+        if (badgeEl && source) {
+            const s = source.toLowerCase();
+            if (s.includes("bil")) {
+                badgeEl.innerText = "Scannad från servicebilen";
+            } else if (s.includes("kort") || s.includes("visitkort")) {
+                badgeEl.innerText = "Trevligt att råkas!";
+            } else if (s.includes("flyer") || s.includes("utskick")) {
+                badgeEl.innerText = "Exklusivt erbjudande";
+            } else if (s.includes("skylt") || s.includes("bygge")) {
+                badgeEl.innerText = "Pågående projekt i närområdet";
+            } else if (s.includes("showroom")) {
+                badgeEl.innerText = "Välkommen till vårt Showroom";
+            }
+        }
+
+        // 2. Anpassa efter kampanj/tjänst
+        if (campaign) {
+            const c = campaign.toLowerCase();
+
+            if (c.includes("laddbox") || c.includes("ladd")) {
+                if (headingEl) headingEl.innerHTML = "Laddbox med <br/><span class='text-elorange'>50% Grön Teknik.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Ladda elbilen säkert och snabbt hemma. Fast pris från 8 000 kr inklusive installation och lastbalansering.";
+                if (serviceSelect) serviceSelect.value = "Laddbox";
+                highlightCard("card-laddbox");
+            } else if (c.includes("sol") || c.includes("solceller")) {
+                if (headingEl) headingEl.innerHTML = "Solceller & <br/><span class='text-elorange'>Egen elproduktion.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Sänk dina elkostnader med solceller monterade av auktoriserad elektriker och certifierade takläggare.";
+                if (serviceSelect) serviceSelect.value = "Solceller";
+                highlightCard("card-solceller");
+            } else if (c.includes("batteri") || c.includes("lagring")) {
+                if (headingEl) headingEl.innerHTML = "Batterilager med <br/><span class='text-elorange'>AI-styrning.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Lagra egen solenergi och låt intelligent AI-styrning optimera förbrukningen mot dyra elpristoppar. 50% Grön Teknik-avdrag.";
+                if (serviceSelect) serviceSelect.value = "Solceller";
+                highlightCard("card-batteri");
+            } else if (c.includes("service") || c.includes("central") || c.includes("propp")) {
+                if (headingEl) headingEl.innerHTML = "Elservice & <br/><span class='text-elorange'>Centralbyte.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Snabb och trygg hjälp med felsökning, byte till automatsäkringar och reparationer.";
+                if (serviceSelect) serviceSelect.value = "Service & Felsökning";
+            } else if (c.includes("plejd") || c.includes("smart")) {
+                if (headingEl) headingEl.innerHTML = "Smarta hem & <br/><span class='text-elorange'>Plejd-styrning.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Styr belysningen med mobilen och astro-ur. Trådlöst, svenskt och användarvänligt.";
+                if (serviceSelect) serviceSelect.value = "Offertförfrågan";
+            }
+        }
+
+        // 3. Områdestext
+        if (area && subheadingEl) {
+            const areaFormatted = area.charAt(0).toUpperCase() + area.slice(1).toLowerCase();
+            const note = document.createElement("span");
+            note.className = "block mt-2 font-semibold text-white";
+            note.innerText = `Din lokala elektriker på ${areaFormatted} och omnejd.`;
+            subheadingEl.appendChild(note);
+        }
+
+        // Hjälpfunktion för att markera fokus-kort
+        function highlightCard(cardId: string) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.classList.add("ring-2", "ring-elorange", "shadow-xl", "bg-white");
+                card.classList.remove("bg-slate-50");
+            }
+        }
+
+        // 4. Umami Analytics Tracking för QR-scan
+        if (typeof (window as any).umami !== "undefined") {
+            (window as any).umami.track("QR Code Scan", {
+                source: source || "showroom",
+                campaign: campaign || "general",
+                area: area || "all",
+                referrer: document.referrer || "direct",
+            });
+        }
+    });
+</script>

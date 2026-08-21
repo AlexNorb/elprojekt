@@ -139,12 +139,14 @@ import { pb } from "../utils";
             </div>
         </div>
 
-        <!-- Copyright -->
-        <div class="border-t border-slate-800 pt-6">
-            <p class="text-slate-500 text-xs text-center">
-                &copy; {new Date().getFullYear()} Elprojekt i Uddevalla AB. Alla rättigheter
-                reserverade.
+        <!-- Copyright & Mediebank Link -->
+        <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+            <p>
+                &copy; {new Date().getFullYear()} Elprojekt i Uddevalla AB. Alla rättigheter reserverade.
             </p>
+            <a href="/media" class="hover:text-elorange transition-colors">
+                Mediebank & Tryckunderlag
+            </a>
         </div>
     </div>
 </footer>

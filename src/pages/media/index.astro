@@ -1,0 +1,375 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import CheckBadgeIcon from "../../components/icons/CheckBadgeIcon.astro";
+import ArrowRightIcon from "../../components/icons/ArrowRightIcon.astro";
+import LogoTitle from "../../components/icons/LogoTitle.astro";
+---
+
+<MainLayout
+    title="Mediebank & Tryckmaterial | ELPROJEKT"
+    description="Ladda ner ELPROJEKT:s officiella logotyper i vektor- och PNG-format för klädtryck, bildekor och tryckeri samt skriv ut färdigt marknadsmaterial."
+>
+    <Navbar />
+
+    <main class="min-h-screen bg-slate-50 pt-24 pb-20">
+        <!-- HERO SECTION -->
+        <section class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-96 h-96 bg-elblue/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -bottom-20 w-96 h-96 bg-elorange/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-elorange text-xs font-bold font-display uppercase tracking-wider mb-4">
+                    Brand Kit & Marknadsmaterial
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-display font-extrabold text-white mb-4">
+                    Mediebank & Tryckunderlag
+                </h1>
+                <p class="text-slate-300 max-w-2xl mx-auto text-base sm:text-lg font-sans">
+                    Här hittar du officiella logotyper i vektor- och högupplöst format för klädtryck, profilering och bildekor, samt färdiga trycksaker och flyers.
+                </p>
+            </div>
+        </section>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 space-y-16">
+            
+            <!-- 1. TRYCKMATERIAL & FLYERS -->
+            <section>
+                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-6">
+                    <div>
+                        <span class="text-xs font-bold text-elorange font-display uppercase tracking-wider">Tryckfärdiga dokument</span>
+                        <h2 class="text-2xl font-bold font-display text-slate-900">Marknadsmaterial</h2>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Kort 1: A4 Flyer -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2.5 py-1 rounded-full bg-blue-50 text-elblue text-xs font-bold font-display">
+                                    A4 Flyer (1 sida)
+                                </span>
+                                <span class="text-xs text-slate-400">PDF / Print</span>
+                            </div>
+                            <h3 class="text-xl font-bold font-display text-slate-900 mb-2 group-hover:text-elblue transition-colors">
+                                Allt inom el – Tryggt, modernt & personligt
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                                Komplett A4-utskicksblad med presentation, tjänsteöversikt (Sol, Laddbox, Renovering, Smarta Hem), trygghetsfaktorer och QR-kod.
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                            <a 
+                                href="/media/flyer" 
+                                class="flex-1 bg-elblue hover:bg-blue-700 text-white font-bold text-xs py-2.5 px-4 rounded-lg text-center transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                            >
+                                Öppna & Skriv ut
+                                <ArrowRightIcon className="w-3.5 h-3.5" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Kort 2: Showroom Digital Skärmpresentation -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2.5 py-1 rounded-full bg-orange-50 text-elorange text-xs font-bold font-display">
+                                    Digital Skärm (CleverLive)
+                                </span>
+                                <span class="text-xs text-slate-400">68×120 cm (9:16)</span>
+                            </div>
+                            <h3 class="text-xl font-bold font-display text-slate-900 mb-2 group-hover:text-elorange transition-colors">
+                                Showroom Presentation
+                            </h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                                Högupplöst, animerad helskärmspresentation i porträttläge med live-klocka, rullande nyhetsticker och showroom-specifik QR-kod.
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                            <a 
+                                href="/media/showroom" 
+                                class="flex-1 bg-elblue hover:bg-blue-700 text-white font-bold text-xs py-2.5 px-4 rounded-lg text-center transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                            >
+                                Öppna & Skriv ut
+                                <ArrowRightIcon className="w-3.5 h-3.5" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Kort 3: Visitkort & Fordonsdekor -->
+                    <div class="bg-slate-100/60 rounded-2xl p-6 border border-dashed border-slate-300 flex flex-col justify-between opacity-80">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2.5 py-1 rounded-full bg-slate-200 text-slate-600 text-xs font-bold font-display">
+                                    Kommande
+                                </span>
+                                <span class="text-xs text-slate-400">Profilering</span>
+                            </div>
+                            <h3 class="text-lg font-bold font-display text-slate-700 mb-2">
+                                Visitkort & Servicebilsdekor
+                            </h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Underlag och måttangivelser för servicebilar och tryckta visitkort.
+                            </p>
+                        </div>
+                        <span class="text-[11px] text-slate-400 italic pt-4">Planerad release</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. LOGOTYPER FÖR NEDLADDNING (Klädtryck, Tryckeri & Profil) -->
+            <section>
+                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-6">
+                    <div>
+                        <span class="text-xs font-bold text-elorange font-display uppercase tracking-wider">Vektor & Raster</span>
+                        <h2 class="text-2xl font-bold font-display text-slate-900">Logotyper för Tryck & Profilering</h2>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Logotyp 1: Primär Blå -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
+                        <div>
+                            <span class="text-xs font-bold text-elblue font-display uppercase tracking-wider block mb-1">
+                                Primär Logotyp
+                            </span>
+                            <h3 class="text-base font-bold text-slate-900 mb-4">Blå (#003ca6)</h3>
+                            
+                            <!-- Förhandsvisning ljus bakgrund -->
+                            <div class="h-32 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-center p-4 mb-4">
+                                <div class="w-[180px]">
+                                    <LogoTitle className="w-full h-auto text-elblue" />
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-6">
+                                Används på vita och ljusa bakgrunder, vitt papper och ljusa textilier.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-2 pt-2 border-t border-slate-100">
+                            <a 
+                                href="/media/logos/elprojekt-logo-primary.svg" 
+                                download="elprojekt-logo-blue.svg"
+                                class="flex-1 bg-slate-100 hover:bg-elblue hover:text-white text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all border border-slate-200"
+                            >
+                                Vektor SVG
+                            </a>
+                            <a 
+                                href="/media/logos/elprojekt-logo-primary.png" 
+                                download="elprojekt-logo-blue.png"
+                                class="flex-1 bg-slate-100 hover:bg-elblue hover:text-white text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all border border-slate-200"
+                            >
+                                PNG (2400px)
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Logotyp 2: Vit (Mörka kläder / bilar) -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
+                        <div>
+                            <span class="text-xs font-bold text-elorange font-display uppercase tracking-wider block mb-1">
+                                Klädtryck & Mörk Profil
+                            </span>
+                            <h3 class="text-base font-bold text-slate-900 mb-4">Vit (#ffffff)</h3>
+                            
+                            <!-- Förhandsvisning mörk bakgrund -->
+                            <div class="h-32 bg-slate-900 rounded-xl flex items-center justify-center p-4 mb-4 shadow-inner">
+                                <div class="w-[180px]">
+                                    <LogoTitle className="w-full h-auto" light={true} />
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-6">
+                                För svarta/mörkblå arbetskläder, pikétröjor, hoodies och mörk bildekor.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-2 pt-2 border-t border-slate-100">
+                            <a 
+                                href="/media/logos/elprojekt-logo-white.svg" 
+                                download="elprojekt-logo-white.svg"
+                                class="flex-1 bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all border border-slate-200"
+                            >
+                                Vektor SVG
+                            </a>
+                            <a 
+                                href="/media/logos/elprojekt-logo-white.png" 
+                                download="elprojekt-logo-white.png"
+                                class="flex-1 bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all border border-slate-200"
+                            >
+                                PNG (2400px)
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Logotyp 3: Svart (Enfärg / stämpel) -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
+                        <div>
+                            <span class="text-xs font-bold text-slate-500 font-display uppercase tracking-wider block mb-1">
+                                Enfärg / Gravyr
+                            </span>
+                            <h3 class="text-base font-bold text-slate-900 mb-4">Svart (#000000)</h3>
+                            
+                            <!-- Förhandsvisning enfärg -->
+                            <div class="h-32 bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-center p-4 mb-4">
+                                <div class="w-[180px] grayscale brightness-0">
+                                    <LogoTitle className="w-full h-auto" />
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-6">
+                                För enfärgstryck, tidningsannonser, lasergravyr och stämplar.
+                            </p>
+                        </div>
+
+                        <div class="flex gap-2 pt-2 border-t border-slate-100">
+                            <a 
+                                href="/media/logos/elprojekt-logo-black.svg" 
+                                download="elprojekt-logo-black.svg"
+                                class="flex-1 bg-slate-100 hover:bg-black hover:text-white text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all border border-slate-200"
+                            >
+                                Vektor SVG
+                            </a>
+                            <a 
+                                href="/media/logos/elprojekt-logo-black.png" 
+                                download="elprojekt-logo-black.png"
+                                class="flex-1 bg-slate-100 hover:bg-black hover:text-white text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all border border-slate-200"
+                            >
+                                PNG (2400px)
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Logotyp 4: Utan Tagline -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
+                        <div>
+                            <span class="text-xs font-bold text-elblue font-display uppercase tracking-wider block mb-1">
+                                Utan Tagline
+                            </span>
+                            <h3 class="text-base font-bold text-slate-900 mb-4">Endast Namn (Blå)</h3>
+                            
+                            <!-- Förhandsvisning -->
+                            <div class="h-32 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-center p-4 mb-4">
+                                <img 
+                                    src="/media/logos/elprojekt-logo-no-tagline.svg" 
+                                    alt="ELPROJEKT utan tagline" 
+                                    class="w-[180px] h-auto"
+                                />
+                            </div>
+                            <p class="text-xs text-slate-500 mb-6">
+                                ELPROJEKT-logotypen utan undertiteln "Ditt projekt i fokus".
+                            </p>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100">
+                            <a 
+                                href="/media/logos/elprojekt-logo-no-tagline.svg" 
+                                download="elprojekt-logo-no-tagline.svg"
+                                class="w-full block bg-slate-100 hover:bg-elblue hover:text-white text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all border border-slate-200"
+                            >
+                                Ladda ner Vektor SVG
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Logotyp 5: Endast Ikon -->
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
+                        <div>
+                            <span class="text-xs font-bold text-elorange font-display uppercase tracking-wider block mb-1">
+                                Symbol / Favicon
+                            </span>
+                            <h3 class="text-base font-bold text-slate-900 mb-4">Endast Ikon (Blå)</h3>
+                            
+                            <!-- Förhandsvisning -->
+                            <div class="h-32 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-center p-4 mb-4">
+                                <img 
+                                    src="/media/logos/elprojekt-icon-only.svg" 
+                                    alt="ELPROJEKT ikon" 
+                                    class="w-12 h-12"
+                                />
+                            </div>
+                            <p class="text-xs text-slate-500 mb-6">
+                                Blixt-ikonen i O:et för app-ikoner, favicon, profilbilder och brodyr.
+                            </p>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100">
+                            <a 
+                                href="/media/logos/elprojekt-icon-only.svg" 
+                                download="elprojekt-icon-only.svg"
+                                class="w-full block bg-slate-100 hover:bg-elblue hover:text-white text-slate-800 text-xs font-bold py-2 rounded-lg text-center transition-all border border-slate-200"
+                            >
+                                Ladda ner Vektor SVG
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. GRAFISK PROFIL & FÄRGKODER -->
+            <section class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+                <div class="border-b border-slate-200 pb-3 mb-6">
+                    <span class="text-xs font-bold text-elorange font-display uppercase tracking-wider">Tryckstandard</span>
+                    <h2 class="text-2xl font-bold font-display text-slate-900">Färgkoder & Typografi</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Brand Blue -->
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                        <div class="w-full h-12 rounded-lg bg-[#003ca6] mb-3 shadow-inner"></div>
+                        <h4 class="font-bold text-sm text-slate-900 font-display">Brand Blue (Primär)</h4>
+                        <div class="text-xs text-slate-600 mt-2 space-y-1 font-mono">
+                            <p>HEX: <span class="text-slate-900 font-bold">#003ca6</span></p>
+                            <p>RGB: 0, 60, 166</p>
+                            <p>CMYK: 100, 75, 0, 0</p>
+                        </div>
+                    </div>
+
+                    <!-- Brand Accent Orange -->
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                        <div class="w-full h-12 rounded-lg bg-[#ff7403] mb-3 shadow-inner"></div>
+                        <h4 class="font-bold text-sm text-slate-900 font-display">Brand Accent Orange</h4>
+                        <div class="text-xs text-slate-600 mt-2 space-y-1 font-mono">
+                            <p>HEX: <span class="text-slate-900 font-bold">#ff7403</span></p>
+                            <p>RGB: 255, 116, 3</p>
+                            <p>CMYK: 0, 65, 100, 0</p>
+                        </div>
+                    </div>
+
+                    <!-- Dark Slate -->
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                        <div class="w-full h-12 rounded-lg bg-[#0f172a] mb-3 shadow-inner"></div>
+                        <h4 class="font-bold text-sm text-slate-900 font-display">Dark Navy / Slate</h4>
+                        <div class="text-xs text-slate-600 mt-2 space-y-1 font-mono">
+                            <p>HEX: <span class="text-slate-900 font-bold">#0f172a</span></p>
+                            <p>RGB: 15, 23, 42</p>
+                            <p>CMYK: 64, 45, 0, 84</p>
+                        </div>
+                    </div>
+
+                    <!-- Typografi -->
+                    <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-900 font-display mb-2">Officiella Typsnitt</h4>
+                            <div class="text-xs text-slate-600 space-y-2">
+                                <div>
+                                    <span class="font-display font-bold text-slate-900 text-sm block">Bank Gothic Light</span>
+                                    <span class="text-[11px] text-slate-500">Logotyp & Stylistiska Rubriker</span>
+                                </div>
+                                <div>
+                                    <span class="font-sans font-semibold text-slate-900 text-sm block">Inter</span>
+                                    <span class="text-[11px] text-slate-500">Brödtext & UI (300-800)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <Footer />
+</MainLayout>

@@ -1,0 +1,315 @@
+---
+import QRCode from "qrcode";
+import { Image } from "astro:assets";
+import LogoTitle from "../../components/icons/LogoTitle.astro";
+import heroRightImg from "../../assets/images/hero/hero-right.JPG";
+import PhoneIcon from "../../components/icons/PhoneIcon.astro";
+import EnvelopeIcon from "../../components/icons/EnvelopeIcon.astro";
+
+// Generera högupplöst QR-kod för Showroom (300 DPI Data URL i mörk slate)
+const qrUrl = "https://elprojekt.nu/qr?src=showroom";
+const qrDataUrl = await QRCode.toDataURL(qrUrl, {
+    width: 400,
+    margin: 1,
+    color: {
+        dark: "#0f172a",
+        light: "#ffffff"
+    }
+});
+---
+
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ELPROJEKT - Showroom Key Visual (9:16)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <style>
+        /* Exact 9:16 Ratio Page for PDF Export & Digital Signage */
+        @page {
+            size: 216mm 384mm; /* Exact 9:16 ratio */
+            margin: 0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: #0b0f19;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Screen Preview: Fits 100% within the viewport with zero overflow */
+        @media screen {
+            body {
+                height: 100vh;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 10px;
+                background-color: #0b0f19;
+            }
+            .poster-container {
+                height: calc(100vh - 60px);
+                aspect-ratio: 9 / 16;
+                width: auto;
+                max-width: 95vw;
+                border-radius: 12px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+                position: relative;
+                overflow: hidden;
+                background-color: #ffffff;
+                container-type: size;
+            }
+        }
+
+        /* Exact 9:16 PDF Export & Print */
+        @media print {
+            html, body {
+                width: 216mm !important;
+                height: 384mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                overflow: hidden !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .poster-container {
+                width: 216mm !important;
+                height: 384mm !important;
+                max-width: 216mm !important;
+                max-height: 384mm !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                overflow: hidden !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+                container-type: size;
+            }
+        }
+
+        .font-display {
+            font-family: 'Bank Gothic Light', 'Inter', sans-serif;
+        }
+
+        /* 100% Proportional Typography & Spacing based on Container Width (cqw) & Height (cqh) */
+        .poster-header {
+            padding-top: 7cqh;
+            padding-bottom: 2.5cqh;
+            padding-left: 8cqw;
+            padding-right: 8cqw;
+        }
+        .poster-logo {
+            width: 76cqw;
+        }
+        .poster-main {
+            padding-left: 9cqw;
+            padding-right: 9cqw;
+            padding-top: 2cqh;
+            padding-bottom: 4cqh;
+            gap: 4.5cqh;
+        }
+        .poster-h1 {
+            font-size: 5.6cqw;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+        .poster-p {
+            font-size: 2.7cqw;
+            line-height: 1.45;
+        }
+        .poster-cta {
+            font-size: 3.1cqw;
+        }
+        .poster-list {
+            gap: 2.2cqh;
+            font-size: 2.7cqw;
+        }
+        .poster-dot {
+            width: 1.3cqw;
+            height: 1.3cqw;
+        }
+        .poster-footer {
+            padding: 5cqh 7cqw;
+        }
+        .poster-footer-title {
+            font-size: 1.9cqw;
+            letter-spacing: 0.1em;
+        }
+        .poster-footer-phone {
+            font-size: 2.9cqw;
+        }
+        .poster-footer-email {
+            font-size: 2.5cqw;
+        }
+        .poster-footer-badge {
+            font-size: 2.1cqw;
+            padding: 0.4cqh 2cqw;
+        }
+        .poster-qr-box {
+            width: 20.5cqw;
+            padding: 1.6cqw;
+            border-radius: 2.2cqw;
+        }
+        .poster-qr-img {
+            width: 17.3cqw;
+            height: 17.3cqw;
+        }
+        .poster-qr-text {
+            font-size: 1.6cqw;
+            letter-spacing: -0.01em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- On-screen preview toolbar with PDF export button -->
+    <div class="no-print mb-4 flex flex-wrap gap-4 items-center justify-between max-w-[500px] w-full bg-slate-900 text-white px-5 py-3 rounded-xl shadow-xl border border-slate-700">
+        <div>
+            <h1 class="text-sm font-bold font-display tracking-wide text-white">ELPROJEKT – Showroom Skärm & Affisch</h1>
+            <p class="text-[11px] text-slate-300">Format: 9:16 (68 × 120 cm) • Skala 100% • Bakgrundsgrafik på</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="bg-elorange hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-lg text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                Skriv ut / Spara PDF
+            </button>
+            <a href="/media" class="bg-slate-800 hover:bg-slate-700 text-slate-100 hover:text-white font-semibold px-4 py-2 rounded-lg text-xs transition-all border border-slate-600 flex items-center gap-1.5 shadow-sm">
+                <svg class="w-3.5 h-3.5 text-elorange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Tillbaka till Mediebanken
+            </a>
+        </div>
+    </div>
+
+    <!-- 9:16 KEY VISUAL POSTER -->
+    <div class="poster-container flex flex-col justify-between text-slate-900 relative select-none">
+        
+        <!-- 1. HERO RIGHT BACKGROUND IMAGE (Fullt utzoomad & vänsterjusterad utan overlay) -->
+        <div class="absolute inset-0 z-0">
+            <Image
+                src={heroRightImg}
+                alt="ELPROJEKT Hero Background"
+                class="w-full h-full object-cover object-left"
+                widths={[1080, 1920, 2400]}
+                sizes="100vw"
+            />
+        </div>
+
+        <!-- 2. TOPP: CENTRERAD STÖRRE LOGOTYP -->
+        <header class="poster-header relative z-10 flex justify-center">
+            <div class="poster-logo">
+                <LogoTitle className="w-full h-auto text-elblue" />
+            </div>
+        </header>
+
+        <!-- 3. MITTENDEL: UPPFLYTTAD RUBRIK, HERO-TEXT & BLÅ SMÅ PUNKTER -->
+        <main class="poster-main relative z-10 flex-1 flex flex-col justify-start">
+            
+            <!-- Huvudrubrik -->
+            <div>
+                <h1 class="poster-h1 font-display font-extrabold text-elblue">
+                    Moderna lösningar,<br />
+                    <span class="text-elblue">personlig service.</span>
+                </h1>
+            </div>
+
+            <!-- Hero-text -->
+            <div class="max-w-[92%] flex flex-col gap-[2cqh]">
+                <p class="poster-p text-slate-900 font-sans font-medium">
+                    Jag finns vid din sida genom hela projektet – från första idén till färdig installation. Det spelar ingen roll om du behöver hjälp med enklare servicearbeten, en laddbox till bilen eller elinstallationen i din nya villa.
+                </p>
+                
+                <p class="poster-cta text-slate-900 font-display font-bold">
+                    Starta ditt nästa elprojekt nu!
+                </p>
+            </div>
+
+            <!-- Punktlista med mindre, blå punkter -->
+            <div>
+                <ul class="poster-list flex flex-col font-sans font-semibold text-slate-900">
+                    <li class="flex items-center gap-[2cqw]">
+                        <span class="poster-dot rounded-full bg-elblue flex-shrink-0"></span>
+                        <span>Solenergi & Batterilagring</span>
+                    </li>
+                    <li class="flex items-center gap-[2cqw]">
+                        <span class="poster-dot rounded-full bg-elblue flex-shrink-0"></span>
+                        <span>Laddboxar & Lastbalansering</span>
+                    </li>
+                    <li class="flex items-center gap-[2cqw]">
+                        <span class="poster-dot rounded-full bg-elblue flex-shrink-0"></span>
+                        <span>Elinstallation & Service</span>
+                    </li>
+                    <li class="flex items-center gap-[2cqw]">
+                        <span class="poster-dot rounded-full bg-elblue flex-shrink-0"></span>
+                        <span>Renovering & Nybygge</span>
+                    </li>
+                </ul>
+            </div>
+
+        </main>
+
+        <!-- 4. FOT: KONTAKTUPPGIFTER & SHOWROOM QR-KOD -->
+        <footer class="poster-footer relative z-10 bg-slate-900 text-white border-t-2 border-elorange shadow-2xl">
+            <div class="flex items-center justify-between gap-[3cqw]">
+                
+                <!-- Vänster: Kontaktuppgifter -->
+                <div class="flex flex-col gap-[1cqh]">
+                    <span class="poster-footer-title text-elorange font-display font-bold uppercase block">
+                        Kontakt & Förfrågan
+                    </span>
+                    
+                    <a href="tel:0703325655" class="poster-footer-phone inline-flex items-center gap-[1.5cqw] text-white font-bold hover:text-elorange transition-colors">
+                        <PhoneIcon className="w-[3.5cqw] h-[3.5cqw] text-elorange flex-shrink-0" />
+                        070-332 56 55
+                    </a>
+
+                    <a href="mailto:alex@elprojekt.nu" class="poster-footer-email inline-flex items-center gap-[1.5cqw] text-slate-300 hover:text-elorange transition-colors block">
+                        <EnvelopeIcon className="w-[3.5cqw] h-[3.5cqw] text-elorange flex-shrink-0" />
+                        alex@elprojekt.nu
+                    </a>
+
+                    <div class="pt-[0.5cqh]">
+                        <span class="poster-footer-badge inline-flex items-center gap-[1cqw] bg-elblue rounded text-white font-bold">
+                            <span class="w-[1.2cqw] h-[1.2cqw] rounded-full bg-elorange"></span>
+                            elprojekt.nu
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Höger: Showroom QR-kod i mörk slate -->
+                <div class="poster-qr-box flex-shrink-0 flex flex-col items-center bg-white shadow-lg border border-slate-200">
+                    <img 
+                        src={qrDataUrl} 
+                        alt="QR-kod till Showroom" 
+                        class="poster-qr-img object-contain block rounded"
+                    />
+                    <span class="poster-qr-text font-display font-extrabold text-slate-900 text-center mt-[0.5cqh] uppercase leading-tight block w-full text-center">
+                        Scanna för info
+                    </span>
+                </div>
+
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
