@@ -11,6 +11,7 @@ import PhoneIcon from "../../components/icons/PhoneIcon.astro";
 import EnvelopeIcon from "../../components/icons/EnvelopeIcon.astro";
 import alexImg from "../../assets/images/alex.png";
 import heroRightImg from "../../assets/images/hero/hero-right.JPG";
+import "../../styles/global.css";
 
 // Generera högupplöst QR-kod (300 DPI Data URL för felfri och skarp utskrift)
 const qrUrl = "https://elprojekt.nu/qr?src=flyer";
@@ -33,7 +34,6 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/src/styles/global.css" />
     <style>
         /* Exact A4 Print Configuration */
         @page {

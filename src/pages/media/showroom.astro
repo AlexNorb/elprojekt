@@ -5,6 +5,7 @@ import LogoTitle from "../../components/icons/LogoTitle.astro";
 import heroRightImg from "../../assets/images/hero/hero-right.JPG";
 import PhoneIcon from "../../components/icons/PhoneIcon.astro";
 import EnvelopeIcon from "../../components/icons/EnvelopeIcon.astro";
+import "../../styles/global.css";
 
 // Generera högupplöst QR-kod för Showroom (300 DPI Data URL i mörk slate)
 const qrUrl = "https://elprojekt.nu/qr?src=showroom";
@@ -27,7 +28,6 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/src/styles/global.css" />
     <style>
         /* Exact 9:16 Ratio Page for PDF Export & Digital Signage */
         @page {
