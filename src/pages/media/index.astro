@@ -100,23 +100,32 @@ import LogoTitle from "../../components/icons/LogoTitle.astro";
                         </div>
                     </div>
 
-                    <!-- Kort 3: Visitkort & Fordonsdekor -->
-                    <div class="bg-slate-100/60 rounded-2xl p-6 border border-dashed border-slate-300 flex flex-col justify-between opacity-80">
+                    <!-- Kort 3: Visitkort -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <span class="px-2.5 py-1 rounded-full bg-slate-200 text-slate-600 text-xs font-bold font-display">
-                                    Kommande
+                                <span class="px-2.5 py-1 rounded-full bg-blue-50 text-elblue text-xs font-bold font-display">
+                                    Visitkort (85×55 mm)
                                 </span>
-                                <span class="text-xs text-slate-400">Profilering</span>
+                                <span class="text-xs text-slate-400">PDF / Print</span>
                             </div>
-                            <h3 class="text-lg font-bold font-display text-slate-700 mb-2">
-                                Visitkort & Servicebilsdekor
+                            <h3 class="text-xl font-bold font-display text-slate-900 mb-2 group-hover:text-elblue transition-colors">
+                                Minimalistiskt Visitkort
                             </h3>
-                            <p class="text-xs text-slate-500 leading-relaxed">
-                                Underlag och måttangivelser för servicebilar och tryckta visitkort.
+                            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                                Tryckfärdigt enkelsidigt visitkort i vitt utförande med vektorlogotyp, kontaktuppgifter, 2mm bleed (89×59 mm) och integrerad 300 DPI QR-kod.
                             </p>
                         </div>
-                        <span class="text-[11px] text-slate-400 italic pt-4">Planerad release</span>
+
+                        <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                            <a 
+                                href="/media/visitkort" 
+                                class="flex-1 bg-elblue hover:bg-blue-700 text-white font-bold text-xs py-2.5 px-4 rounded-lg text-center transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                            >
+                                Öppna & Skriv ut
+                                <ArrowRightIcon className="w-3.5 h-3.5" />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -55,6 +55,18 @@ import { pb } from "../utils";
 
                     <div class="flex flex-wrap gap-4 items-center">
                         <a
+                            id="qr-vcard-btn"
+                            href="/alexander-norback.vcf"
+                            download="alexander-norback.vcf"
+                            data-umami-event="Save Contact vCard Click"
+                            class="hidden inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold text-white transition-all duration-200 bg-elorange font-display rounded-md hover:bg-orange-600 shadow-[0_4px_14px_0_rgba(255,116,3,0.39)] hover:-translate-y-0.5"
+                        >
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Spara kontakt i mobilen
+                        </a>
+                        <a
                             href="#contact-form"
                             data-umami-event="QR Hero CTA Click"
                             class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold text-white transition-all duration-200 bg-elblue font-display rounded-md hover:bg-elblue-600 shadow-[0_4px_14px_0_rgba(0,118,255,0.39)] hover:-translate-y-0.5"
@@ -398,20 +410,24 @@ import { pb } from "../utils";
         const headingEl = document.getElementById("qr-heading");
         const subheadingEl = document.getElementById("qr-subheading");
         const serviceSelect = document.getElementById("serviceType") as HTMLSelectElement;
+        const vcardBtn = document.getElementById("qr-vcard-btn");
 
         // 1. Anpassa badge efter källa (source)
-        if (badgeEl && source) {
+        if (source) {
             const s = source.toLowerCase();
             if (s.includes("bil")) {
-                badgeEl.innerText = "Scannad från servicebilen";
+                if (badgeEl) badgeEl.innerText = "Scannad från servicebilen";
             } else if (s.includes("kort") || s.includes("visitkort")) {
-                badgeEl.innerText = "Trevligt att råkas!";
+                if (badgeEl) badgeEl.innerText = "Trevligt att råkas!";
+                if (headingEl) headingEl.innerHTML = "Alexander Norbäck <br/><span class='text-elorange'>Din personliga elektriker.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Här når du mig direkt för rådgivning, snabba frågor eller kostnadsfri offert. Spara mina kontaktuppgifter direkt i mobilen nedan!";
+                if (vcardBtn) vcardBtn.classList.remove("hidden");
             } else if (s.includes("flyer") || s.includes("utskick")) {
-                badgeEl.innerText = "Exklusivt erbjudande";
+                if (badgeEl) badgeEl.innerText = "Exklusivt erbjudande";
             } else if (s.includes("skylt") || s.includes("bygge")) {
-                badgeEl.innerText = "Pågående projekt i närområdet";
+                if (badgeEl) badgeEl.innerText = "Pågående projekt i närområdet";
             } else if (s.includes("showroom")) {
-                badgeEl.innerText = "Välkommen till vårt Showroom";
+                if (badgeEl) badgeEl.innerText = "Välkommen till vårt Showroom";
             }
         }
 

@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Norbäck;Alexander;;;
+FN:Alexander Norbäck
+ORG:Elprojekt i Uddevalla AB
+TITLE:Elinstallatör
+TEL;TYPE=CELL,VOICE:+46703325655
+EMAIL;TYPE=PREF,INTERNET:alex@elprojekt.nu
+URL:https://elprojekt.nu
+ADR;TYPE=WORK:;;Friggavägen 6;Uddevalla;;451 76;Sverige
+NOTE:Auktoriserat elinstallationsföretag i Uddevalla och Bohuslän.
+END:VCARD
