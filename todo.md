@@ -176,4 +176,8 @@ Comprehensive review of the Elprojekt Astro website covering code quality, SEO, 
 - [x] Remove Font Awesome CDN (already have local icons)
 - [ ] Move reviews/FAQ data to content collections
 - [ ] Add TypeScript interfaces for hardcoded data
+- [ ] **Hosting & Cache Optimization (Future)**:
+  - *Current:* GitHub Pages sets fixed `Cache-Control: max-age=600` (10 min) on all assets.
+  - *Option A:* Move to **Cloudflare Pages** (supports `public/_headers` for 1-year asset caching on `/_astro/*` and 0-second revalidation on HTML). External DNS works via CNAME / ALIAS.
+  - *Option B:* Keep GitHub Pages and route domain via Cloudflare DNS Proxy with Cache Rules / Transform Rules to set custom `Cache-Control`.
 
