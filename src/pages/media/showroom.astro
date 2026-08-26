@@ -108,8 +108,8 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
 
         /* 100% Proportional Typography & Spacing based on Container Width (cqw) & Height (cqh) */
         .poster-header {
-            padding-top: 7cqh;
-            padding-bottom: 2.5cqh;
+            padding-top: 6.5cqh;
+            padding-bottom: 2.2cqh;
             padding-left: 8cqw;
             padding-right: 8cqw;
         }
@@ -119,9 +119,9 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
         .poster-main {
             padding-left: 9cqw;
             padding-right: 9cqw;
-            padding-top: 2cqh;
-            padding-bottom: 4cqh;
-            gap: 4.5cqh;
+            padding-top: 1.5cqh;
+            padding-bottom: 3.5cqh;
+            gap: 3.8cqh;
         }
         .poster-h1 {
             font-size: 5.6cqw;
@@ -129,22 +129,27 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
             letter-spacing: -0.02em;
         }
         .poster-p {
-            font-size: 2.7cqw;
+            font-size: 2.65cqw;
             line-height: 1.45;
         }
         .poster-cta {
-            font-size: 3.1cqw;
+            font-size: 3cqw;
         }
         .poster-list {
-            gap: 2.2cqh;
-            font-size: 2.7cqw;
+            gap: 2cqh;
+            font-size: 2.6cqw;
         }
         .poster-dot {
             width: 1.3cqw;
             height: 1.3cqw;
         }
+        .poster-deduction-badge {
+            font-size: 2.1cqw;
+            padding: 0.8cqh 2.2cqw;
+            border-radius: 0.8cqw;
+        }
         .poster-footer {
-            padding: 5cqh 7cqw;
+            padding: 4.5cqh 7cqw;
         }
         .poster-footer-title {
             font-size: 1.9cqw;
@@ -156,9 +161,8 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
         .poster-footer-email {
             font-size: 2.5cqw;
         }
-        .poster-footer-badge {
-            font-size: 2.1cqw;
-            padding: 0.4cqh 2cqw;
+        .poster-footer-web {
+            font-size: 2.5cqw;
         }
         .poster-qr-box {
             width: 20.5cqw;
@@ -232,9 +236,9 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
             </div>
 
             <!-- Hero-text -->
-            <div class="max-w-[92%] flex flex-col gap-[2cqh]">
+            <div class="max-w-[92%] flex flex-col gap-[1.8cqh]">
                 <p class="poster-p text-slate-900 font-sans font-medium">
-                    Jag finns vid din sida genom hela projektet – från första idén till färdig installation. Det spelar ingen roll om du behöver hjälp med enklare servicearbeten, en laddbox till bilen eller elinstallationen i din nya villa.
+                    Vi finns vid din sida genom hela projektet – från första idén till färdig installation. Oavsett om du behöver hjälp med servicearbeten, en laddbox eller elinstallationen i ditt nya hem.
                 </p>
                 
                 <p class="poster-cta text-slate-900 font-display font-bold">
@@ -259,9 +263,19 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                     </li>
                     <li class="flex items-center gap-[2cqw]">
                         <span class="poster-dot rounded-full bg-elblue flex-shrink-0"></span>
-                        <span>Renovering & Nybygge</span>
+                        <span>Renovering, Nybygge & Totalentreprenad</span>
                     </li>
                 </ul>
+            </div>
+
+            <!-- Avdragsinfo & trygghetsrad -->
+            <div>
+                <div class="poster-deduction-badge inline-flex items-center gap-[1.2cqw] bg-slate-900/90 text-white border border-slate-700 shadow-sm">
+                    <span class="w-[1.2cqw] h-[1.2cqw] rounded-full bg-elorange flex-shrink-0"></span>
+                    <span class="font-sans font-medium text-[0.95em]">
+                        Vi sköter avdragen för <strong class="text-white font-bold">ROT</strong> och <strong class="text-white font-bold">Grön Teknik</strong> direkt på fakturan
+                    </span>
+                </div>
             </div>
 
         </main>
@@ -286,12 +300,12 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                         alex@elprojekt.nu
                     </a>
 
-                    <div class="pt-[0.5cqh]">
-                        <span class="poster-footer-badge inline-flex items-center gap-[1cqw] bg-elblue rounded text-white font-bold">
-                            <span class="w-[1.2cqw] h-[1.2cqw] rounded-full bg-elorange"></span>
-                            elprojekt.nu
-                        </span>
-                    </div>
+                    <a href="https://elprojekt.nu" class="poster-footer-web inline-flex items-center gap-[1.5cqw] text-slate-300 hover:text-elorange transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-[3.5cqw] h-[3.5cqw] text-elorange flex-shrink-0">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                        </svg>
+                        elprojekt.nu
+                    </a>
                 </div>
 
                 <!-- Höger: Showroom QR-kod i mörk slate -->

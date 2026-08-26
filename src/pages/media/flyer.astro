@@ -2,15 +2,12 @@
 import QRCode from "qrcode";
 import { Image } from "astro:assets";
 import LogoTitle from "../../components/icons/LogoTitle.astro";
-import BatteryIcon from "../../components/icons/BatteryIcon.astro";
-import CarIcon from "../../components/icons/CarIcon.astro";
-import CpuChipIcon from "../../components/icons/CpuChipIcon.astro";
-import HomeModernIcon from "../../components/icons/HomeModernIcon.astro";
 import CheckBadgeIcon from "../../components/icons/CheckBadgeIcon.astro";
 import PhoneIcon from "../../components/icons/PhoneIcon.astro";
 import EnvelopeIcon from "../../components/icons/EnvelopeIcon.astro";
 import alexImg from "../../assets/images/alex.png";
 import heroRightImg from "../../assets/images/hero/hero-right.JPG";
+import zaptecGoSquareImg from "../../assets/images/zaptec-go-square.jpg";
 import "../../styles/global.css";
 
 // Generera högupplöst QR-kod (300 DPI Data URL för felfri och skarp utskrift)
@@ -19,7 +16,7 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
     width: 320,
     margin: 1,
     color: {
-        dark: "#002a75",
+        dark: "#0f172a",
         light: "#ffffff"
     }
 });
@@ -139,7 +136,7 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
         <!-- 1. RUBRIK & INLEDNING (Högst upp) -->
         <header class="flex flex-col gap-2.5">
             <!-- Header Top Bar: Centrerad och större logotyp -->
-            <div class="flex items-center justify-center border-b border-slate-200/80 pb-2">
+            <div class="flex items-center justify-center pb-1">
                 <div class="w-[235px]">
                     <LogoTitle className="w-full h-auto text-elblue" />
                 </div>
@@ -149,14 +146,11 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
             <div class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white rounded-xl p-4 shadow-sm border border-slate-800 relative overflow-hidden">
                 <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-elorange/20 rounded-full blur-xl pointer-events-none"></div>
                 <div class="relative z-10">
-                    <span class="text-elorange font-display text-[10px] font-bold uppercase tracking-widest block mb-0.5">
-                        Din personliga elektriker
-                    </span>
                     <h1 class="text-[19px] font-display font-extrabold leading-tight text-white mb-1.5">
                         Allt inom el – <span class="text-elorange">Tryggt, modernt och personligt.</span>
                     </h1>
                     <p class="text-[11.5px] leading-relaxed text-slate-200 font-sans">
-                        Jag finns vid din sida genom hela projektet – från första idén till färdig installation. Oavsett om du behöver en laddbox, renovera badrummet eller bygga nytt, får du en trygg installation med personlig service.
+                        Vi finns vid din sida genom hela projektet – från första idén till färdig installation. Oavsett om du behöver en laddbox, renovera badrummet eller bygga nytt, får du en trygg installation med personlig service.
                     </p>
                 </div>
             </div>
@@ -195,12 +189,13 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                     </div>
                 </div>
 
-                <!-- Tjänst 2: Laddboxar -->
+                <!-- Tjänst 2: Laddboxar (Zaptec Go) -->
                 <div class="relative w-full aspect-square max-h-[65mm] rounded-xl overflow-hidden shadow-sm border border-slate-200">
-                    <img 
-                        src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=800" 
-                        alt="Laddboxar" 
+                    <Image 
+                        src={zaptecGoSquareImg} 
+                        alt="Laddbox Zaptec Go" 
                         class="absolute inset-0 w-full h-full object-cover"
+                        widths={[600, 800]}
                     />
                     <!-- Mjuk botten-gradient endast bakom texten -->
                     <div class="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-slate-950/85 via-slate-950/35 to-transparent flex flex-col justify-end p-3">
@@ -226,7 +221,7 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                             Elinstallation & Service
                         </h3>
                         <p class="text-[10px] text-slate-200 leading-snug">
-                            Fackmannamässiga eldragningar, felsökning och service.
+                            Elarbeten, felsökning och service i alla typer av installationer.
                         </p>
                     </div>
                 </div>
@@ -245,7 +240,7 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                             Renovering & Nybygge
                         </h3>
                         <p class="text-[10px] text-slate-200 leading-snug">
-                            Kompletta elarbeten för kök, badrum och nyproduktion.
+                            Kompletta elarbeten och totalentreprenad under byggprojekt.
                         </p>
                     </div>
                 </div>
@@ -288,10 +283,10 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                 <div class="space-y-0.5">
                     <div class="flex items-center gap-1">
                         <span class="w-1.5 h-1.5 rounded-full bg-elorange flex-shrink-0"></span>
-                        <h3 class="text-[11px] font-bold text-slate-900 font-display">Din trygghet</h3>
+                        <h3 class="text-[11px] font-bold text-slate-900 font-display">Er trygghet</h3>
                     </div>
                     <p class="text-[10px] text-slate-600 leading-snug pl-2.5">
-                        Jag är auktoriserad elinstallatör med full ansvarsförsäkring och lämnar tydliga offerter med fasta priser.
+                        Vi är auktoriserade elinstallatörer med full ansvarsförsäkring och lämnar tydliga offerter med fasta priser.
                     </p>
                 </div>
             </div>
@@ -312,7 +307,7 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                             height={140}
                         />
                     </div>
-                    <span class="text-[8.5px] font-bold text-slate-300 font-display tracking-tight mt-1 text-center whitespace-nowrap">
+                    <span class="text-[10px] font-semibold text-slate-200 font-sans tracking-normal mt-1 text-center whitespace-nowrap">
                         Alexander
                     </span>
                 </div>
@@ -331,23 +326,25 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                         </p>
                     </div>
 
-                    <!-- Kontaktuppgifter centrerade -->
-                    <div class="flex flex-wrap items-center justify-center gap-1.5 pt-0.5">
+                    <!-- Kontaktuppgifter centrerade (utan badge-bakgrund, bara ikon + text) -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 pt-1">
                         <!-- Telefon -->
-                        <a href="tel:0703325655" class="inline-flex items-center gap-1 bg-white/10 px-2 py-1 rounded-md text-white text-[10px] font-bold border border-white/15">
-                            <PhoneIcon className="w-3 h-3 text-elorange flex-shrink-0" />
+                        <a href="tel:0703325655" class="inline-flex items-center gap-1 text-white hover:text-elorange text-[10.5px] font-bold transition-colors">
+                            <PhoneIcon className="w-3.5 h-3.5 text-elorange flex-shrink-0" />
                             070-332 56 55
                         </a>
 
                         <!-- E-post -->
-                        <a href="mailto:alex@elprojekt.nu" class="inline-flex items-center gap-1 bg-white/10 px-2 py-1 rounded-md text-white text-[10px] font-bold border border-white/15">
-                            <EnvelopeIcon className="w-3 h-3 text-elorange flex-shrink-0" />
+                        <a href="mailto:alex@elprojekt.nu" class="inline-flex items-center gap-1 text-white hover:text-elorange text-[10.5px] font-bold transition-colors">
+                            <EnvelopeIcon className="w-3.5 h-3.5 text-elorange flex-shrink-0" />
                             alex@elprojekt.nu
                         </a>
 
                         <!-- Webbadress -->
-                        <a href="https://elprojekt.nu" class="inline-flex items-center gap-1 bg-elblue px-2.5 py-1 rounded-md text-white text-[10px] font-bold border border-blue-400/40">
-                            <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
+                        <a href="https://elprojekt.nu" class="inline-flex items-center gap-1 text-white hover:text-elorange text-[10.5px] font-bold transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3.5 h-3.5 text-elorange flex-shrink-0">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                            </svg>
                             elprojekt.nu
                         </a>
                     </div>
@@ -360,7 +357,7 @@ const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                         alt="QR-kod till elprojekt.nu" 
                         class="w-[68px] h-[68px] object-contain block rounded"
                     />
-                    <span class="text-[7.5px] font-display font-extrabold text-elblue text-center mt-1 uppercase tracking-tight leading-tight">
+                    <span class="text-[7.5px] font-display font-extrabold text-slate-900 text-center mt-1 uppercase tracking-tight leading-tight">
                         Erbjudanden & Inspiration
                     </span>
                 </div>
