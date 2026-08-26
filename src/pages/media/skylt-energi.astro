@@ -1,0 +1,273 @@
+﻿---
+import "../../styles/global.css";
+---
+
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ELPROJEKT – Skylt 1 (120 × 50 cm) Energi & Teknik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Exact 1200x500 mm (120x50 cm) Sign Print Configuration */
+        @page {
+            size: 1200mm 500mm;
+            margin: 0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Screen Preview */
+        @media screen {
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 24px 16px;
+                background-color: #0f172a;
+            }
+
+            .sign-container {
+                width: min(94vw, 1200px);
+                aspect-ratio: 120 / 50;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+                position: relative;
+                overflow: hidden;
+                container-type: size;
+            }
+        }
+
+        /* Print Execution (100% Identical Scale & Proportions) */
+        @media print {
+            html, body {
+                width: 1200mm !important;
+                height: 500mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                overflow: hidden !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .sign-container {
+                width: 1200mm !important;
+                height: 500mm !important;
+                max-width: 1200mm !important;
+                max-height: 500mm !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                overflow: hidden !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+                container-type: size;
+            }
+        }
+
+        .font-display {
+            font-family: 'Bank Gothic Light', 'Inter', sans-serif;
+        }
+
+        /* 100% Proportional Container Units (cqw / cqh) */
+        .sign-inner {
+            padding: 7.5cqh 5cqw;
+            gap: 3.5cqh;
+        }
+
+        .sign-title {
+            font-size: 5.4cqw;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+
+        .sign-chevron {
+            width: 3.1cqw;
+            height: 3.1cqw;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .sign-body {
+            font-size: 2.15cqw;
+            line-height: 1.45;
+            width: 100%;
+            max-width: 100%;
+            text-align: center;
+            gap: 1.2cqh;
+        }
+
+        .sign-body-line {
+            white-space: nowrap;
+        }
+
+        .sign-notice {
+            font-size: 2.05cqw;
+            line-height: 1.3;
+        }
+
+        .sign-keywords {
+            font-size: 2.1cqw;
+            gap: 4cqw;
+            white-space: nowrap;
+        }
+
+        .sign-icon {
+            width: 2.5cqw;
+            height: 2.5cqw;
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        .icon-badge {
+            width: 3.8cqw;
+            height: 3.8cqw;
+            border-radius: 0.8cqw;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eff6ff;
+            color: #003ca6;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- On-screen preview toolbar -->
+    <div class="no-print mb-5 flex flex-wrap gap-4 items-center justify-between max-w-[1200px] w-full bg-slate-900 text-white px-5 py-3 rounded-xl shadow-xl border border-slate-700">
+        <div>
+            <h1 class="text-sm font-bold font-display tracking-wide text-white">ELPROJEKT – Skylt 1: Energi & Teknik</h1>
+            <p class="text-[11px] text-slate-300">Format: 120 × 50 cm (1200 × 500 mm) • Vit bakgrund • Ren typografi • Skala 100%</p>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="bg-elorange hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-lg text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                Skriv ut / Spara PDF
+            </button>
+            <a href="/media" class="bg-slate-800 hover:bg-slate-700 text-slate-100 hover:text-white font-semibold px-4 py-2 rounded-lg text-xs transition-all border border-slate-600 flex items-center gap-1.5 shadow-sm">
+                <svg class="w-3.5 h-3.5 text-elorange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Tillbaka till Mediebanken
+            </a>
+        </div>
+    </div>
+
+    <!-- 120x50 CM SIGN CONTAINER -->
+    <div class="sign-container select-none">
+        <div class="sign-inner w-full h-full flex flex-col justify-between items-center bg-white">
+            
+            <!-- 1. HUVUDRUBRIK (Centrerad enkel rad med > separatorer) -->
+            <div class="w-full flex justify-center">
+                <h1 class="sign-title font-display font-black text-elblue uppercase flex items-center justify-center gap-[1.2cqw]">
+                    <span>Producera</span>
+                    <!-- Chevron > -->
+                    <svg class="sign-chevron text-elorange flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                    <span>Lagra</span>
+                    <!-- Chevron > -->
+                    <svg class="sign-chevron text-elorange flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                    <span>Ladda</span>
+                </h1>
+            </div>
+
+            <!-- 2. BRÖDTEXT (Centrerade 2 rader med luftig marginal emellan) -->
+            <div class="w-full flex justify-center">
+                <div class="sign-body text-slate-900 font-sans font-medium flex flex-col items-center justify-center">
+                    <span class="sign-body-line block">Sänk elkostnaden och säkra strömmen med marknadens smartaste helhetslösningar.</span>
+                    <span class="sign-body-line block">Spara pengar genom att maxa egenanvändning och elprisoptimera försäljningen.</span>
+                </div>
+            </div>
+
+            <!-- 2.5. GRÖN TEKNIK-NOTIS (Centrerad) -->
+            <div class="w-full flex justify-center">
+                <p class="sign-notice text-slate-800 font-sans font-medium text-center">
+                    Upp till <strong class="text-elorange font-bold">50%</strong> grön teknik-avdrag direkt på fakturan.
+                </p>
+            </div>
+
+            <!-- 3. NYCKELORD (Centrerade på en rad med ikoner) -->
+            <div class="w-full flex justify-center">
+                <div class="sign-keywords flex items-center justify-center font-display font-bold text-slate-800 tracking-wide uppercase">
+                    
+                    <!-- Solenergi (Sol/Blixt) -->
+                    <span class="inline-flex items-center gap-[0.9cqw] flex-shrink-0">
+                        <span class="icon-badge">
+                            <svg class="sign-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M12 2v2" />
+                                <path d="M12 20v2" />
+                                <path d="M4.93 4.93l1.41 1.41" />
+                                <path d="M17.66 17.66l1.41 1.41" />
+                                <path d="M2 12h2" />
+                                <path d="M20 12h2" />
+                                <path d="M6.34 17.66l-1.41 1.41" />
+                                <path d="M19.07 4.93l-1.41 1.41" />
+                            </svg>
+                        </span>
+                        Solenergi
+                    </span>
+                    
+                    <!-- Batterilagring (Batteri) -->
+                    <span class="inline-flex items-center gap-[0.9cqw] flex-shrink-0">
+                        <span class="icon-badge">
+                            <svg class="sign-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="16" height="10" rx="2" ry="2" />
+                                <line x1="22" y1="11" x2="22" y2="13" />
+                                <line x1="6" y1="11" x2="6" y2="13" />
+                                <line x1="10" y1="11" x2="10" y2="13" />
+                                <line x1="14" y1="11" x2="14" y2="13" />
+                            </svg>
+                        </span>
+                        Batterilagring
+                    </span>
+                    
+                    <!-- Laddbox (Laddstation/Bil) -->
+                    <span class="inline-flex items-center gap-[0.9cqw] flex-shrink-0">
+                        <span class="icon-badge">
+                            <svg class="sign-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3C2.1 11.2 2 11.6 2 12v4c0 .6.4 1 1 1h2" />
+                                <circle cx="7" cy="17" r="2" />
+                                <path d="M9 17h6" />
+                                <circle cx="17" cy="17" r="2" />
+                            </svg>
+                        </span>
+                        Laddbox
+                    </span>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -64,7 +64,7 @@ const navItems = [
                                     {item.label}
                                     <ChevronDownIcon className="w-4 h-4" />
                                 </a>
-                                <div class="absolute left-0 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+                                <div class="absolute left-0 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-200 transform group-hover:translate-y-0 group-focus-within:translate-y-0 translate-y-2">
                                     <div class="bg-white backdrop-blur-md rounded-md shadow-xl border border-gray-100 py-2 overflow-hidden">
                                         {item.children.map((child) => (
                                             <a
@@ -138,6 +138,9 @@ const navItems = [
             <div class="flex items-center lg:hidden">
                 <button
                     id="mobile-menu-btn"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu"
+                    aria-label="Öppna meny"
                     class="inline-flex items-center justify-center p-2 rounded-md focus:outline-none text-elblue"
                 >
                     <span class="sr-only">Öppna meny</span>
@@ -234,6 +237,7 @@ const navItems = [
 
     function toggleMenu() {
         isMenuOpen = !isMenuOpen;
+        mobileMenuBtn?.setAttribute("aria-expanded", String(isMenuOpen));
         if (isMenuOpen) {
             mobileMenu?.classList.remove("opacity-0", "-translate-y-2", "pointer-events-none");
             mobileMenu?.classList.add("opacity-100", "translate-y-0", "pointer-events-auto");

@@ -28,6 +28,13 @@ export default defineConfig({
 
   integrations: [
     sitemap({
+      filter: (page) =>
+        !page.includes('/404') &&
+        !page.includes('/qr') &&
+        !page.includes('/media/flyer') &&
+        !page.includes('/media/showroom') &&
+        !page.includes('/media/skylt') &&
+        !page.includes('/media/visitkort'),
       i18n: {
         defaultLocale: 'sv',
         locales: { sv: 'sv-SE' }

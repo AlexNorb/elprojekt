@@ -1,0 +1,32 @@
+# ELPROJEKT
+
+> Lokal elektriker i Tjörn, Orust & Stenungsund. Personlig service och moderna lösningar.
+
+## Om oss
+
+ELPROJEKT (Elprojekt i Uddevalla AB, org.nr 559557-0895) är en auktoriserad elfirma som erbjuder elinstallationer, laddboxar, solceller, batterilagring och smarta hem-lösningar. Vi arbetar med både privatpersoner och företag i Tjörn, Orust, Stenungsund, Uddevalla och Kungälv.
+
+Ägare och ansvarig elektriker: Alexander Norbäck
+Telefon: 070-332 56 55
+E-post: alex@elprojekt.nu
+Adress: Friggavägen 6, 451 76 Uddevalla
+
+## Tjänster
+
+- [Elinstallation](/tjanster/elinstallation/): Nyinstallationer, renoveringar och centralbyte
+- [EV-laddning](/tjanster/ev-laddning/): Laddboxar för hem och företag
+- [Belysning](/tjanster/belysning/): Belysningsplanering och installation
+- [Felsökning](/tjanster/felsokning/): Felsökning av el och service
+- [Smarta hem](/tjanster/smarta-hem/): Plejd och smarta installationer
+
+## Projekt
+
+- [Projekt](/projekt/): Utvalda referensprojekt
+
+## Kontakt
+
+Kontakta oss via formuläret på hemsidan eller ring direkt.
+
+## Sitemap
+
+- https://elprojekt.nu/sitemap-index.xml

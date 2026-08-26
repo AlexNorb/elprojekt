@@ -36,7 +36,12 @@ const faqs = [
             {
                 faqs.map((faq, index) => (
                     <div class="faq-item border border-slate-100 rounded-lg overflow-hidden transition-all duration-300 bg-white hover:border-elblue/30">
-                        <button class="faq-toggle w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none">
+                        <button
+                            class="faq-toggle w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-elblue rounded-lg"
+                            id={`faq-btn-${index}`}
+                            aria-expanded="false"
+                            aria-controls={`faq-answer-${index}`}
+                        >
                             <span class="faq-question font-display font-bold text-lg transition-colors text-slate-800">
                                 {faq.question}
                             </span>
@@ -45,7 +50,12 @@ const faqs = [
                             </span>
                         </button>
 
-                        <div class="faq-answer px-6 text-slate-600 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0">
+                        <div
+                            id={`faq-answer-${index}`}
+                            role="region"
+                            aria-labelledby={`faq-btn-${index}`}
+                            class="faq-answer px-6 text-slate-600 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0"
+                        >
                             <p class="leading-relaxed border-t border-slate-200/50 pt-4 pb-6">
                                 {faq.answer}
                             </p>
@@ -56,6 +66,23 @@ const faqs = [
         </div>
     </div>
 </section>
+
+{/* FAQPage structured data for rich snippets */}
+<script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+            },
+        })),
+    })}
+/>
 
 <script>
     document.addEventListener("astro:page-load", () => {
@@ -77,11 +104,13 @@ const faqs = [
                     const ans = item.querySelector(".faq-answer") as HTMLElement;
                     const icn = item.querySelector(".faq-icon");
                     const qst = item.querySelector(".faq-question");
+                    const tgl = item.querySelector(".faq-toggle");
 
                     if (ans) {
                         ans.style.maxHeight = "0px";
                         ans.classList.add("max-h-0", "opacity-0");
                     }
+                    tgl?.setAttribute("aria-expanded", "false");
                     icn?.classList.remove("rotate-180", "text-elblue");
                     qst?.classList.remove("text-elblue");
                     item.classList.remove(
@@ -94,6 +123,7 @@ const faqs = [
                 if (isClosed) {
                     answer.classList.remove("max-h-0", "opacity-0");
                     answer.style.maxHeight = answer.scrollHeight + "px";
+                    toggle.setAttribute("aria-expanded", "true");
 
                     icon.classList.add("rotate-180", "text-elblue");
                     question.classList.add("text-elblue");
@@ -102,6 +132,8 @@ const faqs = [
                         "bg-slate-50",
                         "border-elblue/20",
                     );
+                } else {
+                    toggle.setAttribute("aria-expanded", "false");
                 }
             });
         });
