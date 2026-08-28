@@ -7,24 +7,22 @@ import ContactForm from "../components/ContactForm.astro";
 import BoltIcon from "../components/icons/BoltIcon.astro";
 import BatteryIcon from "../components/icons/BatteryIcon.astro";
 import CpuChipIcon from "../components/icons/CpuChipIcon.astro";
-import HomeModernIcon from "../components/icons/HomeModernIcon.astro";
 import CheckBadgeIcon from "../components/icons/CheckBadgeIcon.astro";
 import PhoneIcon from "../components/icons/PhoneIcon.astro";
 import EnvelopeIcon from "../components/icons/EnvelopeIcon.astro";
 import ChevronDownIcon from "../components/icons/ChevronDownIcon.astro";
-import StarIcon from "../components/icons/StarIcon.astro";
 import { pb } from "../utils";
 ---
 
 <MainLayout
-    title="Showroom & Energilösningar | Elprojekt"
-    description="Välkommen till Elprojekt. Utforska solceller, batterilagring, växelriktare, laddboxar och kompletta elinstallationer."
+    title="Aktuell Kampanj & Showroom | Elprojekt"
+    description="Aktuella kampanjpaket på laddboxar (Zaptec Go), solceller och intelligenta Sigenergy batterilager. Trygg installation av behörig elektriker."
 >
     <Navbar />
 
     <main id="main-content" class="min-h-screen bg-slate-50 pt-20">
         {/* HERO SECTION */}
-        <section class="relative bg-slate-900 text-white py-16 lg:py-24 overflow-hidden">
+        <section class="relative bg-slate-900 text-white py-14 lg:py-20 overflow-hidden">
             {/* Background Glow */}
             <div
                 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-elblue rounded-full mix-blend-screen filter blur-[140px] opacity-25 pointer-events-none"
@@ -33,24 +31,24 @@ import { pb } from "../utils";
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="max-w-3xl">
                     {/* Dynamic Source Badge */}
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-elorange text-xs sm:text-sm font-bold font-display uppercase tracking-wider mb-6 backdrop-blur-sm" id="qr-badge-container">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-elorange text-xs sm:text-sm font-bold font-display uppercase tracking-wider mb-6 backdrop-blur-sm" id="qr-badge-container">
                         <span class="w-2 h-2 rounded-full bg-elorange animate-pulse"></span>
-                        <span id="qr-badge">Välkommen till vårt Showroom</span>
+                        <span id="qr-badge">Aktuell Kampanj • Showroom</span>
                     </div>
 
                     <h1
                         id="qr-heading"
                         class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-white leading-tight mb-6"
                     >
-                        Grön teknik & <br />
-                        <span class="text-elorange">framtidens energi.</span>
+                        Smarta energisystem & <br />
+                        <span class="text-elorange">framtidens elbilsladdning.</span>
                     </h1>
 
                     <p
                         id="qr-subheading"
-                        class="text-lg sm:text-xl text-slate-300 leading-relaxed font-sans mb-8 border-l-4 border-elorange pl-4 sm:pl-6"
+                        class="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed font-sans mb-8 border-l-4 border-elorange pl-4 sm:pl-6"
                     >
-                        Kul att du scannade vår QR-kod! Här visar vi upp framtidens smarta energilösningar – solceller, batterilagring, växelriktare och elbilsladdning. Och som alltid hjälper vi dig med allt inom traditionell elinstallation.
+                        Välkommen! Just nu kör vi kampanj på kompletta energipaket – från marknadsledande Zaptec-laddboxar till solceller och intelligenta Sigenergy batterilager. Alltid installerat med 50% Grön Teknik-avdrag och personlig service av auktoriserad elektriker.
                     </p>
 
                     <div class="flex flex-wrap gap-4 items-center">
@@ -67,148 +65,355 @@ import { pb } from "../utils";
                             Spara kontakt i mobilen
                         </a>
                         <a
-                            href="#contact-form"
-                            data-umami-event="QR Hero CTA Click"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold text-white transition-all duration-200 bg-elblue font-display rounded-md hover:bg-elblue-600 shadow-[0_4px_14px_0_rgba(0,118,255,0.39)] hover:-translate-y-0.5"
+                            href="#kampanj-paket"
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold text-white transition-all duration-200 bg-elorange font-display rounded-md hover:bg-orange-600 shadow-[0_4px_14px_0_rgba(255,116,3,0.39)] hover:-translate-y-0.5"
                         >
-                            Prata med Alexander
+                            Se Kampanjpaketen
                             <div class="ml-2 w-4 h-4 inline-block">
                                 <ChevronDownIcon />
                             </div>
                         </a>
                         <a
-                            href="#showroom-products"
-                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold text-slate-300 transition-all duration-200 bg-white/5 border border-white/15 font-display rounded-md hover:bg-white/10 hover:text-white"
+                            href="#contact-form"
+                            data-umami-event="QR Hero CTA Click"
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold text-slate-200 transition-all duration-200 bg-white/10 border border-white/20 font-display rounded-md hover:bg-white/20 hover:text-white"
                         >
-                            Se produkterna
+                            Prata med Alexander
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        {/* SHOWROOM FOCUS: ENERGILÖSNINGAR */}
-        <section id="showroom-products" class="py-16 bg-white border-b border-slate-100">
+        {/* KAMPANJSEKTION: SOLCELLER, BATTERI & LADDBOX */}
+        <section id="kampanj-paket" class="py-16 sm:py-20 bg-slate-100/70 border-b border-slate-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-12">
-                    <h2 class="text-elorange font-bold tracking-wide uppercase text-sm mb-2 font-display">
-                        I vårt Showroom
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <span class="inline-block px-3 py-1 rounded-full bg-orange-100 text-elorange font-bold tracking-wide uppercase text-xs sm:text-sm font-display mb-3">
+                        Aktuella Erbjudanden
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight">
+                        Smarta Paket med Grön Teknik
                     </h2>
-                    <h3 class="text-3xl font-extrabold text-slate-900 font-display">
-                        Smarta energisystem för hem & företag
-                    </h3>
-                    <p class="mt-3 text-slate-600 text-base">
-                        Helhetslösningar installerade av auktoriserad elektriker med lokal förankring och personlig service.
+                    <p class="mt-3 text-slate-600 text-base sm:text-lg">
+                        Färdiga helhetslösningar inklusive auktoriserad installation, driftsättning och skatteavdrag direkt på fakturan.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {/* 1. Solceller */}
-                    <div id="card-solceller" class="product-card flex flex-col p-6 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-elblue/40 hover:shadow-lg transition-all duration-300">
-                        <div class="w-12 h-12 rounded-lg bg-elblue-50 text-elblue flex items-center justify-center mb-4">
-                            <BoltIcon className="w-6 h-6" />
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                    {/* KORT 1: LADDBOX (ZAPTEC GO & GO 2) */}
+                    <div
+                        id="card-laddbox"
+                        class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+                    >
+                        <div>
+                            {/* Bild & Badge */}
+                            <div class="relative bg-slate-900 aspect-[4/3] overflow-hidden">
+                                <img
+                                    src="/images/campaign/zaptec-laddsystem.jpg"
+                                    alt="Komplett laddsystem Zaptec Go laddbox med lastbalansering och kabel"
+                                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                    loading="lazy"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1.5 rounded-md bg-elblue text-white text-xs font-bold font-display uppercase tracking-wider shadow">
+                                        50% Grön Teknik
+                                    </span>
+                                </div>
+                                <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                                    <div>
+                                        <p class="text-xs uppercase font-bold text-slate-300 font-display tracking-wider">Laddsystem Paket</p>
+                                        <h3 class="text-xl font-bold text-white font-display">Zaptec Go & Go 2</h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-xs text-slate-300 block">Paketpris från</span>
+                                        <span class="text-2xl sm:text-3xl font-extrabold text-elorange font-display">8 000:-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Innehåll & Sammanfattning */}
+                            <div class="p-6 space-y-5">
+                                {/* Standardpaket */}
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-base font-bold text-slate-900 font-display flex items-center gap-2">
+                                            <span class="w-2.5 h-2.5 rounded-full bg-elblue"></span>
+                                            Zaptec Go Standard
+                                        </h4>
+                                        <span class="font-bold text-slate-900 font-display text-sm">8 000 kr</span>
+                                    </div>
+                                    <ul class="text-xs text-slate-700 space-y-1.5">
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>Zaptec Go laddbox</strong> (upp till 22 kW)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>Dynamisk lastbalansering</strong> (Sense)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>7m laddkabel</strong> Typ 2 + kabelhållare</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>Standardinstallation:</strong> Upp till 10m kabel, håltagning & driftsättning</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {/* Uppgradering Zaptec Go 2 */}
+                                <div class="p-4 rounded-xl bg-gradient-to-br from-orange-50/70 to-amber-50/70 border border-orange-200">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-sm font-bold text-slate-900 font-display flex items-center gap-1">
+                                            <span>🚀</span> Zaptec Go 2 Uppgradering
+                                        </h4>
+                                        <span class="text-[11px] font-bold bg-elorange text-white px-2 py-0.5 rounded uppercase font-display">
+                                            +1 500 kr (9 500 kr)
+                                        </span>
+                                    </div>
+                                    <ul class="text-[11px] text-slate-700 space-y-1.5">
+                                        <li class="flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
+                                            <span><strong>V2G Ready:</strong> Förberedd för dubbelriktad laddning</span>
+                                        </li>
+                                        <li class="flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
+                                            <span><strong>Inbyggd Display:</strong> Direkt koll på laddstatus & effekt</span>
+                                        </li>
+                                        <li class="flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
+                                            <span><strong>MID-godkänd:</strong> Exakt debiteringsmätning för tjänstebil</span>
+                                        </li>
+                                        <li class="flex items-center gap-1.5">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
+                                            <span><strong>Premium finish:</strong> Extra robust nordisk konstruktion</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <span class="text-xs font-bold text-elblue uppercase tracking-wider mb-1">
-                            15% Grön Teknik
-                        </span>
-                        <h4 class="text-xl font-bold text-slate-900 font-display mb-2">
-                            Solceller & Takmontage
-                        </h4>
-                        <p class="text-sm text-slate-600 leading-relaxed flex-grow mb-4">
-                            Producera din egen el. Monteras fackmannamässigt av behörig elektriker och certifierade takläggare via Byggprojekt.
-                        </p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Marknadsledande paneler</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Säkra takgenomföringar</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Totalentreprenad</li>
-                        </ul>
-                        <a
-                            href={pb("/tjanster/solceller-batterilagring")}
-                            class="inline-flex items-center text-sm font-bold text-elblue hover:text-elorange transition-colors"
-                        >
-                            Läs mer om solceller →
-                        </a>
+
+                        {/* Kort CTA */}
+                        <div class="p-6 pt-0">
+                            <button
+                                type="button"
+                                data-package="Zaptec Go Laddsystem"
+                                class="select-package-btn w-full flex items-center justify-center py-3.5 px-4 rounded-xl font-bold font-display text-white bg-elorange hover:bg-orange-600 shadow-md hover:shadow-lg transition-all duration-200 uppercase tracking-wider group-hover:-translate-y-0.5 cursor-pointer text-sm"
+                            >
+                                Välj Zaptec Paket →
+                            </button>
+                        </div>
                     </div>
 
-                    {/* 2. Batterilagring */}
-                    <div id="card-batteri" class="product-card flex flex-col p-6 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-elblue/40 hover:shadow-lg transition-all duration-300">
-                        <div class="w-12 h-12 rounded-lg bg-elblue-50 text-elblue flex items-center justify-center mb-4">
-                            <BatteryIcon className="w-6 h-6" />
+                    {/* KORT 2: KOMPLETT SOL + BATTERIPAKET */}
+                    <div
+                        id="card-sol-batteri"
+                        class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+                    >
+                        <div>
+                            {/* Bild & Badge */}
+                            <div class="relative bg-slate-900 aspect-[4/3] overflow-hidden">
+                                <img
+                                    src="/images/campaign/sigenergy-energilosning.jpg"
+                                    alt="Sigenergy komplett energilösning med solpaneler och batterilager"
+                                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                    loading="lazy"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1.5 rounded-md bg-emerald-600 text-white text-xs font-bold font-display uppercase tracking-wider shadow">
+                                        Totalentreprenad
+                                    </span>
+                                </div>
+                                <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                                    <div>
+                                        <p class="text-xs uppercase font-bold text-slate-300 font-display tracking-wider">Sol + Lagring</p>
+                                        <h3 class="text-xl font-bold text-white font-display">Solceller & Batteri</h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-xs text-slate-300 block">Paketpris från</span>
+                                        <span class="text-2xl sm:text-3xl font-extrabold text-elorange font-display">130 000:-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Innehåll & Sammanfattning */}
+                            <div class="p-6 space-y-5">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-base font-bold text-slate-900 font-display flex items-center gap-2">
+                                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                                            Komplett Sol- & Batteripaket
+                                        </h4>
+                                        <span class="font-bold text-slate-900 font-display text-sm">Från 130 000 kr</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mb-3">
+                                        Den kompletta lösningen för maximal självförsörjning och lägsta elkostnad.
+                                    </p>
+                                    <ul class="text-xs text-slate-700 space-y-2">
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>16 högeffektiva paneler</strong> (~7,5 kWp optimerad toppeffekt)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>15 kWh Sigenergy batterilager</strong> (intelligent & stapelbart)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>Standardmontage & elinstallation</strong> av behörig elektriker</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>Inkl. Grön Teknik:</strong> Avdrag direkt på fakturan</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 text-xs text-emerald-950 space-y-1">
+                                    <p class="font-bold font-display">☀️ Maximal energifrihet</p>
+                                    <p class="text-slate-600 text-[11px] leading-relaxed">
+                                        Producera på dagen, lagra till kvällen och kapa dina elkostnader året runt.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <span class="text-xs font-bold text-elorange uppercase tracking-wider mb-1">
-                            50% Grön Teknik
-                        </span>
-                        <h4 class="text-xl font-bold text-slate-900 font-display mb-2">
-                            Batterilager med AI-styrning
-                        </h4>
-                        <p class="text-sm text-slate-600 leading-relaxed flex-grow mb-4">
-                            Lagra din egen solenergi, kapa effekttoppar och låt intelligent AI-styrning automatiskt optimera laddning mot dyra elpristoppar.
-                        </p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Maxa egenanvändningen</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Smart elprisoptimering</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>50% skatteavdrag</li>
-                        </ul>
-                        <a
-                            href={pb("/tjanster/solceller-batterilagring")}
-                            class="inline-flex items-center text-sm font-bold text-elblue hover:text-elorange transition-colors"
-                        >
-                            Läs mer om batterier →
-                        </a>
+
+                        {/* Kort CTA */}
+                        <div class="p-6 pt-0">
+                            <button
+                                type="button"
+                                data-package="Komplett Sol- och Batteripaket"
+                                class="select-package-btn w-full flex items-center justify-center py-3.5 px-4 rounded-xl font-bold font-display text-white bg-emerald-700 hover:bg-emerald-800 shadow-md hover:shadow-lg transition-all duration-200 uppercase tracking-wider group-hover:-translate-y-0.5 cursor-pointer text-sm"
+                            >
+                                Välj Sol + Batteri →
+                            </button>
+                        </div>
                     </div>
 
-                    {/* 3. Växelriktare */}
-                    <div id="card-vaxelriktare" class="product-card flex flex-col p-6 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-elblue/40 hover:shadow-lg transition-all duration-300">
-                        <div class="w-12 h-12 rounded-lg bg-elblue-50 text-elblue flex items-center justify-center mb-4">
-                            <CpuChipIcon className="w-6 h-6" />
-                        </div>
-                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
-                            Systemets Hjärna
-                        </span>
-                        <h4 class="text-xl font-bold text-slate-900 font-display mb-2">
-                            Smarta Växelriktare
-                        </h4>
-                        <p class="text-sm text-slate-600 leading-relaxed flex-grow mb-4">
-                            Hög verkningsgrad och realtidsövervakning via app. Vi hjälper dig att välja rätt hybridväxelriktare för ditt system.
-                        </p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Realtidskoll i mobilen</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Hybrid förberedd för batteri</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Hög driftsäkerhet</li>
-                        </ul>
-                        <a
-                            href="#contact-form"
-                            class="inline-flex items-center text-sm font-bold text-elblue hover:text-elorange transition-colors"
-                        >
-                            Rådgivning & offert →
-                        </a>
-                    </div>
+                    {/* KORT 3: ENDAST BATTERILAGER (SIGENERGY EC) */}
+                    <div
+                        id="card-batteri"
+                        class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+                    >
+                        <div>
+                            {/* Bild & Badge */}
+                            <div class="relative bg-slate-900 aspect-[4/3] overflow-hidden">
+                                <img
+                                    src="/images/campaign/sigenergy-batterilager.jpg"
+                                    alt="Sigenergy EC batterilager 15kWh för spotprisoptimering och energilagring"
+                                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                    loading="lazy"
+                                />
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1.5 rounded-md bg-elorange text-white text-xs font-bold font-display uppercase tracking-wider shadow">
+                                        50% Grön Teknik
+                                    </span>
+                                </div>
+                                <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                                    <div>
+                                        <p class="text-xs uppercase font-bold text-slate-300 font-display tracking-wider">Energilagring</p>
+                                        <h3 class="text-xl font-bold text-white font-display">Sigenergy EC Batteri</h3>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-xs text-slate-300 block">Från endast</span>
+                                        <span class="text-2xl sm:text-3xl font-extrabold text-elblue font-display">65 000:-</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                    {/* 4. Laddboxar */}
-                    <div id="card-laddbox" class="product-card flex flex-col p-6 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-elblue/40 hover:shadow-lg transition-all duration-300">
-                        <div class="w-12 h-12 rounded-lg bg-elblue-50 text-elblue flex items-center justify-center mb-4">
-                            <BatteryIcon className="w-6 h-6" />
+                            {/* Innehåll & Sammanfattning */}
+                            <div class="p-6 space-y-5">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-base font-bold text-slate-900 font-display flex items-center gap-2">
+                                            <span class="w-2.5 h-2.5 rounded-full bg-elorange"></span>
+                                            Sigenergy EC 10kW System
+                                        </h4>
+                                        <span class="font-bold text-slate-900 font-display text-sm">Från 65 000 kr</span>
+                                    </div>
+                                    <p class="text-xs text-slate-600 mb-3">
+                                        Komplett system för energifrihet – fungerar med eller utan befintliga solceller.
+                                    </p>
+                                    <ul class="text-xs text-slate-700 space-y-2">
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>Sigenergy EC 10kW</strong> hybrid-enhet</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>15 kWh batterilagring</strong> (modulärt och säkert)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>AI Spotprisoptimering:</strong> Ladda billigt, använd dyrt</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                            <span><strong>Standardinstallation:</strong> Skyddskomponenter & driftsättning</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200/80 text-xs text-blue-950 space-y-1">
+                                    <p class="font-bold font-display text-elblue">🔋 Smart effekttoppskapning</p>
+                                    <p class="text-slate-600 text-[11px] leading-relaxed">
+                                        Skydda dig mot framtida effekttariffer och höga elpristoppar direkt via appen.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <span class="text-xs font-bold text-elorange uppercase tracking-wider mb-1">
-                            50% Grön Teknik • Från 8 000 kr
-                        </span>
-                        <h4 class="text-xl font-bold text-slate-900 font-display mb-2">
-                            Laddbox med Lastbalansering
-                        </h4>
-                        <p class="text-sm text-slate-600 leading-relaxed flex-grow mb-4">
-                            Ladda elbilen snabbt och säkert hemma. Dynamisk lastbalansering skyddar huvudsäkringen mot överbelastning.
-                        </p>
-                        <ul class="text-xs text-slate-600 space-y-1.5 mb-6">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Zaptec, Easee, Garo m.fl.</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>App-styrning & timer</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-elorange mr-2"></span>Fast pris inkl. installation</li>
-                        </ul>
-                        <a
-                            href={pb("/tjanster/laddbox")}
-                            class="inline-flex items-center text-sm font-bold text-elblue hover:text-elorange transition-colors"
-                        >
-                            Läs mer om laddboxar →
-                        </a>
+
+                        {/* Kort CTA */}
+                        <div class="p-6 pt-0">
+                            <button
+                                type="button"
+                                data-package="Endast Batterilager - Sigenergy 15kWh"
+                                class="select-package-btn w-full flex items-center justify-center py-3.5 px-4 rounded-xl font-bold font-display text-white bg-elblue hover:bg-blue-800 shadow-md hover:shadow-lg transition-all duration-200 uppercase tracking-wider group-hover:-translate-y-0.5 cursor-pointer text-sm"
+                            >
+                                Välj Endast Batteri →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* TRYGGHETS-BANNER */}
+        <section class="py-10 bg-elblue text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center sm:text-left">
+                    <div class="flex items-center justify-center sm:justify-start gap-3">
+                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
+                        <div>
+                            <p class="font-bold font-display text-sm">Auktoriserad Elektriker</p>
+                            <p class="text-xs text-blue-100">Trygg & fackmannamässig installation</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center sm:justify-start gap-3">
+                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
+                        <div>
+                            <p class="font-bold font-display text-sm">Direktkontakt</p>
+                            <p class="text-xs text-blue-100">Inga mellanhänder – prata direkt med Alexander</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center sm:justify-start gap-3">
+                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
+                        <div>
+                            <p class="font-bold font-display text-sm">Grön Teknik & ROT</p>
+                            <p class="text-xs text-blue-100">Upp till 50% avdrag direkt på fakturan</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center sm:justify-start gap-3">
+                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
+                        <div>
+                            <p class="font-bold font-display text-sm">Lokal förankring</p>
+                            <p class="text-xs text-blue-100">Tjörn, Orust, Stenungsund & Uddevalla</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -297,54 +502,18 @@ import { pb } from "../utils";
             </div>
         </section>
 
-        {/* TRYGGHETS-BANNER */}
-        <section class="py-10 bg-elblue text-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center sm:text-left">
-                    <div class="flex items-center justify-center sm:justify-start gap-3">
-                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
-                        <div>
-                            <p class="font-bold font-display text-sm">Auktoriserad Elektriker</p>
-                            <p class="text-xs text-blue-100">Trygg & fackmannamässig installation</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-center sm:justify-start gap-3">
-                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
-                        <div>
-                            <p class="font-bold font-display text-sm">Direktkontakt</p>
-                            <p class="text-xs text-blue-100">Inga mellanhänder – prata med Alexander</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-center sm:justify-start gap-3">
-                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
-                        <div>
-                            <p class="font-bold font-display text-sm">Grön Teknik & ROT</p>
-                            <p class="text-xs text-blue-100">Upp till 50% avdrag direkt på fakturan</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-center sm:justify-start gap-3">
-                        <CheckBadgeIcon className="w-8 h-8 text-elorange flex-shrink-0" />
-                        <div>
-                            <p class="font-bold font-display text-sm">Lokalt förankrad</p>
-                            <p class="text-xs text-blue-100">Tjörn, Orust, Stenungsund & Uddevalla</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         {/* KONTAKT / OFFERTFORMULÄR */}
-        <section id="contact-form" class="py-16 bg-white">
+        <section id="contact-form" class="py-16 sm:py-20 bg-white">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-10">
                     <h2 class="text-elorange font-bold tracking-wide uppercase text-sm mb-2 font-display">
-                        Kostnadsfri Förfrågan
+                        Kostnadsfri Förfrågan & Rådgivning
                     </h2>
                     <h3 class="text-3xl font-extrabold text-slate-900 font-display">
                         Låt oss diskutera ditt projekt
                     </h3>
                     <p class="mt-3 text-slate-600 max-w-xl mx-auto text-sm sm:text-base">
-                        Fyll i dina uppgifter så återkopplar vi snabbt med rådgivning eller offert. Du kan även ringa direkt!
+                        Fyll i dina uppgifter så återkopplar vi snabbt med rådgivning eller skräddarsydd offert. Du kan även ringa direkt!
                     </p>
                 </div>
 
@@ -378,7 +547,7 @@ import { pb } from "../utils";
                         <div class="p-5 bg-elblue-50 rounded-xl border border-elblue-100 text-xs text-elblue-950 space-y-2">
                             <p class="font-bold font-display text-sm text-elblue">Direkt med Alexander</p>
                             <p class="text-slate-600 leading-relaxed">
-                                Inga fördröjningar eller kundtjänstköer. Du pratar alltid direkt med den som utför arbetet.
+                                Inga fördröjningar eller kundtjänstköer. Du pratar alltid direkt med den som utför och ansvarar för arbetet.
                             </p>
                         </div>
                     </div>
@@ -396,7 +565,7 @@ import { pb } from "../utils";
     <Footer />
 </MainLayout>
 
-{/* DYNAMISK PARAMETERHANTERING (UTM / Query params) */}
+{/* DYNAMISK PARAMETERHANTERING (UTM / Query params) & PAKETKNAPPAR */}
 <script>
     document.addEventListener("astro:page-load", () => {
         const params = new URLSearchParams(window.location.search);
@@ -410,7 +579,37 @@ import { pb } from "../utils";
         const headingEl = document.getElementById("qr-heading");
         const subheadingEl = document.getElementById("qr-subheading");
         const serviceSelect = document.getElementById("serviceType") as HTMLSelectElement;
+        const messageInput = document.getElementById("message") as HTMLTextAreaElement;
         const vcardBtn = document.getElementById("qr-vcard-btn");
+
+        // Koppla paket-knapparna till formuläret
+        const selectButtons = document.querySelectorAll(".select-package-btn");
+        selectButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const pkgName = btn.getAttribute("data-package") || "";
+                if (serviceSelect) {
+                    if (pkgName.toLowerCase().includes("laddbox") || pkgName.toLowerCase().includes("zaptec")) {
+                        serviceSelect.value = "Laddbox";
+                    } else if (pkgName.toLowerCase().includes("sol") || pkgName.toLowerCase().includes("batteri")) {
+                        serviceSelect.value = "Solceller";
+                    }
+                }
+                if (messageInput && !messageInput.value) {
+                    messageInput.value = `Hej Alexander! Jag är intresserad av kampanjerbjudandet gällande ${pkgName}. Kontakta mig gärna för mer information eller offert.`;
+                }
+                
+                // Scrolla mjukt till kontaktformuläret
+                const contactEl = document.getElementById("contact-form");
+                if (contactEl) {
+                    contactEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                    // Fokusera på namn-fältet efter skroll
+                    setTimeout(() => {
+                        const nameField = document.getElementById("name");
+                        if (nameField) nameField.focus();
+                    }, 600);
+                }
+            });
+        });
 
         // 1. Anpassa badge efter källa (source)
         if (source) {
@@ -423,7 +622,7 @@ import { pb } from "../utils";
                 if (subheadingEl) subheadingEl.innerText = "Här når du mig direkt för rådgivning, snabba frågor eller kostnadsfri offert. Spara mina kontaktuppgifter direkt i mobilen nedan!";
                 if (vcardBtn) vcardBtn.classList.remove("hidden");
             } else if (s.includes("flyer") || s.includes("utskick")) {
-                if (badgeEl) badgeEl.innerText = "Exklusivt erbjudande";
+                if (badgeEl) badgeEl.innerText = "Exklusivt erbjudande via flyer";
             } else if (s.includes("skylt") || s.includes("bygge")) {
                 if (badgeEl) badgeEl.innerText = "Pågående projekt i närområdet";
             } else if (s.includes("showroom")) {
@@ -435,24 +634,24 @@ import { pb } from "../utils";
         if (campaign) {
             const c = campaign.toLowerCase();
 
-            if (c.includes("laddbox") || c.includes("ladd")) {
+            if (c.includes("laddbox") || c.includes("ladd") || c.includes("zaptec")) {
                 if (headingEl) headingEl.innerHTML = "Laddbox med <br/><span class='text-elorange'>50% Grön Teknik.</span>";
-                if (subheadingEl) subheadingEl.innerText = "Ladda elbilen säkert och snabbt hemma. Fast pris från 8 000 kr inklusive installation och lastbalansering.";
+                if (subheadingEl) subheadingEl.innerText = "Ladda elbilen säkert och snabbt hemma. Fast pris från 8 000 kr inklusive Zaptec laddbox, dynamisk lastbalansering och installation.";
                 if (serviceSelect) serviceSelect.value = "Laddbox";
                 highlightCard("card-laddbox");
-            } else if (c.includes("sol") || c.includes("solceller")) {
-                if (headingEl) headingEl.innerHTML = "Solceller & <br/><span class='text-elorange'>Egen elproduktion.</span>";
-                if (subheadingEl) subheadingEl.innerText = "Sänk dina elkostnader med solceller monterade av auktoriserad elektriker och certifierade takläggare.";
-                if (serviceSelect) serviceSelect.value = "Solceller";
-                highlightCard("card-solceller");
-            } else if (c.includes("batteri") || c.includes("lagring")) {
-                if (headingEl) headingEl.innerHTML = "Batterilager med <br/><span class='text-elorange'>AI-styrning.</span>";
-                if (subheadingEl) subheadingEl.innerText = "Lagra egen solenergi och låt intelligent AI-styrning optimera förbrukningen mot dyra elpristoppar. 50% Grön Teknik-avdrag.";
+            } else if (c.includes("batteri") || c.includes("lagring") || c.includes("ec")) {
+                if (headingEl) headingEl.innerHTML = "Sigenergy EC <br/><span class='text-elorange'>15 kWh Batterilager.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Kapa effekttoppar och optimera elförbrukningen mot dyra elpristoppar. Från 65 000 kr inklusive 50% Grön Teknik och installation.";
                 if (serviceSelect) serviceSelect.value = "Solceller";
                 highlightCard("card-batteri");
+            } else if (c.includes("sol") || c.includes("solceller")) {
+                if (headingEl) headingEl.innerHTML = "Solceller & <br/><span class='text-elorange'>Sigenergy batterilager.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Sänk dina elkostnader och maximera din självständighet med 16 paneler och 15 kWh intelligent energilagring. Grön Teknik-avdrag direkt på fakturan.";
+                if (serviceSelect) serviceSelect.value = "Solceller";
+                highlightCard("card-sol-batteri");
             } else if (c.includes("service") || c.includes("central") || c.includes("propp")) {
                 if (headingEl) headingEl.innerHTML = "Elservice & <br/><span class='text-elorange'>Centralbyte.</span>";
-                if (subheadingEl) subheadingEl.innerText = "Snabb och trygg hjälp med felsökning, byte till automatsäkringar och reparationer.";
+                if (subheadingEl) subheadingEl.innerText = "Snabb och trygg hjälp med statuskontroll, felsökning, byte till automatsäkringar och reparationer.";
                 if (serviceSelect) serviceSelect.value = "Service & Felsökning";
             } else if (c.includes("plejd") || c.includes("smart")) {
                 if (headingEl) headingEl.innerHTML = "Smarta hem & <br/><span class='text-elorange'>Plejd-styrning.</span>";
@@ -474,8 +673,7 @@ import { pb } from "../utils";
         function highlightCard(cardId: string) {
             const card = document.getElementById(cardId);
             if (card) {
-                card.classList.add("ring-2", "ring-elorange", "shadow-xl", "bg-white");
-                card.classList.remove("bg-slate-50");
+                card.classList.add("ring-4", "ring-elorange", "shadow-2xl");
             }
         }
 
