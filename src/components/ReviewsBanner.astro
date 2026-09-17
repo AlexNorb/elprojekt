@@ -38,9 +38,32 @@ const reviews = [
 ---
 
 <section
-    class="bg-white border-b border-slate-100 py-6 overflow-hidden relative"
+    class="bg-slate-50/50 border-b border-slate-100 py-8 overflow-hidden relative"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Aggregated Score Header - Compact */}
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-6 text-center">
+            <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-sm">
+                <GoogleIcon className="w-4 h-4 text-[#4285F4]" />
+                <span class="text-sm font-bold text-slate-900">5.0</span>
+                <div class="flex gap-0.5 text-elorange">
+                    <StarIcon className="w-3.5 h-3.5 drop-shadow-sm" />
+                    <StarIcon className="w-3.5 h-3.5 drop-shadow-sm" />
+                    <StarIcon className="w-3.5 h-3.5 drop-shadow-sm" />
+                    <StarIcon className="w-3.5 h-3.5 drop-shadow-sm" />
+                    <StarIcon className="w-3.5 h-3.5 drop-shadow-sm" />
+                </div>
+            </div>
+            <a 
+                href="https://g.page/r/CZaiX2q-GJRhEBM/review" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-xs sm:text-sm font-medium text-slate-500 hover:text-elblue transition-colors underline decoration-slate-300 underline-offset-4"
+            >
+                Baserat på riktiga kundomdömen
+            </a>
+        </div>
+
         <div class="relative group px-1 md:px-8">
             {/* Previous Button */}
             <button
@@ -56,7 +79,7 @@ const reviews = [
             {/* Container for Carousel */}
             <div
                 id="banner-carousel"
-                class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-6 scroll-smooth -mx-4 px-4 md:mx-0 md:px-0"
+                class="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 scroll-smooth -mx-4 px-4 md:mx-0 md:px-0"
             >
                 {
                     reviews.map((review, index) => (
@@ -64,8 +87,8 @@ const reviews = [
                             class="banner-card w-[85%] sm:w-[350px] md:w-[calc((100%-3rem)/3)] flex-shrink-0 snap-start flex flex-col"
                             data-index={index}
                         >
-                            <div class="flex flex-col p-4 rounded-lg bg-slate-50 border border-slate-100 hover:border-elblue/20 hover:shadow-sm transition-all duration-300 h-full">
-                                <div class="flex items-center justify-between mb-2">
+                            <div class="flex flex-col p-5 rounded-xl bg-white border border-slate-100 shadow-sm hover:border-elblue/20 hover:shadow-md transition-all duration-300 h-full">
+                                <div class="flex items-center justify-between mb-3">
                                     <h4 class="text-sm font-bold text-slate-900 truncate pr-2">
                                         {review.name}
                                     </h4>
@@ -77,15 +100,15 @@ const reviews = [
                                         ))}
                                     </div>
                                 </div>
-                                <p class="text-xs text-slate-600 italic leading-relaxed flex-grow">
+                                <p class="text-sm text-slate-600 italic leading-relaxed flex-grow">
                                     "{review.text}"
                                 </p>
                                 
                                 {/* Tags Section */}
-                                <div class="flex flex-wrap gap-1 mt-3 pt-2 border-t border-slate-200/50">
+                                <div class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-slate-100">
                                     {
                                         review.tags.map((tag) => (
-                                            <span class="text-[9px] font-bold uppercase tracking-wider text-elblue bg-elblue-50/70 px-1.5 py-0.5 rounded-sm">
+                                            <span class="text-[10px] font-bold uppercase tracking-wider text-elblue bg-elblue/10 px-2 py-0.5 rounded">
                                                 {tag}
                                             </span>
                                         ))
@@ -110,7 +133,7 @@ const reviews = [
         </div>
 
         {/* Dots Indicator (All Screens) */}
-        <div class="flex justify-center items-center gap-1 mt-4">
+        <div class="flex justify-center items-center gap-1 mt-2">
             {
                 reviews.map((_, index) => (
                     <button
@@ -122,22 +145,6 @@ const reviews = [
                     </button>
                 ))
             }
-        </div>
-
-        {/* Leave Review CTA */}
-        <div class="flex justify-center mt-4">
-            <a
-                href="https://g.page/r/CZaiX2q-GJRhEBM/review"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 hover:text-white bg-slate-100 hover:bg-gradient-to-r hover:from-[#4285F4] hover:via-[#34A853] hover:to-[#FBBC04] rounded-full transition-all duration-300 group"
-            >
-                <GoogleIcon className="w-4 h-4 text-[#4285F4] group-hover:text-white transition-colors" />
-                <span>Nöjd kund? Lämna ett omdöme!</span>
-                <span class="group-hover:translate-x-1 transition-transform"
-                    >→</span
-                >
-            </a>
         </div>
     </div>
 
