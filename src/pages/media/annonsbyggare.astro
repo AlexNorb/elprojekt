@@ -1,0 +1,2178 @@
+---
+import QRCode from "qrcode";
+import "../../styles/global.css";
+
+const qrUrl = "https://elprojekt.nu/qr?src=annons";
+const qrDataUrl = await QRCode.toDataURL(qrUrl, {
+    width: 400,
+    margin: 1,
+    color: {
+        dark: "#0f172a",
+        light: "#ffffff",
+    },
+});
+---
+
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ELPROJEKT – Annonsbyggare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    />
+    <style is:global>
+        @page {
+            size: 216mm 384mm;
+            margin: 0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: "Inter", system-ui, sans-serif;
+            background-color: #0b0f19;
+            color: #f8fafc;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-display {
+            font-family: "Bank Gothic Light", "Inter", sans-serif;
+        }
+
+        .font-condensed {
+            font-family: "Oswald", "Inter", sans-serif;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Screen layout: Editor sidebar + Live 9:16 preview */
+        @media screen {
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            .poster-container {
+                height: calc(100vh - 92px);
+                max-height: 920px;
+                aspect-ratio: 9 / 16;
+                width: auto;
+                max-width: 92vw;
+                border-radius: 12px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.12);
+                position: relative;
+                overflow: hidden;
+                background-color: #ffffff;
+                container-type: size;
+                flex-shrink: 0;
+            }
+        }
+
+        /* Exact 9:16 PDF Export & Print */
+        @media print {
+            html, body {
+                width: 216mm !important;
+                height: 384mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #ffffff !important;
+                overflow: hidden !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .preview-stage {
+                padding: 0 !important;
+                margin: 0 !important;
+                display: block !important;
+                background: transparent !important;
+            }
+            .poster-container {
+                width: 216mm !important;
+                height: 384mm !important;
+                max-width: 216mm !important;
+                max-height: 384mm !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                overflow: hidden !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+                container-type: size;
+            }
+        }
+
+        /* 100% Proportional Typography & Spacing via Container Units (cqw / cqh) */
+        .ad-header {
+            padding: 2.8cqh 6cqw 2.4cqh;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+            flex-shrink: 0;
+        }
+        .ad-logo-wrap {
+            width: 48cqw;
+            margin: 0 auto 1.2cqh;
+        }
+        .ad-campaign-title {
+            font-family: "Oswald", "Inter", sans-serif;
+            font-size: 9.2cqw;
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .ad-campaign-sub {
+            font-size: 2.35cqw;
+            line-height: 1.3;
+            font-weight: 500;
+            margin-top: 0.8cqh;
+            opacity: 0.92;
+        }
+
+        .ad-stage {
+            position: relative;
+            flex: 1 1 auto;
+            min-height: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ad-bg-studio-light {
+            background: radial-gradient(circle at 50% 45%, #f1f5f9 0%, #dce2ea 55%, #cbd5e1 100%);
+        }
+        .ad-bg-pure-white {
+            background: #ffffff;
+        }
+        .ad-bg-studio-dark {
+            background: radial-gradient(circle at 50% 45%, #1e293b 0%, #0f172a 65%, #020617 100%);
+        }
+
+        .ad-product-img {
+            position: relative;
+            z-index: 10;
+            pointer-events: none;
+            user-select: none;
+        }
+        .ad-product-img.fit-contain {
+            max-width: 82cqw;
+            max-height: 82%;
+            object-fit: contain;
+        }
+        .ad-product-img.fit-cover {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            max-height: none;
+            object-fit: cover;
+        }
+
+        /* Draggable Overlays */
+        .ad-draggable {
+            position: absolute;
+            z-index: 25;
+            user-select: none;
+            cursor: grab;
+            touch-action: none;
+        }
+        .ad-draggable:active {
+            cursor: grabbing;
+        }
+        @media screen {
+            .ad-draggable:hover {
+                outline: 2px dashed rgba(255, 116, 3, 0.8);
+                outline-offset: 4px;
+            }
+        }
+
+        /* Overlay Badges */
+        .ad-badge {
+            box-shadow: 0 1.4cqh 3cqw rgba(15, 23, 42, 0.28);
+            text-align: center;
+            --badge-rot: 0deg;
+            transform: translate(-50%, -50%) rotate(var(--badge-rot));
+        }
+
+        .ad-badge-tilted-price {
+            background: linear-gradient(135deg, #ff7403 0%, #e65c00 100%);
+            color: #ffffff;
+            padding: 1.8cqh 4.5cqw;
+            border-radius: 2.2cqw;
+            --badge-rot: 7deg;
+            border: 0.35cqw solid rgba(255, 255, 255, 0.35);
+        }
+        .ad-badge-flat-price {
+            background: linear-gradient(135deg, #ff7403 0%, #e65c00 100%);
+            color: #ffffff;
+            padding: 1.8cqh 4.5cqw;
+            border-radius: 2cqw;
+            --badge-rot: 0deg;
+            border: 0.35cqw solid rgba(255, 255, 255, 0.35);
+        }
+        .ad-badge-pill-campaign {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 1.4cqh 4.5cqw;
+            border-radius: 999px;
+            --badge-rot: 0deg;
+            border: 0.4cqw solid #ff7403;
+        }
+        .ad-badge-circle-burst {
+            background: linear-gradient(135deg, #ff7403 0%, #dc2626 100%);
+            color: #ffffff;
+            width: 24cqw;
+            height: 24cqw;
+            border-radius: 999px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2cqw;
+            --badge-rot: -6deg;
+            border: 0.45cqw solid #ffffff;
+        }
+
+        /* Text Overlay Block */
+        .ad-text-overlay {
+            transform: translate(-50%, -50%);
+            padding: 2cqh 3.8cqw;
+            border-radius: 2cqw;
+            z-index: 24;
+        }
+        .ad-text-overlay-dark-glass {
+            background: rgba(15, 23, 42, 0.52);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            color: #ffffff;
+            box-shadow: 0 1.4cqh 3.5cqw rgba(2, 6, 23, 0.35), inset 0 0.15cqh 0 rgba(255, 255, 255, 0.25);
+            border: 0.28cqw solid rgba(255, 255, 255, 0.28);
+        }
+        .ad-text-overlay-light-glass {
+            background: rgba(255, 255, 255, 0.58);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            color: #0f172a;
+            box-shadow: 0 1.4cqh 3.5cqw rgba(15, 23, 42, 0.16), inset 0 0.15cqh 0 rgba(255, 255, 255, 0.8);
+            border: 0.28cqw solid rgba(255, 255, 255, 0.65);
+        }
+        .ad-text-overlay-clean-white {
+            background: transparent;
+            color: #ffffff;
+            text-shadow: 0 0.4cqh 1.4cqw rgba(0, 0, 0, 0.72);
+            padding: 0.8cqh 1.5cqw;
+        }
+        .ad-text-overlay-clean-dark {
+            background: transparent;
+            color: #0f172a;
+            padding: 0.8cqh 1.5cqw;
+        }
+        .ad-md-h1 {
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.015em;
+            margin-bottom: 0.45cqh;
+            white-space: pre-wrap;
+        }
+        .ad-md-h2 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 0.35cqh;
+            margin-bottom: 0.35cqh;
+            white-space: pre-wrap;
+        }
+        .ad-md-h3 {
+            font-weight: 700;
+            line-height: 1.25;
+            margin-top: 0.25cqh;
+            margin-bottom: 0.25cqh;
+            white-space: pre-wrap;
+        }
+        .ad-md-p,
+        .ad-md-bullet {
+            font-weight: 500;
+            line-height: 1.38;
+            opacity: 0.95;
+            white-space: pre-wrap;
+        }
+        .ad-md-bullet {
+            display: flex;
+            gap: 1.1cqw;
+            align-items: flex-start;
+        }
+        .ad-md-spacer {
+            height: 0.9cqh;
+        }
+        .ad-image-overlay {
+            transform: translate(-50%, -50%);
+            z-index: 24;
+            border-radius: 2cqw;
+        }
+        .ad-image-overlay-transparent {
+            background: transparent;
+            padding: 0;
+        }
+        .ad-image-overlay-dark-glass {
+            background: rgba(15, 23, 42, 0.52);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            padding: 1.6cqh 2.8cqw;
+            box-shadow: 0 1.4cqh 3.5cqw rgba(2, 6, 23, 0.35), inset 0 0.15cqh 0 rgba(255, 255, 255, 0.25);
+            border: 0.28cqw solid rgba(255, 255, 255, 0.28);
+        }
+        .ad-image-overlay-light-glass {
+            background: rgba(255, 255, 255, 0.58);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            padding: 1.6cqh 2.8cqw;
+            box-shadow: 0 1.4cqh 3.5cqw rgba(15, 23, 42, 0.16), inset 0 0.15cqh 0 rgba(255, 255, 255, 0.8);
+            border: 0.28cqw solid rgba(255, 255, 255, 0.65);
+        }
+        .ad-image-overlay img {
+            width: 100%;
+            height: auto;
+            display: block;
+            pointer-events: none;
+            user-select: none;
+        }
+        .ad-badge-main {
+            font-family: "Oswald", "Inter", sans-serif;
+            font-size: 6.2cqw;
+            font-weight: 700;
+            line-height: 1.05;
+            white-space: nowrap;
+        }
+        .ad-badge-sub {
+            font-size: 2.2cqw;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-top: 0.35cqh;
+            opacity: 0.95;
+            white-space: nowrap;
+        }
+
+        /* Footer */
+        .ad-footer-wrap {
+            position: relative;
+            z-index: 20;
+            flex-shrink: 0;
+        }
+        .ad-footer-info {
+            background: #ffffff;
+            padding: 2.4cqh 5.5cqw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3cqw;
+            border-top: 0.25cqh solid rgba(15, 23, 42, 0.08);
+        }
+        .ad-footer-text-col {
+            flex: 1 1 auto;
+            text-align: center;
+        }
+        .ad-footer-text-col.with-qr {
+            text-align: left;
+        }
+        .ad-footer-title {
+            font-size: 4.3cqw;
+            font-weight: 800;
+            line-height: 1.18;
+            color: #003ca6;
+            letter-spacing: -0.015em;
+        }
+        .ad-footer-selling {
+            font-size: 2.75cqw;
+            font-weight: 600;
+            line-height: 1.35;
+            color: #1e293b;
+            margin-top: 0.6cqh;
+        }
+        .ad-footer-local {
+            font-size: 2.35cqw;
+            font-weight: 500;
+            line-height: 1.35;
+            color: #475569;
+            margin-top: 0.35cqh;
+        }
+        .ad-qr-card {
+            width: 15cqw;
+            flex-shrink: 0;
+            background: #ffffff;
+            border: 0.25cqw solid #e2e8f0;
+            border-radius: 1.6cqw;
+            padding: 1cqw;
+            text-align: center;
+            box-shadow: 0 0.5cqh 1.5cqw rgba(15, 23, 42, 0.08);
+        }
+        .ad-qr-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .ad-qr-card span {
+            display: block;
+            font-size: 1.45cqw;
+            font-weight: 800;
+            color: #0f172a;
+            margin-top: 0.3cqh;
+            text-transform: uppercase;
+        }
+        .ad-contact-bar {
+            padding: 1.5cqh 4cqw;
+            text-align: center;
+            font-size: 2.35cqw;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+
+    <!-- Top Toolbar -->
+    <header class="no-print h-14 px-4 sm:px-6 bg-slate-900 border-b border-slate-800 flex items-center justify-between gap-4 shrink-0">
+        <div class="flex items-center gap-3 min-w-0">
+            <a href="/media" class="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 transition-colors shrink-0">
+                <svg class="w-3.5 h-3.5 text-elorange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Mediebank
+            </a>
+            <div class="truncate">
+                <span class="text-sm font-bold font-display tracking-wide text-white">ELPROJEKT Annonsbyggare</span>
+                <span id="header-format-label" class="hidden md:inline-block ml-2 text-xs text-slate-400">• 9:16 Showroom & Digital Skylt</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+            <button
+                id="btn-export-jpg"
+                type="button"
+                class="bg-elorange hover:bg-orange-600 text-white font-bold px-3.5 py-2 rounded-lg text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer"
+            >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Ladda ner JPG
+            </button>
+            <button
+                id="btn-export-pdf"
+                type="button"
+                onclick="window.print()"
+                class="bg-elblue hover:bg-blue-700 text-white font-bold px-3.5 py-2 rounded-lg text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer"
+            >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                Spara PDF / Skriv ut
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex flex-col lg:flex-row min-h-0">
+
+        <!-- Left Editor Sidebar -->
+        <aside class="no-print w-full lg:w-[390px] xl:w-[420px] bg-slate-900 border-b lg:border-b-0 lg:border-r border-slate-800 overflow-y-auto p-4 sm:p-5 space-y-5 shrink-0 lg:h-[calc(100vh-56px)]">
+
+            <!-- 1. Format & Snabbmall -->
+            <section class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-elorange font-display">1. Format & Mall</h2>
+                    <button id="btn-reset" type="button" class="text-[11px] text-slate-400 hover:text-white underline cursor-pointer">Återställ</button>
+                </div>
+
+                <div>
+                    <label for="input-format" class="block text-xs font-medium text-slate-300 mb-1">Storleksformat</label>
+                    <select id="input-format" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-elorange">
+                        <option value="9:16" selected>9:16 – Showroom / Skylt (1080×1920)</option>
+                        <option value="4:5">4:5 – Instagram / Facebook (1080×1350)</option>
+                        <option value="1:1">1:1 – Kvadratisk / Sociala medier (1080×1080)</option>
+                        <option value="a4">A4 – Flyer (210×297 mm)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <span class="block text-xs font-medium text-slate-300 mb-2">Tema</span>
+                    <div class="flex items-center gap-3">
+                        <button
+                            type="button"
+                            data-theme="kampanj-blue"
+                            title="Blå"
+                            aria-label="Blå tema"
+                            class="theme-btn w-9 h-9 rounded-full border-2 border-elorange ring-2 ring-elorange/40 cursor-pointer transition-all shadow-sm"
+                            style="background: linear-gradient(180deg, #003ca6 0%, #002a75 100%);"
+                        ></button>
+                        <button
+                            type="button"
+                            data-theme="black-friday"
+                            title="Mörk"
+                            aria-label="Mörk tema"
+                            class="theme-btn w-9 h-9 rounded-full border-2 border-slate-600 cursor-pointer transition-all shadow-sm"
+                            style="background: linear-gradient(180deg, #0f172a 0%, #020617 100%);"
+                        ></button>
+                        <button
+                            type="button"
+                            data-theme="clean-white"
+                            title="Vit"
+                            aria-label="Vit tema"
+                            class="theme-btn w-9 h-9 rounded-full border-2 border-slate-600 cursor-pointer transition-all shadow-sm"
+                            style="background: #ffffff;"
+                        ></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Header -->
+            <section class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-elorange font-display">2. Header (Topp)</h2>
+                    <label class="inline-flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer">
+                        <input id="input-show-logo" type="checkbox" checked class="rounded accent-elorange" />
+                        Visa logotyp
+                    </label>
+                </div>
+
+                <div>
+                    <label for="input-campaign" class="block text-xs font-medium text-slate-300 mb-1">Kampanjrubrik</label>
+                    <input id="input-campaign" type="text" value="BLACK FRIDAY" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-elorange" />
+                </div>
+
+                <div>
+                    <label for="input-dates" class="block text-xs font-medium text-slate-300 mb-1">Underrubrik / Datum</label>
+                    <input id="input-dates" type="text" value="Gäller 16 nov – 31 dec 2026" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-elorange" />
+                </div>
+            </section>
+
+            <!-- 3. Produktbild (Drag & Drop) -->
+            <section class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-elorange font-display">3. Produktbild (Mitten)</h2>
+
+                <div
+                    id="sidebar-dropzone"
+                    class="border-2 border-dashed border-slate-600 hover:border-elorange rounded-xl p-4 text-center cursor-pointer transition-colors bg-slate-950/60"
+                >
+                    <input id="input-image" type="file" accept="image/*" class="hidden" />
+                    <svg class="w-7 h-7 mx-auto text-slate-400 mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <p class="text-xs font-semibold text-white">Dra & släpp bild här eller klicka</p>
+                    <p class="text-[11px] text-slate-400 mt-0.5">PNG med transparent bakgrund eller JPG (stöder även Ctrl+V)</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label for="input-fit" class="block text-[11px] text-slate-300 mb-1">Bildpassning</label>
+                        <select id="input-fit" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+                            <option value="contain" selected>Anpassa (hela bilden)</option>
+                            <option value="cover">Fyll ytan (Cover)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="input-bg" class="block text-[11px] text-slate-300 mb-1">Studiobakgrund</label>
+                        <select id="input-bg" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white">
+                            <option value="studio-light" selected>Ljus studio (som PDF)</option>
+                            <option value="pure-white">Helvit</option>
+                            <option value="studio-dark">Mörk studio</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between text-[11px] text-slate-300 mb-1">
+                        <span>Zoom / Storlek</span>
+                        <span id="val-scale">100%</span>
+                    </div>
+                    <input id="input-scale" type="range" min="20" max="300" value="100" class="w-full accent-elorange cursor-pointer" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <div class="flex justify-between text-[11px] text-slate-300 mb-1">
+                            <span>Flytta X</span>
+                            <span id="val-pos-x">0%</span>
+                        </div>
+                        <input id="input-pos-x" type="range" min="-35" max="35" value="0" class="w-full accent-elorange cursor-pointer" />
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-[11px] text-slate-300 mb-1">
+                            <span>Flytta Y</span>
+                            <span id="val-pos-y">0%</span>
+                        </div>
+                        <input id="input-pos-y" type="range" min="-35" max="35" value="0" class="w-full accent-elorange cursor-pointer" />
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end pt-1">
+                    <button id="btn-clear-image" type="button" class="text-[11px] text-slate-400 hover:text-red-400 cursor-pointer">Ta bort bild</button>
+                </div>
+            </section>
+
+            <!-- 4. Overlay & Pristag -->
+            <section class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-elorange font-display">4. Overlay & Pristag</h2>
+                    <button id="btn-reset-badge-pos" type="button" class="text-[11px] text-slate-400 hover:text-white underline cursor-pointer">Återställ plats</button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label for="input-badge-style" class="block text-[11px] text-slate-300 mb-1">Overlay-mall</label>
+                        <select id="input-badge-style" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white">
+                            <option value="tilted-price" selected>Lutad pristag (Orange)</option>
+                            <option value="flat-price">Rak pristag (Orange)</option>
+                            <option value="pill-campaign">Kampanj-pill (Mörk)</option>
+                            <option value="circle-burst">Rund stämpel</option>
+                            <option value="none">Ingen overlay</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="input-badge-pos" class="block text-[11px] text-slate-300 mb-1">Snabbplacering</label>
+                        <select id="input-badge-pos" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white">
+                            <option value="custom" selected>Fri placering (dra i bild)</option>
+                            <option value="top-right">Övre höger</option>
+                            <option value="top-left">Övre vänster</option>
+                            <option value="bottom-right">Nedre höger</option>
+                            <option value="bottom-left">Nedre vänster</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div>
+                        <label for="input-price-main" class="block text-[11px] text-slate-300 mb-1">Pris / Huvudtext</label>
+                        <input id="input-price-main" type="text" value="5 900 kr" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-elorange" />
+                    </div>
+                    <div>
+                        <label for="input-price-sub" class="block text-[11px] text-slate-300 mb-1">Undertext</label>
+                        <input id="input-price-sub" type="text" value="efter Grön Teknik" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-elorange" />
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-400">Tips: Dra pristagen fritt direkt i förhandsvisningen.</p>
+            </section>
+
+            <!-- 5. Custom Overlays (Text & Bild) -->
+            <section class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-elorange font-display">5. Custom Overlays</h2>
+                    <div class="flex items-center gap-1.5">
+                        <button
+                            id="btn-add-text-overlay"
+                            type="button"
+                            class="inline-flex items-center gap-1 bg-elorange hover:bg-orange-600 text-white font-bold text-[11px] px-2 py-1 rounded-lg transition-colors cursor-pointer shadow-sm"
+                        >
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Text
+                        </button>
+                        <button
+                            id="btn-add-image-overlay"
+                            type="button"
+                            class="inline-flex items-center gap-1 bg-elblue hover:bg-blue-700 text-white font-bold text-[11px] px-2 py-1 rounded-lg transition-colors cursor-pointer shadow-sm"
+                        >
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Bild / Logga
+                        </button>
+                    </div>
+                </div>
+
+                <div id="text-overlays-list" class="space-y-3"></div>
+                <p id="text-overlays-empty" class="text-[11px] text-slate-400 leading-relaxed">
+                    Lägg till valfritt antal <strong class="text-slate-200">Text-block</strong> (med Markdown: <code class="text-slate-300"># Rubrik</code>, <code class="text-slate-300">## Underrubrik</code>, <code class="text-slate-300">- Punkt</code>, <code class="text-slate-300">**fet**</code>) eller <strong class="text-slate-200">Bilder/Loggor</strong> och dra dem dit du vill.
+                </p>
+            </section>
+
+            <!-- 6. Säljtext -->
+            <section class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-elorange font-display">6. Säljtext</h2>
+                    <div class="flex items-center gap-3">
+                        <label class="inline-flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer">
+                            <input id="input-show-sales-box" type="checkbox" checked class="rounded accent-elorange" />
+                            Visa säljtext
+                        </label>
+                        <label class="inline-flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer">
+                            <input id="input-show-qr" type="checkbox" class="rounded accent-elorange" />
+                            QR-kod
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="input-title" class="block text-xs font-medium text-slate-300 mb-1">Produkttitel</label>
+                    <input id="input-title" type="text" value="Laddbox Easee Charge – installerad" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-elorange" />
+                </div>
+
+                <div>
+                    <label for="input-selling" class="block text-xs font-medium text-slate-300 mb-1">Säljtext</label>
+                    <input id="input-selling" type="text" value="Ladda elbilen säkert och smart hemma" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-elorange" />
+                </div>
+
+                <div>
+                    <label for="input-local" class="block text-xs font-medium text-slate-300 mb-1">Lokal rad</label>
+                    <input id="input-local" type="text" value="Lokal elektriker i Uddevalla" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-elorange" />
+                </div>
+            </section>
+
+            <!-- 7. Footer -->
+            <section class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-elorange font-display">7. Footer</h2>
+                    <label class="inline-flex items-center gap-1.5 text-[11px] text-slate-300 cursor-pointer">
+                        <input id="input-show-footer" type="checkbox" checked class="rounded accent-elorange" />
+                        Visa footer
+                    </label>
+                </div>
+
+                <div>
+                    <label for="input-contact" class="block text-xs font-medium text-slate-300 mb-1">Kontaktlist (botten)</label>
+                    <input id="input-contact" type="text" value="elprojekt.nu  ·  alex@elprojekt.nu  ·  070-332 56 55" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-elorange" />
+                </div>
+            </section>
+        </aside>
+
+        <!-- Right Stage: Live 9:16 Preview -->
+        <main class="preview-stage flex-1 flex items-center justify-center p-4 sm:p-6 bg-slate-950 overflow-auto">
+            <div id="poster-container" class="poster-container flex flex-col justify-between select-none">
+
+                <!-- HEADER -->
+                <header id="preview-header" class="ad-header" style="background: linear-gradient(180deg, #003ca6 0%, #002a75 100%); color: #ffffff;">
+                    <div id="preview-logo-wrap" class="ad-logo-wrap">
+                        <div id="logo-light-holder">
+                            <img src="/media/logos/elprojekt-logo-white.svg" alt="ELPROJEKT" class="w-full h-auto block" />
+                        </div>
+                        <div id="logo-dark-holder" class="hidden">
+                            <img src="/media/logos/elprojekt-logo-primary.svg" alt="ELPROJEKT" class="w-full h-auto block" />
+                        </div>
+                    </div>
+                    <div id="preview-campaign" class="ad-campaign-title">BLACK FRIDAY</div>
+                    <div id="preview-dates" class="ad-campaign-sub">Gäller 16 nov – 31 dec 2026</div>
+                </header>
+
+                <!-- MIDDLE: IMAGE STAGE + OVERLAY -->
+                <div id="preview-stage" class="ad-stage ad-bg-studio-light">
+                    <img
+                        id="preview-img"
+                        alt="Produktbild"
+                        class="ad-product-img fit-contain hidden"
+                    />
+
+                    <!-- FREE-FORM TEXT OVERLAYS -->
+                    <div id="preview-text-overlays-layer" class="contents"></div>
+
+                    <!-- OVERLAY BADGE -->
+                    <div id="preview-badge" class="ad-draggable ad-badge ad-badge-tilted-price" style="left: 78%; top: 14%;">
+                        <div id="preview-badge-main" class="ad-badge-main">5 900 kr</div>
+                        <div id="preview-badge-sub" class="ad-badge-sub">efter Grön Teknik</div>
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <footer class="ad-footer-wrap">
+                    <div id="preview-footer-info" class="ad-footer-info">
+                        <div id="preview-footer-text-col" class="ad-footer-text-col">
+                            <div id="preview-title" class="ad-footer-title">Laddbox Easee Charge – installerad</div>
+                            <div id="preview-selling" class="ad-footer-selling">Ladda elbilen säkert och smart hemma</div>
+                            <div id="preview-local" class="ad-footer-local">Lokal elektriker i Uddevalla</div>
+                        </div>
+
+                        <div id="preview-qr-box" class="ad-qr-card hidden">
+                            <img id="preview-qr-img" src={qrDataUrl} alt="QR-kod" />
+                            <span>Scanna här</span>
+                        </div>
+                    </div>
+
+                    <div id="preview-contact-bar" class="ad-contact-bar" style="background: #002a75;">
+                        elprojekt.nu  ·  alex@elprojekt.nu  ·  070-332 56 55
+                    </div>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <script is:inline>
+        const FORMATS = {
+            "9:16": {
+                id: "9:16",
+                label: "• 9:16 Showroom & Digital Skylt",
+                aspect: "9 / 16",
+                printW: "216mm",
+                printH: "384mm",
+                width: 1080,
+                height: 1920,
+                exportScale: 2, // 2160 x 3840
+                filename: "elprojekt-annons-9x16.jpg",
+            },
+            "4:5": {
+                id: "4:5",
+                label: "• 4:5 Instagram / Facebook",
+                aspect: "4 / 5",
+                printW: "200mm",
+                printH: "250mm",
+                width: 1080,
+                height: 1350,
+                exportScale: 2, // 2160 x 2700
+                filename: "elprojekt-annons-4x5.jpg",
+            },
+            "1:1": {
+                id: "1:1",
+                label: "• 1:1 Kvadratisk / Sociala medier",
+                aspect: "1 / 1",
+                printW: "200mm",
+                printH: "200mm",
+                width: 1080,
+                height: 1080,
+                exportScale: 2, // 2160 x 2160
+                filename: "elprojekt-annons-1x1.jpg",
+            },
+            "a4": {
+                id: "a4",
+                label: "• A4 Flyer (210×297 mm)",
+                aspect: "210 / 297",
+                printW: "210mm",
+                printH: "297mm",
+                width: 1240,
+                height: 1754,
+                exportScale: 2, // 2480 x 3508 (300 DPI)
+                filename: "elprojekt-annons-a4.jpg",
+            },
+        };
+
+        const THEMES = {
+            "kampanj-blue": {
+                headerBg: "linear-gradient(180deg, #003ca6 0%, #002a75 100%)",
+                headerColor: "#ffffff",
+                headerSolidTop: "#003ca6",
+                headerSolidBottom: "#002a75",
+                logoLight: true,
+                contactBg: "#002a75",
+                contactColor: "#ffffff",
+                titleColor: "#003ca6",
+            },
+            "black-friday": {
+                headerBg: "linear-gradient(180deg, #0f172a 0%, #020617 100%)",
+                headerColor: "#ffffff",
+                headerSolidTop: "#0f172a",
+                headerSolidBottom: "#020617",
+                logoLight: true,
+                contactBg: "#020617",
+                contactColor: "#ffffff",
+                titleColor: "#0f172a",
+            },
+            "clean-white": {
+                headerBg: "#ffffff",
+                headerColor: "#003ca6",
+                headerSolidTop: "#ffffff",
+                headerSolidBottom: "#f8fafc",
+                logoLight: false,
+                contactBg: "#003ca6",
+                contactColor: "#ffffff",
+                titleColor: "#003ca6",
+            },
+        };
+
+        const state = {
+            format: "9:16",
+            theme: "kampanj-blue",
+            bg: "studio-light",
+            fit: "contain",
+            imageSrc: null,
+            imageEl: null,
+            scale: 100,
+            posX: 0,
+            posY: 0,
+            showLogo: true,
+            campaign: "BLACK FRIDAY",
+            dates: "Gäller 16 nov – 31 dec 2026",
+            badgeStyle: "tilted-price",
+            badgeX: 78,
+            badgeY: 14,
+            priceMain: "5 900 kr",
+            priceSub: "efter Grön Teknik",
+            textOverlays: [],
+            showSalesBox: true,
+            title: "Laddbox Easee Charge – installerad",
+            selling: "Ladda elbilen säkert och smart hemma",
+            local: "Lokal elektriker i Uddevalla",
+            showFooter: true,
+            contact: "elprojekt.nu  ·  alex@elprojekt.nu  ·  070-332 56 55",
+            showQr: false,
+        };
+
+        const printPageStyleEl = document.createElement("style");
+        document.head.appendChild(printPageStyleEl);
+
+        // DOM references
+        const el = {
+            posterContainer: document.getElementById("poster-container"),
+            headerFormatLabel: document.getElementById("header-format-label"),
+            printPageStyle: printPageStyleEl,
+            previewHeader: document.getElementById("preview-header"),
+            previewLogoWrap: document.getElementById("preview-logo-wrap"),
+            logoLightHolder: document.getElementById("logo-light-holder"),
+            logoDarkHolder: document.getElementById("logo-dark-holder"),
+            previewCampaign: document.getElementById("preview-campaign"),
+            previewDates: document.getElementById("preview-dates"),
+            previewStage: document.getElementById("preview-stage"),
+            previewImg: document.getElementById("preview-img"),
+            previewBadge: document.getElementById("preview-badge"),
+            previewBadgeMain: document.getElementById("preview-badge-main"),
+            previewBadgeSub: document.getElementById("preview-badge-sub"),
+            previewTextOverlaysLayer: document.getElementById("preview-text-overlays-layer"),
+            previewFooterInfo: document.getElementById("preview-footer-info"),
+            previewFooterTextCol: document.getElementById("preview-footer-text-col"),
+            previewTitle: document.getElementById("preview-title"),
+            previewSelling: document.getElementById("preview-selling"),
+            previewLocal: document.getElementById("preview-local"),
+            previewQrBox: document.getElementById("preview-qr-box"),
+            previewQrImg: document.getElementById("preview-qr-img"),
+            previewContactBar: document.getElementById("preview-contact-bar"),
+
+            inputFormat: document.getElementById("input-format"),
+            inputImage: document.getElementById("input-image"),
+            sidebarDropzone: document.getElementById("sidebar-dropzone"),
+            inputFit: document.getElementById("input-fit"),
+            inputScale: document.getElementById("input-scale"),
+            valScale: document.getElementById("val-scale"),
+            inputPosX: document.getElementById("input-pos-x"),
+            valPosX: document.getElementById("val-pos-x"),
+            inputPosY: document.getElementById("input-pos-y"),
+            valPosY: document.getElementById("val-pos-y"),
+            inputBg: document.getElementById("input-bg"),
+            inputShowLogo: document.getElementById("input-show-logo"),
+            inputCampaign: document.getElementById("input-campaign"),
+            inputDates: document.getElementById("input-dates"),
+            inputBadgeStyle: document.getElementById("input-badge-style"),
+            inputBadgePos: document.getElementById("input-badge-pos"),
+            btnResetBadgePos: document.getElementById("btn-reset-badge-pos"),
+            inputPriceMain: document.getElementById("input-price-main"),
+            inputPriceSub: document.getElementById("input-price-sub"),
+            btnAddTextOverlay: document.getElementById("btn-add-text-overlay"),
+            btnAddImageOverlay: document.getElementById("btn-add-image-overlay"),
+            textOverlaysList: document.getElementById("text-overlays-list"),
+            textOverlaysEmpty: document.getElementById("text-overlays-empty"),
+            inputShowSalesBox: document.getElementById("input-show-sales-box"),
+            inputTitle: document.getElementById("input-title"),
+            inputSelling: document.getElementById("input-selling"),
+            inputLocal: document.getElementById("input-local"),
+            inputShowFooter: document.getElementById("input-show-footer"),
+            inputContact: document.getElementById("input-contact"),
+            inputShowQr: document.getElementById("input-show-qr"),
+            btnClearImage: document.getElementById("btn-clear-image"),
+            btnReset: document.getElementById("btn-reset"),
+            btnExportJpg: document.getElementById("btn-export-jpg"),
+        };
+
+        function render() {
+            const fmt = FORMATS[state.format];
+            const theme = THEMES[state.theme];
+
+            // Format & Print @page sizing
+            el.posterContainer.style.aspectRatio = fmt.aspect;
+            el.posterContainer.dataset.format = fmt.id;
+            if (el.headerFormatLabel) el.headerFormatLabel.textContent = fmt.label;
+            el.printPageStyle.textContent = `
+                @media print {
+                    @page { size: ${fmt.printW} ${fmt.printH}; margin: 0; }
+                    html, body { width: ${fmt.printW} !important; height: ${fmt.printH} !important; }
+                    .poster-container {
+                        width: ${fmt.printW} !important;
+                        height: ${fmt.printH} !important;
+                        max-width: ${fmt.printW} !important;
+                        max-height: ${fmt.printH} !important;
+                    }
+                }
+            `;
+
+            // Header
+            el.previewHeader.style.background = theme.headerBg;
+            el.previewHeader.style.color = theme.headerColor;
+            el.previewLogoWrap.classList.toggle("hidden", !state.showLogo);
+            el.logoLightHolder.classList.toggle("hidden", !theme.logoLight);
+            el.logoDarkHolder.classList.toggle("hidden", theme.logoLight);
+
+            el.previewCampaign.textContent = state.campaign;
+            el.previewCampaign.classList.toggle("hidden", !state.campaign.trim());
+            el.previewDates.textContent = state.dates;
+            el.previewDates.classList.toggle("hidden", !state.dates.trim());
+
+            // Stage & Background
+            el.previewStage.className = `ad-stage ad-bg-${state.bg}`;
+
+            // Product Image
+            if (state.imageSrc) {
+                el.previewImg.src = state.imageSrc;
+                el.previewImg.classList.remove("hidden", "fit-contain", "fit-cover");
+                el.previewImg.classList.add(`fit-${state.fit}`);
+                el.previewImg.style.transform = `translate(${state.posX}%, ${state.posY}%) scale(${state.scale / 100})`;
+            } else {
+                el.previewImg.classList.add("hidden");
+            }
+
+            // Badge
+            if (state.badgeStyle === "none") {
+                el.previewBadge.classList.add("hidden");
+            } else {
+                el.previewBadge.classList.remove("hidden");
+                el.previewBadge.className = `ad-draggable ad-badge ad-badge-${state.badgeStyle}`;
+                el.previewBadge.style.left = `${state.badgeX}%`;
+                el.previewBadge.style.top = `${state.badgeY}%`;
+                el.previewBadgeMain.textContent = state.priceMain;
+                el.previewBadgeSub.textContent = state.priceSub;
+                el.previewBadgeSub.classList.toggle("hidden", !state.priceSub.trim());
+            }
+
+            // Free-form Text Overlays
+            syncPreviewTextOverlays();
+
+            // Säljtext & Footer
+            el.previewFooterInfo.classList.toggle("hidden", !state.showSalesBox);
+            el.previewTitle.textContent = state.title;
+            el.previewTitle.style.color = theme.titleColor;
+            el.previewTitle.classList.toggle("hidden", !state.title.trim());
+
+            el.previewSelling.textContent = state.selling;
+            el.previewSelling.classList.toggle("hidden", !state.selling.trim());
+
+            el.previewLocal.textContent = state.local;
+            el.previewLocal.classList.toggle("hidden", !state.local.trim());
+
+            el.previewQrBox.classList.toggle("hidden", !state.showQr);
+            el.previewFooterTextCol.classList.toggle("with-qr", state.showQr);
+
+            el.previewContactBar.classList.toggle("hidden", !state.showFooter);
+            el.previewContactBar.textContent = state.contact;
+            el.previewContactBar.style.background = theme.contactBg;
+            el.previewContactBar.style.color = theme.contactColor;
+
+            // Theme swatch buttons active state
+            document.querySelectorAll(".theme-btn").forEach((btn) => {
+                const isActive = btn.dataset.theme === state.theme;
+                btn.classList.toggle("border-elorange", isActive);
+                btn.classList.toggle("ring-2", isActive);
+                btn.classList.toggle("ring-elorange/40", isActive);
+                btn.classList.toggle("border-slate-600", !isActive);
+            });
+        }
+
+        function loadImageFile(file) {
+            if (!file || !file.type.startsWith("image/")) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const dataUrl = e.target.result;
+                const img = new Image();
+                img.onload = () => {
+                    state.imageSrc = dataUrl;
+                    state.imageEl = img;
+                    render();
+                };
+                img.src = dataUrl;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Theme selection
+        document.querySelectorAll(".theme-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                state.theme = btn.dataset.theme;
+                render();
+            });
+        });
+
+        // File upload & Drag/Drop (sidebar only)
+        el.sidebarDropzone.addEventListener("click", () => el.inputImage.click());
+        el.inputImage.addEventListener("change", (e) => {
+            if (e.target.files?.[0]) loadImageFile(e.target.files[0]);
+        });
+
+        el.sidebarDropzone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            el.sidebarDropzone.classList.add("border-elorange");
+        });
+        el.sidebarDropzone.addEventListener("dragleave", () => {
+            el.sidebarDropzone.classList.remove("border-elorange");
+        });
+        el.sidebarDropzone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            el.sidebarDropzone.classList.remove("border-elorange");
+            const file = e.dataTransfer?.files?.[0];
+            if (file) loadImageFile(file);
+        });
+
+        // Paste image support (Ctrl+V)
+        window.addEventListener("paste", (e) => {
+            const items = e.clipboardData?.items;
+            if (!items) return;
+            for (const item of items) {
+                if (item.type.startsWith("image/")) {
+                    loadImageFile(item.getAsFile());
+                    break;
+                }
+            }
+        });
+
+        // Bind inputs
+        el.inputFormat.addEventListener("change", (e) => {
+            state.format = e.target.value;
+            render();
+        });
+        el.inputFit.addEventListener("change", (e) => {
+            state.fit = e.target.value;
+            render();
+        });
+        el.inputScale.addEventListener("input", (e) => {
+            state.scale = Number(e.target.value);
+            el.valScale.textContent = `${state.scale}%`;
+            render();
+        });
+        el.inputPosX.addEventListener("input", (e) => {
+            state.posX = Number(e.target.value);
+            el.valPosX.textContent = `${state.posX}%`;
+            render();
+        });
+        el.inputPosY.addEventListener("input", (e) => {
+            state.posY = Number(e.target.value);
+            el.valPosY.textContent = `${state.posY}%`;
+            render();
+        });
+        el.inputBg.addEventListener("change", (e) => {
+            state.bg = e.target.value;
+            render();
+        });
+        el.inputShowLogo.addEventListener("change", (e) => {
+            state.showLogo = e.target.checked;
+            render();
+        });
+        el.inputCampaign.addEventListener("input", (e) => {
+            state.campaign = e.target.value;
+            render();
+        });
+        el.inputDates.addEventListener("input", (e) => {
+            state.dates = e.target.value;
+            render();
+        });
+        const BADGE_PRESETS = {
+            "top-right": { x: 78, y: 14 },
+            "top-left": { x: 22, y: 14 },
+            "bottom-right": { x: 78, y: 86 },
+            "bottom-left": { x: 22, y: 86 },
+        };
+
+        function makeDraggable(targetEl, getPos, setPos) {
+            let dragging = false;
+            let startX = 0;
+            let startY = 0;
+            let origX = 0;
+            let origY = 0;
+
+            targetEl.addEventListener("pointerdown", (e) => {
+                e.preventDefault();
+                dragging = true;
+                targetEl.setPointerCapture(e.pointerId);
+                startX = e.clientX;
+                startY = e.clientY;
+                const pos = getPos();
+                origX = pos.x;
+                origY = pos.y;
+            });
+
+            targetEl.addEventListener("pointermove", (e) => {
+                if (!dragging) return;
+                const stageRect = el.previewStage.getBoundingClientRect();
+                const dxPct = ((e.clientX - startX) / stageRect.width) * 100;
+                const dyPct = ((e.clientY - startY) / stageRect.height) * 100;
+                const nx = Math.max(4, Math.min(96, origX + dxPct));
+                const ny = Math.max(4, Math.min(96, origY + dyPct));
+                setPos(nx, ny);
+            });
+
+            const stop = (e) => {
+                if (!dragging) return;
+                dragging = false;
+                if (targetEl.hasPointerCapture(e.pointerId)) {
+                    targetEl.releasePointerCapture(e.pointerId);
+                }
+            };
+            targetEl.addEventListener("pointerup", stop);
+            targetEl.addEventListener("pointercancel", stop);
+        }
+
+        let nextOverlayId = 1;
+
+        function parseInlineBold(text) {
+            const spans = [];
+            const parts = text.split(/(\*\*[^*]+\*\*)/g);
+            for (const part of parts) {
+                if (!part) continue;
+                if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+                    spans.push({ text: part.slice(2, -2), bold: true });
+                } else {
+                    spans.push({ text: part, bold: false });
+                }
+            }
+            return spans;
+        }
+
+        function parseMarkdownLines(md) {
+            const lines = (md || "").split(/\r?\n/);
+            return lines.map((raw) => {
+                const trimmed = raw.trim();
+                if (!trimmed) return { type: "spacer", spans: [] };
+                if (trimmed.startsWith("### ")) return { type: "h3", spans: parseInlineBold(trimmed.slice(4)) };
+                if (trimmed.startsWith("## ")) return { type: "h2", spans: parseInlineBold(trimmed.slice(3)) };
+                if (trimmed.startsWith("# ")) return { type: "h1", spans: parseInlineBold(trimmed.slice(2)) };
+                if (/^[-*•]\s+/.test(trimmed)) {
+                    return { type: "bullet", spans: parseInlineBold(trimmed.replace(/^[-*•]\s+/, "")) };
+                }
+                return { type: "p", spans: parseInlineBold(raw) };
+            });
+        }
+
+        function appendSpansToDom(parent, spans) {
+            for (const sp of spans) {
+                if (sp.bold) {
+                    const strong = document.createElement("strong");
+                    strong.style.fontWeight = "800";
+                    strong.textContent = sp.text;
+                    parent.appendChild(strong);
+                } else {
+                    parent.appendChild(document.createTextNode(sp.text));
+                }
+            }
+        }
+
+        function renderMarkdownToDom(container, md, scalePct) {
+            container.innerHTML = "";
+            const s = scalePct / 100;
+            const parsed = parseMarkdownLines(md);
+            for (const item of parsed) {
+                if (item.type === "spacer") {
+                    const div = document.createElement("div");
+                    div.className = "ad-md-spacer";
+                    container.appendChild(div);
+                    continue;
+                }
+                const elLine = document.createElement("div");
+                if (item.type === "h1") {
+                    elLine.className = "ad-md-h1";
+                    elLine.style.fontSize = `${3.9 * s}cqw`;
+                    appendSpansToDom(elLine, item.spans);
+                } else if (item.type === "h2") {
+                    elLine.className = "ad-md-h2";
+                    elLine.style.fontSize = `${3.1 * s}cqw`;
+                    appendSpansToDom(elLine, item.spans);
+                } else if (item.type === "h3") {
+                    elLine.className = "ad-md-h3";
+                    elLine.style.fontSize = `${2.6 * s}cqw`;
+                    appendSpansToDom(elLine, item.spans);
+                } else if (item.type === "bullet") {
+                    elLine.className = "ad-md-bullet";
+                    elLine.style.fontSize = `${2.45 * s}cqw`;
+                    const dot = document.createElement("span");
+                    dot.textContent = "•";
+                    const content = document.createElement("span");
+                    appendSpansToDom(content, item.spans);
+                    elLine.appendChild(dot);
+                    elLine.appendChild(content);
+                } else {
+                    elLine.className = "ad-md-p";
+                    elLine.style.fontSize = `${2.45 * s}cqw`;
+                    appendSpansToDom(elLine, item.spans);
+                }
+                container.appendChild(elLine);
+            }
+        }
+
+        function syncPreviewTextOverlays() {
+            const existingMap = new Map();
+            el.previewTextOverlaysLayer.querySelectorAll("[data-overlay-id]").forEach((node) => {
+                existingMap.set(Number(node.dataset.overlayId), node);
+            });
+
+            const activeIds = new Set(state.textOverlays.map((o) => o.id));
+            existingMap.forEach((node, id) => {
+                if (!activeIds.has(id)) node.remove();
+            });
+
+            state.textOverlays.forEach((ov) => {
+                let box = existingMap.get(ov.id);
+                if (!box) {
+                    box = document.createElement("div");
+                    box.dataset.overlayId = String(ov.id);
+                    el.previewTextOverlaysLayer.appendChild(box);
+
+                    makeDraggable(
+                        box,
+                        () => ({ x: ov.x, y: ov.y }),
+                        (x, y) => {
+                            ov.x = x;
+                            ov.y = y;
+                            box.style.left = `${x}%`;
+                            box.style.top = `${y}%`;
+                        }
+                    );
+                }
+
+                if (ov.type === "image") {
+                    box.className = `ad-draggable ad-image-overlay ad-image-overlay-${ov.style}`;
+                    box.style.left = `${ov.x}%`;
+                    box.style.top = `${ov.y}%`;
+                    box.style.width = `${ov.width}%`;
+                    box.style.textAlign = "center";
+
+                    if (!ov.imageSrc) {
+                        box.classList.add("hidden");
+                    } else {
+                        box.classList.remove("hidden");
+                        let img = box.querySelector("img");
+                        if (!img) {
+                            box.innerHTML = "";
+                            img = document.createElement("img");
+                            box.appendChild(img);
+                        }
+                        if (img.src !== ov.imageSrc) img.src = ov.imageSrc;
+                    }
+                } else {
+                    box.className = `ad-draggable ad-text-overlay ad-text-overlay-${ov.style}`;
+                    box.style.left = `${ov.x}%`;
+                    box.style.top = `${ov.y}%`;
+                    box.style.width = `${ov.width}%`;
+                    box.style.textAlign = ov.align;
+                    box.classList.toggle("hidden", !(ov.markdown || "").trim());
+                    renderMarkdownToDom(box, ov.markdown, ov.scale);
+                }
+            });
+        }
+
+        function loadOverlayImageFile(ov, file) {
+            if (!file || !file.type.startsWith("image/")) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const dataUrl = e.target.result;
+                const img = new Image();
+                img.onload = () => {
+                    ov.imageSrc = dataUrl;
+                    ov.imageEl = img;
+                    renderSidebarTextOverlays();
+                    syncPreviewTextOverlays();
+                };
+                img.src = dataUrl;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderSidebarTextOverlays() {
+            el.textOverlaysEmpty.classList.toggle("hidden", state.textOverlays.length > 0);
+            el.textOverlaysList.innerHTML = "";
+
+            state.textOverlays.forEach((ov, idx) => {
+                const card = document.createElement("div");
+                card.className = "bg-slate-950/80 border border-slate-700/80 rounded-lg p-3 space-y-2.5";
+
+                if (ov.type === "image") {
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-bold text-white uppercase tracking-wide">Bild / Logga #${idx + 1}</span>
+                            <div class="flex items-center gap-2">
+                                <button type="button" data-action="reset-pos" class="text-[11px] text-slate-400 hover:text-white underline cursor-pointer">Centrera</button>
+                                <button type="button" data-action="remove" class="text-[11px] text-red-400 hover:text-red-300 font-semibold cursor-pointer">Ta bort</button>
+                            </div>
+                        </div>
+                        <div data-field="dropzone" class="border border-dashed border-slate-600 hover:border-elorange rounded-lg p-2.5 text-center cursor-pointer transition-colors bg-slate-900/70">
+                            <input data-field="file" type="file" accept="image/*" class="hidden" />
+                            <p class="text-[11px] font-semibold text-white">${ov.imageSrc ? "Byt bild / logga (dra eller klicka)" : "Dra in bild / logga eller klicka"}</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div>
+                                <label class="block text-[10px] text-slate-400 mb-0.5">Bakgrund</label>
+                                <select data-field="style" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white">
+                                    <option value="transparent" ${ov.style === "transparent" ? "selected" : ""}>Transparent</option>
+                                    <option value="dark-glass" ${ov.style === "dark-glass" ? "selected" : ""}>Mörk glasplatta</option>
+                                    <option value="light-glass" ${ov.style === "light-glass" ? "selected" : ""}>Ljus glasplatta</option>
+                                </select>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[10px] text-slate-400 mb-0.5">
+                                    <span>Storlek (bredd)</span>
+                                    <span data-val="width">${ov.width}%</span>
+                                </div>
+                                <input data-field="width" type="range" min="10" max="85" value="${ov.width}" class="w-full accent-elorange cursor-pointer" />
+                            </div>
+                        </div>
+                    `;
+
+                    const dz = card.querySelector('[data-field="dropzone"]');
+                    const fileInput = card.querySelector('[data-field="file"]');
+                    dz.addEventListener("click", () => fileInput.click());
+                    fileInput.addEventListener("change", (e) => {
+                        if (e.target.files?.[0]) loadOverlayImageFile(ov, e.target.files[0]);
+                    });
+                    dz.addEventListener("dragover", (e) => {
+                        e.preventDefault();
+                        dz.classList.add("border-elorange");
+                    });
+                    dz.addEventListener("dragleave", () => dz.classList.remove("border-elorange"));
+                    dz.addEventListener("drop", (e) => {
+                        e.preventDefault();
+                        dz.classList.remove("border-elorange");
+                        if (e.dataTransfer?.files?.[0]) loadOverlayImageFile(ov, e.dataTransfer.files[0]);
+                    });
+                    card.querySelector('[data-field="style"]').addEventListener("change", (e) => {
+                        ov.style = e.target.value;
+                        syncPreviewTextOverlays();
+                    });
+                    card.querySelector('[data-field="width"]').addEventListener("input", (e) => {
+                        ov.width = Number(e.target.value);
+                        card.querySelector('[data-val="width"]').textContent = `${ov.width}%`;
+                        syncPreviewTextOverlays();
+                    });
+                } else {
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-bold text-white uppercase tracking-wide">Textfält #${idx + 1} (Markdown)</span>
+                            <div class="flex items-center gap-2">
+                                <button type="button" data-action="reset-pos" class="text-[11px] text-slate-400 hover:text-white underline cursor-pointer">Centrera</button>
+                                <button type="button" data-action="remove" class="text-[11px] text-red-400 hover:text-red-300 font-semibold cursor-pointer">Ta bort</button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[10px] text-slate-400 mb-0.5">Stil</label>
+                                <select data-field="style" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white">
+                                    <option value="dark-glass" ${ov.style === "dark-glass" ? "selected" : ""}>Mörk glasplatta</option>
+                                    <option value="light-glass" ${ov.style === "light-glass" ? "selected" : ""}>Ljus glasplatta</option>
+                                    <option value="clean-white" ${ov.style === "clean-white" ? "selected" : ""}>Vit text (med skugga)</option>
+                                    <option value="clean-dark" ${ov.style === "clean-dark" ? "selected" : ""}>Mörk text (utan platta)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] text-slate-400 mb-0.5">Justering</label>
+                                <select data-field="align" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1 text-xs text-white">
+                                    <option value="left" ${ov.align === "left" ? "selected" : ""}>Vänsterställd</option>
+                                    <option value="center" ${ov.align === "center" ? "selected" : ""}>Centrerad</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-slate-400 mb-0.5">Innehåll (# Rubrik, ## Underrubrik, - Punkt, **fet**)</label>
+                            <textarea data-field="markdown" rows="4" class="w-full bg-slate-900 border border-slate-700 rounded px-2 py-1.5 text-xs font-mono text-white focus:outline-none focus:border-elorange"></textarea>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <div>
+                                <div class="flex justify-between text-[10px] text-slate-400 mb-0.5">
+                                    <span>Textstorlek</span>
+                                    <span data-val="scale">${ov.scale}%</span>
+                                </div>
+                                <input data-field="scale" type="range" min="70" max="150" value="${ov.scale}" class="w-full accent-elorange cursor-pointer" />
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[10px] text-slate-400 mb-0.5">
+                                    <span>Bredd</span>
+                                    <span data-val="width">${ov.width}%</span>
+                                </div>
+                                <input data-field="width" type="range" min="30" max="90" value="${ov.width}" class="w-full accent-elorange cursor-pointer" />
+                            </div>
+                        </div>
+                    `;
+
+                    const mdInput = card.querySelector('[data-field="markdown"]');
+                    mdInput.value = ov.markdown;
+
+                    card.querySelector('[data-field="style"]').addEventListener("change", (e) => {
+                        ov.style = e.target.value;
+                        syncPreviewTextOverlays();
+                    });
+                    card.querySelector('[data-field="align"]').addEventListener("change", (e) => {
+                        ov.align = e.target.value;
+                        syncPreviewTextOverlays();
+                    });
+                    mdInput.addEventListener("input", (e) => {
+                        ov.markdown = e.target.value;
+                        syncPreviewTextOverlays();
+                    });
+                    card.querySelector('[data-field="scale"]').addEventListener("input", (e) => {
+                        ov.scale = Number(e.target.value);
+                        card.querySelector('[data-val="scale"]').textContent = `${ov.scale}%`;
+                        syncPreviewTextOverlays();
+                    });
+                    card.querySelector('[data-field="width"]').addEventListener("input", (e) => {
+                        ov.width = Number(e.target.value);
+                        card.querySelector('[data-val="width"]').textContent = `${ov.width}%`;
+                        syncPreviewTextOverlays();
+                    });
+                }
+
+                card.querySelector('[data-action="reset-pos"]').addEventListener("click", () => {
+                    ov.x = 50;
+                    ov.y = 50;
+                    syncPreviewTextOverlays();
+                });
+                card.querySelector('[data-action="remove"]').addEventListener("click", () => {
+                    state.textOverlays = state.textOverlays.filter((item) => item.id !== ov.id);
+                    renderSidebarTextOverlays();
+                    syncPreviewTextOverlays();
+                });
+
+                el.textOverlaysList.appendChild(card);
+            });
+        }
+
+        el.btnAddTextOverlay.addEventListener("click", () => {
+            const count = state.textOverlays.length;
+            const defaultY = Math.max(20, Math.min(82, 76 - count * 16));
+            state.textOverlays.push({
+                id: nextOverlayId++,
+                type: "text",
+                style: "dark-glass",
+                align: "left",
+                markdown: count === 0
+                    ? "# Allt detta ingår:\n- Standardinstallation ingår\n- **Lastbalansering** & appstyrning\n- 5 års garanti"
+                    : "## Kampanjinfo\n- Gäller så långt lagret räcker",
+                scale: 100,
+                width: 72,
+                x: 50,
+                y: defaultY,
+            });
+            renderSidebarTextOverlays();
+            syncPreviewTextOverlays();
+        });
+
+        el.btnAddImageOverlay.addEventListener("click", () => {
+            const count = state.textOverlays.length;
+            const defaultY = Math.max(20, Math.min(82, 26 + count * 14));
+            state.textOverlays.push({
+                id: nextOverlayId++,
+                type: "image",
+                style: "transparent",
+                imageSrc: null,
+                imageEl: null,
+                width: 30,
+                x: 24,
+                y: defaultY,
+            });
+            renderSidebarTextOverlays();
+            syncPreviewTextOverlays();
+        });
+
+        makeDraggable(
+            el.previewBadge,
+            () => ({ x: state.badgeX, y: state.badgeY }),
+            (x, y) => {
+                state.badgeX = x;
+                state.badgeY = y;
+                el.inputBadgePos.value = "custom";
+                el.previewBadge.style.left = `${x}%`;
+                el.previewBadge.style.top = `${y}%`;
+            }
+        );
+
+        el.inputBadgeStyle.addEventListener("change", (e) => {
+            state.badgeStyle = e.target.value;
+            render();
+        });
+        el.inputBadgePos.addEventListener("change", (e) => {
+            const preset = BADGE_PRESETS[e.target.value];
+            if (preset) {
+                state.badgeX = preset.x;
+                state.badgeY = preset.y;
+                render();
+            }
+        });
+        el.btnResetBadgePos.addEventListener("click", () => {
+            state.badgeX = 78;
+            state.badgeY = 14;
+            el.inputBadgePos.value = "top-right";
+            render();
+        });
+        el.inputPriceMain.addEventListener("input", (e) => {
+            state.priceMain = e.target.value;
+            render();
+        });
+        el.inputPriceSub.addEventListener("input", (e) => {
+            state.priceSub = e.target.value;
+            render();
+        });
+        el.inputShowSalesBox.addEventListener("change", (e) => {
+            state.showSalesBox = e.target.checked;
+            render();
+        });
+        el.inputShowFooter.addEventListener("change", (e) => {
+            state.showFooter = e.target.checked;
+            render();
+        });
+        el.inputTitle.addEventListener("input", (e) => {
+            state.title = e.target.value;
+            render();
+        });
+        el.inputSelling.addEventListener("input", (e) => {
+            state.selling = e.target.value;
+            render();
+        });
+        el.inputLocal.addEventListener("input", (e) => {
+            state.local = e.target.value;
+            render();
+        });
+        el.inputContact.addEventListener("input", (e) => {
+            state.contact = e.target.value;
+            render();
+        });
+        el.inputShowQr.addEventListener("change", (e) => {
+            state.showQr = e.target.checked;
+            render();
+        });
+
+        el.btnClearImage.addEventListener("click", () => {
+            state.imageSrc = null;
+            state.imageEl = null;
+            el.inputImage.value = "";
+            render();
+        });
+
+        el.btnReset.addEventListener("click", () => {
+            state.scale = 100;
+            state.posX = 0;
+            state.posY = 0;
+            el.inputScale.value = 100;
+            el.valScale.textContent = "100%";
+            el.inputPosX.value = 0;
+            el.valPosX.textContent = "0%";
+            el.inputPosY.value = 0;
+            el.valPosY.textContent = "0%";
+            render();
+        });
+
+        // High-Resolution JPG Export (Canvas 2D renderer at 2160 x 3840)
+        function drawRoundedRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+        }
+
+        function loadLogoImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = (err) => reject(err);
+                img.src = src;
+            });
+        }
+
+        function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(" ");
+            let line = "";
+            let currentY = y;
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + " ";
+                if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+                    ctx.fillText(line.trim(), x, currentY);
+                    line = words[n] + " ";
+                    currentY += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            if (line.trim()) {
+                ctx.fillText(line.trim(), x, currentY);
+                currentY += lineHeight;
+            }
+            return currentY;
+        }
+
+        el.btnExportJpg.addEventListener("click", async () => {
+            const btn = el.btnExportJpg;
+            const origText = btn.innerHTML;
+            btn.disabled = true;
+            btn.textContent = "Skapar JPG...";
+
+            try {
+                await document.fonts.ready;
+
+                const fmt = FORMATS[state.format];
+                const theme = THEMES[state.theme];
+                const W = fmt.width * fmt.exportScale;  // 2160
+                const H = fmt.height * fmt.exportScale; // 3840
+
+                const canvas = document.createElement("canvas");
+                canvas.width = W;
+                canvas.height = H;
+                const ctx = canvas.getContext("2d");
+
+                // 1. Measure layout proportions matching DOM
+                const headerRect = el.previewHeader.getBoundingClientRect();
+                const posterRect = document.getElementById("poster-container").getBoundingClientRect();
+                const footerRect = document.querySelector(".ad-footer-wrap").getBoundingClientRect();
+                const contactRect = el.previewContactBar.getBoundingClientRect();
+
+                const headerH = Math.round((headerRect.height / posterRect.height) * H);
+                const footerH = Math.round((footerRect.height / posterRect.height) * H);
+                const contactH = Math.round((contactRect.height / posterRect.height) * H);
+                const footerInfoH = footerH - contactH;
+                const stageY = headerH;
+                const stageH = H - headerH - footerH;
+
+                // 2. Draw Studio Stage Background
+                ctx.save();
+                ctx.beginPath();
+                ctx.rect(0, stageY, W, stageH);
+                ctx.clip();
+
+                if (state.bg === "pure-white") {
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillRect(0, stageY, W, stageH);
+                } else if (state.bg === "studio-dark") {
+                    const grad = ctx.createRadialGradient(W * 0.5, stageY + stageH * 0.45, 0, W * 0.5, stageY + stageH * 0.45, W * 0.85);
+                    grad.addColorStop(0, "#1e293b");
+                    grad.addColorStop(0.65, "#0f172a");
+                    grad.addColorStop(1, "#020617");
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(0, stageY, W, stageH);
+                } else {
+                    const grad = ctx.createRadialGradient(W * 0.5, stageY + stageH * 0.45, 0, W * 0.5, stageY + stageH * 0.45, W * 0.85);
+                    grad.addColorStop(0, "#f1f5f9");
+                    grad.addColorStop(0.55, "#dce2ea");
+                    grad.addColorStop(1, "#cbd5e1");
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(0, stageY, W, stageH);
+                }
+
+                // 3. Draw Product Image
+                if (state.imageEl) {
+                    const natW = state.imageEl.naturalWidth;
+                    const natH = state.imageEl.naturalHeight;
+                    const baseRatio =
+                        state.fit === "cover"
+                            ? Math.max(W / natW, stageH / natH)
+                            : Math.min((W * 0.82) / natW, (stageH * 0.82) / natH);
+                    const baseW = natW * baseRatio;
+                    const baseH = natH * baseRatio;
+                    const boxW = state.fit === "cover" ? W : baseW;
+                    const boxH = state.fit === "cover" ? stageH : baseH;
+                    const s = state.scale / 100;
+                    const drawW = baseW * s;
+                    const drawH = baseH * s;
+                    const centerX = W / 2 + (state.posX / 100) * boxW;
+                    const centerY = stageY + stageH / 2 + (state.posY / 100) * boxH;
+                    const drawX = centerX - drawW / 2;
+                    const drawY = centerY - drawH / 2;
+                    ctx.drawImage(state.imageEl, drawX, drawY, drawW, drawH);
+                }
+
+                // Snapshot stage for real frosted-glass blur if any glass text overlay is used
+                let stageSnapshot = null;
+                if (state.textOverlays.some((ov) => ov.style === "dark-glass" || ov.style === "light-glass")) {
+                    stageSnapshot = document.createElement("canvas");
+                    stageSnapshot.width = W;
+                    stageSnapshot.height = H;
+                    stageSnapshot.getContext("2d").drawImage(canvas, 0, 0);
+                }
+
+                const drawGlassCard = (bx, by, boxW, boxH, style) => {
+                    ctx.save();
+                    ctx.shadowColor = style === "dark-glass" ? "rgba(2, 6, 23, 0.35)" : "rgba(15, 23, 42, 0.16)";
+                    ctx.shadowBlur = W * 0.035;
+                    ctx.shadowOffsetY = H * 0.014;
+                    ctx.fillStyle = style === "dark-glass" ? "rgba(15, 23, 42, 0.52)" : "rgba(255, 255, 255, 0.58)";
+                    drawRoundedRect(ctx, bx, by, boxW, boxH, W * 0.02);
+                    ctx.fill();
+                    ctx.restore();
+
+                    if (stageSnapshot) {
+                        ctx.save();
+                        drawRoundedRect(ctx, bx, by, boxW, boxH, W * 0.02);
+                        ctx.clip();
+                        ctx.filter = "blur(28px) saturate(1.5)";
+                        ctx.drawImage(stageSnapshot, 0, 0);
+                        ctx.filter = "none";
+                        ctx.fillStyle = style === "dark-glass" ? "rgba(15, 23, 42, 0.52)" : "rgba(255, 255, 255, 0.58)";
+                        ctx.fillRect(bx, by, boxW, boxH);
+                        ctx.restore();
+                    }
+
+                    ctx.save();
+                    drawRoundedRect(ctx, bx, by, boxW, boxH, W * 0.02);
+                    ctx.lineWidth = W * 0.0028;
+                    ctx.strokeStyle = style === "dark-glass" ? "rgba(255, 255, 255, 0.28)" : "rgba(255, 255, 255, 0.65)";
+                    ctx.stroke();
+                    ctx.restore();
+                };
+
+                // 4a. Draw Custom Overlays (Text Markdown & Image)
+                for (const ov of state.textOverlays) {
+                    if (ov.type === "image") {
+                        if (!ov.imageEl) continue;
+                        ctx.save();
+                        const boxW = (ov.width / 100) * W;
+                        const hasGlass = ov.style === "dark-glass" || ov.style === "light-glass";
+                        const padX = hasGlass ? W * 0.028 : 0;
+                        const padY = hasGlass ? H * 0.016 : 0;
+                        const imgW = boxW - padX * 2;
+                        const imgH = imgW * (ov.imageEl.naturalHeight / ov.imageEl.naturalWidth);
+                        const boxH = imgH + padY * 2;
+                        const cx = (ov.x / 100) * W;
+                        const cy = stageY + (ov.y / 100) * stageH;
+                        const bx = cx - boxW / 2;
+                        const by = cy - boxH / 2;
+
+                        if (hasGlass) drawGlassCard(bx, by, boxW, boxH, ov.style);
+                        ctx.drawImage(ov.imageEl, bx + padX, by + padY, imgW, imgH);
+                        ctx.restore();
+                        continue;
+                    }
+
+                    if (!(ov.markdown || "").trim()) continue;
+                    ctx.save();
+                    const s = ov.scale / 100;
+                    const boxW = (ov.width / 100) * W;
+                    const isClean = ov.style.startsWith("clean-");
+                    const padX = isClean ? W * 0.015 : W * 0.038;
+                    const padY = isClean ? H * 0.008 : H * 0.02;
+                    const innerW = boxW - padX * 2;
+
+                    const wrapSpans = (spans, baseWeight, boldWeight, sizePx, maxW) => {
+                        const tokens = [];
+                        for (const sp of spans) {
+                            const parts = sp.text.split(/(\s+)/);
+                            for (const p of parts) {
+                                if (p) tokens.push({ text: p, bold: sp.bold });
+                            }
+                        }
+                        const lines = [];
+                        let cur = [];
+                        let curW = 0;
+                        for (const tok of tokens) {
+                            ctx.font = `${tok.bold ? boldWeight : baseWeight} ${sizePx}px "Inter", sans-serif`;
+                            const tw = ctx.measureText(tok.text).width;
+                            if (cur.length > 0 && curW + tw > maxW && tok.text.trim() !== "") {
+                                lines.push(cur);
+                                cur = tok.text.trim() === "" ? [] : [tok];
+                                curW = tok.text.trim() === "" ? 0 : tw;
+                            } else {
+                                if (lines.length > 0 && cur.length === 0 && tok.text.trim() === "") continue;
+                                cur.push(tok);
+                                curW += tw;
+                            }
+                        }
+                        if (cur.length > 0) lines.push(cur);
+                        if (lines.length === 0) lines.push([]);
+                        return lines;
+                    };
+
+                    const parsed = parseMarkdownLines(ov.markdown);
+                    const blocks = [];
+                    let totalH = 0;
+                    for (const item of parsed) {
+                        if (item.type === "spacer") {
+                            const h = H * 0.009;
+                            blocks.push({ type: "spacer", h });
+                            totalH += h;
+                            continue;
+                        }
+                        const cfg =
+                            item.type === "h1"
+                                ? { size: Math.round(W * 0.039 * s), lh: 1.15, w: 800, bw: 900, mt: 0, mb: H * 0.0045, bullet: false }
+                                : item.type === "h2"
+                                    ? { size: Math.round(W * 0.031 * s), lh: 1.2, w: 700, bw: 800, mt: H * 0.0035, mb: H * 0.0035, bullet: false }
+                                    : item.type === "h3"
+                                        ? { size: Math.round(W * 0.026 * s), lh: 1.25, w: 700, bw: 800, mt: H * 0.0025, mb: H * 0.0025, bullet: false }
+                                        : { size: Math.round(W * 0.0245 * s), lh: 1.38, w: 500, bw: 800, mt: 0, mb: 0, bullet: item.type === "bullet" };
+
+                        const bulletIndent = cfg.bullet ? W * 0.024 : 0;
+                        const wrapped = wrapSpans(item.spans, cfg.w, cfg.bw, cfg.size, innerW - bulletIndent);
+                        const lineH = cfg.size * cfg.lh;
+                        const blockH = cfg.mt + wrapped.length * lineH + cfg.mb;
+                        blocks.push({ ...cfg, wrapped, lineH, bulletIndent });
+                        totalH += blockH;
+                    }
+
+                    const boxH = totalH + padY * 2;
+                    const cx = (ov.x / 100) * W;
+                    const cy = stageY + (ov.y / 100) * stageH;
+                    const bx = cx - boxW / 2;
+                    const by = cy - boxH / 2;
+
+                    if (ov.style === "dark-glass" || ov.style === "light-glass") {
+                        drawGlassCard(bx, by, boxW, boxH, ov.style);
+                    }
+
+                    const textColor =
+                        ov.style === "dark-glass" || ov.style === "clean-white"
+                            ? "#ffffff"
+                            : "#0f172a";
+
+                    if (ov.style === "clean-white") {
+                        ctx.shadowColor = "rgba(0, 0, 0, 0.72)";
+                        ctx.shadowBlur = W * 0.014;
+                        ctx.shadowOffsetY = H * 0.004;
+                    }
+
+                    ctx.fillStyle = textColor;
+                    ctx.textAlign = "left";
+                    ctx.textBaseline = "top";
+                    let ty = by + padY;
+
+                    for (const blk of blocks) {
+                        if (blk.type === "spacer") {
+                            ty += blk.h;
+                            continue;
+                        }
+                        ty += blk.mt;
+                        for (let li = 0; li < blk.wrapped.length; li++) {
+                            const lineTokens = blk.wrapped[li];
+                            let lineW = 0;
+                            for (const tok of lineTokens) {
+                                ctx.font = `${tok.bold ? blk.bw : blk.w} ${blk.size}px "Inter", sans-serif`;
+                                lineW += ctx.measureText(tok.text).width;
+                            }
+                            let lx =
+                                ov.align === "center"
+                                    ? cx - (lineW + blk.bulletIndent) / 2
+                                    : bx + padX;
+
+                            if (blk.bullet && li === 0) {
+                                ctx.font = `${blk.w} ${blk.size}px "Inter", sans-serif`;
+                                ctx.fillText("•", lx, ty);
+                            }
+                            lx += blk.bulletIndent;
+
+                            for (const tok of lineTokens) {
+                                ctx.font = `${tok.bold ? blk.bw : blk.w} ${blk.size}px "Inter", sans-serif`;
+                                ctx.fillText(tok.text, lx, ty);
+                                lx += ctx.measureText(tok.text).width;
+                            }
+                            ty += blk.lineH;
+                        }
+                        ty += blk.mb;
+                    }
+                    ctx.restore();
+                }
+
+                // 4b. Draw Overlay Badge
+                if (state.badgeStyle !== "none") {
+                    ctx.save();
+                    const padX = W * 0.045;
+                    const padY = H * 0.018;
+                    ctx.font = `700 ${Math.round(W * 0.062)}px "Oswald", "Inter", sans-serif`;
+                    const mainW = ctx.measureText(state.priceMain).width;
+                    ctx.font = `600 ${Math.round(W * 0.022)}px "Inter", sans-serif`;
+                    const subW = state.priceSub.trim() ? ctx.measureText(state.priceSub).width : 0;
+
+                    let bW = Math.max(mainW, subW) + padX * 2;
+                    let bH = W * 0.062 * 1.05 + (state.priceSub.trim() ? W * 0.022 * 1.6 : 0) + padY * 2;
+                    if (state.badgeStyle === "circle-burst") {
+                        bW = W * 0.24;
+                        bH = W * 0.24;
+                    }
+
+                    const cx = (state.badgeX / 100) * W;
+                    const cy = stageY + (state.badgeY / 100) * stageH;
+
+                    ctx.translate(cx, cy);
+                    if (state.badgeStyle === "tilted-price") ctx.rotate((7 * Math.PI) / 180);
+                    if (state.badgeStyle === "circle-burst") ctx.rotate((-6 * Math.PI) / 180);
+
+                    ctx.shadowColor = "rgba(15, 23, 42, 0.28)";
+                    ctx.shadowBlur = W * 0.03;
+                    ctx.shadowOffsetY = H * 0.012;
+
+                    if (state.badgeStyle === "circle-burst") {
+                        const bg = ctx.createLinearGradient(-bW / 2, -bH / 2, bW / 2, bH / 2);
+                        bg.addColorStop(0, "#ff7403");
+                        bg.addColorStop(1, "#dc2626");
+                        ctx.fillStyle = bg;
+                        ctx.beginPath();
+                        ctx.arc(0, 0, bW / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.shadowColor = "transparent";
+                        ctx.lineWidth = W * 0.0045;
+                        ctx.strokeStyle = "#ffffff";
+                        ctx.stroke();
+                    } else if (state.badgeStyle === "pill-campaign") {
+                        ctx.fillStyle = "#0f172a";
+                        drawRoundedRect(ctx, -bW / 2, -bH / 2, bW, bH, bH / 2);
+                        ctx.fill();
+                        ctx.shadowColor = "transparent";
+                        ctx.lineWidth = W * 0.004;
+                        ctx.strokeStyle = "#ff7403";
+                        ctx.stroke();
+                    } else {
+                        const bg = ctx.createLinearGradient(-bW / 2, -bH / 2, bW / 2, bH / 2);
+                        bg.addColorStop(0, "#ff7403");
+                        bg.addColorStop(1, "#e65c00");
+                        ctx.fillStyle = bg;
+                        drawRoundedRect(ctx, -bW / 2, -bH / 2, bW, bH, W * 0.022);
+                        ctx.fill();
+                        ctx.shadowColor = "transparent";
+                        ctx.lineWidth = W * 0.0035;
+                        ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
+                        ctx.stroke();
+                    }
+
+                    ctx.fillStyle = "#ffffff";
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    const hasSub = Boolean(state.priceSub.trim());
+                    ctx.font = `700 ${Math.round(W * 0.062)}px "Oswald", "Inter", sans-serif`;
+                    ctx.fillText(state.priceMain, 0, hasSub ? -W * 0.015 : 0);
+
+                    if (hasSub) {
+                        ctx.font = `600 ${Math.round(W * 0.022)}px "Inter", sans-serif`;
+                        ctx.fillText(state.priceSub, 0, W * 0.032);
+                    }
+                    ctx.restore();
+                }
+
+                ctx.restore(); // end stage clip
+
+                // 5. Draw Header
+                const hGrad = ctx.createLinearGradient(0, 0, 0, headerH);
+                hGrad.addColorStop(0, theme.headerSolidTop);
+                hGrad.addColorStop(1, theme.headerSolidBottom);
+                ctx.fillStyle = hGrad;
+                ctx.fillRect(0, 0, W, headerH);
+
+                let cursorY = H * 0.028;
+                if (state.showLogo) {
+                    const logoSrc = theme.logoLight
+                        ? "/media/logos/elprojekt-logo-white.svg"
+                        : "/media/logos/elprojekt-logo-primary.svg";
+                    const logoImg = await loadLogoImage(logoSrc);
+                    const logoW = W * 0.48;
+                    const logoH = logoW * (logoImg.height / logoImg.width);
+                    ctx.drawImage(logoImg, (W - logoW) / 2, cursorY, logoW, logoH);
+                    cursorY += logoH + H * 0.012;
+                }
+
+                if (state.campaign.trim()) {
+                    ctx.fillStyle = theme.headerColor;
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "top";
+                    ctx.font = `700 ${Math.round(W * 0.092)}px "Oswald", "Inter", sans-serif`;
+                    ctx.fillText(state.campaign.toUpperCase(), W / 2, cursorY);
+                    cursorY += W * 0.092 * 1.02;
+                }
+
+                if (state.dates.trim()) {
+                    ctx.fillStyle = theme.headerColor;
+                    ctx.globalAlpha = 0.92;
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "top";
+                    ctx.font = `500 ${Math.round(W * 0.0235)}px "Inter", sans-serif`;
+                    ctx.fillText(state.dates, W / 2, cursorY + H * 0.006);
+                    ctx.globalAlpha = 1;
+                }
+
+                // 6. Draw Säljtext & Footer
+                const footerY = H - footerH;
+                if (state.showSalesBox && footerInfoH > 0) {
+                    ctx.fillStyle = "#ffffff";
+                    ctx.fillRect(0, footerY, W, footerInfoH);
+
+                    ctx.fillStyle = "rgba(15, 23, 42, 0.08)";
+                    ctx.fillRect(0, footerY, W, Math.max(2, H * 0.002));
+
+                    const padFooterX = W * 0.055;
+                    const qrSize = state.showQr ? W * 0.15 : 0;
+                    const textMaxW = state.showQr ? W - padFooterX * 2 - qrSize - W * 0.03 : W - padFooterX * 2;
+                    const textCenterX = state.showQr ? padFooterX : W / 2;
+
+                    ctx.textAlign = state.showQr ? "left" : "center";
+                    ctx.textBaseline = "top";
+                    let fy = footerY + H * 0.024;
+
+                    if (state.title.trim()) {
+                        ctx.fillStyle = theme.titleColor;
+                        ctx.font = `800 ${Math.round(W * 0.043)}px "Inter", sans-serif`;
+                        fy = wrapText(ctx, state.title, textCenterX, fy, textMaxW, W * 0.043 * 1.18);
+                    }
+                    if (state.selling.trim()) {
+                        fy += H * 0.005;
+                        ctx.fillStyle = "#1e293b";
+                        ctx.font = `600 ${Math.round(W * 0.0275)}px "Inter", sans-serif`;
+                        fy = wrapText(ctx, state.selling, textCenterX, fy, textMaxW, W * 0.0275 * 1.35);
+                    }
+                    if (state.local.trim()) {
+                        fy += H * 0.003;
+                        ctx.fillStyle = "#475569";
+                        ctx.font = `500 ${Math.round(W * 0.0235)}px "Inter", sans-serif`;
+                        wrapText(ctx, state.local, textCenterX, fy, textMaxW, W * 0.0235 * 1.35);
+                    }
+
+                    if (state.showQr && el.previewQrImg.complete) {
+                        const qx = W - padFooterX - qrSize;
+                        const qy = footerY + (footerInfoH - qrSize) / 2;
+                        ctx.fillStyle = "#ffffff";
+                        drawRoundedRect(ctx, qx, qy, qrSize, qrSize, W * 0.016);
+                        ctx.fill();
+                        ctx.lineWidth = W * 0.0025;
+                        ctx.strokeStyle = "#e2e8f0";
+                        ctx.stroke();
+                        const innerPad = W * 0.01;
+                        ctx.drawImage(el.previewQrImg, qx + innerPad, qy + innerPad, qrSize - innerPad * 2, qrSize - innerPad * 2);
+                    }
+                }
+
+                // Contact bar
+                if (state.showFooter && contactH > 0) {
+                    ctx.fillStyle = theme.contactBg;
+                    ctx.fillRect(0, H - contactH, W, contactH);
+                    ctx.fillStyle = theme.contactColor;
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    ctx.font = `600 ${Math.round(W * 0.0235)}px "Inter", sans-serif`;
+                    ctx.fillText(state.contact, W / 2, H - contactH / 2);
+                }
+
+                // Trigger JPG download
+                canvas.toBlob(
+                    (blob) => {
+                        if (!blob) return;
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = fmt.filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        URL.revokeObjectURL(url);
+                    },
+                    "image/jpeg",
+                    0.95
+                );
+            } catch (err) {
+                console.error("JPG export failed:", err);
+                alert("Kunde inte skapa JPG. Testa igen eller använd 'Spara PDF / Skriv ut'.");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = origText;
+            }
+        });
+
+        // Initial render
+        render();
+    </script>
+</body>
+</html>

@@ -33,22 +33,22 @@ import { pb } from "../utils";
                     {/* Dynamic Source Badge */}
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-elorange text-xs sm:text-sm font-bold font-display uppercase tracking-wider mb-6 backdrop-blur-sm" id="qr-badge-container">
                         <span class="w-2 h-2 rounded-full bg-elorange animate-pulse"></span>
-                        <span id="qr-badge">Aktuell Kampanj • Showroom</span>
+                        <span id="qr-badge">Black Friday • Gäller 16 nov – 31 dec 2026</span>
                     </div>
 
                     <h1
                         id="qr-heading"
                         class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-white leading-tight mb-6"
                     >
-                        Smarta energisystem & <br />
-                        <span class="text-elorange">framtidens elbilsladdning.</span>
+                        Black Friday på laddbox & <br />
+                        <span class="text-elorange">SigenStor Neo batterilager.</span>
                     </h1>
 
                     <p
                         id="qr-subheading"
                         class="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed font-sans mb-8 border-l-4 border-elorange pl-4 sm:pl-6"
                     >
-                        Välkommen! Just nu kör vi kampanj på kompletta energipaket – från marknadsledande Zaptec-laddboxar till solceller och intelligenta Sigenergy batterilager. Alltid installerat med 50% Grön Teknik-avdrag och personlig service av auktoriserad elektriker.
+                        Gäller 16 nov – 31 dec 2026! Just nu har vi kampanjpris på komplett villapaket med Zaptec Go (7 450 kr) och nya SigenStor Neo 16 kWh batterilager (53 000 kr). Alltid med Grön Teknik-avdrag direkt på fakturan och installation av behörig elektriker.
                     </p>
 
                     <div class="flex flex-wrap gap-4 items-center">
@@ -85,111 +85,91 @@ import { pb } from "../utils";
             </div>
         </section>
 
-        {/* KAMPANJSEKTION: SOLCELLER, BATTERI & LADDBOX */}
-        <section id="kampanj-paket" class="py-16 sm:py-20 bg-slate-100/70 border-b border-slate-200">
+        {/* KAMPANJSEKTION: BLACK FRIDAY */}
+        <section id="kampanj-paket" class="scroll-mt-20 py-16 sm:py-20 bg-slate-100/70 border-b border-slate-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-14">
                     <span class="inline-block px-3 py-1 rounded-full bg-orange-100 text-elorange font-bold tracking-wide uppercase text-xs sm:text-sm font-display mb-3">
-                        Aktuella Erbjudanden
+                        Black Friday • 16 nov – 31 dec 2026
                     </span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-display tracking-tight">
-                        Smarta Paket med Grön Teknik
+                        Aktuella Kampanjpaket med Grön Teknik
                     </h2>
                     <p class="mt-3 text-slate-600 text-base sm:text-lg">
-                        Färdiga helhetslösningar inklusive auktoriserad installation, driftsättning och skatteavdrag direkt på fakturan.
+                        Färdiga helhetslösningar inklusive standardinstallation, driftsättning och Grön Teknik-avdrag direkt på fakturan.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-                    {/* KORT 1: LADDBOX (ZAPTEC GO & GO 2) */}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
+                    {/* KORT 1: ZAPTEC GO & GO 2 */}
                     <div
                         id="card-laddbox"
                         class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
                     >
                         <div>
-                            {/* Bild & Badge */}
-                            <div class="relative bg-slate-900 aspect-[4/3] overflow-hidden">
+                            {/* Bild */}
+                            <div class="relative bg-slate-950 aspect-[9/13] overflow-hidden">
                                 <img
-                                    src="/images/campaign/zaptec-laddsystem.jpg"
-                                    alt="Komplett laddsystem Zaptec Go laddbox med lastbalansering och kabel"
-                                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                    src="/images/campaign/black-friday-zaptec.jpg"
+                                    alt="Black Friday-kampanj: Zaptec Go komplett villapaket 7 450 kr efter Grön Teknik"
+                                    class="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
                                     loading="lazy"
                                 />
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-                                <div class="absolute top-4 left-4">
-                                    <span class="px-3 py-1.5 rounded-md bg-elblue text-white text-xs font-bold font-display uppercase tracking-wider shadow">
-                                        50% Grön Teknik
-                                    </span>
-                                </div>
-                                <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                                    <div>
-                                        <p class="text-xs uppercase font-bold text-slate-300 font-display tracking-wider">Laddsystem Paket</p>
-                                        <h3 class="text-xl font-bold text-white font-display">Zaptec Go & Go 2</h3>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-xs text-slate-300 block">Paketpris från</span>
-                                        <span class="text-2xl sm:text-3xl font-extrabold text-elorange font-display">8 000:-</span>
-                                    </div>
-                                </div>
                             </div>
 
                             {/* Innehåll & Sammanfattning */}
                             <div class="p-6 space-y-5">
                                 {/* Standardpaket */}
                                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-                                    <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center justify-between gap-2 mb-2">
                                         <h4 class="text-base font-bold text-slate-900 font-display flex items-center gap-2">
-                                            <span class="w-2.5 h-2.5 rounded-full bg-elblue"></span>
-                                            Zaptec Go Standard
+                                            <span class="w-2.5 h-2.5 rounded-full bg-elblue shrink-0"></span>
+                                            Komplett villapaket
                                         </h4>
-                                        <span class="font-bold text-slate-900 font-display text-sm">8 000 kr</span>
+                                        <span class="font-bold text-slate-900 font-display text-sm whitespace-nowrap shrink-0">7 450 kr</span>
                                     </div>
                                     <ul class="text-xs text-slate-700 space-y-1.5">
                                         <li class="flex items-start">
                                             <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>Zaptec Go laddbox</strong> (upp till 22 kW)</span>
+                                            <span><strong>Standardinstallation</strong> av behörig elektriker</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>Dynamisk lastbalansering</strong> (Sense)</span>
+                                            <span><strong>Zaptec Go</strong> laddbox</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>7m laddkabel</strong> Typ 2 + kabelhållare</span>
+                                            <span><strong>Lastbalansering</strong></span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>Standardinstallation:</strong> Upp till 10m kabel, håltagning & driftsättning</span>
+                                            <span><strong>7m Laddkabel</strong> + <strong>Kabelhållare</strong></span>
                                         </li>
                                     </ul>
                                 </div>
 
                                 {/* Uppgradering Zaptec Go 2 */}
                                 <div class="p-4 rounded-xl bg-gradient-to-br from-orange-50/70 to-amber-50/70 border border-orange-200">
-                                    <div class="flex items-center justify-between mb-2">
+                                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
                                         <h4 class="text-sm font-bold text-slate-900 font-display flex items-center gap-1">
-                                            <span>🚀</span> Zaptec Go 2 Uppgradering
+                                            <span>🚀</span> Uppgradera till nya Go 2
                                         </h4>
-                                        <span class="text-[11px] font-bold bg-elorange text-white px-2 py-0.5 rounded uppercase font-display">
-                                            +1 500 kr (9 500 kr)
+                                        <span class="text-[11px] font-bold bg-elorange text-white px-2 py-0.5 rounded uppercase font-display whitespace-nowrap shrink-0">
+                                            +1 300 kr (8 750 kr)
                                         </span>
                                     </div>
                                     <ul class="text-[11px] text-slate-700 space-y-1.5">
                                         <li class="flex items-center gap-1.5">
                                             <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
-                                            <span><strong>V2G Ready:</strong> Förberedd för dubbelriktad laddning</span>
+                                            <span><strong>V2G ready</strong> – förberedd för dubbelriktad laddning</span>
                                         </li>
                                         <li class="flex items-center gap-1.5">
                                             <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
-                                            <span><strong>Inbyggd Display:</strong> Direkt koll på laddstatus & effekt</span>
+                                            <span><strong>MID mätare</strong> – godkänd energimätning</span>
                                         </li>
                                         <li class="flex items-center gap-1.5">
                                             <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
-                                            <span><strong>MID-godkänd:</strong> Exakt debiteringsmätning för tjänstebil</span>
-                                        </li>
-                                        <li class="flex items-center gap-1.5">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-elorange"></span>
-                                            <span><strong>Premium finish:</strong> Extra robust nordisk konstruktion</span>
+                                            <span><strong>Inbyggd Display</strong> – direkt översikt på laddaren</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -200,7 +180,7 @@ import { pb } from "../utils";
                         <div class="p-6 pt-0">
                             <button
                                 type="button"
-                                data-package="Zaptec Go Laddsystem"
+                                data-package="Zaptec Go Villapaket (7 450 kr)"
                                 class="select-package-btn w-full flex items-center justify-center py-3.5 px-4 rounded-xl font-bold font-display text-white bg-elorange hover:bg-orange-600 shadow-md hover:shadow-lg transition-all duration-200 uppercase tracking-wider group-hover:-translate-y-0.5 cursor-pointer text-sm"
                             >
                                 Välj Zaptec Paket →
@@ -208,161 +188,59 @@ import { pb } from "../utils";
                         </div>
                     </div>
 
-                    {/* KORT 2: KOMPLETT SOL + BATTERIPAKET */}
-                    <div
-                        id="card-sol-batteri"
-                        class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
-                    >
-                        <div>
-                            {/* Bild & Badge */}
-                            <div class="relative bg-slate-900 aspect-[4/3] overflow-hidden">
-                                <img
-                                    src="/images/campaign/sigenergy-energilosning.jpg"
-                                    alt="Sigenergy komplett energilösning med solpaneler och batterilager"
-                                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                                    loading="lazy"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-                                <div class="absolute top-4 left-4">
-                                    <span class="px-3 py-1.5 rounded-md bg-emerald-600 text-white text-xs font-bold font-display uppercase tracking-wider shadow">
-                                        Totalentreprenad
-                                    </span>
-                                </div>
-                                <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                                    <div>
-                                        <p class="text-xs uppercase font-bold text-slate-300 font-display tracking-wider">Sol + Lagring</p>
-                                        <h3 class="text-xl font-bold text-white font-display">Solceller & Batteri</h3>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-xs text-slate-300 block">Paketpris från</span>
-                                        <span class="text-2xl sm:text-3xl font-extrabold text-elorange font-display">130 000:-</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Innehåll & Sammanfattning */}
-                            <div class="p-6 space-y-5">
-                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-                                    <div class="flex items-center justify-between mb-2">
-                                        <h4 class="text-base font-bold text-slate-900 font-display flex items-center gap-2">
-                                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
-                                            Komplett Sol- & Batteripaket
-                                        </h4>
-                                        <span class="font-bold text-slate-900 font-display text-sm">Från 130 000 kr</span>
-                                    </div>
-                                    <p class="text-xs text-slate-600 mb-3">
-                                        Den kompletta lösningen för maximal självförsörjning och lägsta elkostnad.
-                                    </p>
-                                    <ul class="text-xs text-slate-700 space-y-2">
-                                        <li class="flex items-start">
-                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>16 högeffektiva paneler</strong> (~7,5 kWp optimerad toppeffekt)</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>15 kWh Sigenergy batterilager</strong> (intelligent & stapelbart)</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>Standardmontage & elinstallation</strong> av behörig elektriker</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>Inkl. Grön Teknik:</strong> Avdrag direkt på fakturan</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 text-xs text-emerald-950 space-y-1">
-                                    <p class="font-bold font-display">☀️ Maximal energifrihet</p>
-                                    <p class="text-slate-600 text-[11px] leading-relaxed">
-                                        Producera på dagen, lagra till kvällen och kapa dina elkostnader året runt.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Kort CTA */}
-                        <div class="p-6 pt-0">
-                            <button
-                                type="button"
-                                data-package="Komplett Sol- och Batteripaket"
-                                class="select-package-btn w-full flex items-center justify-center py-3.5 px-4 rounded-xl font-bold font-display text-white bg-emerald-700 hover:bg-emerald-800 shadow-md hover:shadow-lg transition-all duration-200 uppercase tracking-wider group-hover:-translate-y-0.5 cursor-pointer text-sm"
-                            >
-                                Välj Sol + Batteri →
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* KORT 3: ENDAST BATTERILAGER (SIGENERGY EC) */}
+                    {/* KORT 2: SIGENSTOR NEO 16 KWH BATTERILAGER */}
                     <div
                         id="card-batteri"
                         class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group"
                     >
                         <div>
-                            {/* Bild & Badge */}
-                            <div class="relative bg-slate-900 aspect-[4/3] overflow-hidden">
+                            {/* Bild */}
+                            <div class="relative bg-slate-950 aspect-[9/13] overflow-hidden">
                                 <img
-                                    src="/images/campaign/sigenergy-batterilager.jpg"
-                                    alt="Sigenergy EC batterilager 15kWh för spotprisoptimering och energilagring"
-                                    class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                                    src="/images/campaign/black-friday-sigenstor-neo.jpg"
+                                    alt="Black Friday-kampanj: SigenStor Neo 16 kWh Batterilager 53 000 kr efter Grön Teknik"
+                                    class="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
                                     loading="lazy"
                                 />
-                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-                                <div class="absolute top-4 left-4">
-                                    <span class="px-3 py-1.5 rounded-md bg-elorange text-white text-xs font-bold font-display uppercase tracking-wider shadow">
-                                        50% Grön Teknik
-                                    </span>
-                                </div>
-                                <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                                    <div>
-                                        <p class="text-xs uppercase font-bold text-slate-300 font-display tracking-wider">Energilagring</p>
-                                        <h3 class="text-xl font-bold text-white font-display">Sigenergy EC Batteri</h3>
-                                    </div>
-                                    <div class="text-right">
-                                        <span class="text-xs text-slate-300 block">Från endast</span>
-                                        <span class="text-2xl sm:text-3xl font-extrabold text-elblue font-display">65 000:-</span>
-                                    </div>
-                                </div>
                             </div>
 
                             {/* Innehåll & Sammanfattning */}
                             <div class="p-6 space-y-5">
                                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-                                    <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center justify-between gap-2 mb-2">
                                         <h4 class="text-base font-bold text-slate-900 font-display flex items-center gap-2">
-                                            <span class="w-2.5 h-2.5 rounded-full bg-elorange"></span>
-                                            Sigenergy EC 10kW System
+                                            <span class="w-2.5 h-2.5 rounded-full bg-elorange shrink-0"></span>
+                                            Nya Sigenergy Neo
                                         </h4>
-                                        <span class="font-bold text-slate-900 font-display text-sm">Från 65 000 kr</span>
+                                        <span class="font-bold text-slate-900 font-display text-sm whitespace-nowrap shrink-0">53 000 kr</span>
                                     </div>
                                     <p class="text-xs text-slate-600 mb-3">
-                                        Komplett system för energifrihet – fungerar med eller utan befintliga solceller.
+                                        Ladda batterierna och kapa effekttopparna i vinter.
                                     </p>
-                                    <ul class="text-xs text-slate-700 space-y-2">
+                                    <ul class="text-xs text-slate-700 space-y-1.5">
                                         <li class="flex items-start">
                                             <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>Sigenergy EC 10kW</strong> hybrid-enhet</span>
+                                            <span><strong>Allt-i-ett-system</strong> (8kW växelriktare + 16kWh batteri)</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>15 kWh batterilagring</strong> (modulärt och säkert)</span>
+                                            <span><strong>Inbyggd ö-drift</strong> (reservkraft)</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>AI Spotprisoptimering:</strong> Ladda billigt, använd dyrt</span>
+                                            <span><strong>AI-styrning</strong> som sänker elräkningen & snabbare laddning</span>
                                         </li>
                                         <li class="flex items-start">
                                             <svg class="w-4 h-4 text-emerald-600 mr-1.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                                            <span><strong>Standardinstallation:</strong> Skyddskomponenter & driftsättning</span>
+                                            <span><strong>Enkelt att bygga ut</strong> & tålig konstruktion för utomhusplacering</span>
                                         </li>
                                     </ul>
                                 </div>
 
                                 <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-200/80 text-xs text-blue-950 space-y-1">
-                                    <p class="font-bold font-display text-elblue">🔋 Smart effekttoppskapning</p>
+                                    <p class="font-bold font-display text-elblue">Villkor & Installation</p>
                                     <p class="text-slate-600 text-[11px] leading-relaxed">
-                                        Skydda dig mot framtida effekttariffer och höga elpristoppar direkt via appen.
+                                        *Standardinstallation ingår: 8kW växelriktare – 16kWh batteri. Installation för reservkraft ej inkluderat.
                                     </p>
                                 </div>
                             </div>
@@ -372,10 +250,10 @@ import { pb } from "../utils";
                         <div class="p-6 pt-0">
                             <button
                                 type="button"
-                                data-package="Endast Batterilager - Sigenergy 15kWh"
+                                data-package="SigenStor Neo 16 kWh Batterilager (53 000 kr)"
                                 class="select-package-btn w-full flex items-center justify-center py-3.5 px-4 rounded-xl font-bold font-display text-white bg-elblue hover:bg-blue-800 shadow-md hover:shadow-lg transition-all duration-200 uppercase tracking-wider group-hover:-translate-y-0.5 cursor-pointer text-sm"
                             >
-                                Välj Endast Batteri →
+                                Välj SigenStor Neo →
                             </button>
                         </div>
                     </div>
@@ -627,6 +505,16 @@ import { pb } from "../utils";
                 if (badgeEl) badgeEl.innerText = "Pågående projekt i närområdet";
             } else if (s.includes("showroom")) {
                 if (badgeEl) badgeEl.innerText = "Välkommen till vårt Showroom";
+            } else if (s.includes("annons")) {
+                if (badgeEl) badgeEl.innerText = "Black Friday • Gäller 16 nov – 31 dec 2026";
+                if (!window.location.hash) {
+                    const packagesEl = document.getElementById("kampanj-paket");
+                    if (packagesEl) {
+                        setTimeout(() => {
+                            packagesEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }, 120);
+                    }
+                }
             }
         }
 
@@ -635,20 +523,15 @@ import { pb } from "../utils";
             const c = campaign.toLowerCase();
 
             if (c.includes("laddbox") || c.includes("ladd") || c.includes("zaptec")) {
-                if (headingEl) headingEl.innerHTML = "Laddbox med <br/><span class='text-elorange'>50% Grön Teknik.</span>";
-                if (subheadingEl) subheadingEl.innerText = "Ladda elbilen säkert och snabbt hemma. Fast pris från 8 000 kr inklusive Zaptec laddbox, dynamisk lastbalansering och installation.";
+                if (headingEl) headingEl.innerHTML = "Zaptec Go Villapaket <br/><span class='text-elorange'>7 450 kr efter Grön Teknik.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Black Friday-kampanj (16 nov – 31 dec 2026): Komplett villapaket med Zaptec Go, lastbalansering, 7m laddkabel, kabelhållare och standardinstallation. Uppgradera till Go 2 för +1 300 kr.";
                 if (serviceSelect) serviceSelect.value = "Laddbox";
                 highlightCard("card-laddbox");
-            } else if (c.includes("batteri") || c.includes("lagring") || c.includes("ec")) {
-                if (headingEl) headingEl.innerHTML = "Sigenergy EC <br/><span class='text-elorange'>15 kWh Batterilager.</span>";
-                if (subheadingEl) subheadingEl.innerText = "Kapa effekttoppar och optimera elförbrukningen mot dyra elpristoppar. Från 65 000 kr inklusive 50% Grön Teknik och installation.";
+            } else if (c.includes("batteri") || c.includes("lagring") || c.includes("neo") || c.includes("sigen")) {
+                if (headingEl) headingEl.innerHTML = "SigenStor Neo <br/><span class='text-elorange'>16 kWh Batterilager – 53 000 kr.</span>";
+                if (subheadingEl) subheadingEl.innerText = "Black Friday-kampanj (16 nov – 31 dec 2026): Nya Sigenergy Neo allt-i-ett-system med 8kW växelriktare, 16kWh batteri, inbyggd ö-drift och AI-styrning. Standardinstallation ingår (reservkraftsinstallation ej inkluderat).";
                 if (serviceSelect) serviceSelect.value = "Solceller";
                 highlightCard("card-batteri");
-            } else if (c.includes("sol") || c.includes("solceller")) {
-                if (headingEl) headingEl.innerHTML = "Solceller & <br/><span class='text-elorange'>Sigenergy batterilager.</span>";
-                if (subheadingEl) subheadingEl.innerText = "Sänk dina elkostnader och maximera din självständighet med 16 paneler och 15 kWh intelligent energilagring. Grön Teknik-avdrag direkt på fakturan.";
-                if (serviceSelect) serviceSelect.value = "Solceller";
-                highlightCard("card-sol-batteri");
             } else if (c.includes("service") || c.includes("central") || c.includes("propp")) {
                 if (headingEl) headingEl.innerHTML = "Elservice & <br/><span class='text-elorange'>Centralbyte.</span>";
                 if (subheadingEl) subheadingEl.innerText = "Snabb och trygg hjälp med statuskontroll, felsökning, byte till automatsäkringar och reparationer.";

@@ -81,14 +81,22 @@ const { className, light = false } = Astro.props;
 
 <style>
     /* Default Blue - applied to all paths in the SVG */
-    /* Default Blue - applied to all paths in the SVG */
     .logo-svg :global(path) {
         fill: #003ca6 !important;
         stroke: none !important; /* Override potential strokes from SVG */
     }
 
+    /* Preserve the horizontal centerline stroke */
+    .logo-svg :global(#centerline path) {
+        stroke: #003ca6 !important;
+    }
+
     /* Light Mode Overrides */
     .logo-svg.light :global(path) {
         fill: white !important;
+    }
+
+    .logo-svg.light :global(#centerline path) {
+        stroke: white !important;
     }
 </style>
