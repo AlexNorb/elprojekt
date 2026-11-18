@@ -10,7 +10,6 @@ tags: ["laddbox", "samfällighet", "elbil", "zaptec"]
 filterCategory: ["laddbox"]
 gallery:
   - https://media.ffycdn.net/eu/zaptec/aq8T72dZKk2itXcsgGyK.jpg?mod=v1/max=2400
-  - https://brand.easee.com/wp-content/uploads/2024/04/environment_new1-1800x1013.jpg
 ---
 
 #### Detta är ett exempelprojekt - snart kommer riktiga bilder och text.
